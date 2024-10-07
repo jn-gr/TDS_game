@@ -1,28 +1,37 @@
 using UnityEngine;
 
-public class MainTower: MonoBehaviour
+public class MainTower : MonoBehaviour
 {
-    //Main variables
-    public int maxHealth = 100;
-    public int damageTaken = 3;
+    private int maxHealth;
+    private int damageTaken;
     private int currentHealth;
-
-    void Start()
-    {
-        currentHealth = maxHealth;
-    }
 
     //Function to take away health from currentHealth
     public void TakeDamage()
     {
         currentHealth -= damageTaken;
 
-
         //Check if currentHealth is not <=0
         if (currentHealth <= 0)
         {
             EndGame();
         }
+    }
+
+    public void SetHealth(int hp)
+    {
+        maxHealth = hp;
+        currentHealth = hp;
+    }
+
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
+
+    public void SetDamageTaken(int dmg)
+    {
+        damageTaken = dmg;
     }
 
     //Function to trigger the TakeDamage function on collision of prefabs
