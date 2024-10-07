@@ -31,9 +31,11 @@ public class Turret : MonoBehaviour
 
     void Shoot()
     {
-        Projectile projectile = Instantiate(projectilePrefab,shootPoint.position,shootPoint.rotation);
+        Projectile projectile = Instantiate(projectilePrefab,shootPoint.position,shootPoint.rotation); // spawns a projectile
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        rb.AddForce(shootPoint.right * projectileForce, ForceMode.Impulse);
+        rb.AddForce(shootPoint.right * projectileForce, ForceMode.Impulse); // using the physics, pushes the projectile in a direction
+
+        projectile.SetDamage(damage);
     }
     
 }

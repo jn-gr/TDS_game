@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public float damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,9 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         
+    }
+    public void SetDamage(float damage)
+    {
+        this.damage = damage;
     }
 }
