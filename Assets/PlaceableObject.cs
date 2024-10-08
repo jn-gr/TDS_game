@@ -29,6 +29,29 @@ public class PlaceableObject : MonoBehaviour
 
         }
 
-        Size = new Vector3Int((vertices[0] - vertices[1]).x, (vertices[0] - vertices[3]).y, 1);
+        Size = new Vector3Int(Math.Abs(vertices[0] - vertices[1]).x, 
+                                Math.Abs(vertices[0] - vertices[3]).y
+                                 , 1);
+    }
+
+    private Vector3 GetStartPosition() //Get Vertices and put into world points
+    {
+        return transform.TransformPoint(Vertices[0]);
+    }
+
+    private void Start()
+    {
+        GetColliderVertexPositionsLocal();
+        CalculateSizeInCells();
+
+    }
+
+    public virtual void Place()
+    {
+        ObjectDrag drag = gameObject.GetComponent<ObjectDrag>();
+        Destroy(drag);
+        Placed = true;
+        //Overide here for building timers, or non functional buildings
+        //Invoke events for placement
     }
 }

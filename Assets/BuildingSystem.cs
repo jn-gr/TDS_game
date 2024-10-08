@@ -32,8 +32,23 @@ public class BuildingSystem : MonoBehaviour
         {
         }
 
-
-
+        if (!objectToPlace(KeyCode.Space))
+        {
+            if (CanBePlaced(objectToPlace))
+            {
+                objectToPlace.Place();
+                Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
+                TakeArea(start, objectToPlace.Size);
+            }
+            else
+            {
+                Destroy(objectToPlace.gameObject);
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Destroy(objectToPlace.GameObject);
+        }
     }
 
     #endregion
