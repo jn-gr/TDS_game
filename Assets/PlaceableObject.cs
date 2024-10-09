@@ -29,12 +29,12 @@ public class PlaceableObject : MonoBehaviour
 
         }
 
-        Size = new Vector3Int(Math.Abs(vertices[0] - vertices[1]).x, 
-                                Math.Abs(vertices[0] - vertices[3]).y
+        Size = new Vector3Int(Mathf.Abs((vertices[0] - vertices[1]).x), 
+                                Mathf.Abs((vertices[0] - vertices[3]).y)
                                  , 1);
     }
 
-    private Vector3 GetStartPosition() //Get Vertices and put into world points
+    public Vector3 GetStartPosition() //Get Vertices and put into world points
     {
         return transform.TransformPoint(Vertices[0]);
     }

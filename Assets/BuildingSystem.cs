@@ -7,11 +7,13 @@ public class BuildingSystem : MonoBehaviour
 {
     public static BuildingSystem current;
 
-    public static GridLayout gridLayout;
+    public GridLayout gridLayout;
     private Grid grid;
+    [SerializeField] private Tilemap MainTilemap;
     [SerializeField] private TileBase whiteTile;
-
+    //Place Prefabs Here
     public GameObject House_01;
+
     private PlaceableObject objectToPlace;
 
     #region Unity methods
@@ -30,9 +32,15 @@ public class BuildingSystem : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
+            InitializeWithObject(House_01);
         }
 
-        if (!objectToPlace(KeyCode.Space))
+        if (!objectToPlace)
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (CanBePlaced(objectToPlace))
             {
@@ -47,7 +55,7 @@ public class BuildingSystem : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Destroy(objectToPlace.GameObject);
+            Destroy(objectToPlace.gameObject);
         }
     }
 
@@ -80,9 +88,9 @@ public class BuildingSystem : MonoBehaviour
         TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
         int counter = 0;
 
-        foreach (var v:Vector3int in area.allPositionsWithin)
+        foreach (var v in area.allPositionsWithin)
         {
-            Vector3int pos = new Vector3int(v.x, v.y, 0);
+            Vector3Int pos = new Vector3Int(v.x, v.y, 0);
             array[counter] = tilemap.GetTile(pos);
             counter++;
         }
@@ -110,8 +118,7 @@ public class BuildingSystem : MonoBehaviour
 
         TileBase[] baseArray = GetTilesBlock(area, MainTilemap);
 
-        foreach (var b:TileBase in baseArray)
-        {
+        foreach (var b in baseArray){
             if (b == whiteTile)
             {
                 return false;
