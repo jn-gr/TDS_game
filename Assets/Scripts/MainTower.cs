@@ -3,13 +3,12 @@ using UnityEngine;
 public class MainTower : MonoBehaviour
 {
     private int maxHealth;
-    private int damageTaken;
-    private int currentHealth;
+    public int currentHealth;
 
     //Function to take away health from currentHealth
-    public void TakeDamage()
+    public void TakeDamage(int incomingDamage)
     {
-        currentHealth -= damageTaken;
+        currentHealth -= incomingDamage;
 
         //Check if currentHealth is not <=0
         if (currentHealth <= 0)
@@ -29,21 +28,14 @@ public class MainTower : MonoBehaviour
         return currentHealth;
     }
 
-    public void SetDamageTaken(int dmg)
-    {
-        damageTaken = dmg;
-    }
-
     //Function to trigger the TakeDamage function on collision of prefabs
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
             GameObject enemy = other.gameObject;
-
-            TakeDamage();
+            TakeDamage(enemy.GetComponent<Enemy>().damage);
             Destroy(other.gameObject);
-
             Debug.Log("i got hit by enemy");
         }
     }
