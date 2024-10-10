@@ -14,7 +14,7 @@ public class BuildingSystem : MonoBehaviour
     //Place Prefabs Here
     public GameObject House_01;
 
-    private PlaceableObject objectToPlace;
+    public PlaceableObject objectToPlace;
 
     #region Unity methods
 
@@ -35,15 +35,16 @@ public class BuildingSystem : MonoBehaviour
             InitializeWithObject(House_01);
         }
 
-        if (!objectToPlace)
-        {
-            return;
-        }
+        //if (!objectToPlace)
+        //{
+        //    return;
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (CanBePlaced(objectToPlace))
             {
+                Debug.Log("hello");
                 objectToPlace.Place();
                 Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
                 TakeArea(start, objectToPlace.Size);

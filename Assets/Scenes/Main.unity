@@ -5119,8 +5119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be07e5b55acc53e48bd7507d8b90b967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridLayout: {fileID: 0}
-  MainTilemap: {fileID: 0}
+  gridLayout: {fileID: 2037830843}
+  MainTilemap: {fileID: 512563763}
   whiteTile: {fileID: 11400000, guid: 90b2f6a5d7b53834d8caa553e8d8f424, type: 2}
   House_01: {fileID: 1223219109258597026, guid: 83f81d3110dbac947a0ea51a76fe8887, type: 3}
 --- !u!1 &963194225
@@ -5134,7 +5134,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
