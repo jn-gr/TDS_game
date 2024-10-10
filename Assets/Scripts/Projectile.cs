@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float damage;
+    public int damage;
     public float force;
     public GameObject enemyTarget;
     // Start is called before the first frame update
@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour
     }
 
 
-    public void SetDamage(float damage)
+    public void SetDamage(int damage)
     {
         this.damage = damage;
     }
