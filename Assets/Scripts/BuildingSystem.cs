@@ -36,15 +36,16 @@ public class BuildingSystem : MonoBehaviour
             InitializeWithObject(Castle);
         }
 
-        if (!objectToPlace)
-        {
-            return;
-        }
+        //if (!objectToPlace)
+        //{
+        //    return;
+        //}
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (CanBePlaced(objectToPlace))
             {
+                Debug.Log("hello");
                 objectToPlace.Place();
                 Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
                 TakeArea(start, objectToPlace.Size);
