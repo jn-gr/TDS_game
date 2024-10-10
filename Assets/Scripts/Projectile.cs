@@ -20,4 +20,14 @@ public class Projectile : MonoBehaviour
     {
         this.damage = damage;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            GameObject enemy = other.gameObject;
+
+            //enemy.TakeDamage(damage):  
+            Destroy(gameObject);
+        }
+    }
 }
