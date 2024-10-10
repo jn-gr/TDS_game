@@ -5,6 +5,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int damage;
+    public int health;
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,11 +19,19 @@ public class Enemy : MonoBehaviour
     {
         
     }
-    public void TakeDamage(float damage) {
-        if (damage > 0) ;
-            
-     }
-    
+    public void TakeDamage(float damage)
+    {
+
+        health -= damage;
+
+        if (health <= 0)
+        {
+
+            Destroy(gameObject);
+        }
+
+
+    }
 
     void OnTriggerEnter(Collider other)
     {
