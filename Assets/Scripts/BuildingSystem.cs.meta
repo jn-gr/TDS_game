@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: be07e5b55acc53e48bd7507d8b90b967
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - gridLayout: {instanceID: 0}
+  - MainTilemap: {instanceID: 0}
+  - whiteTile: {fileID: 11400000, guid: 90b2f6a5d7b53834d8caa553e8d8f424, type: 2}
+  - House_01: {fileID: 1223219109258597026, guid: 83f81d3110dbac947a0ea51a76fe8887, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
