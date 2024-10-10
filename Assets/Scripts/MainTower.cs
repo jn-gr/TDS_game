@@ -39,7 +39,12 @@ public class MainTower : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            GameObject enemy = other.gameObject;
+
             TakeDamage();
+            Destroy(other.gameObject);
+
+            Debug.Log("i got hit by enemy");
         }
     }
 
