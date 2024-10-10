@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public MainTower mainTower;
-    private int currentHealth;
+    public int currentHealth;
     private int currency = 0;
     private int experience = 0;
     private int totalKills = 0;
@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         mainTower.SetHealth(100);
-        mainTower.SetDamageTaken(3);
         currentHealth = mainTower.GetHealth();
     }
 
