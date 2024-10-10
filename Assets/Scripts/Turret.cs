@@ -43,8 +43,9 @@ public class Turret : MonoBehaviour
         Debug.Log(enemyTarget.transform.position);
         Vector3 direction = (enemyTarget.transform.position - shootPoint.position).normalized;
         rb.AddForce(direction * projectileForce, ForceMode.Impulse); // using the physics, pushes the projectile in a direction
-
+        projectile.SetForce(projectileForce);
         projectile.SetDamage(damage);
+        projectile.SetTarget(enemyTarget);
     }
 
     private void OnTriggerEnter(Collider other)

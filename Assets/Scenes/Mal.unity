@@ -306,38 +306,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &294232329 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5038159768750370891, guid: f3b7797f659911a4da988f97c25671c5, type: 3}
-  m_PrefabInstance: {fileID: 599702425}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &294232333
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 294232329}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &599702425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -393,10 +361,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5038159768750370891, guid: f3b7797f659911a4da988f97c25671c5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 294232333}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3b7797f659911a4da988f97c25671c5, type: 3}
 --- !u!1001 &3601090109558734627
 PrefabInstance:

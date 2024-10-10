@@ -120,6 +120,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  force: 0
+  enemyTarget: {fileID: 0}
+  turnSpeed: 500
 --- !u!54 &-5596567141994039862
 Rigidbody:
   m_ObjectHideFlags: 0

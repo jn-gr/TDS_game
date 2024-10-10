@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 512542244957376011}
   - component: {fileID: 1564516410563034726}
   - component: {fileID: 883438022104388176}
-  - component: {fileID: 6110661294398300684}
+  - component: {fileID: 5867057142687090198}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Enemy
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf65b73ca7fed624b92b718663696bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &6110661294398300684
+--- !u!54 &5867057142687090198
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
