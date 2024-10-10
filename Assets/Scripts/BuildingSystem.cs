@@ -13,8 +13,9 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private TileBase whiteTile;
     //Place Prefabs Here
     public GameObject House_01;
+    public GameObject Castle;
 
-    private PlaceableObject objectToPlace;
+    public PlaceableObject objectToPlace;
 
     #region Unity methods
 
@@ -32,7 +33,7 @@ public class BuildingSystem : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            InitializeWithObject(House_01);
+            InitializeWithObject(Castle);
         }
 
         if (!objectToPlace)
@@ -40,7 +41,7 @@ public class BuildingSystem : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (CanBePlaced(objectToPlace))
             {
@@ -129,7 +130,7 @@ public class BuildingSystem : MonoBehaviour
 
     public void TakeArea(Vector3Int start, Vector3Int size) //Take area around building to stop overlapping buildings
     {
-        MainTilemap.BoxFill(start, whiteTile, startX: start.x, startY: start.y, endX: start.x, endY: start.y + size.y);
+        MainTilemap.BoxFill(start, whiteTile, start.x, start.y, start.x +size.x, start.y + size.y);
     }
 
     #endregion
