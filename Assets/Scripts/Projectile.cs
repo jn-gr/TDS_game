@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour
         {
             GameObject enemy = other.gameObject;
 
-            //enemy.TakeDamage(damage);  
+            enemy.GetComponent<Enemy>().TakeDamage(damage);  
             Destroy(gameObject);
         }
     }
