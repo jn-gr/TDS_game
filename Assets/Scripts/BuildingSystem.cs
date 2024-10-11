@@ -27,11 +27,11 @@ public class BuildingSystem : MonoBehaviour
 
     private void Update() //Selection of buildings (currently with keyboard buttons
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             InitializeWithObject(House_01);
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             InitializeWithObject(Castle);
         }

@@ -24,10 +24,18 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        Vector3 targetDirection = (enemyTarget.transform.position - transform.position).normalized;
-        float speed = rb.velocity.magnitude;       
-        Vector3 newDirection = Vector3.RotateTowards(rb.velocity.normalized, targetDirection, turnSpeed * Mathf.Deg2Rad * Time.deltaTime, 0f);
-        rb.velocity = newDirection * speed;
+        if (enemyTarget)
+        {
+            Vector3 targetDirection = (enemyTarget.transform.position - transform.position).normalized;
+            float speed = rb.velocity.magnitude;
+            Vector3 newDirection = Vector3.RotateTowards(rb.velocity.normalized, targetDirection, turnSpeed * Mathf.Deg2Rad * Time.deltaTime, 0f);
+            rb.velocity = newDirection * speed;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
     }
 
 

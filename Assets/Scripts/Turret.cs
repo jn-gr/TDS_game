@@ -40,7 +40,7 @@ public class Turret : MonoBehaviour
     {
         Projectile projectile = Instantiate(projectilePrefab,shootPoint.position,shootPoint.rotation); // spawns a projectile
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        Debug.Log(enemyTarget.transform.position);
+        
         Vector3 direction = (enemyTarget.transform.position - shootPoint.position).normalized;
         rb.AddForce(direction * projectileForce, ForceMode.Impulse); // using the physics, pushes the projectile in a direction
         projectile.SetForce(projectileForce);
@@ -50,7 +50,7 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Triggered with: " + other.name);
+        
         if (other.CompareTag("Enemy"))
         {
             GameObject enemy = other.gameObject;
