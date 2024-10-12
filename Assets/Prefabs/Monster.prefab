@@ -330,7 +330,6 @@ MonoBehaviour:
   damage: 5
   health: 20
   speed: 5
-  castle: {fileID: 2249674909522930646, guid: aae719d815927e24db5ca60ba1a713fe, type: 3}
 --- !u!1 &5361635397227955183
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,7 +673,7 @@ Transform:
   m_GameObject: {fileID: 7328159333396522130}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.163, y: -0.538, z: 0}
+  m_LocalPosition: {x: 0.165, y: -0.538, z: 0}
   m_LocalScale: {x: 0.15, y: 0.55, z: 0.16}
   m_ConstrainProportionsScale: 0
   m_Children: []
