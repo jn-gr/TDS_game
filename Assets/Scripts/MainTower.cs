@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class MainTower : MonoBehaviour
 {
-    private int maxHealth;
     public int currentHealth;
+    public GameManager gameManager;
 
     //Function to take away health from currentHealth
     public void TakeDamage(int incomingDamage)
     {
         currentHealth -= incomingDamage;
+        gameManager.updateHealth();
+
+
 
         //Check if currentHealth is not <=0
         if (currentHealth <= 0)
@@ -17,11 +20,11 @@ public class MainTower : MonoBehaviour
         }
     }
 
-    public void SetHealth(int hp)
-    {
-        maxHealth = hp;
-        currentHealth = hp;
-    }
+    //public void SetHealth(int hp)
+    //{
+    //    maxHealth = hp;
+    //    currentHealth = hp;
+    //}
 
     public int GetHealth()
     {

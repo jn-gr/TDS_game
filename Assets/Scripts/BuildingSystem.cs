@@ -14,6 +14,7 @@ public class BuildingSystem : MonoBehaviour
     //Place Prefabs Here
     public GameObject House_01;
     public GameObject Castle;
+    public GameManager gameManager;
 
     public PlaceableObject objectToPlace;
 
@@ -21,6 +22,7 @@ public class BuildingSystem : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
         current = this;
         grid = gridLayout.gameObject.GetComponent<Grid>();
     }
@@ -29,11 +31,14 @@ public class BuildingSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            InitializeWithObject(House_01);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            InitializeWithObject(Castle);
+            if (gameManager.currency >= 100){
+                InitializeWithObject(House_01);
+                gameManager.currency -= 100;
+            }
+            else
+            {
+                Debug.Log("insufficient gold");
+            }
         }
 
         //if (!objectToPlace)

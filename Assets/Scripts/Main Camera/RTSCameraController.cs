@@ -108,11 +108,11 @@ public class RTSCameraController : MonoBehaviour
         //increase pan speed
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)
             || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)
-            || Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Q)
-            || Input.mousePosition.y >= Screen.height - ScreenEdgeBorderThickness
-            || Input.mousePosition.y <= ScreenEdgeBorderThickness
-            || Input.mousePosition.x <= ScreenEdgeBorderThickness
-            || Input.mousePosition.x >= Screen.width - ScreenEdgeBorderThickness)
+            || Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Q))
+            //|| Input.mousePosition.y >= Screen.height - ScreenEdgeBorderThickness
+            //|| Input.mousePosition.y <= ScreenEdgeBorderThickness
+            //|| Input.mousePosition.x <= ScreenEdgeBorderThickness
+            //|| Input.mousePosition.x >= Screen.width - ScreenEdgeBorderThickness)
         {
             panIncrease += Time.deltaTime / secToMaxSpeed;
             panSpeed = Mathf.Lerp(minPanSpeed, maxPanSpeed, panIncrease);

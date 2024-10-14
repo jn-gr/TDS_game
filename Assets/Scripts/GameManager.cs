@@ -6,20 +6,31 @@ public class GameManager : MonoBehaviour
 {
     public MainTower mainTower;
     public int currentHealth;
-    private int currency = 0;
-    private int experience = 0;
-    private int totalKills = 0;
-    private int Score = 0;
+    public int currency;
+    public int experience;
+    public int totalKills;
+    public int score;
 
     //Setting defaults on game start
     void Start()
     {
-        mainTower.SetHealth(100);
         currentHealth = mainTower.GetHealth();
+        currency = 1000;
     }
 
     void Update()
     {
-        Score = totalKills * 5;
+    }
+
+    public void updateHealth()
+    {
+        currentHealth = mainTower.GetHealth();
+    }
+    public void enemyKilled()
+    {
+        totalKills += 1;
+        currency += 50;
+        score += 100;
+        experience += 100;
     }
 }

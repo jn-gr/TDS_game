@@ -6,8 +6,8 @@ public class Spawner : MonoBehaviour
 {
     
     public GameObject enemyPrefab;  // The enemy prefab to spawn
-        // The point where enemies will spawn
-    public float spawnInterval = 1.0f;  // Time interval between spawns (1 second)
+                                    // The point where enemies will spawn
+    public float spawnInterval;  // Time interval between spawns (1 second)
 
     // Start is called before the first frame update
     void Start()

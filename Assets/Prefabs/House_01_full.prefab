@@ -178,7 +178,7 @@ MonoBehaviour:
   damage: 4
   projectilePrefab: {fileID: 2218205936552177126, guid: 1266300cc6894ea489b0dd25d93da877, type: 3}
   shootPoint: {fileID: 2816835223909173770}
-  projectileForce: 10
+  projectileForce: 30
   fireRate: 1
   fireCooldown: 0
   enemyTarget: {fileID: 0}

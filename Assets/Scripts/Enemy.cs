@@ -8,14 +8,14 @@ public class Enemy : MonoBehaviour
     public int health;
     public float speed;
     private MainTower castle;
-    private GameManager manager;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
        
-        manager = FindFirstObjectByType<GameManager>(); 
-        castle = manager.mainTower;
+        gameManager = FindFirstObjectByType<GameManager>(); 
+        castle = gameManager.mainTower;
     }
 
     // Update is called once per frame
@@ -32,8 +32,9 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
-
+            gameManager.enemyKilled();
             Destroy(gameObject);
+       
         }
 
 
