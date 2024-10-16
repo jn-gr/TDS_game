@@ -75,19 +75,23 @@ public class RTSCameraController : MonoBehaviour
 
         panMovement = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.W) || Input.mousePosition.y >= Screen.height - ScreenEdgeBorderThickness)
+        if (Input.GetKey(KeyCode.W) )
+            //|| Input.mousePosition.y >= Screen.height - ScreenEdgeBorderThickness)
         {
             panMovement += Vector3.forward * panSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.S) || Input.mousePosition.y <= ScreenEdgeBorderThickness)
+        if (Input.GetKey(KeyCode.S) )
+            //|| Input.mousePosition.y <= ScreenEdgeBorderThickness)
         {
             panMovement -= Vector3.forward * panSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.A) || Input.mousePosition.x <= ScreenEdgeBorderThickness)
+        if (Input.GetKey(KeyCode.A) )
+            //|| Input.mousePosition.x <= ScreenEdgeBorderThickness)
         {
             panMovement += Vector3.left * panSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.D) || Input.mousePosition.x >= Screen.width - ScreenEdgeBorderThickness)
+        if (Input.GetKey(KeyCode.D) )
+            //|| Input.mousePosition.x >= Screen.width - ScreenEdgeBorderThickness)
         {
             panMovement += Vector3.right * panSpeed * Time.deltaTime;
             //pos.x += panSpeed * Time.deltaTime;
