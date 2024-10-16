@@ -55,8 +55,8 @@ public class RTSCameraController : MonoBehaviour
     {
         initialPos = transform.position;
         initialRot = transform.rotation;
-        zoomLimit.x = 15;
-        zoomLimit.y = 60;
+        zoomLimit.x = 14;
+        zoomLimit.y = 56;
     }
 
 

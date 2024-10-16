@@ -9,7 +9,7 @@ public class MainTower : MonoBehaviour
     public void TakeDamage(int incomingDamage)
     {
         currentHealth -= incomingDamage;
-        gameManager.updateHealth();
+        gameManager.UpdateHealth();
 
 
 

@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
-            gameManager.enemyKilled();
+            gameManager.EnemyKilled();
             Destroy(gameObject);
        
         }
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Castle"))
         {
-            Debug.Log("castle has been hit by monster");
+            Debug.Log("castle has been hit by enemy");
         }
     }
 }

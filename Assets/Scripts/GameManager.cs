@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public int totalKills;
     public int score;
 
+    public int enemiesSpawned;
+
     //Setting defaults on game start
     void Start()
     {
@@ -22,11 +24,11 @@ public class GameManager : MonoBehaviour
     {
     }
 
-    public void updateHealth()
+    public void UpdateHealth()
     {
         currentHealth = mainTower.GetHealth();
     }
-    public void enemyKilled()
+    public void EnemyKilled()
     {
         totalKills += 1;
         currency += 50;
