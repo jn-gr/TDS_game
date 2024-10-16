@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // This runs if wave started and you've killed all the enemies. I just put 50 since we're only doing wave 1 for now. Should check per wave if we keep this implementation.
+        // This runs if wave started and you've killed all the enemies.
         // I say enemies died to account for if any died by killing themselves when they hit the castle.
 
         if (waveStarted && enemiesLeftInWave == 0 && enemiesDiedThisWave == enemiesInThisWave) 
