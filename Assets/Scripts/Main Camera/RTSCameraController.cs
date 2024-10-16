@@ -80,37 +80,40 @@ public class RTSCameraController : MonoBehaviour
 
         panMovement = Vector3.zero;
 
-        // Need custom forward, left, right sinec it's an orthographic camera and Vector3.forward doesn't make sense for it.
-        Vector3 customForward = new Vector3(1, 0, 1).normalized;
-        Vector3 customLeft = new Vector3(-1, 0, 1).normalized;
-        Vector3 customRight = new Vector3(1, 0, -1).normalized;
+        // Need orthographic forward, left, right sinec it's an orthographic camera and Vector3.forward doesn't make sense for it.
+        Vector3 orthographicForward = new Vector3(1, 0, 1).normalized;
+        Vector3 orthographicLeft = new Vector3(-1, 0, 1).normalized;
+        Vector3 orthographicRight = new Vector3(1, 0, -1).normalized;
 
 
         if (Input.GetKey(KeyCode.W) || (!keyboardOnly && (Input.mousePosition.y >= Screen.height - ScreenEdgeBorderThickness)))
         {
-            panMovement += customForward * panSpeed * Time.deltaTime;
+            panMovement += orthographicForward * panSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S) || (!keyboardOnly && (Input.mousePosition.y <= ScreenEdgeBorderThickness)))
         {
-            panMovement -= customForward * panSpeed * Time.deltaTime;
+            panMovement -= orthographicForward * panSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.A) || (!keyboardOnly && (Input.mousePosition.x <= ScreenEdgeBorderThickness)))
         {
-            panMovement += customLeft * panSpeed * Time.deltaTime;
+            panMovement += orthographicLeft * panSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D) || (!keyboardOnly && (Input.mousePosition.x >= Screen.width - ScreenEdgeBorderThickness)))
         {
-            panMovement += customRight * panSpeed * Time.deltaTime;
+            panMovement += orthographicRight * panSpeed * Time.deltaTime;
             //pos.x += panSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            panMovement += Vector3.up * panSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            panMovement += Vector3.down * panSpeed * Time.deltaTime;
-        }
+
+        // Removed Q and E since doesnt make sense for orthographic camera 
+
+        //if (Input.GetKey(KeyCode.Q))
+        //{
+        //    panMovement += Vector3.up * panSpeed * Time.deltaTime;
+        //}
+        //if (Input.GetKey(KeyCode.E))
+        //{
+        //    panMovement += Vector3.down * panSpeed * Time.deltaTime;
+        //}
 
         if (RTSMode) transform.Translate(panMovement, Space.World);
         else if (FlyCameraMode) transform.Translate(panMovement, Space.Self);
