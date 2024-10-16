@@ -23,6 +23,8 @@ public class Spawner : MonoBehaviour
     // This just runs this code every spawn interval. Then only runs it if the wave has started.
     // Should only run when wave is started and not before.
     // Fix later.
+
+    // Another issue is that spawners spawn at the same time. If it's a case where only 1 of them needs to spawn, what might happen is both spawn. Then you get 1 extra enemy.
     IEnumerator SpawnEnemies()
     {
         while (true)
