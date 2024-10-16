@@ -19,13 +19,13 @@ public class UI : MonoBehaviour
 
         healthText.text = "Health: " + gameManager.currentHealth;
         goldText.text = "Gold: " + gameManager.currency;
-        enemiesLeftText = "";
-
+        enemiesLeftText.text = "";
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        healthText.text = "Health: " + gameManager.currentHealth;
+        goldText.text = "Gold: " + gameManager.currency;
     }
 }

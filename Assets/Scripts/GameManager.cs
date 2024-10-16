@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
     public int score;
 
     public int enemiesSpawned;
+    public int enemiesLeftInWave;
 
     //Setting defaults on game start
     void Start()
     {
         currentHealth = mainTower.GetHealth();
         currency = 1000;
+        enemiesLeftInWave = 0;
     }
 
     void Update()
@@ -34,5 +36,10 @@ public class GameManager : MonoBehaviour
         currency += 50;
         score += 100;
         experience += 100;
+    }
+
+    public void NewEnemiesSpawned(int numberOfEnemiesSpawned)
+    {
+        enemiesSpawned += numberOfEnemiesSpawned;
     }
 }
