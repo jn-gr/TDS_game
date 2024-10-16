@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -952,7 +952,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1796107628}
+      - m_Target: {fileID: 1676836042}
         m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
         m_MethodName: PlaceTower
         m_Mode: 1
@@ -28867,8 +28867,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 30, y: 1, z: 30}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1676836040}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1468711300
@@ -29412,6 +29411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1676836040}
   - component: {fileID: 1676836041}
+  - component: {fileID: 1676836042}
   m_Layer: 6
   m_Name: Grid
   m_TagString: Untagged
@@ -29429,11 +29429,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.01, z: 0}
-  m_LocalScale: {x: 0.033333335, y: 1, z: 0.033333335}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1214431271}
-  m_Father: {fileID: 1462339051}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &1676836041
 Grid:
@@ -29447,6 +29447,28 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 1
+--- !u!114 &1676836042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676836039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be07e5b55acc53e48bd7507d8b90b967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridLayout: {fileID: 1676836041}
+  MainTilemap: {fileID: 1214431269}
+  whiteTile: {fileID: 11400000, guid: 90b2f6a5d7b53834d8caa553e8d8f424, type: 2}
+  layersToHit:
+    serializedVersion: 2
+    m_Bits: 64
+  House_01: {fileID: 1537438245501326481, guid: 8f5617ee829216c4f8374619322a0cb2, type: 3}
+  Castle: {fileID: 8772523874860222815, guid: aae719d815927e24db5ca60ba1a713fe, type: 3}
+  gameManager: {fileID: 1609003467}
+  objectToPlace: {fileID: 0}
 --- !u!1001 &1679698728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29652,60 +29674,6 @@ RectTransform:
   m_AnchoredPosition: {x: -128, y: 72}
   m_SizeDelta: {x: 160, y: 57.350006}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1796107627
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1796107629}
-  - component: {fileID: 1796107628}
-  m_Layer: 0
-  m_Name: Buildings
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1796107628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796107627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be07e5b55acc53e48bd7507d8b90b967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridLayout: {fileID: 1676836041}
-  MainTilemap: {fileID: 1214431269}
-  whiteTile: {fileID: 11400000, guid: 90b2f6a5d7b53834d8caa553e8d8f424, type: 2}
-  layersToHit:
-    serializedVersion: 2
-    m_Bits: 64
-  House_01: {fileID: 1537438245501326481, guid: 8f5617ee829216c4f8374619322a0cb2, type: 3}
-  Castle: {fileID: 0}
-  gameManager: {fileID: 0}
-  objectToPlace: {fileID: 0}
---- !u!4 &1796107629
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796107627}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1861180450
 GameObject:
   m_ObjectHideFlags: 0
@@ -30091,9 +30059,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 277259093}
-  - {fileID: 1796107629}
   - {fileID: 705507995}
   - {fileID: 1609003469}
+  - {fileID: 1676836040}
   - {fileID: 1462339051}
   - {fileID: 1679698728}
   - {fileID: 1283293376}

@@ -32,18 +32,6 @@ public class BuildingSystem : MonoBehaviour
 
     private void Update() //Selection of buildings (currently with keyboard buttons
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            if (gameManager.currency >= 100)
-            {
-                InitializeWithObject(House_01);
-                gameManager.currency -= 100;
-            }
-            else
-            {
-                Debug.Log("insufficient gold");
-            }
-        }
 
         //if (!objectToPlace)
         //{
