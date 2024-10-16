@@ -29,10 +29,10 @@ public class PlaceableObject : MonoBehaviour
             vertices[i] = BuildingSystem.current.gridLayout.WorldToCell(worldPos);
 
         }
-        Debug.Log((Vertices[0], Vertices[1], Vertices[2], Vertices[3]));
+        
         
         Size = new Vector3Int(Mathf.Abs((vertices[0] - vertices[1]).x), Mathf.Abs((vertices[0] - vertices[3]).y),1);
-        Debug.Log((Mathf.Abs((vertices[0] - vertices[1]).x), 1, Mathf.Abs((vertices[0] - vertices[3]).z)));
+        
     }
 
     public Vector3 GetStartPosition() //Get Vertices and put into world points
