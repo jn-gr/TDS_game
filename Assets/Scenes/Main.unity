@@ -155,7 +155,7 @@ MonoBehaviour:
   RTSMode: 1
   FlyCameraMode: 0
   minPanSpeed: 24.8
-  maxPanSpeed: 116.3
+  maxPanSpeed: 190.2
   secToMaxSpeed: 2.06
   zoomSpeed: 3.5
   enableMovementLimits: 0
