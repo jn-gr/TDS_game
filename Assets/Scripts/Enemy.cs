@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
         gameManager = FindFirstObjectByType<GameManager>(); 
         castle = gameManager.mainTower;
     }
@@ -21,30 +20,16 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         transform.position = Vector3.MoveTowards(transform.position, castle.transform.position, speed * Time.deltaTime);
-        
     }
     public void TakeDamage(int damage)
     {
-
         health -= damage;
 
         if (health <= 0)
         {
             gameManager.EnemyKilled();
             Destroy(gameObject);
-       
-        }
-
-
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Castle"))
-        {
-            Debug.Log("castle has been hit by enemy");
         }
     }
 }

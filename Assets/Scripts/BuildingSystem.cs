@@ -66,6 +66,20 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
+    // Hackyish solution. Just copied the InputKeyDownAlpha1 and put it here. Then connected the button to this method.
+    public void PlaceTower() 
+    {
+        if (gameManager.currency >= 100)
+        {
+            InitializeWithObject(House_01);
+            gameManager.currency -= 100;
+        }
+        else
+        {
+            Debug.Log("insufficient gold");
+        }
+    }
+
     #endregion
 
     #region Utils

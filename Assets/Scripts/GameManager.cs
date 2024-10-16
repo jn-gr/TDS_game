@@ -11,19 +11,30 @@ public class GameManager : MonoBehaviour
     public int totalKills;
     public int score;
 
-    public int enemiesSpawned;
-    public int enemiesLeftInWave;
+    public bool waveStarted;
+    public int enemiesInThisWave;
+    public int enemiesLeftInWave; // Used internally to tell spawners how many left to spawn
+    public int enemiesDiedThisWave;
+
 
     //Setting defaults on game start
     void Start()
     {
         currentHealth = mainTower.GetHealth();
         currency = 1000;
-        enemiesLeftInWave = 0;
+        waveStarted = false;
     }
 
     void Update()
     {
+        // This runs if wave started and you've killed all the enemies. I just put 50 since we're only doing wave 1 for now. Should check per wave if we keep this implementation.
+        // I say enemies died to account for if any died by killing themselves when they hit the castle.
+
+        if (waveStarted && enemiesLeftInWave == 0 && enemiesDiedThisWave == enemiesInThisWave) 
+        {
+            waveStarted = false;
+            enemiesDiedThisWave = 0;
+        }
     }
 
     public void UpdateHealth()
@@ -36,10 +47,20 @@ public class GameManager : MonoBehaviour
         currency += 50;
         score += 100;
         experience += 100;
+
+        enemiesDiedThisWave += 1;
     }
 
-    public void NewEnemiesSpawned(int numberOfEnemiesSpawned)
+    public void NewEnemiesSpawned(int numberOfNewEnemiesSpawned)
     {
-        enemiesSpawned += numberOfEnemiesSpawned;
+        enemiesLeftInWave -= numberOfNewEnemiesSpawned;
+    }
+
+    // Starts the first wave. Could be generalised for multiple waves. It isn't right now, though.
+    public void StartWaveOne()
+    {
+        waveStarted = true;
+        enemiesInThisWave = 12;
+        enemiesLeftInWave = enemiesInThisWave;
     }
 }

@@ -134,7 +134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.91
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27690,8 +27690,10 @@ MonoBehaviour:
   experience: 0
   totalKills: 0
   score: 0
-  enemiesSpawned: 0
+  waveStarted: 0
+  enemiesInThisWave: 0
   enemiesLeftInWave: 0
+  enemiesDiedThisWave: 0
 --- !u!4 &682950713
 Transform:
   m_ObjectHideFlags: 0
@@ -27722,6 +27724,7 @@ MonoBehaviour:
   healthText: {fileID: 1064202374}
   goldText: {fileID: 188103298}
   enemiesLeftText: {fileID: 1388619530}
+  startWaveButton: {fileID: 972711824}
 --- !u!1 &694037316
 GameObject:
   m_ObjectHideFlags: 0
@@ -28464,8 +28467,8 @@ MonoBehaviour:
   RTSMode: 1
   FlyCameraMode: 0
   minPanSpeed: 24.8
-  maxPanSpeed: 91.3
-  secToMaxSpeed: 4.27
+  maxPanSpeed: 116.3
+  secToMaxSpeed: 2.06
   zoomSpeed: 3.5
   enableMovementLimits: 0
   heightLimit: {x: 0, y: 0}
@@ -28555,7 +28558,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 972711827}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 682950714}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_MethodName: StartWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &972711827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28824,7 +28839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.86
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29281,7 +29296,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1463298476}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 770130989}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: PlaceTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1463298476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29350,7 +29377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000019073486
+      value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29454,7 +29481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000076293945
+      value: 0.93
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.z

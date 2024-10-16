@@ -22,16 +22,19 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
-        // Checks game manager if theres enemies left to spawn.
-        while (gameManager.enemiesLeftInWave > 0)
+        while (true)
         {
-            // Spawn the enemy
-            Instantiate(enemyPrefab, gameObject.transform.position, gameObject.transform.rotation);
             // Wait for the specified interval before spawning the next enemy
             yield return new WaitForSeconds(spawnInterval);
 
-            // Tell game manager we spawned a new enemy I'm tellnig it we just spawned 1.
-            gameManager.NewEnemiesSpawned(1);
+            // Checks game manager if theres enemies left to spawn.
+            if (gameManager.waveStarted && gameManager.enemiesLeftInWave > 0)
+            {
+                // Spawn the enemy
+                Instantiate(enemyPrefab, gameObject.transform.position, gameObject.transform.rotation);
+                // Tell game manager we spawned a new enemy I'm telling it we just spawned 1.
+                gameManager.NewEnemiesSpawned(1);
+            }
         }
     }
 }
