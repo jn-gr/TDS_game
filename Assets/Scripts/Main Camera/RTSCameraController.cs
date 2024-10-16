@@ -80,21 +80,27 @@ public class RTSCameraController : MonoBehaviour
 
         panMovement = Vector3.zero;
 
+        // Need custom forward, left, right sinec it's an orthographic camera and Vector3.forward doesn't make sense for it.
+        Vector3 customForward = new Vector3(1, 0, 1).normalized;
+        Vector3 customLeft = new Vector3(-1, 0, 1).normalized;
+        Vector3 customRight = new Vector3(1, 0, -1).normalized;
+
+
         if (Input.GetKey(KeyCode.W) || (!keyboardOnly && (Input.mousePosition.y >= Screen.height - ScreenEdgeBorderThickness)))
         {
-            panMovement += Vector3.forward * panSpeed * Time.deltaTime;
+            panMovement += customForward * panSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S) || (!keyboardOnly && (Input.mousePosition.y <= ScreenEdgeBorderThickness)))
         {
-            panMovement -= Vector3.forward * panSpeed * Time.deltaTime;
+            panMovement -= customForward * panSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.A) || (!keyboardOnly && (Input.mousePosition.x <= ScreenEdgeBorderThickness)))
         {
-            panMovement += Vector3.left * panSpeed * Time.deltaTime;
+            panMovement += customLeft * panSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D) || (!keyboardOnly && (Input.mousePosition.x >= Screen.width - ScreenEdgeBorderThickness)))
         {
-            panMovement += Vector3.right * panSpeed * Time.deltaTime;
+            panMovement += customRight * panSpeed * Time.deltaTime;
             //pos.x += panSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.Q))
