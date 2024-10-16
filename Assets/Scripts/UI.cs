@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI enemiesLeftText;
 
     public GameObject startWaveButton;
+    public GameObject gameOverOverlay;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +29,8 @@ public class UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Currently checks all info on UI per frame. Should be optimised every time value changes. Maybe should be changed to that instead.
+        // Currently checks all info on UI per frame. Gold, health, wave progress, etc.
+        // Should be optimised to every time value changes.
         healthText.text = "Health: " + gameManager.currentHealth;
         goldText.text = "Gold: " + gameManager.currency;
 
@@ -41,6 +44,11 @@ public class UI : MonoBehaviour
             startWaveButton.SetActive(true);
             enemiesLeftText.text = "";
         }
+
+        if (gameManager.currentHealth <= 0)
+        {
+            gameOverOverlay.SetActive(true);
+        }
     }
 
     // Button connected to start wave button. Starts wave 1.
@@ -48,5 +56,10 @@ public class UI : MonoBehaviour
     {
         gameManager.StartWaveOne();
         Debug.Log("button clicked");
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 }

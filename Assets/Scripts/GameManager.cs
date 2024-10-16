@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     public void StartWaveOne()
     {
         waveStarted = true;
-        enemiesInThisWave = 12;
+        enemiesInThisWave = 19;
         enemiesLeftInWave = enemiesInThisWave;
     }
 }
