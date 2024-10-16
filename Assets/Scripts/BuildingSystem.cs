@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,6 +12,8 @@ public class BuildingSystem : MonoBehaviour
     private Grid grid;
     [SerializeField] private Tilemap MainTilemap;
     [SerializeField] private TileBase whiteTile;
+
+    public LayerMask layersToHit;
     //Place Prefabs Here
     public GameObject House_01;
     public GameObject Castle;
@@ -31,7 +34,8 @@ public class BuildingSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (gameManager.currency >= 100){
+            if (gameManager.currency >= 100)
+            {
                 InitializeWithObject(House_01);
                 gameManager.currency -= 100;
             }
@@ -45,24 +49,29 @@ public class BuildingSystem : MonoBehaviour
         //{
         //    return;
         //}
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (objectToPlace != null)
         {
-            if (CanBePlaced(objectToPlace))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("hello");
-                objectToPlace.Place();
-                Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
-                TakeArea(start, objectToPlace.Size);
+                if (CanBePlaced(objectToPlace))
+                {
+
+                    objectToPlace.Place();
+                    Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
+                    TakeArea(start, objectToPlace.Size);
+                    Turret turret = objectToPlace.GetComponent<Turret>();
+                    turret.enabled = true;
+                    objectToPlace = null; // we change this to null because once the object has been placed and locked we wont be able to move it
+                }
+                else
+                {
+                    Destroy(objectToPlace.gameObject);
+                }
             }
-            else
+            else if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Destroy(objectToPlace.gameObject);
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Destroy(objectToPlace.gameObject);
         }
     }
 
@@ -73,8 +82,12 @@ public class BuildingSystem : MonoBehaviour
     public static Vector3 GetMouseWorldPosition()  //Cast a ray from the camera to align building to mouse pointer
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit))
+        Debug.DrawRay(ray.origin, ray.direction * 1000f, Color.red, 1f);
+        if (Physics.Raycast(ray, out RaycastHit raycastHit,1000,BuildingSystem.current.layersToHit))
         {
+
+            Debug.DrawRay(raycastHit.point, Vector3.up * 1f, Color.green, 1f);
+            //Debug.Log("Ray hit: " + raycastHit.collider.name);
             return raycastHit.point;
         }
         else
@@ -110,10 +123,19 @@ public class BuildingSystem : MonoBehaviour
 
     public void InitializeWithObject(GameObject prefab) //Show tower when selected
     {
+        if (objectToPlace != null) // this will destory the building that hasnt been locked in a place, so that the player doesnt end up having many unplaced towers in the scene
+        {
+          
+            Destroy(objectToPlace.gameObject);
+            
+        }
+        
         Vector3 positon = SnapCoordinateToGrid(Vector3.zero);
 
         GameObject obj = Instantiate(prefab, positon, Quaternion.identity);
         objectToPlace = obj.GetComponent<PlaceableObject>();
+        Turret turret = obj.GetComponent<Turret>();
+        turret.enabled = false;
         obj.AddComponent<ObjectDrag>();
     }
 

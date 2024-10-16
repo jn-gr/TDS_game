@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,7 @@ public class Turret : MonoBehaviour
     public float fireCooldown;
 
     public GameObject enemyTarget;
-
-    public List<GameObject> enemiesInRange = new List<GameObject>();
+    private List<GameObject> enemiesInRange = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +33,26 @@ public class Turret : MonoBehaviour
                 fireCooldown = 1f / fireRate;
             }
             fireCooldown -= Time.deltaTime;
+
+            // Check if the enemyTarget has been destroyed
+            if (enemyTarget == null)
+            {
+                enemyTarget = null;
+            }
+        }
+        else
+        {
+            // Clean up any destroyed enemies from the list
+            enemiesInRange.RemoveAll(e => e == null);
+
+            // Assign a new target if available
+            if (enemiesInRange.Count > 0)
+            {
+                enemyTarget = enemiesInRange[0];
+            }
         }
     }
+
 
     void Shoot()
     {
