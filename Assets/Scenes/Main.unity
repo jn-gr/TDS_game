@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -29415,6 +29415,9 @@ MonoBehaviour:
   healthText: {fileID: 1286484739}
   goldText: {fileID: 610374584}
   enemiesLeftText: {fileID: 810734142}
+  totalKillsText: {fileID: 571802304}
+  scoreText: {fileID: 1506743918}
+  experienceText: {fileID: 1072567478}
   startWaveButton: {fileID: 1775663565}
   gameOverOverlay: {fileID: 1185301777}
 --- !u!4 &1609003469

@@ -12,6 +12,9 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI enemiesLeftText;
+    public TextMeshProUGUI totalKillsText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI experienceText;
 
     public GameObject startWaveButton;
     public GameObject gameOverOverlay;
@@ -33,6 +36,9 @@ public class UI : MonoBehaviour
         // Should be optimised to every time value changes.
         healthText.text = "Health: " + gameManager.currentHealth;
         goldText.text = "Gold: " + gameManager.currency;
+        totalKillsText.text = "Total kills: " + gameManager.totalKills;
+        scoreText.text = "Score: " + gameManager.score;
+        experienceText.text = "Experience: " + gameManager.experience;
 
         if (gameManager.waveStarted)
         {
