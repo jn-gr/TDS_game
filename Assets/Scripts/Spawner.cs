@@ -20,6 +20,9 @@ public class Spawner : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>();
     }
 
+    // This just runs this code every spawn interval. Then only runs it if the wave has started.
+    // Should only run when wave is started and not before.
+    // Fix later.
     IEnumerator SpawnEnemies()
     {
         while (true)
