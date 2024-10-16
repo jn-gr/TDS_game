@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -409,9 +409,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2119285469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -416.2, y: 154.8}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 133.79999, y: -105.2}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &610374583
@@ -962,9 +962,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2119285469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -115, y: -206}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 435, y: 54}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &810734141
@@ -28689,9 +28689,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2119285469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -416, y: 206}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 134, y: -54}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1286484738
@@ -29735,10 +29735,10 @@ RectTransform:
   - {fileID: 1488222460}
   m_Father: {fileID: 2119285469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 422, y: -188}
-  m_SizeDelta: {x: 160, y: 57.35}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -128, y: 72}
+  m_SizeDelta: {x: 160, y: 57.350006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1796107627
 GameObject:
@@ -29774,7 +29774,7 @@ MonoBehaviour:
   whiteTile: {fileID: 11400000, guid: 90b2f6a5d7b53834d8caa553e8d8f424, type: 2}
   layersToHit:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   House_01: {fileID: 1537438245501326481, guid: 8f5617ee829216c4f8374619322a0cb2, type: 3}
   Castle: {fileID: 0}
   gameManager: {fileID: 0}
@@ -29828,10 +29828,10 @@ RectTransform:
   - {fileID: 753896787}
   m_Father: {fileID: 2119285469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 416, y: 152.06252}
-  m_SizeDelta: {x: -906.05005, y: -372.27496}
+  m_AnchoredPosition: {x: -134, y: -107.437485}
+  m_SizeDelta: {x: 193.94995, y: 146.72504}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1861180452
 MonoBehaviour:
