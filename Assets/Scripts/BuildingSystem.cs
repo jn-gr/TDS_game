@@ -40,7 +40,7 @@ public class BuildingSystem : MonoBehaviour
         }
         if (objectToPlace != null)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetMouseButtonDown(0))
             {
                 if (CanBePlaced(objectToPlace))
                 {
@@ -55,7 +55,7 @@ public class BuildingSystem : MonoBehaviour
                     Destroy(objectToPlace.gameObject);
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Escape))
+            else if (Input.GetMouseButtonDown(1))
             {
                 Destroy(objectToPlace.gameObject);
             }
