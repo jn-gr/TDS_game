@@ -34,10 +34,10 @@ public class BuildingSystem : MonoBehaviour
     private void Update() //Selection of buildings (currently with keyboard buttons
     {
 
-        //if (!objectToPlace)
-        //{
-        //    return;
-        //}
+        if (!objectToPlace)
+        {
+            return;
+        }
         if (objectToPlace != null)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -48,6 +48,7 @@ public class BuildingSystem : MonoBehaviour
                     objectToPlace.Place();
                     Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
                     TakeArea(start, objectToPlace.Size);
+                    objectToPlace = null; // we change this to null because once the object has been placed and locked we wont be able to move it
                 }
                 else
                 {
@@ -83,12 +84,10 @@ public class BuildingSystem : MonoBehaviour
     public static Vector3 GetMouseWorldPosition()  //Cast a ray from the camera to align building to mouse pointer
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(ray.origin, ray.direction * 1000f, Color.red, 1f);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit,1000,BuildingSystem.current.layersToHit))
-        {
 
-            Debug.DrawRay(raycastHit.point, Vector3.up * 1f, Color.green, 1f);
-            //Debug.Log("Ray hit: " + raycastHit.collider.name);
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 1000, BuildingSystem.current.layersToHit))
+        {
+            Debug.Log("Ray hit: " + raycastHit.collider.name);
             return raycastHit.point;
         }
         else
@@ -124,14 +123,14 @@ public class BuildingSystem : MonoBehaviour
 
     public void InitializeWithObject(GameObject prefab) //Show tower when selected
     {
-        if (objectToPlace != null) // this will destory the building that hasnt been locked in a place, so that the player doesnt end up having many unplaced towers in the scene
-        {
+        //if (objectToPlace != null) // this will destory the building that hasnt been locked in a place, so that the player doesnt end up having many unplaced towers in the scene
+        //{
           
-            Destroy(objectToPlace.gameObject);
+        //    Destroy(objectToPlace.gameObject);
             
-        }
+        //}
         
-        Vector3 positon = SnapCoordinateToGrid(Vector3.zero);
+        Vector3 positon = SnapCoordinateToGrid(GetMouseWorldPosition());
 
         GameObject obj = Instantiate(prefab, positon, Quaternion.identity);
         objectToPlace = obj.GetComponent<PlaceableObject>();
@@ -158,7 +157,6 @@ public class BuildingSystem : MonoBehaviour
     public void TakeArea(Vector3Int start, Vector3Int size) //Take area around building to stop overlapping buildings
     {
         MainTilemap.BoxFill(start, whiteTile, start.x, start.y, start.x +size.x, start.y + size.y);
-        objectToPlace = null; // we change this to null because once the object has been placed and locked we wont be able to move it
     }
 
     #endregion

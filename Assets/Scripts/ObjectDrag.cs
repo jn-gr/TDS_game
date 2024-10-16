@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectDrag : MonoBehaviour
 {
     private Vector3 offset;
-    private bool isDragging = false;
+    private bool isDragging = true;
 
     private void Update()
     {

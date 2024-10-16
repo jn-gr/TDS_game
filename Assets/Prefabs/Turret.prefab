@@ -160,7 +160,6 @@ MonoBehaviour:
   fireRate: 1
   fireCooldown: 0
   enemyTarget: {fileID: 0}
-  enemiesInRange: []
 --- !u!114 &5856372859600647456
 MonoBehaviour:
   m_ObjectHideFlags: 0
