@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -283,7 +283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 312529141}
   - component: {fileID: 312529142}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MapGeneratorObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1482,7 +1482,7 @@ GameObject:
   - component: {fileID: 1214431271}
   - component: {fileID: 1214431269}
   - component: {fileID: 1214431270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28998,7 +28998,7 @@ GameObject:
   - component: {fileID: 1462339050}
   - component: {fileID: 1462339049}
   - component: {fileID: 1462339048}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29500,7 +29500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1676836040}
   - component: {fileID: 1676836041}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29772,6 +29772,9 @@ MonoBehaviour:
   gridLayout: {fileID: 1676836041}
   MainTilemap: {fileID: 1214431269}
   whiteTile: {fileID: 11400000, guid: 90b2f6a5d7b53834d8caa553e8d8f424, type: 2}
+  layersToHit:
+    serializedVersion: 2
+    m_Bits: 0
   House_01: {fileID: 1537438245501326481, guid: 8f5617ee829216c4f8374619322a0cb2, type: 3}
   Castle: {fileID: 0}
   gameManager: {fileID: 0}
