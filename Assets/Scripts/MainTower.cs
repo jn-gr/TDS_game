@@ -9,7 +9,7 @@ public class MainTower : MonoBehaviour
     public void TakeDamage(int incomingDamage)
     {
         currentHealth -= incomingDamage;
-        gameManager.updateHealth();
+        gameManager.UpdateHealth();
 
 
 
@@ -40,6 +40,9 @@ public class MainTower : MonoBehaviour
             TakeDamage(enemy.GetComponent<Enemy>().damage);
             Destroy(other.gameObject);
             Debug.Log("i got hit by enemy");
+
+            // Tell game manager that an enemy died when they hit the tower. So enemy wave death counts work.
+            gameManager.enemiesDiedThisWave += 1;
         }
     }
 

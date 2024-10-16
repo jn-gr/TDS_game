@@ -55,8 +55,8 @@ public class RTSCameraController : MonoBehaviour
     {
         initialPos = transform.position;
         initialRot = transform.rotation;
-        zoomLimit.x = 15;
-        zoomLimit.y = 65;
+        zoomLimit.x = 14;
+        zoomLimit.y = 56;
     }
 
 
@@ -108,11 +108,11 @@ public class RTSCameraController : MonoBehaviour
         //increase pan speed
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)
             || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)
-            || Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Q))
-            //|| Input.mousePosition.y >= Screen.height - ScreenEdgeBorderThickness
-            //|| Input.mousePosition.y <= ScreenEdgeBorderThickness
-            //|| Input.mousePosition.x <= ScreenEdgeBorderThickness
-            //|| Input.mousePosition.x >= Screen.width - ScreenEdgeBorderThickness)
+            || Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Q)
+            || Input.mousePosition.y >= Screen.height - ScreenEdgeBorderThickness
+            || Input.mousePosition.y <= ScreenEdgeBorderThickness
+            || Input.mousePosition.x <= ScreenEdgeBorderThickness
+            || Input.mousePosition.x >= Screen.width - ScreenEdgeBorderThickness)
         {
             panIncrease += Time.deltaTime / secToMaxSpeed;
             panSpeed = Mathf.Lerp(minPanSpeed, maxPanSpeed, panIncrease);
@@ -127,8 +127,9 @@ public class RTSCameraController : MonoBehaviour
 
         #region Zoom
 
-        Camera.main.fieldOfView -= Input.mouseScrollDelta.y * zoomSpeed;
-        Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, zoomLimit.x, zoomLimit.y);
+        // This got changed to orthographic. Because Orthographic camera. Use fieldOfView if perspective camera.
+        Camera.main.orthographicSize -= Input.mouseScrollDelta.y * zoomSpeed;
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, zoomLimit.x, zoomLimit.y);
 
         #endregion
 
