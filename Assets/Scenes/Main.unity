@@ -377,6 +377,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
+--- !u!1 &519556553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 519556554}
+  m_Layer: 0
+  m_Name: TermporalBuild
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &519556554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519556553}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 51.642746, y: 39.224625, z: -51.175995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &571802302
 GameObject:
   m_ObjectHideFlags: 0
@@ -29465,6 +29496,7 @@ MonoBehaviour:
   layersToHit:
     serializedVersion: 2
     m_Bits: 64
+  NothingObject: {fileID: 0}
   House_01: {fileID: 1537438245501326481, guid: 8f5617ee829216c4f8374619322a0cb2, type: 3}
   Castle: {fileID: 8772523874860222815, guid: aae719d815927e24db5ca60ba1a713fe, type: 3}
   gameManager: {fileID: 1609003467}
@@ -30071,3 +30103,4 @@ SceneRoots:
   - {fileID: 300215408}
   - {fileID: 2119285469}
   - {fileID: 734967443}
+  - {fileID: 519556554}

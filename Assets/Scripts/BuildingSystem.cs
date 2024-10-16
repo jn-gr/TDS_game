@@ -15,6 +15,7 @@ public class BuildingSystem : MonoBehaviour
 
     public LayerMask layersToHit;
     //Place Prefabs Here
+    public GameObject NothingObject;
     public GameObject House_01;
     public GameObject Castle;
     public GameManager gameManager;
@@ -47,9 +48,6 @@ public class BuildingSystem : MonoBehaviour
                     objectToPlace.Place();
                     Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
                     TakeArea(start, objectToPlace.Size);
-                    Turret turret = objectToPlace.GetComponent<Turret>();
-                    turret.enabled = true;
-                    objectToPlace = null; // we change this to null because once the object has been placed and locked we wont be able to move it
                 }
                 else
                 {
@@ -137,8 +135,6 @@ public class BuildingSystem : MonoBehaviour
 
         GameObject obj = Instantiate(prefab, positon, Quaternion.identity);
         objectToPlace = obj.GetComponent<PlaceableObject>();
-        Turret turret = obj.GetComponent<Turret>();
-        turret.enabled = false;
         obj.AddComponent<ObjectDrag>();
     }
 
@@ -162,6 +158,7 @@ public class BuildingSystem : MonoBehaviour
     public void TakeArea(Vector3Int start, Vector3Int size) //Take area around building to stop overlapping buildings
     {
         MainTilemap.BoxFill(start, whiteTile, start.x, start.y, start.x +size.x, start.y + size.y);
+        objectToPlace = null; // we change this to null because once the object has been placed and locked we wont be able to move it
     }
 
     #endregion
