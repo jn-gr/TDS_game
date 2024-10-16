@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad33f844a5068e4499b2a3a880f245d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyboardOnly: 0
   ScreenEdgeBorderThickness: 5
   RTSMode: 1
   FlyCameraMode: 0
