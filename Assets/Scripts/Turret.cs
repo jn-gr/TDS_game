@@ -56,7 +56,7 @@ public class Turret : MonoBehaviour
 
     void Shoot()
     {
-        Projectile projectile = Instantiate(projectilePrefab,shootPoint.position,shootPoint.rotation); // spawns a projectile
+        Projectile projectile = Instantiate(projectilePrefab,shootPoint.position,shootPoint.rotation,transform); // spawns a projectile
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         
         Vector3 direction = (enemyTarget.transform.position - shootPoint.position).normalized;
