@@ -29284,8 +29284,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Tower
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6492100679701248841, guid: aae719d815927e24db5ca60ba1a713fe, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -29804,10 +29803,6 @@ PrefabInstance:
     - target: {fileID: 1153494756151801963, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -46.463
-      objectReference: {fileID: 0}
-    - target: {fileID: 1449560179125831409, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
-      propertyPath: spawnInterval
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4673475698990331751, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
       propertyPath: m_Name

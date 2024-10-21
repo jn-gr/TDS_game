@@ -1039,7 +1039,6 @@ GameObject:
   - component: {fileID: 4162783595457367869}
   - component: {fileID: 2464824949050905281}
   - component: {fileID: 6540219954861335024}
-  - component: {fileID: 6492100679701248841}
   - component: {fileID: 2249674909522930646}
   m_Layer: 0
   m_Name: Main Tower
@@ -1106,27 +1105,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.127755, y: 13.137032, z: 7.998374}
   m_Center: {x: -0.510406, y: 4.9471245, z: -0.5332308}
---- !u!65 &6492100679701248841
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8772523874860222815}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: -2.81, y: 0, z: 0}
 --- !u!114 &2249674909522930646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,3 +1118,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 100
+  gameManager: {fileID: 0}
