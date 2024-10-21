@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    
+
     public GameObject enemyPrefab;  // The enemy prefab to spawn
                                     // The point where enemies will spawn
     public float spawnInterval;  // Time interval between spawns (1 second)
@@ -41,5 +41,7 @@ public class Spawner : MonoBehaviour
                 gameManager.NewEnemiesSpawned(1);
             }
         }
+
+
     }
 }

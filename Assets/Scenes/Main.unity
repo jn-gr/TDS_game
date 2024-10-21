@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -335,7 +335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.86
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -28424,7 +28424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.67
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -28916,7 +28916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.93
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29397,6 +29397,7 @@ MonoBehaviour:
   experience: 0
   totalKills: 0
   score: 0
+  waveNum: 0
   waveStarted: 0
   enemiesInThisWave: 0
   enemiesLeftInWave: 0
@@ -29937,7 +29938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.91
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199988473593236433, guid: 3c7487c276b497c4385940deed8cb01f, type: 3}
       propertyPath: m_LocalPosition.z

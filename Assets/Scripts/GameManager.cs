@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int experience;
     public int totalKills;
     public int score;
-
+    public int waveNum;
     public bool waveStarted;
     public int enemiesInThisWave;
     public int enemiesLeftInWave; // Used internally to tell spawners how many left to spawn
@@ -60,7 +60,11 @@ public class GameManager : MonoBehaviour
     public void StartWaveOne()
     {
         waveStarted = true;
-        enemiesInThisWave = 19;
+        //enemiesInThisWave = (int)(5 + (totalKills *0.4));
+        enemiesInThisWave = (int)(4 + (waveNum * 0.2));
         enemiesLeftInWave = enemiesInThisWave;
+        waveNum++;
+        
+
     }
 }

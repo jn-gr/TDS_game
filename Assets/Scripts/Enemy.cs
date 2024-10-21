@@ -15,6 +15,9 @@ public class Enemy : MonoBehaviour
     {
         gameManager = FindFirstObjectByType<GameManager>(); 
         castle = gameManager.mainTower;
+        health = (int)(8 + (gameManager.waveNum * 1.1));
+        speed = (float)(2 + (gameManager.waveNum * 1.5));
+
     }
 
     // Update is called once per frame
