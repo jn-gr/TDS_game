@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 277259093}
   - component: {fileID: 277259092}
   - component: {fileID: 277259091}
-  - component: {fileID: 277259090}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -139,32 +138,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &277259090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277259089}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad33f844a5068e4499b2a3a880f245d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyboardOnly: 0
-  ScreenEdgeBorderThickness: 5
-  RTSMode: 1
-  FlyCameraMode: 0
-  minPanSpeed: 24.8
-  maxPanSpeed: 190.2
-  secToMaxSpeed: 2.06
-  zoomSpeed: 3.5
-  enableMovementLimits: 1
-  heightLimit: {x: 0, y: 51}
-  lenghtLimit: {x: -180, y: 100}
-  widthLimit: {x: -180, y: 100}
-  rotationEnabled: 0
-  rotateSpeed: 0
 --- !u!81 &277259091
 AudioListener:
   m_ObjectHideFlags: 0
