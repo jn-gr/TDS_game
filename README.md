@@ -5,7 +5,7 @@ Group Tower Defense Game
 # Tower Defense Game
 
 ## Game Overview
-Welcome to our Tower Defense Game! In this game, your mission is to defend your **Main Castle** from waves of enemies that spawn from **Enemy Spawners**. You will strategically place towers to destroy the incoming enemies and prevent them from reaching your castle. Each wave increases in difficulty, with more enemies and tougher challenges. Try to reach the highest score possible before your castle is destroyed!
+In this game, your mission is to defend your **Main Castle** from waves of enemies that spawn from **Enemy Spawners**. You will strategically place towers to destroy the incoming enemies and prevent them from reaching your castle. Each wave increases in difficulty, with more enemies and tougher challenges. Try to reach the highest score possible before your castle is destroyed!
 
 ## How to Play
 
