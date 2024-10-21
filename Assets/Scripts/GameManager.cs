@@ -56,11 +56,9 @@ public class GameManager : MonoBehaviour
         enemiesLeftInWave -= numberOfNewEnemiesSpawned;
     }
 
-    // Starts the first wave. Could be generalised for multiple waves. It isn't right now, though.
-    public void StartWaveOne()
+    public void StartWave()
     {
         waveStarted = true;
-        //enemiesInThisWave = (int)(5 + (totalKills *0.4));
         enemiesInThisWave = (int)(4 + (waveNum * 0.2));
         enemiesLeftInWave = enemiesInThisWave;
         waveNum++;

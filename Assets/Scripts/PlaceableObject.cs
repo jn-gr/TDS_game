@@ -8,6 +8,9 @@ public class PlaceableObject : MonoBehaviour
     public bool Placed {  get; private set; }
     public Vector3Int Size { get; private set; }
     private Vector3[] Vertices;
+    private GameManager gameManager;
+
+    
 
     private void GetColliderVertexPositionsLocal()
     {
@@ -44,6 +47,7 @@ public class PlaceableObject : MonoBehaviour
     {
         GetColliderVertexPositionsLocal();
         CalculateSizeInCells();
+        gameManager = FindFirstObjectByType<GameManager>();
 
     }
 
@@ -52,6 +56,7 @@ public class PlaceableObject : MonoBehaviour
         ObjectDrag drag = gameObject.GetComponent<ObjectDrag>();
         Destroy(drag);
         gameObject.GetComponent<Turret>().placed = true;
+        gameManager.currency -= 100;
         //Overide here for building timers, or non functional buildings
         //Invoke events for placement
     }

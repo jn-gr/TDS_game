@@ -60,7 +60,7 @@ public class UI : MonoBehaviour
     // Button connected to start wave button. Starts wave 1.
     public void StartWave()
     {
-        gameManager.StartWaveOne();
+        gameManager.StartWave();
         Debug.Log("button clicked");
     }
 

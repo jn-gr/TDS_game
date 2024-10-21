@@ -69,7 +69,7 @@ public class BuildingSystem : MonoBehaviour
         if (gameManager.currency >= 100)
         {
             InitializeWithObject(House_01);
-            gameManager.currency -= 100;
+            
         }
         else
         {
