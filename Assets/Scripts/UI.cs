@@ -43,7 +43,7 @@ public class UI : MonoBehaviour
         if (gameManager.waveStarted)
         {
             startWaveButton.SetActive(false);
-            enemiesLeftText.text = "Enemies left in wave: " + (gameManager.enemiesInThisWave - gameManager.enemiesDiedThisWave);
+            enemiesLeftText.text = "Enemies left in wave: " + (gameManager.enemiesAlive);
         }
         else
         {
@@ -61,7 +61,7 @@ public class UI : MonoBehaviour
     public void StartWave()
     {
         gameManager.StartWave();
-        Debug.Log("button clicked");
+        //Debug.Log("button clicked");
     }
 
     public void BackToMainMenu()

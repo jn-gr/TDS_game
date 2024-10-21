@@ -39,10 +39,10 @@ public class MainTower : MonoBehaviour
             GameObject enemy = other.gameObject;
             TakeDamage(enemy.GetComponent<Enemy>().damage);
             Destroy(other.gameObject);
-            Debug.Log("i got hit by enemy");
+            
 
             // Tell game manager that an enemy died when they hit the tower. So enemy wave death counts work.
-            gameManager.enemiesDiedThisWave += 1;
+            gameManager.enemiesAlive --;
         }
     }
 

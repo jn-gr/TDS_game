@@ -87,7 +87,7 @@ public class BuildingSystem : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 1000, BuildingSystem.current.layersToHit))
         {
-            Debug.Log("Ray hit: " + raycastHit.collider.name);
+            //Debug.Log("Ray hit: " + raycastHit.collider.name);
             return raycastHit.point;
         }
         else

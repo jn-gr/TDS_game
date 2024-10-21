@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public float speed;
     private MainTower castle;
     private GameManager gameManager;
+    private bool isDead;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class Enemy : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>(); 
         castle = gameManager.mainTower;
         health = (int)(8 + (gameManager.waveNum * 1.1));
-        speed = (float)(2 + (gameManager.waveNum * 1.5));
+        speed = (float)(5 + (gameManager.waveNum * 1.5));
 
     }
 
@@ -27,10 +28,12 @@ public class Enemy : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
         health -= damage;
 
         if (health <= 0)
         {
+            isDead = true;
             gameManager.EnemyKilled();
             Destroy(gameObject);
         }

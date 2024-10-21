@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 7466547307871674118}
   - component: {fileID: 4382365831239862143}
   - component: {fileID: 2690953184777579304}
-  - component: {fileID: 4281917540002296381}
+  - component: {fileID: 8107916569760964466}
+  - component: {fileID: 3780840376313323098}
+  - component: {fileID: 2987740681648187178}
   m_Layer: 0
   m_Name: Decorative Cube Where Monsters Spawn
   m_TagString: Untagged
@@ -27,9 +29,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2576601462669743417}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0073474096, y: 0.3510037, z: -0.41442952, w: 0.8396372}
+  m_LocalRotation: {x: 0.0073435903, y: 0.35100526, z: -0.41443294, w: 0.8396349}
   m_LocalPosition: {x: 6.6101713, y: -84.932755, z: 95.892525}
-  m_LocalScale: {x: 8.11, y: 8.11, z: 8.11}
+  m_LocalScale: {x: 8.110001, y: 8.110001, z: 8.11}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,24 +86,45 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4281917540002296381
-BoxCollider:
+--- !u!114 &8107916569760964466
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2576601462669743417}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdfc01cb7b3dccc4681b4f620d4dc0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 5038159768750370891, guid: f3b7797f659911a4da988f97c25671c5, type: 3}
+  spawnInterval: 5
+--- !u!114 &3780840376313323098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2576601462669743417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdfc01cb7b3dccc4681b4f620d4dc0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 5038159768750370891, guid: f3b7797f659911a4da988f97c25671c5, type: 3}
+  spawnInterval: 5
+--- !u!114 &2987740681648187178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2576601462669743417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdfc01cb7b3dccc4681b4f620d4dc0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 5038159768750370891, guid: f3b7797f659911a4da988f97c25671c5, type: 3}
+  spawnInterval: 5
