@@ -51,7 +51,7 @@ public class PlaceableObject : MonoBehaviour
     {
         ObjectDrag drag = gameObject.GetComponent<ObjectDrag>();
         Destroy(drag);
-        Placed = true;
+        gameObject.GetComponent<Turret>().placed = true;
         //Overide here for building timers, or non functional buildings
         //Invoke events for placement
     }

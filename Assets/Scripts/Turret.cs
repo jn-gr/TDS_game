@@ -16,39 +16,44 @@ public class Turret : MonoBehaviour
     public GameObject enemyTarget;
     private List<GameObject> enemiesInRange = new List<GameObject>();
 
+    public bool placed;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        placed = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (enemyTarget != null)
+        if (placed)
         {
-            if (fireCooldown <= 0f)
+            if (enemyTarget != null)
             {
-                Shoot();
-                fireCooldown = 1f / fireRate;
-            }
-            fireCooldown -= Time.deltaTime;
+                if (fireCooldown <= 0f)
+                {
+                    Shoot();
+                    fireCooldown = 1f / fireRate;
+                }
+                fireCooldown -= Time.deltaTime;
 
-            // Check if the enemyTarget has been destroyed
-            if (enemyTarget == null)
-            {
-                enemyTarget = null;
+                // Check if the enemyTarget has been destroyed
+                if (enemyTarget == null)
+                {
+                    enemyTarget = null;
+                }
             }
-        }
-        else
-        {
-            // Clean up any destroyed enemies from the list
-            enemiesInRange.RemoveAll(e => e == null);
-
-            // Assign a new target if available
-            if (enemiesInRange.Count > 0)
+            else
             {
-                enemyTarget = enemiesInRange[0];
+                // Clean up any destroyed enemies from the list
+                enemiesInRange.RemoveAll(e => e == null);
+
+                // Assign a new target if available
+                if (enemiesInRange.Count > 0)
+                {
+                    enemyTarget = enemiesInRange[0];
+                }
             }
         }
     }
