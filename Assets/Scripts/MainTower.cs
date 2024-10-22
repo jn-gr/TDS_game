@@ -11,20 +11,11 @@ public class MainTower : MonoBehaviour
         currentHealth -= incomingDamage;
         gameManager.UpdateHealth();
 
-
-
-        //Check if currentHealth is not <=0
         if (currentHealth <= 0)
         {
             EndGame();
         }
     }
-
-    //public void SetHealth(int hp)
-    //{
-    //    maxHealth = hp;
-    //    currentHealth = hp;
-    //}
 
     public int GetHealth()
     {
@@ -38,8 +29,7 @@ public class MainTower : MonoBehaviour
         {
             GameObject enemy = other.gameObject;
             TakeDamage(enemy.GetComponent<Enemy>().damage);
-            Destroy(other.gameObject);
-            
+            Destroy(other.gameObject);           
 
             // Tell game manager that an enemy died when they hit the tower. So enemy wave death counts work.
             gameManager.enemiesAlive --;

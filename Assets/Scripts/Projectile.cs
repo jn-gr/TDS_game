@@ -9,19 +9,14 @@ public class Projectile : MonoBehaviour
     public GameObject enemyTarget;
     // Start is called before the first frame update
     private Rigidbody rb;
-    [SerializeField]
-    private float turnSpeed;
+    [SerializeField] private float turnSpeed;
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         Destroy(gameObject, 5); // dies after 5 seconds
     }
 
-    // Update is called once per frame
-
-
-
-
+    
     void Update()
     {
         if (enemyTarget)
@@ -34,10 +29,8 @@ public class Projectile : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
-        
+        }       
     }
-
 
     public void SetDamage(int damage)
     {
@@ -50,8 +43,10 @@ public class Projectile : MonoBehaviour
     {
         this.force = force;
     }
+
     private void OnTriggerEnter(Collider other)
     {
+        // checks if the collider is an enemy to do damage to it
         if (other.CompareTag("Enemy"))
         {
             GameObject enemy = other.gameObject;
