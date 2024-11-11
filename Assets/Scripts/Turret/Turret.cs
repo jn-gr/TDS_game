@@ -59,7 +59,7 @@ public class Turret : MonoBehaviour
     }
 
 
-    void Shoot()
+    public virtual Projectile Shoot()
     {
         Projectile projectile = Instantiate(projectilePrefab,shootPoint.position,shootPoint.rotation,transform); // spawns a projectile
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
@@ -69,6 +69,9 @@ public class Turret : MonoBehaviour
         projectile.SetForce(projectileForce);
         projectile.SetDamage(damage);
         projectile.SetTarget(enemyTarget);
+        projectile.SetElement(Element.Neutral);
+
+        return projectile;
     }
 
     private void OnTriggerEnter(Collider other)

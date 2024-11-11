@@ -2,18 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Element
+{
+    Fire,
+    Water,
+    Neutral
+}
+
 public class Projectile : MonoBehaviour
 {
     public int damage;
     public float force;
     public GameObject enemyTarget;
+    public Element element;
     // Start is called before the first frame update
     private Rigidbody rb;
-    [SerializeField]
-    private float turnSpeed;
+    private Renderer projectileRenderer;
+
+    [SerializeField] private Material fireMaterial;
+    [SerializeField] private Material waterMaterial;
+    [SerializeField] private Material neutralMaterial;
+
+    [SerializeField] private float turnSpeed;
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        
+        projectileRenderer = gameObject.GetComponent<Renderer>();
         Destroy(gameObject, 5); // dies after 5 seconds
     }
 
@@ -50,6 +65,25 @@ public class Projectile : MonoBehaviour
     {
         this.force = force;
     }
+    public void SetElement(Element element)
+    {
+        this.element = element;
+        this.element = element;
+
+        // Set the material based on the element type
+        switch (element)
+        {
+            case Element.Fire:
+                GetComponent<Renderer>().material = fireMaterial;
+                break;
+            case Element.Water:
+                GetComponent<Renderer>().material = waterMaterial;
+                break;
+            case Element.Neutral:
+                GetComponent<Renderer>().material = neutralMaterial;
+                break;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
@@ -60,4 +94,5 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }

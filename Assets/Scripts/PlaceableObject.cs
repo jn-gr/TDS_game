@@ -60,4 +60,5 @@ public class PlaceableObject : MonoBehaviour
         //Overide here for building timers, or non functional buildings
         //Invoke events for placement
     }
+
 }
