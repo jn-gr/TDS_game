@@ -10,7 +10,7 @@ public class NeutralEnemy : MonoBehaviour
     public float selfDamageMultiplier = 0.9f;
     public float strongDamageMultiplier = 1.2f;
     public float weakDamageMultiplier = 0.8f;
-    private MainTower castle;
+    protected MainTower castle;
     protected GameManager gameManager;
     protected bool isDead;
     public Element element;
@@ -27,7 +27,7 @@ public class NeutralEnemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, castle.transform.position, speed * Time.deltaTime);
     }

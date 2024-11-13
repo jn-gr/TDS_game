@@ -1,10 +1,29 @@
+using UnityEngine;
+
 public class FireEnemy : NeutralEnemy
 {
+    public float levitationHeight = 5f; // Max height to levitate
+    public float levitationSpeed = 5f;   // Speed of levitation
+    private float startingY;              // Starting Y position
+
     public override void Start()
     {
         base.Start();
         element = Element.Fire;
+        startingY = transform.position.y;  // Set starting Y to initial Y
     }
+
+    public override void Update()
+    {
+        base.Update();
+
+        // Calculate smooth levitation effect with sine wave
+        float currentHeight = Mathf.Sin(Time.time * levitationSpeed) * levitationHeight;
+
+        // Apply the levitation effect to the Y position
+        transform.position = new Vector3(transform.position.x, startingY + currentHeight, transform.position.z);
+    }
+
     public override void TakeDamage(float damage, Element element)
     {
         if (isDead) return;
