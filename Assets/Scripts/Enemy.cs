@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+
+
+public class Enemy : MonoBehaviour, IDamageable
 {
     public int damage;
     public int health;
@@ -14,11 +16,10 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindFirstObjectByType<GameManager>(); 
+        gameManager = FindFirstObjectByType<GameManager>();
         castle = gameManager.mainTower;
         health = (int)(8 + (gameManager.waveNum * 1.1));
         speed = (float)(5 + (gameManager.waveNum * 1.5));
-
     }
 
     // Update is called once per frame
@@ -26,9 +27,11 @@ public class Enemy : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, castle.transform.position, speed * Time.deltaTime);
     }
-    public void TakeDamage(int damage)
+
+    public void TakeDamage(int damage, Element element)
     {
         if (isDead) return;
+
         health -= damage;
 
         if (health <= 0)
@@ -38,5 +41,4 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }
