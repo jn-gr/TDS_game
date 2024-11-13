@@ -45,7 +45,7 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
     }
 
 
@@ -56,7 +56,8 @@ public class Projectile : MonoBehaviour
     public void SetTarget(GameObject target)
     {
         enemyTarget = target;
-    }public void SetForce(float force)
+    }
+    public void SetForce(float force)
     {
         this.force = force;
     }

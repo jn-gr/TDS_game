@@ -61,9 +61,9 @@ public class Turret : MonoBehaviour
 
     public virtual Projectile Shoot()
     {
-        Projectile projectile = Instantiate(projectilePrefab,shootPoint.position,shootPoint.rotation,transform); // spawns a projectile
+        Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation, transform); // spawns a projectile
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        
+
         Vector3 direction = (enemyTarget.transform.position - shootPoint.position).normalized;
         rb.AddForce(direction * projectileForce, ForceMode.Impulse); // using the physics, pushes the projectile in a direction
         projectile.SetForce(projectileForce);
@@ -76,7 +76,7 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+
         if (other.CompareTag("Enemy"))
         {
             GameObject enemy = other.gameObject;
@@ -87,8 +87,8 @@ public class Turret : MonoBehaviour
             {
                 enemyTarget = enemy;
             }
-            
-            
+
+
         }
     }
 
@@ -98,22 +98,22 @@ public class Turret : MonoBehaviour
         {
             GameObject enemy = other.gameObject;
 
-            
-            
-            enemiesInRange.Remove(enemy);
-            
 
-            
+
+            enemiesInRange.Remove(enemy);
+
+
+
             if (enemy == enemyTarget)
             {
                 if (enemiesInRange.Count > 0)
                 {
-                    
+
                     enemyTarget = enemiesInRange[0];
                 }
                 else
                 {
-                    enemyTarget = null; 
+                    enemyTarget = null;
                 }
             }
         }
