@@ -3,32 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 
-public class Fire_Enemy : MonoBehaviour, IDamageable
+public class FireEnemy : Enemy
 {
-    public int damage;
-    public int health;
-    public float speed;
-    private MainTower castle;
-    private GameManager gameManager;
-    private bool isDead;
-    public Element element;
-
-    // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        gameManager = FindFirstObjectByType<GameManager>();
-        castle = gameManager.mainTower;
-        health = (int)(8 + (gameManager.waveNum * 1.1));
-        speed = (float)(5 + (gameManager.waveNum * 1.5));
+        base.Start();
+        element = Element.Fire;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, castle.transform.position, speed * Time.deltaTime);
-    }
-
-    public void TakeDamage(int damage, Element element)
+    public override void TakeDamage(int damage, Element element)
     {
         if (isDead) return;
 
