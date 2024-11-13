@@ -37,7 +37,8 @@ public class Turret : MonoBehaviour
                     fireCooldown = 1f / fireRate;
                 }
                 fireCooldown -= Time.deltaTime;
-               
+
+                // Check if the enemyTarget has been destroyed
                 if (enemyTarget == null)
                 {
                     enemyTarget = null;
@@ -45,10 +46,10 @@ public class Turret : MonoBehaviour
             }
             else
             {
-                // we remove all enemies that have been destoryed in the list
+                // Clean up any destroyed enemies from the list
                 enemiesInRange.RemoveAll(e => e == null);
 
-                // if there is an enemy still left within range, assign the first enemy in the list as target
+                // Assign a new target if available
                 if (enemiesInRange.Count > 0)
                 {
                     enemyTarget = enemiesInRange[0];
@@ -58,50 +59,61 @@ public class Turret : MonoBehaviour
     }
 
 
-    void Shoot()
+    public virtual Projectile Shoot()
     {
-        Projectile projectile = Instantiate(projectilePrefab,shootPoint.position,shootPoint.rotation,transform); // spawns a projectile
+        Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation, transform); // spawns a projectile
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        Vector3 direction = (enemyTarget.transform.position - shootPoint.position).normalized;
 
+        Vector3 direction = (enemyTarget.transform.position - shootPoint.position).normalized;
         rb.AddForce(direction * projectileForce, ForceMode.Impulse); // using the physics, pushes the projectile in a direction
         projectile.SetForce(projectileForce);
         projectile.SetDamage(damage);
         projectile.SetTarget(enemyTarget);
+        projectile.SetElement(Element.Neutral);
+
+        return projectile;
     }
 
     private void OnTriggerEnter(Collider other)
-    {       
+    {
+
         if (other.CompareTag("Enemy"))
         {
             GameObject enemy = other.gameObject;
+
             enemiesInRange.Add(enemy);
 
             if (enemyTarget == null)
             {
                 enemyTarget = enemy;
-            }  
+            }
+
+
         }
     }
 
-    // we check to see if enemy collider exit range so that we can remove it from the list
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
             GameObject enemy = other.gameObject;
+
+
+
             enemiesInRange.Remove(enemy);
+
+
 
             if (enemy == enemyTarget)
             {
                 if (enemiesInRange.Count > 0)
                 {
-                    
+
                     enemyTarget = enemiesInRange[0];
                 }
                 else
                 {
-                    enemyTarget = null; 
+                    enemyTarget = null;
                 }
             }
         }
