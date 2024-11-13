@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8164751688063950497}
   - component: {fileID: -6621490498938364869}
   - component: {fileID: -4945441088433947429}
-  - component: {fileID: -6045282078080240149}
+  - component: {fileID: 8576755464321520025}
   m_Layer: 0
   m_Name: Fire_Enemy
   m_TagString: Enemy
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-6045282078080240149
+--- !u!114 &8576755464321520025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,3 +149,7 @@ MonoBehaviour:
   damage: 10
   health: 20
   speed: 5
+  selfDamageMultiplier: 0.9
+  strongDamageMultiplier: 1.2
+  weakDamageMultiplier: 0.8
+  element: 0

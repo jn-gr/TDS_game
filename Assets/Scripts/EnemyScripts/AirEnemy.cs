@@ -1,26 +1,26 @@
-public class FireEnemy : NeutralEnemy
+public class AirEnemy : NeutralEnemy
 {
     public override void Start()
     {
         base.Start();
-        element = Element.Fire;
+        element = Element.Air;
     }
     public override void TakeDamage(float damage, Element element)
     {
         if (isDead) return;
 
         // Same type element damage has a damage multiplier of 0.9
-        if (element == Element.Fire)
+        if (element == Element.Air)
         {
             health -= damage * selfDamageMultiplier;
         }
         // Stronger element damage has a damage multiplier of 1.2
-        else if (element == Element.Water)
+        else if (element == Element.Fire)
         {
             health -= damage * strongDamageMultiplier;
         }
         // Weaker element damage has a damage multiplier of 0.8
-        else if (element == Element.Air)
+        else if (element == Element.Water)
         {
             health -= damage * weakDamageMultiplier;
         }
