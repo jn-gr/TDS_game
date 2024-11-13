@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 1049202559407526607}
   - component: {fileID: 8164751688063950497}
   - component: {fileID: -6621490498938364869}
-  - component: {fileID: 1477060760861774063}
   - component: {fileID: -4945441088433947429}
+  - component: {fileID: -6045282078080240149}
   m_Layer: 0
-  m_Name: Fire_Monster
+  m_Name: Fire_Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,21 +107,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.04496646, y: 0.022480791, z: 0.045747142}
   m_Center: {x: 0, y: -1.5060378e-18, z: 0.00021195595}
---- !u!114 &1477060760861774063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6272448577178881763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b2b6ca24d55b8a4092cab6a88d90fde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 3
-  health: 50
-  speed: 3
 --- !u!54 &-4945441088433947429
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,3 +134,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6045282078080240149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272448577178881763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0b16adcb8d2b4439312e9e6967891d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  health: 20
+  speed: 5

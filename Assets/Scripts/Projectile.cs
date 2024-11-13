@@ -46,12 +46,12 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // checks if the collider is an enemy to do damage to it
-        if (other.CompareTag("Enemy"))
-        {
-            GameObject enemy = other.gameObject;
+        // Check if the collider has a component that implements IDamageable
+        IDamageable damageable = other.GetComponent<IDamageable>();
 
-            enemy.GetComponent<Enemy>().TakeDamage(damage);  
+        if (damageable != null)
+        {
+            damageable.TakeDamage(damage, element);
             Destroy(gameObject);
         }
     }
