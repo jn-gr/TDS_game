@@ -62,10 +62,17 @@ using UnityEngine;
 //        enemiesInThisWave = (int)(4 + (waveNum * 0.2));
 //        enemiesLeftInWave = enemiesInThisWave;
 //        waveNum++;
-        
+
 
 //    }
 //}
+
+public enum Element
+{
+    Fire,
+    Water,
+    Neutral
+}
 
 public class GameManager : MonoBehaviour
 {

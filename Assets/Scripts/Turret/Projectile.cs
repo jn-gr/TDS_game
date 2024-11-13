@@ -2,12 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Element
-{
-    Fire,
-    Water,
-    Neutral
-}
+
 
 public class Projectile : MonoBehaviour
 {
@@ -84,13 +79,15 @@ public class Projectile : MonoBehaviour
                 break;
         }
     }
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
-        {
-            GameObject enemy = other.gameObject;
+        // Check if the collider has a component that implements IDamageable
+        IDamageable damageable = other.GetComponent<IDamageable>();
 
-            enemy.GetComponent<Enemy>().TakeDamage(damage);  
+        if (damageable != null)
+        {
+            damageable.TakeDamage(damage, element);
             Destroy(gameObject);
         }
     }
