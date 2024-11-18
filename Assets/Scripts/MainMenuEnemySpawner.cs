@@ -17,8 +17,11 @@ public class MainMenuEnemySpawner : MonoBehaviour
     public Vector3 spawnOffset = Vector3.zero;
 
     [Header("Force Settings")]
-    [Tooltip("Initial force to push the object forward")]
+    [Tooltip("Initial force to push the object")]
     public float initialForce = 500f;
+
+    [Tooltip("Direction of the initial force")]
+    public Vector3 forceDirection = Vector3.forward;
 
     [Tooltip("Whether to apply continuous force")]
     public bool continuousForce = false;
@@ -84,14 +87,14 @@ public class MainMenuEnemySpawner : MonoBehaviour
             Debug.LogWarning("Added Rigidbody to spawned object as none was found.");
         }
 
-        // Initial push is now separate from continuous force
-        rb.AddForce(transform.forward * initialForce, ForceMode.Impulse);
+        // Use the configurable forceDirection for the initial force
+        rb.AddForce(forceDirection.normalized * initialForce, ForceMode.Impulse);
 
         if (continuousForce)
         {
             // Add a separate component to handle continuous force
             ObjectForceApplier forceApplier = spawnedObject.AddComponent<ObjectForceApplier>();
-            forceApplier.Initialize(continuousForceAmount, transform.forward);
+            forceApplier.Initialize(continuousForceAmount, forceDirection.normalized);
         }
 
         // Start destruction coroutine
@@ -119,7 +122,7 @@ public class ObjectForceApplier : MonoBehaviour
     public void Initialize(float force, Vector3 direction)
     {
         forceAmount = force;
-        forceDirection = direction;
+        forceDirection = direction.normalized;
         rb = GetComponent<Rigidbody>();
     }
 
