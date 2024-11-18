@@ -84,7 +84,7 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Check if the collider has a component that implements IDamageable
-        Enemy damageable = other.GetComponent<Enemy>();
+        NeutralEnemy damageable = other.GetComponent<NeutralEnemy>();
 
         if (damageable != null)
         {

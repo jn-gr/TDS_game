@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class MainTower : MonoBehaviour
 {
-    public int currentHealth;
+    public float currentHealth;
     public GameManager gameManager;
 
     //Function to take away health from currentHealth
-    public void TakeDamage(int incomingDamage)
+    public void TakeDamage(float incomingDamage)
     {
         currentHealth -= incomingDamage;
         gameManager.UpdateHealth();
@@ -17,7 +17,7 @@ public class MainTower : MonoBehaviour
         }
     }
 
-    public int GetHealth()
+    public float GetHealth()
     {
         return currentHealth;
     }
@@ -28,7 +28,7 @@ public class MainTower : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             GameObject enemy = other.gameObject;
-            TakeDamage(enemy.GetComponent<Enemy>().damage);
+            TakeDamage(enemy.GetComponent<NeutralEnemy>().damage);
             Destroy(other.gameObject);           
 
             // Tell game manager that an enemy died when they hit the tower. So enemy wave death counts work.

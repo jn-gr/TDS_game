@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public MainTower mainTower;
     public Spawner[] spawners;
 
-    public int currentHealth;
+    public float currentHealth;
     public int currency;
     public int experience;
     public int totalKills;
