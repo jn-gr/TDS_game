@@ -42,5 +42,6 @@ public class ObjectDrag : MonoBehaviour
             transform.position = BuildingSystem.current.SnapCoordinateToGrid(newPosition);
         }
     }
+
 }
 

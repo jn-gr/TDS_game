@@ -42,8 +42,8 @@ GameObject:
   - component: {fileID: 4256643491642048597}
   - component: {fileID: 6026314310174638678}
   - component: {fileID: 2087745553582316903}
-  - component: {fileID: 4010778590858334546}
   - component: {fileID: 8060922316438162720}
+  - component: {fileID: 4010778590858334546}
   - component: {fileID: 5856372859600647456}
   - component: {fileID: 1311066784101835007}
   m_Layer: 0
@@ -119,27 +119,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4010778590858334546
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537438245501326481}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 4.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8060922316438162720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +140,27 @@ MonoBehaviour:
   fireCooldown: 0
   enemyTarget: {fileID: 0}
   placed: 0
+--- !u!135 &4010778590858334546
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537438245501326481}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 4.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5856372859600647456
 MonoBehaviour:
   m_ObjectHideFlags: 0

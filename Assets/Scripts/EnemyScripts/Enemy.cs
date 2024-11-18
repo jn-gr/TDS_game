@@ -1,0 +1,46 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+
+public class Enemy : MonoBehaviour
+{
+    public int damage;
+    public int health;
+    public float speed;
+    private MainTower castle;
+    protected GameManager gameManager;
+    protected bool isDead;
+    public Element element;
+
+    // Start is called before the first frame update
+    public virtual void Start()
+    {
+        gameManager = FindFirstObjectByType<GameManager>();
+        castle = gameManager.mainTower;
+        health = (int)(8 + (gameManager.waveNum * 1.1));
+        speed = (float)(5 + (gameManager.waveNum * 1.5));
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, castle.transform.position, speed * Time.deltaTime);
+    }
+
+    public virtual void TakeDamage(int damage, Element element)
+    {
+        if (isDead) return;
+
+        health -= damage;
+
+        if (health <= 0)
+        {
+            isDead = true;
+            gameManager.EnemyKilled();
+            Destroy(gameObject);
+        }
+    }
+}

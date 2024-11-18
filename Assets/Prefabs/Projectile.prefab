@@ -122,7 +122,11 @@ MonoBehaviour:
   damage: 0
   force: 0
   enemyTarget: {fileID: 0}
-  turnSpeed: 500
+  element: 0
+  fireMaterial: {fileID: 2100000, guid: e6b9b44320f4448d9d5e0ee634259966, type: 2}
+  waterMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  neutralMaterial: {fileID: 0}
+  turnSpeed: 100
 --- !u!54 &-5596567141994039862
 Rigidbody:
   m_ObjectHideFlags: 0
