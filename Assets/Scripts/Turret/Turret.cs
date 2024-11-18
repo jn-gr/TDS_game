@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    public int maxHealth;
+    
     public int damage;
+    public Element element;
     public Projectile projectilePrefab;
     public Transform shootPoint;
     public float projectileForce;
     public float fireRate;
-    public float fireCooldown;
 
+    private float fireCooldown;
+
+
+    [Header("Debugging")]
     public GameObject enemyTarget;
     private List<GameObject> enemiesInRange = new List<GameObject>();
 
@@ -69,7 +73,7 @@ public class Turret : MonoBehaviour
         projectile.SetForce(projectileForce);
         projectile.SetDamage(damage);
         projectile.SetTarget(enemyTarget);
-        projectile.SetElement(Element.Neutral);
+        projectile.SetElement(element);
 
         return projectile;
     }

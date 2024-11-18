@@ -7,7 +7,8 @@ public enum Element
 {
     Fire,
     Water,
-    Neutral
+    Neutral,
+    Air
 }
 
 public class GameManager : MonoBehaviour
