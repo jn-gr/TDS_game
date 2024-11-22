@@ -1626,14 +1626,14 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 324666799}
-  - {fileID: 753896787}
-  - {fileID: 958883510}
   - {fileID: 1286484737}
   - {fileID: 610374582}
   - {fileID: 571802303}
   - {fileID: 1506743917}
   - {fileID: 1072567477}
   - {fileID: 810734140}
+  - {fileID: 753896787}
+  - {fileID: 958883510}
   - {fileID: 1775663569}
   m_Father: {fileID: 2119285469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30168,9 +30168,8 @@ GameObject:
   - component: {fileID: 1775663568}
   - component: {fileID: 1775663567}
   - component: {fileID: 1775663566}
-  - component: {fileID: 1775663570}
   m_Layer: 5
-  m_Name: Start Wave
+  m_Name: Start Wave Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30289,19 +30288,6 @@ RectTransform:
   m_AnchoredPosition: {x: -164.83905, y: 56.67114}
   m_SizeDelta: {x: 71.3505, y: 72.8421}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1775663570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775663565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf7095bb6d2dc9e40a9210b50b3ca91f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverCursor: {fileID: 2800000, guid: 34109fe647e59e8468a07160c3498a2c, type: 3}
 --- !u!1 &2119285468
 GameObject:
   m_ObjectHideFlags: 0
