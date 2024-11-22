@@ -34,10 +34,10 @@ public class UI : MonoBehaviour
     {
         // Currently checks all info on UI per frame. Gold, health, wave progress, etc.
         // Should be optimised to every time value changes.
-        healthText.text = "Health: " + gameManager.currentHealth;
-        goldText.text = "Gold: " + gameManager.currency;
-        totalKillsText.text = "Total kills: " + gameManager.totalKills;
-        scoreText.text = "Score: " + gameManager.score;
+        healthText.text = (gameManager.currentHealth).ToString();
+        goldText.text = (gameManager.currency).ToString();
+        totalKillsText.text = (gameManager.totalKills).ToString();
+        scoreText.text = (gameManager.score).ToString();
         experienceText.text = "Experience: " + gameManager.experience;
 
         if (gameManager.waveStarted)
