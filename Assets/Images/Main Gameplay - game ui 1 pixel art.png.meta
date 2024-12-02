@@ -119,7 +119,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Game UI 1 - Towers
+      name: Game UI 1 - Backgroud
       rect:
         serializedVersion: 2
         x: 31
@@ -127,7 +127,7 @@ TextureImporter:
         width: 45
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -148,7 +148,7 @@ TextureImporter:
         width: 45
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -169,7 +169,7 @@ TextureImporter:
         width: 17
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,7 +190,7 @@ TextureImporter:
         width: 17
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -211,7 +211,7 @@ TextureImporter:
         width: 7
         height: 37
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -219,6 +219,111 @@ TextureImporter:
       bones: []
       spriteID: 530d2c0a62690c8429baf41936d3ad39
       internalID: 162801926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Game UI 1 - Pause
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 92
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4210816543ac6bb4a8d6e7bb479a4d18
+      internalID: 616636310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Game UI 1 - Border
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 35
+        width: 45
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cde224aacaf737428d93c386a7538fe
+      internalID: -830825844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Game UI 1 - Tower 1
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 23
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a22678c2bdbd354082faed795b189a3
+      internalID: 676581905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Game UI 1 - Tower 2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 23
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 871c1d8808a332e4ba73580352252ac4
+      internalID: 86763090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Game UI 1 _ Tower 3
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 23
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8aca1be88da87c45ac491b48fa47a01
+      internalID: 1780268570
       vertices: []
       indices: 
       edges: []
@@ -234,11 +339,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Game UI 1 - Backgroud: 1409495662
+      Game UI 1 - Border: -830825844
       Game UI 1 - Next Wave: -289897834
+      Game UI 1 - Pause: 616636310
       Game UI 1 - Skills: 679779506
       Game UI 1 - Skills Button: -62588550
       Game UI 1 - Stats: 162801926
-      Game UI 1 - Towers: 1409495662
+      Game UI 1 - Tower 1: 676581905
+      Game UI 1 - Tower 2: 86763090
+      Game UI 1 _ Tower 3: 1780268570
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
