@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b0d055a912e7d3742bae3e397356bbb8
+guid: cac1c0d43aa7a014793b60e3f4aea438
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -119,22 +119,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Game UI 1 - Active Skill Tree
+      name: Game UI 1 - Skill Tree Button Border
       rect:
         serializedVersion: 2
-        x: 19
-        y: 5
-        width: 154
-        height: 98
+        x: 83
+        y: 53
+        width: 27
+        height: 27
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2c688e88b5d6e5419144e83399ce87f
-      internalID: -442836639
+      spriteID: 0390ef4f2fa3ba742bbdb30e756b5848
+      internalID: 1658350943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Game UI 1 - Skill Tree Button Connector
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 30
+        width: 3
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 359c11d030ff0b64790884c039fe94fd
+      internalID: 532772100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Game UI 1 - Skill Tree Button Background
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 53
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef67d8f560a241e4190c0a18585d2028
+      internalID: -2116002760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Game UI 1 - Skill Scrollbar
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 14
+        width: 8
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ee52084cc6c2fc419d96a3423388e70
+      internalID: 1134836192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Game UI 1 - Skill Scroll Handle
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 66
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b14d8d553c3bef24b953877b6a2355a7
+      internalID: 987840941
       vertices: []
       indices: 
       edges: []
@@ -142,7 +226,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: b1ac473110ffc0a4bbfe4716c36dfb1f
     internalID: 0
     vertices: []
     indices: 
@@ -150,7 +234,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Game UI 1 - Active Skill Tree: -442836639
+      Game UI 1 - Skill Scroll Handle: 987840941
+      Game UI 1 - Skill Scrollbar: 1134836192
+      Game UI 1 - Skill Tree Button Background: -2116002760
+      Game UI 1 - Skill Tree Button Border: 1658350943
+      Game UI 1 - Skill Tree Button Connector: 532772100
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

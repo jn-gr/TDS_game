@@ -207,9 +207,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 8
-        y: 66
+        y: 56
         width: 7
-        height: 37
+        height: 47
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,6 +328,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Game UI 1 - Wave Started
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 23
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: deb9b5b3b0ad0d14fb89516b206b64f5
+      internalID: -1887388573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Game UI 1 - Enemy Counter Icon
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 97
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89fe54ef4134f8b4682d67aa5a78cfb9
+      internalID: 1706950999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -341,6 +383,7 @@ TextureImporter:
     nameFileIdTable:
       Game UI 1 - Button Background: 1409495662
       Game UI 1 - Button Border: -830825844
+      Game UI 1 - Enemy Counter Icon: 1706950999
       Game UI 1 - Next Wave: -289897834
       Game UI 1 - Pause: 616636310
       Game UI 1 - Skills: 679779506
@@ -348,6 +391,7 @@ TextureImporter:
       Game UI 1 - Stats: 162801926
       Game UI 1 - Tower 1 Icon: 676581905
       Game UI 1 - Tower 2 Icon: 86763090
+      Game UI 1 - Wave Started: -1887388573
       Game UI 1 _ Tower 3 Icon: 1780268570
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

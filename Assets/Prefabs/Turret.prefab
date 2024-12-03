@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 4010778590858334546}
   - component: {fileID: 5856372859600647456}
   - component: {fileID: 1311066784101835007}
+  - component: {fileID: 300932433275096626}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -131,13 +132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b9d77018a3df924a8dced39d60266de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
   damage: 2
+  element: 0
   projectilePrefab: {fileID: 2218205936552177126, guid: 1266300cc6894ea489b0dd25d93da877, type: 3}
   shootPoint: {fileID: 686601973761718789}
   projectileForce: 53.6
   fireRate: 1
-  fireCooldown: 0
   enemyTarget: {fileID: 0}
   placed: 0
 --- !u!135 &4010778590858334546
@@ -194,3 +194,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &300932433275096626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537438245501326481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb08896e41336541bca8a913682d5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelPrefab: {fileID: 8305243648505235943, guid: e554352fdbc679b42af380942d0b335f, type: 3}
+  specificCollider: {fileID: 1311066784101835007}

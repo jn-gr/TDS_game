@@ -16,8 +16,13 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI experienceText;
 
-    public GameObject startWaveButton;
+    public Button startWaveButton;
     public GameObject gameOverOverlay;
+
+    public Sprite startWaveSprite; 
+    public Sprite waveStartedSprite;
+
+    public GameObject enemiesLeftIcon;
 
     // Start is called before the first frame update
     void Start()
@@ -33,22 +38,25 @@ public class UI : MonoBehaviour
     void Update()
     {
         // Currently checks all info on UI per frame. Gold, health, wave progress, etc.
-        // Should be optimised to every time value changes.
+        // Should be optimised to every time a value changes.
         healthText.text = (gameManager.currentHealth).ToString();
         goldText.text = (gameManager.currency).ToString();
         totalKillsText.text = (gameManager.totalKills).ToString();
         scoreText.text = (gameManager.score).ToString();
-        experienceText.text = "Experience: " + gameManager.experience;
+        experienceText.text = (gameManager.experience).ToString();
 
         if (gameManager.waveStarted)
         {
-            startWaveButton.SetActive(false);
-            enemiesLeftText.text = "Enemies left in wave: " + (gameManager.enemiesAlive);
+            startWaveButton.image.sprite = waveStartedSprite;
+            startWaveButton.interactable = false;
+            enemiesLeftIcon.SetActive(true);
+            enemiesLeftText.text = (gameManager.enemiesAlive).ToString();
         }
         else
         {
-            startWaveButton.SetActive(true);
-            enemiesLeftText.text = "";
+            startWaveButton.image.sprite = startWaveSprite;
+            startWaveButton.interactable = true;
+            enemiesLeftIcon.SetActive(false);
         }
 
         if (gameManager.currentHealth <= 0)
