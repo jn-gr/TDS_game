@@ -207,4 +207,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelPrefab: {fileID: 8305243648505235943, guid: e554352fdbc679b42af380942d0b335f, type: 3}
-  specificCollider: {fileID: 1311066784101835007}
+  colliderForMouseToClick: {fileID: 1311066784101835007}
