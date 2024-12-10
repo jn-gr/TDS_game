@@ -16,8 +16,15 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI experienceText;
 
-    public GameObject startWaveButton;
+    public Button startWaveButton;
     public GameObject gameOverOverlay;
+
+    public Sprite startWaveSprite; 
+    public Sprite waveStartedSprite;
+
+    public GameObject enemiesLeftIcon;
+
+    bool isPaused = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,22 +40,25 @@ public class UI : MonoBehaviour
     void Update()
     {
         // Currently checks all info on UI per frame. Gold, health, wave progress, etc.
-        // Should be optimised to every time value changes.
-        healthText.text = "Health: " + gameManager.currentHealth;
-        goldText.text = "Gold: " + gameManager.currency;
-        totalKillsText.text = "Total kills: " + gameManager.totalKills;
-        scoreText.text = "Score: " + gameManager.score;
-        experienceText.text = "Experience: " + gameManager.experience;
+        // Should be optimised to every time a value changes.
+        healthText.text = (gameManager.currentHealth).ToString();
+        goldText.text = (gameManager.currency).ToString();
+        totalKillsText.text = (gameManager.totalKills).ToString();
+        scoreText.text = (gameManager.score).ToString();
+        experienceText.text = (gameManager.experience).ToString();
 
         if (gameManager.waveStarted)
         {
-            startWaveButton.SetActive(false);
-            enemiesLeftText.text = "Enemies left in wave: " + (gameManager.enemiesAlive);
+            startWaveButton.image.sprite = waveStartedSprite;
+            startWaveButton.interactable = false;
+            enemiesLeftIcon.SetActive(true);
+            enemiesLeftText.text = (gameManager.enemiesAlive).ToString();
         }
         else
         {
-            startWaveButton.SetActive(true);
-            enemiesLeftText.text = "";
+            startWaveButton.image.sprite = startWaveSprite;
+            startWaveButton.interactable = true;
+            enemiesLeftIcon.SetActive(false);
         }
 
         if (gameManager.currentHealth <= 0)
@@ -66,7 +76,22 @@ public class UI : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneLoader.NextSceneName = "Main Menu";
+        SceneManager.LoadScene("Loading Screen");
     }
 
+    public void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
+    }
 }
