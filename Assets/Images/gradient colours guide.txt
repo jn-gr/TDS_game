@@ -1,0 +1,9 @@
+gradient colours
+
+silver
+ada8a6
+fbfcf1
+
+blue
+313645
+c9c7c1

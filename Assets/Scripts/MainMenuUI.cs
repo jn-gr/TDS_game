@@ -11,4 +11,9 @@ public class MainMenuUI : MonoBehaviour
         SceneManager.LoadScene("Loading Screen");
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
 }
