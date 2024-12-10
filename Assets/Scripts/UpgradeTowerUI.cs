@@ -7,10 +7,15 @@ public class UpgradeTowerUI : MonoBehaviour
 {
     public GameObject panelPrefab;
     private GameObject activePanel;
-    public Collider colliderForMouseToClick; // Assign this in the Inspector
+    public Collider colliderForMouseToClick;
 
     void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         // Check for mouse click
         if (Input.GetMouseButtonDown(0))
         {
@@ -19,10 +24,10 @@ public class UpgradeTowerUI : MonoBehaviour
 
             foreach (RaycastHit hit in hits)
             {
-                if (hit.collider == colliderForMouseToClick) // Check if specific collider is among the hits
+                if (hit.collider == colliderForMouseToClick)
                 {
                     TogglePanel();
-                    return; // Stop checking once the specific collider is found
+                    return;
                 }
             }
         }

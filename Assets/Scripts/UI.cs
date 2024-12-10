@@ -24,6 +24,8 @@ public class UI : MonoBehaviour
 
     public GameObject enemiesLeftIcon;
 
+    bool isPaused = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,7 +76,22 @@ public class UI : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneLoader.NextSceneName = "Main Menu";
+        SceneManager.LoadScene("Loading Screen");
     }
 
+    public void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
+    }
 }
