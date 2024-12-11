@@ -119,7 +119,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Game UI 1 -Upgrade Button
+      name: Game UI 1 - Upgrade Button
       rect:
         serializedVersion: 2
         x: 171
@@ -127,7 +127,7 @@ TextureImporter:
         width: 17
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -148,7 +148,7 @@ TextureImporter:
         width: 11
         height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -169,7 +169,7 @@ TextureImporter:
         width: 11
         height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,7 +190,7 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -211,7 +211,7 @@ TextureImporter:
         width: 40
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -219,6 +219,27 @@ TextureImporter:
       bones: []
       spriteID: 099a1e808cbe7674f82600e0e2dcd79a
       internalID: -60060571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Game UI 1 - Upgrade Button Border
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 13
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef91b379430cc5e4dbadccdd0fdb8af4
+      internalID: -719229605
       vertices: []
       indices: 
       edges: []
@@ -237,7 +258,8 @@ TextureImporter:
       Game UI  1 - Exit Upgrade: -163318062
       Game UI  1 - Upgrade Tower Icon: 648399503
       Game UI 1 - Sell Tower Icon: 815428694
-      Game UI 1 -Upgrade Button: 191527720
+      Game UI 1 - Upgrade Button: 191527720
+      Game UI 1 - Upgrade Button Border: -719229605
       Game uI 1 - Tower Upgrade Circle: -60060571
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
