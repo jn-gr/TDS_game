@@ -33,10 +33,10 @@ public class UpgradeTowerUI : MonoBehaviour
         }
 
         // Check if the panel should be closed
-        if (activePanel != null && !IsMouseOverUI())
-        {
-            ClosePanelIfMouseLeaves();
-        }
+        //if (activePanel != null && !IsMouseOverUI())
+        //{
+        //    ClosePanelIfMouseLeaves();
+        //}
     }
 
     void TogglePanel()
