@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Sniper : Tower { 
-    
-   public override void DecideEnemy()
+public class Sniper : Tower {
+
+    protected override string towerType => "Sniper";
+    public override void DecideEnemy()
    {
         
 
@@ -25,4 +26,6 @@ public class Sniper : Tower {
         }
 
     }
+
+    
 }

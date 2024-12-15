@@ -5,10 +5,10 @@ using UnityEngine;
 
 public enum Element
 {
-    Fire,
-    Water,
-    Neutral,
-    Air
+    Neutral = 0,
+    Fire = 1,
+    Water = 2,
+    Air = 3
 }
 
 public class GameManager : MonoBehaviour
@@ -28,6 +28,13 @@ public class GameManager : MonoBehaviour
     public int totalEnemiesToSpawn;
     public int enemiesSpawned;
     public int enemiesAlive;
+
+    [Header("Tower Prefab Pool")]
+
+    // lvl1 nuetral,fire,water,air, lv2 so on
+    public GameObject[] turretPrefabs; // 12 prefabs 
+    public GameObject[] sniperPrefabs; // 12 prefabs 
+    public GameObject[] rapidFirePrefabs; // 12 prefabs 
 
     void Start()
     {
@@ -100,6 +107,31 @@ public class GameManager : MonoBehaviour
     public bool CanSpawnEnemy()
     {
         return enemiesSpawned < totalEnemiesToSpawn;
+    }
+
+    public GameObject GetTowerPrefab(string towerType, int tier, Element element)
+    {
+        
+        int prefabIndex = tier * 4 + (int)element; // Calculate index in 1D array
+        
+
+        if (towerType == "Turret")
+        {
+            return turretPrefabs[prefabIndex];
+        }
+        else if (towerType == "Sniper")
+        {
+            return sniperPrefabs[prefabIndex];
+        }
+        else if (towerType == "RapidFire")
+        {
+            return rapidFirePrefabs[prefabIndex];
+        }
+        else
+        {
+            Debug.LogError("tower tpye error");
+            return null;
+        }
     }
 
 }

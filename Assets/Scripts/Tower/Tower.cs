@@ -1,13 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class Tower : MonoBehaviour
 {
 
+    public int currentTier;
+    protected virtual string towerType => "Turret";
     public int damage;
     public Element element;
+    
     public Projectile projectilePrefab;
     public Transform shootPoint;
     public float projectileForce;
@@ -15,6 +20,7 @@ public class Tower : MonoBehaviour
 
     protected float fireCooldown;
 
+    protected GameManager gameManager;
 
     [Header("Debugging")]
     public GameObject enemyTarget;
@@ -27,6 +33,8 @@ public class Tower : MonoBehaviour
     public void Start()
     {
         placed = false;
+        gameManager = FindAnyObjectByType<GameManager>();
+        
     }
 
     // Update is called once per frame
@@ -100,6 +108,70 @@ public class Tower : MonoBehaviour
             GameObject enemy = other.gameObject;
             enemiesInRange.Remove(enemy);  
         }
+    }
+
+    public virtual Tower UpgradeTower() {
+        // 0 is tier 1, 1 is tier 2 you can only upgrade 2 times
+        if (currentTier < 2)
+        {
+            // the tower type variable is overrided in the child classes, thats how we are able to spawn the correct type of prefab
+            Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier + 1, element), transform.position, transform.rotation).GetComponent<Tower>();
+            upgradedTower.currentTier = currentTier + 1;
+            upgradedTower.element = element;
+            Destroy(gameObject);
+            return upgradedTower;
+        }
+        return this;
+    } 
+    public virtual Tower FireUpgrade()  
+    {
+        // need ti implement costs of changing element
+        if(element != Element.Fire)
+        {
+            Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier, Element.Fire), transform.position, transform.rotation).GetComponent<Tower>();
+            
+            upgradedTower.element = Element.Fire;
+            Destroy(gameObject);
+            return upgradedTower;
+        }
+        else
+        {
+            Debug.Log("already this element");
+            return this;
+        }
+    }
+    public virtual Tower WaterUpgrade() 
+    {
+        if (element != Element.Water)
+        {
+            Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier, Element.Water), transform.position, transform.rotation).GetComponent<Tower>();
+            
+            upgradedTower.element = Element.Water;
+            Destroy(gameObject);
+            return upgradedTower;
+        }
+        else
+        {
+            Debug.Log("already this element");
+            return this;
+        }
+    }
+    public virtual Tower AirUpgrade() 
+    {
+        if (element != Element.Air)
+        {
+            Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier, Element.Air), transform.position, transform.rotation).GetComponent<Tower>();
+            
+            upgradedTower.element = Element.Air;
+            Destroy(gameObject);
+            return upgradedTower;
+        }
+        else
+        {
+            Debug.Log("already this element");
+            return this;
+        }
+        
     }
 
 }

@@ -12,6 +12,58 @@ PrefabInstance:
       propertyPath: element
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: prefabPool.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: 'prefabPool.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3586289918454773459, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: 'prefabPool.Array.data[1]'
+      value: 
+      objectReference: {fileID: 761921107110685886, guid: 1b2c07b32e3ce434faa3f87954118de9, type: 3}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: 'prefabPool.Array.data[2]'
+      value: 
+      objectReference: {fileID: 268095445433906648, guid: 9f6a772e4fe0761409a4c6a7e1a78d8d, type: 3}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: 'prefabPool.Array.data[3]'
+      value: 
+      objectReference: {fileID: 6069397610259219981}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: 'prefabPool.Array.data[4]'
+      value: 
+      objectReference: {fileID: 6185928453406240084, guid: 63405b213ea958d47b5814793b13be46, type: 3}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: 'prefabPool.Array.data[5]'
+      value: 
+      objectReference: {fileID: 3150177418852131129, guid: 8f844064bec44fb4d970cbd1e9c01d49, type: 3}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: 'prefabPool.Array.data[6]'
+      value: 
+      objectReference: {fileID: 3479204815067638932, guid: a3f868f33efaef643adefc616bfc9961, type: 3}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: 'prefabPool.Array.data[7]'
+      value: 
+      objectReference: {fileID: 9203273808948412907, guid: 7a0e63ab4bcacb542ac1e80c087d7854, type: 3}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: 'prefabPool.Array.data[8]'
+      value: 
+      objectReference: {fileID: 2155480604201809368, guid: 98ebe6c9b22bf154f8ae09decef3cb6d, type: 3}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: 'prefabPool.Array.data[9]'
+      value: 
+      objectReference: {fileID: 92098396980883517, guid: 48a7b4dd7b9609b488780ff220d6080b, type: 3}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: 'prefabPool.Array.data[10]'
+      value: 
+      objectReference: {fileID: 6276414101471085752, guid: 14003f06b70eb4f46b4033f9e76e3611, type: 3}
+    - target: {fileID: 2663407652763368751, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+      propertyPath: 'prefabPool.Array.data[11]'
+      value: 
+      objectReference: {fileID: 1923113509386781037, guid: b45845cc440fc544a98153952558215e, type: 3}
     - target: {fileID: 3082137655847163654, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -38,15 +90,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4219555103020936297, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -101.55792
+      value: -40.888084
       objectReference: {fileID: 0}
     - target: {fileID: 4219555103020936297, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000038146973
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4219555103020936297, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -51.58587
+      value: -85.538055
       objectReference: {fileID: 0}
     - target: {fileID: 4219555103020936297, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -85,3 +137,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+--- !u!1 &6069397610259219981 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3586289918454773459, guid: 22485d2b70d540747872302f6d968e2a, type: 3}
+  m_PrefabInstance: {fileID: 7349834280296820958}
+  m_PrefabAsset: {fileID: 0}
