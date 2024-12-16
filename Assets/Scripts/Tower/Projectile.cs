@@ -17,6 +17,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Material fireMaterial;
     [SerializeField] private Material waterMaterial;
     [SerializeField] private Material neutralMaterial;
+    [SerializeField] private Material airMaterial;
 
     [SerializeField] private float turnSpeed;
     void Start()
@@ -66,7 +67,7 @@ public class Projectile : MonoBehaviour
         this.element = element;
         this.element = element;
 
-        // Set the material based on the element type
+        
         switch (element)
         {
             case Element.Fire:
@@ -77,6 +78,9 @@ public class Projectile : MonoBehaviour
                 break;
             case Element.Neutral:
                 GetComponent<Renderer>().material = neutralMaterial;
+                break;
+            case Element.Air:
+                GetComponent<Renderer>().material = airMaterial;
                 break;
         }
     }

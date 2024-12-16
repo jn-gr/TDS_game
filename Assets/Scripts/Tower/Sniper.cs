@@ -7,25 +7,8 @@ public class Sniper : Tower {
 
     protected override string towerType => "Sniper";
     public override void DecideEnemy()
-   {
-        
-
-        if (enemiesInRange.Count > 0)
-        {
-            
-            enemiesInRange = enemiesInRange.OrderBy(enemy => enemy.GetComponent<NeutralEnemy>().health).ToList();
-
-
-           
-
-            enemyTarget = enemiesInRange[0]; 
-        }
-        else
-        {
-            enemyTarget = null; 
-        }
-
-    }
-
-    
+    {
+        enemiesInRange = enemiesInRange.OrderBy(enemy => enemy.GetComponent<NeutralEnemy>().health).ToList();
+        enemyTarget = enemiesInRange[0]; 
+    }   
 }

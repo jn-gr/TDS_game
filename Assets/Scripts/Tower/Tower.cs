@@ -18,14 +18,14 @@ public class Tower : MonoBehaviour
     public float projectileForce;
     public float fireRate;
 
-    protected float fireCooldown;
+    [SerializeField]protected float fireCooldown;
 
     protected GameManager gameManager;
 
     [Header("Debugging")]
     public GameObject enemyTarget;
-    
-    protected List<GameObject> enemiesInRange = new List<GameObject>();
+
+    [SerializeField]  protected List<GameObject> enemiesInRange = new List<GameObject>();
 
     public bool placed;
 
@@ -43,12 +43,14 @@ public class Tower : MonoBehaviour
         if (placed)
         {
             // Clean up any destroyed enemies from the list
-            
+            enemiesInRange.RemoveAll(e => e == null);
             if (enemiesInRange.Count > 0)
             {
                 DecideEnemy();
+
                 if (fireCooldown <= 0f)
                 {
+                    
                     Shoot();
                     fireCooldown = 1f / fireRate;
                 }
@@ -63,7 +65,7 @@ public class Tower : MonoBehaviour
             //else
             //{
             //    // Clean up any destroyed enemies from the list
-            //    enemiesInRange.RemoveAll(e => e == null);
+            
 
             //    DecideEnemy();
             //}
