@@ -55,7 +55,7 @@ public class PlaceableObject : MonoBehaviour
     {
         ObjectDrag drag = gameObject.GetComponent<ObjectDrag>();
         Destroy(drag);
-        gameObject.GetComponent<Turret>().placed = true;
+        gameObject.GetComponent<Tower>().placed = true;
         gameManager.currency -= 100;
         //Overide here for building timers, or non functional buildings
         //Invoke events for placement

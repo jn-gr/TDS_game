@@ -32,7 +32,10 @@ public class Tower : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        placed = false;
+        if (currentTier == 0 && element == Element.Neutral) // spawned in turrets are not placed, but all upgraded either tier or element remain placed
+        {
+            placed = false;
+        }
         gameManager = FindAnyObjectByType<GameManager>();
         
     }
@@ -120,6 +123,7 @@ public class Tower : MonoBehaviour
             Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier + 1, element), transform.position, transform.rotation).GetComponent<Tower>();
             upgradedTower.currentTier = currentTier + 1;
             upgradedTower.element = element;
+            upgradedTower.placed = true;
             Destroy(gameObject);
             return upgradedTower;
         }
@@ -131,8 +135,9 @@ public class Tower : MonoBehaviour
         if(element != Element.Fire)
         {
             Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier, Element.Fire), transform.position, transform.rotation).GetComponent<Tower>();
-            
+            upgradedTower.currentTier = currentTier;
             upgradedTower.element = Element.Fire;
+            upgradedTower.placed = true;
             Destroy(gameObject);
             return upgradedTower;
         }
@@ -147,8 +152,9 @@ public class Tower : MonoBehaviour
         if (element != Element.Water)
         {
             Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier, Element.Water), transform.position, transform.rotation).GetComponent<Tower>();
-            
+            upgradedTower.currentTier = currentTier;
             upgradedTower.element = Element.Water;
+            upgradedTower.placed = true;
             Destroy(gameObject);
             return upgradedTower;
         }
@@ -163,8 +169,9 @@ public class Tower : MonoBehaviour
         if (element != Element.Air)
         {
             Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier, Element.Air), transform.position, transform.rotation).GetComponent<Tower>();
-            
+            upgradedTower.currentTier = currentTier;
             upgradedTower.element = Element.Air;
+            upgradedTower.placed = true;
             Destroy(gameObject);
             return upgradedTower;
         }

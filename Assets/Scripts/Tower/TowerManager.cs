@@ -26,8 +26,11 @@ public class TowerManager : MonoBehaviour
                     Tower tower = hit.collider.GetComponent<Tower>();
                     if (tower != null)
                     {
-                        SelectTurret(tower);
-                        return;
+                        if (tower.placed) // this makes sure that we can only select towers that have been placed
+                        {
+                            SelectTurret(tower);
+                            return;
+                        }
                     }
                     
                 }
