@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,10 +25,10 @@ public class GameManager : MonoBehaviour
     public int waveNum;
     public bool waveStarted;
 
-
     public int totalEnemiesToSpawn;
     public int enemiesSpawned;
     public int enemiesAlive;
+
 
     [Header("Tower Prefab Pool")]
 
@@ -35,6 +36,9 @@ public class GameManager : MonoBehaviour
     public GameObject[] turretPrefabs; // 12 prefabs 
     public GameObject[] sniperPrefabs; // 12 prefabs 
     public GameObject[] rapidFirePrefabs; // 12 prefabs 
+
+    public event Action WaveEnded;
+
 
     void Start()
     {
@@ -50,6 +54,7 @@ public class GameManager : MonoBehaviour
         if (waveStarted && enemiesSpawned == totalEnemiesToSpawn && enemiesAlive == 0)
         {
             EndWave();
+            WaveEnded?.Invoke();
         }
     }
 

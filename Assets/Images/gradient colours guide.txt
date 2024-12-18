@@ -7,3 +7,7 @@ fbfcf1
 blue
 313645
 c9c7c1
+
+gold
+d4af37
+fef9e7
