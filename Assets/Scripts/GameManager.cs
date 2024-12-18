@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,10 +25,11 @@ public class GameManager : MonoBehaviour
     public int waveNum;
     public bool waveStarted;
 
-
     public int totalEnemiesToSpawn;
     public int enemiesSpawned;
     public int enemiesAlive;
+
+    public event Action WaveEnded;
 
     void Start()
     {
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
         if (waveStarted && enemiesSpawned == totalEnemiesToSpawn && enemiesAlive == 0)
         {
             EndWave();
+            WaveEnded?.Invoke();
         }
     }
 

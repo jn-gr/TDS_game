@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 64bd34004178f8e44b19efb679efff5a
+guid: 7823c36925df58a40904106dbc08aeca
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -122,8 +122,8 @@ TextureImporter:
       name: Pause Panel
       rect:
         serializedVersion: 2
-        x: 41
-        y: 23
+        x: 1
+        y: 44
         width: 115
         height: 63
       alignment: 0
@@ -133,18 +133,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8036d7e8813e347468dd4740701b6c80
-      internalID: 291463865
+      spriteID: 67c9018bd0032e9489e0cdb394a65449
+      internalID: 92544202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pause Panel Exit
+      name: Pause Close
       rect:
         serializedVersion: 2
-        x: 163
-        y: 75
+        x: 117
+        y: 98
         width: 9
         height: 9
       alignment: 0
@@ -154,18 +154,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55e062ccf14c9294ca09bceb4ef3536f
-      internalID: -228096522
+      spriteID: 9ce117a8cbc4b6646977b57b5039c088
+      internalID: -1170726526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pause Panel Button Background
+      name: Pause Continue
       rect:
         serializedVersion: 2
-        x: 163
-        y: 44
+        x: 127
+        y: 72
         width: 17
         height: 17
       alignment: 0
@@ -175,20 +175,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 675c12f7bc969f441a8c779c8202ed69
-      internalID: 1863339896
+      spriteID: 6b8bf2a435d6756458239316e593dc49
+      internalID: -1637534142
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Continue Pause Menu Icon
+      name: Pause Continue Hover
       rect:
         serializedVersion: 2
-        x: 166
-        y: 31
-        width: 11
-        height: 11
+        x: 145
+        y: 72
+        width: 17
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,20 +196,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c17e030ea530b5f4b8779f51da33f366
-      internalID: 812141212
+      spriteID: 3c3ed2d4a57307a47813bc5116c10095
+      internalID: -1019772953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Restart Pause Menu Icon
+      name: Pause Restart
       rect:
         serializedVersion: 2
-        x: 166
-        y: 18
-        width: 11
-        height: 11
+        x: 127
+        y: 54
+        width: 17
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -217,20 +217,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98ac81febeceea044ba22822c7334b45
-      internalID: -137261450
+      spriteID: 366271f5248de8a4c98097af52c9030c
+      internalID: 730518748
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Home Pause Menu Icon
+      name: Pause Restart Hover
       rect:
         serializedVersion: 2
-        x: 166
-        y: 6
-        width: 11
-        height: 11
+        x: 145
+        y: 54
+        width: 17
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,8 +238,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5804bc0105f6d0c4c97a2282b8f765da
-      internalID: 24032454
+      spriteID: e44bef14a2310a5459ca65e36819d263
+      internalID: 1294193507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pause Home
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 36
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40f967a4bf13caf4bb0405bfdef0a44d
+      internalID: 114597301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pause Home Hover
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 36
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d2ebae824fa8ff43bcfbd7c06b15117
+      internalID: 779961492
       vertices: []
       indices: 
       edges: []
@@ -247,7 +289,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4ef3b6e56bcc442408c0f579589d8af0
+    spriteID: 5e302f2cf0ee9ce498091ba6b7c92de8
     internalID: 0
     vertices: []
     indices: 
@@ -255,12 +297,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Continue Pause Menu Icon: 812141212
-      Home Pause Menu Icon: 24032454
-      Pause Panel: 291463865
-      Pause Panel Button Background: 1863339896
-      Pause Panel Exit: -228096522
-      Restart Pause Menu Icon: -137261450
+      Pause Close: -1170726526
+      Pause Continue: -1637534142
+      Pause Continue Hover: -1019772953
+      Pause Home: 114597301
+      Pause Home Hover: 779961492
+      Pause Panel: 92544202
+      Pause Restart: 730518748
+      Pause Restart Hover: 1294193507
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
