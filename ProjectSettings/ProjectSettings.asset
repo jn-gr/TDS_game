@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: Temu Game Devs
   productName: Fortress of Elements
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: b0c6f49452e80674cad1a42e304e91bb, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
   m_ShowUnitySplashScreen: 1
