@@ -50,6 +50,7 @@ public class UI : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>();
         ppVolume = GetComponent<PostProcessVolume>();
         allUI = canvas.GetComponentsInChildren<Transform>(true).ToArray();
+        gameManager.WaveEnded += EndOfWave;
     }
 
     // Update is called once per frame
@@ -64,17 +65,12 @@ public class UI : MonoBehaviour
 
         if (gameManager.waveStarted)
         {
-            startWaveButton.image.sprite = waveStartedSprite;
-            startWaveButton.interactable = false;
             enemiesLeftIcon.SetActive(true);
             enemiesLeftText.text = (gameManager.enemiesAlive).ToString();
         }
         else
         {
-            startWaveButton.image.sprite = startWaveSprite;
-            startWaveButton.interactable = true;
             enemiesLeftIcon.SetActive(false);
-            enemiesLeftText.text = "";
         }
 
         if (gameManager.currentHealth <= 0)
@@ -93,6 +89,14 @@ public class UI : MonoBehaviour
     public void StartWave()
     {
         gameManager.StartWave();
+        startWaveButton.image.sprite = waveStartedSprite;
+        startWaveButton.interactable = false;
+    }
+
+    public void EndOfWave()
+    {
+        startWaveButton.image.sprite = startWaveSprite;
+        startWaveButton.interactable = true;
     }
 
     public void BackToMainMenu()
