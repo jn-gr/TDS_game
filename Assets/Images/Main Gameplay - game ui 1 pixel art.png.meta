@@ -358,7 +358,7 @@ TextureImporter:
         width: 11
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -366,6 +366,90 @@ TextureImporter:
       bones: []
       spriteID: 89fe54ef4134f8b4682d67aa5a78cfb9
       internalID: 1706950999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pause Hover
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 78
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 866e379061545874ab53fd973aa5fc66
+      internalID: -955058961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skill Tree Hover
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 23
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf4f09289178ec546895d36d1cc54749
+      internalID: 437949354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Start Wave Hover
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 41
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c61ae4a158b02042be6766038d0084e
+      internalID: -505329504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower Hover
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 53
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a99bdd1d838da64fbf4796c8d38636b
+      internalID: 1647743678
       vertices: []
       indices: 
       edges: []
@@ -393,6 +477,10 @@ TextureImporter:
       Game UI 1 - Tower 2 Icon: 86763090
       Game UI 1 - Wave Started: -1887388573
       Game UI 1 _ Tower 3 Icon: 1780268570
+      Pause Hover: -955058961
+      Skill Tree Hover: 437949354
+      Start Wave Hover: -505329504
+      Tower Hover: 1647743678
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

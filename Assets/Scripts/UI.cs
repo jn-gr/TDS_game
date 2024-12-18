@@ -183,4 +183,10 @@ public class UI : MonoBehaviour
         StartCoroutine(FadeCanvasGroup(Fade.Out, passiveSkillTreePanel, skillTreeFadeDuration));
         ppVolume.enabled = false;
     }
+
+    public void PassiveSkillTreeOpen()
+    {
+        CanvasGroup canvasGroup = passiveSkillTreePanel.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 1f;
+    }
 }
