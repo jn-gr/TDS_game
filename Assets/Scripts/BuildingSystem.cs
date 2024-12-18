@@ -64,11 +64,13 @@ public class BuildingSystem : MonoBehaviour
 
     // Hackyish solution. Just copied the InputKeyDownAlpha1 and put it here. Then connected the button to this method.
     // Currentyl no way to tell UI that theres insufficient gold outside the console.
-    public void PlaceTower() 
+    public void PlaceObject( GameObject tower) 
     {
+        
         if (gameManager.currency >= 100)
         {
-            InitializeWithObject(House_01);
+            Debug.Log("hello");
+            InitializeWithObject(tower);
             
         }
         else

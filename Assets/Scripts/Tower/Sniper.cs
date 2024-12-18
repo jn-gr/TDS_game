@@ -3,26 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Sniper : Tower { 
-    
-   public override void DecideEnemy()
-   {
-        
+public class Sniper : Tower {
 
-        if (enemiesInRange.Count > 0)
-        {
-            
-            enemiesInRange = enemiesInRange.OrderBy(enemy => enemy.GetComponent<NeutralEnemy>().health).ToList();
-
-
-           
-
-            enemyTarget = enemiesInRange[0]; 
-        }
-        else
-        {
-            enemyTarget = null; 
-        }
-
-    }
+    protected override string towerType => "Sniper";
+    public override void DecideEnemy()
+    {
+        enemiesInRange = enemiesInRange.OrderBy(enemy => enemy.GetComponent<NeutralEnemy>().health).ToList();
+        enemyTarget = enemiesInRange[0]; 
+    }   
 }

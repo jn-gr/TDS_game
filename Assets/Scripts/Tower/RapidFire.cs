@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class RapidFire : Tower
 {
+   
     public int maxSimultaneousTargets;
     private List<GameObject> enemyTargets = new List<GameObject>();
 
+    protected override string towerType => "RapidFire";
 
     public override void Update()
     {
@@ -67,5 +69,7 @@ public class RapidFire : Tower
         }
         
     }
+
+    
 
 }

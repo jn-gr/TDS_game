@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Turret : Tower
 {
-
+    protected override string towerType => "Turret";
     public override void DecideEnemy()
     {
         if (enemiesInRange.Count > 0)
@@ -13,5 +13,7 @@ public class Turret : Tower
             enemyTarget = enemiesInRange[0];
         }
     }
+
+    
 
 }
