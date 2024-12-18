@@ -11,7 +11,7 @@ public class UI : MonoBehaviour
 {
     private GameManager gameManager;
     private bool isPaused = false;
-    private PostProcessVolume ppVolume;
+    private PostProcessVolume blurryCameraEffect;
     private Transform[] allUI;
 
     [Header("Canvas Game Object")]
@@ -48,7 +48,7 @@ public class UI : MonoBehaviour
     void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
-        ppVolume = GetComponent<PostProcessVolume>();
+        blurryCameraEffect = GetComponent<PostProcessVolume>();
         allUI = canvas.GetComponentsInChildren<Transform>(true).ToArray();
         gameManager.WaveEnded += EndOfWave;
     }
@@ -152,20 +152,20 @@ public class UI : MonoBehaviour
         {
             StartCoroutine(FadeCanvasGroup(Fade.In, pausePanel, pauseFadeDuration));
             Time.timeScale = 0;
-            ppVolume.enabled = true;
+            blurryCameraEffect.enabled = true;
         }
         else
         {
             StartCoroutine(FadeCanvasGroup(Fade.Out, pausePanel, pauseFadeDuration));
             Time.timeScale = 1;
-            ppVolume.enabled = false;
+            blurryCameraEffect.enabled = false;
         }
 
     }
 
     private void GameOverScreen()
     {
-        ppVolume.enabled = true;
+        blurryCameraEffect.enabled = true;
         foreach (Transform transform in allUI) {
             if (transform.CompareTag("UI")) {
                 transform.gameObject.SetActive(false);
@@ -178,14 +178,14 @@ public class UI : MonoBehaviour
     public void SkillTreeOpen()
     {
         StartCoroutine(FadeCanvasGroup(Fade.In, activeSkillTreePanel, skillTreeFadeDuration));
-        ppVolume.enabled = true;
+        blurryCameraEffect.enabled = true;
     }
 
     public void SkillTreeClose()
     {
         StartCoroutine(FadeCanvasGroup(Fade.Out, activeSkillTreePanel, skillTreeFadeDuration));
         StartCoroutine(FadeCanvasGroup(Fade.Out, passiveSkillTreePanel, skillTreeFadeDuration));
-        ppVolume.enabled = false;
+        blurryCameraEffect.enabled = false;
     }
 
     public void PassiveSkillTreeOpen()
