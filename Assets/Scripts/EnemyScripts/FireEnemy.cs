@@ -17,8 +17,8 @@ public class FireEnemy : NeutralEnemy
     {
         base.Update();
 
-        // Calculate smooth levitation effect with sine wave
-        float currentHeight = Mathf.Sin(Time.time * levitationSpeed) * levitationHeight;
+        // Calculate smooth levitation effect with sine wave (shifted to stay above the plane)
+        float currentHeight = Mathf.Abs(Mathf.Sin(Time.time * levitationSpeed)) * levitationHeight;
 
         // Apply the levitation effect to the Y position
         transform.position = new Vector3(transform.position.x, startingY + currentHeight, transform.position.z);
