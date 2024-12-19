@@ -4606,6 +4606,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -46.463
       objectReference: {fileID: 0}
+    - target: {fileID: 1449560179125831409, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
+      propertyPath: mainTower
+      value: 
+      objectReference: {fileID: 1679698732}
+    - target: {fileID: 1449560179125831409, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 7025110967114424067, guid: 05d01e858e24bbf43b5235567859a423, type: 3}
     - target: {fileID: 4673475698990331751, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
       propertyPath: m_Name
       value: EnemySpawner (2)
@@ -4663,6 +4671,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -46.463
       objectReference: {fileID: 0}
+    - target: {fileID: 1449560179125831409, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
+      propertyPath: mainTower
+      value: 
+      objectReference: {fileID: 1679698732}
+    - target: {fileID: 1449560179125831409, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 7025110967114424067, guid: 05d01e858e24bbf43b5235567859a423, type: 3}
     - target: {fileID: 4673475698990331751, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
       propertyPath: m_Name
       value: EnemySpawner (1)
@@ -6113,6 +6129,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -46.463
       objectReference: {fileID: 0}
+    - target: {fileID: 1449560179125831409, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
+      propertyPath: mainTower
+      value: 
+      objectReference: {fileID: 1679698732}
+    - target: {fileID: 1449560179125831409, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 7025110967114424067, guid: 05d01e858e24bbf43b5235567859a423, type: 3}
     - target: {fileID: 4673475698990331751, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
       propertyPath: m_Name
       value: EnemySpawner (3)
@@ -35700,6 +35724,9 @@ MonoBehaviour:
   totalEnemiesToSpawn: 0
   enemiesSpawned: 0
   enemiesAlive: 0
+  turretPrefabs: []
+  sniperPrefabs: []
+  rapidFirePrefabs: []
 --- !u!114 &1609003468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36267,6 +36294,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11035fc6e468ca42b6aae0eee54e117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1679698732 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4162783595457367869, guid: aae719d815927e24db5ca60ba1a713fe, type: 3}
+  m_PrefabInstance: {fileID: 1679698728}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1681056057
 GameObject:
   m_ObjectHideFlags: 0
@@ -38130,6 +38162,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -46.463
       objectReference: {fileID: 0}
+    - target: {fileID: 1449560179125831409, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
+      propertyPath: mainTower
+      value: 
+      objectReference: {fileID: 1679698732}
+    - target: {fileID: 1449560179125831409, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 7025110967114424067, guid: 05d01e858e24bbf43b5235567859a423, type: 3}
     - target: {fileID: 4673475698990331751, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
       propertyPath: m_Name
       value: EnemySpawner
