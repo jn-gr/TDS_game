@@ -5425,7 +5425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &705507994
 Light:
   m_ObjectHideFlags: 0
@@ -5439,7 +5439,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
-  m_Range: 400
+  m_Range: 250
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -8097,6 +8097,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1023636351}
   - component: {fileID: 1023636350}
+  - component: {fileID: 1023636352}
   m_Layer: 0
   m_Name: DirectionalLight_Sunrise
   m_TagString: Untagged
@@ -8116,14 +8117,14 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.98557293, b: 0.9103774, a: 1}
-  m_Intensity: 0.69
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
     m_Type: 1
-    m_Resolution: 1
+    m_Resolution: 2
     m_CustomResolution: -1
     m_Strength: 1
     m_Bias: 0.05
@@ -8174,13 +8175,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023636349}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5968887, y: 0.24178185, z: -0.73973244, w: -0.1950933}
+  m_LocalRotation: {x: -0.1380553, y: 0.7592032, z: -0.17109385, w: -0.6125996}
   m_LocalPosition: {x: 18.44, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 143.8, y: 257.8, z: 0}
+  m_LocalEulerAnglesHint: {x: 25.4, y: 257.8, z: 0}
+--- !u!114 &1023636352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023636349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4552691f2512494d9fa4d179ad1e651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wavesPer360: 6
+  rotationDuration: 15
 --- !u!1 &1025780510
 GameObject:
   m_ObjectHideFlags: 0
@@ -36692,6 +36707,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d357ce5b-e9a0-4979-b245-2ac14477686f
     m_ActionName: 'RTS Camera/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 77f3d6f3-1caa-42ab-908d-7f1630b5f385
+    m_ActionName: 'RTS Camera/Tower 1[/Keyboard/1,/Keyboard/numpad1]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6d936dd4-14b6-4095-8e47-4aeda0bd8cfd
+    m_ActionName: 'RTS Camera/Tower 2[/Keyboard/2,/Keyboard/numpad2]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4c8b04bc-2b27-43f1-9909-45122cba6f84
+    m_ActionName: 'RTS Camera/Tower 3[/Keyboard/3,/Keyboard/numpad3]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fdec0a92-8c3f-4131-8cd1-64e649c4b154
+    m_ActionName: 'RTS Camera/Active Skill 1[/Keyboard/4,/Keyboard/numpad4]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 84e32f33-0612-4491-821f-3fc092b0a493
+    m_ActionName: 'RTS Camera/Active Skill 2[/Keyboard/5,/Keyboard/numpad5]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 89573726-0834-4813-adde-f9b842cf8e51
+    m_ActionName: 'RTS Camera/Active Skill 3[/Keyboard/6,/Keyboard/numpad6]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b5fb6ed1-6f68-48ae-ace6-0e1f74090876
+    m_ActionName: 'RTS Camera/Left Arrow Encyclopedia[/Keyboard/leftArrow,/Keyboard/a]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e7bd4691-bd51-4023-9f44-1e43587edbc7
+    m_ActionName: 'RTS Camera/Right Arrow Encyclopedia[/Keyboard/rightArrow,/Keyboard/d]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: RTS Camera
@@ -39601,7 +39648,7 @@ GameObject:
   - component: {fileID: 1646419088}
   m_Layer: 5
   m_Name: Wave Counter
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

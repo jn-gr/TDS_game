@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] rapidFirePrefabs; // 12 prefabs 
 
     public event Action WaveEnded;
+    public event Action WaveStarted;
 
 
     void Start()
@@ -89,6 +90,8 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log($"Wave {waveNum} started: Spawning {totalEnemiesToSpawn} enemies.");
+
+        WaveStarted?.Invoke();
     }
 
     public void EndWave()
