@@ -1,72 +1,54 @@
 using UnityEngine;
 
-public class WaveRotation : MonoBehaviour
+public class DayNightLightRotate : MonoBehaviour
 {
-    private GameManager gameManager; // Reference to the GameManager
-    public int wavesPer360 = 6; // Number of waves required for a full 360-degree rotation
-    public float rotationDuration = 1f; // Duration of the smooth rotation (in seconds)
+    public int wavesPerFullRotation = 6; // Number of waves to complete a full 360° rotation
+    public float rotationDuration = 1f; // Duration of the rotation in seconds
 
-    private float degreesPerWave; // Degrees to rotate per wave
-    private Quaternion targetRotation; // The target rotation to reach
-    private float rotationStartTime; // When the smooth rotation starts
-    private bool isRotating = false; // Whether a rotation is currently happening
+    private GameManager gameManager;
+    private float anglePerWave;
+    private Quaternion targetRotation;
+    private bool isRotating = false;
+    private float rotationProgress = 0f;
 
-    void Start()
+    private void Start()
     {
-        // Find the GameManager if not assigned
-        if (gameManager == null)
-        {
-            gameManager = FindFirstObjectByType<GameManager>();
-            if (gameManager == null)
-            {
-                Debug.LogError("GameManager not found in the scene!");
-                return;
-            }
-        }
-
-        // Calculate degrees per wave
-        degreesPerWave = 360f / wavesPer360;
-
-        // Subscribe to the WaveStarted event
-        gameManager.WaveStarted += OnWaveStarted;
-
-        // Initialize target rotation to the current rotation
+        // Find the GameManager in the scene and subscribe to the WaveStarted event
+        gameManager = FindFirstObjectByType<GameManager>();
+        anglePerWave = 360f / wavesPerFullRotation;
         targetRotation = transform.rotation;
-    }
 
-    void Update()
-    {
-        if (isRotating)
-        {
-            // Smoothly interpolate rotation towards the target
-            float t = (Time.time - rotationStartTime) / rotationDuration;
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, t);
-
-            // Stop rotating if we've reached the target
-            if (t >= 1f)
-            {
-                isRotating = false;
-            }
-        }
+        gameManager.WaveStarted += OnWaveStarted;
     }
 
     private void OnWaveStarted()
     {
-        // Calculate the new target rotation
-        float increment = degreesPerWave;
-        targetRotation = transform.rotation * Quaternion.Euler(increment, 0, 0);
+        if (gameManager.waveNum == 1)
+        {
+            return;
+        }
 
-        // Start the rotation
-        rotationStartTime = Time.time;
-        isRotating = true;
+        if (!isRotating)
+        {
+            StartCoroutine(SmoothRotate());
+        }
     }
 
-    private void OnDestroy()
+    private System.Collections.IEnumerator SmoothRotate()
     {
-        // Unsubscribe from the WaveStarted event to avoid memory leaks
-        if (gameManager != null)
+        isRotating = true;
+        rotationProgress = 0f;
+        Quaternion startRotation = transform.rotation;
+        targetRotation *= Quaternion.Euler(anglePerWave, 0, 0);
+
+        while (rotationProgress < 1f)
         {
-            gameManager.WaveStarted -= OnWaveStarted;
+            rotationProgress += Time.deltaTime / rotationDuration;
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, rotationProgress);
+            yield return null;
         }
+
+        transform.rotation = targetRotation; // Ensure final rotation is precise
+        isRotating = false;
     }
 }
