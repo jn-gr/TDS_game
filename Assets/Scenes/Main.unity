@@ -1390,8 +1390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120e689a3fbcbae4c89646fce85aac67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotkey: 275
-  optionalHotkey: 100
+  actionName: Right Arrow Encyclopedia
 --- !u!114 &212237655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5759,8 +5758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120e689a3fbcbae4c89646fce85aac67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotkey: 54
-  optionalHotkey: 262
+  actionName: Active Skill 3
 --- !u!1001 &747458756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6658,8 +6656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120e689a3fbcbae4c89646fce85aac67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotkey: 51
-  optionalHotkey: 259
+  actionName: Tower 3
 --- !u!1 &890019017
 GameObject:
   m_ObjectHideFlags: 0
@@ -6809,8 +6806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120e689a3fbcbae4c89646fce85aac67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotkey: 49
-  optionalHotkey: 257
+  actionName: Tower 1
 --- !u!1 &905696633
 GameObject:
   m_ObjectHideFlags: 0
@@ -7660,8 +7656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120e689a3fbcbae4c89646fce85aac67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotkey: 50
-  optionalHotkey: 258
+  actionName: Tower 2
 --- !u!1 &963631615
 GameObject:
   m_ObjectHideFlags: 0
@@ -36693,6 +36688,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d8b3a813-759a-40a7-a1a1-f10e999a6983
     m_ActionName: 'RTS Camera/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d357ce5b-e9a0-4979-b245-2ac14477686f
+    m_ActionName: 'RTS Camera/Pause[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: RTS Camera
@@ -37774,8 +37773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120e689a3fbcbae4c89646fce85aac67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotkey: 52
-  optionalHotkey: 260
+  actionName: Active Skill 1
 --- !u!1 &1441399438
 GameObject:
   m_ObjectHideFlags: 0
@@ -38277,8 +38275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120e689a3fbcbae4c89646fce85aac67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotkey: 53
-  optionalHotkey: 261
+  actionName: Active Skill 2
 --- !u!1 &1478286501
 GameObject:
   m_ObjectHideFlags: 0
@@ -38541,8 +38538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120e689a3fbcbae4c89646fce85aac67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotkey: 276
-  optionalHotkey: 97
+  actionName: Left Arrow Encyclopedia
 --- !u!114 &1482330106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39346,6 +39342,7 @@ MonoBehaviour:
   gameOverFadeDuration: 1.1
   pausePanel: {fileID: 621592171}
   pauseFadeDuration: 0.3
+  pauseCooldownDuration: 0.4
   activeSkillTreePanel: {fileID: 378923406}
   passiveSkillTreePanel: {fileID: 239445553}
   skillTreeFadeDuration: 0.15

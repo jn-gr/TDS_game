@@ -2,27 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class HotkeyTrigger : MonoBehaviour
-{
-    public KeyCode hotkey = KeyCode.Space;
-    [Tooltip("Set to 'None' to not have a secondary hotkey attached to this button.")]
-    public KeyCode optionalHotkey = KeyCode.None;
+{   
+    [Header("Input Settings")]
+    public string actionName = "TriggerHotkey"; // Name of the input action
 
     private Button button;
+    private InputAction hotkeyAction;
 
-    // Start is called before the first frame update
     void Start()
     {
         button = GetComponent<Button>();
+
+        // Get the action from the PlayerInput on the Main Camera
+        PlayerInput playerInput = Camera.main.GetComponent<PlayerInput>();
+        InputActionMap actionMap = playerInput.actions.FindActionMap("RTS Camera");
+        hotkeyAction = actionMap.FindAction(actionName);
+
+        if (hotkeyAction == null)
+        {
+            Debug.LogError($"Action '{actionName}' not found'");
+            return;
+        }
+
+        // Enable the action and subscribe to its performed event
+        hotkeyAction.Enable();
+        hotkeyAction.performed += OnHotkeyPressed;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDestroy()
     {
-        if (Input.GetKeyDown(hotkey) || (optionalHotkey != KeyCode.None && Input.GetKeyDown(optionalHotkey)))
-        {
-            button.onClick.Invoke();
-        }
+        // Unsubscribe from the action's event
+        hotkeyAction.performed -= OnHotkeyPressed;
+    }
+
+    private void OnHotkeyPressed(InputAction.CallbackContext context)
+    {
+        // Trigger the button when the action is performed
+        button.onClick.Invoke();
     }
 }
