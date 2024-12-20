@@ -22,7 +22,6 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI enemiesLeftText;
     public TextMeshProUGUI totalKillsText;
-    public TextMeshProUGUI scoreText;
     public TextMeshProUGUI experienceText;
     public GameObject enemiesLeftIcon;
 
@@ -60,7 +59,6 @@ public class UI : MonoBehaviour
         healthText.text = (gameManager.currentHealth).ToString();
         goldText.text = (gameManager.currency).ToString();
         totalKillsText.text = (gameManager.totalKills).ToString();
-        scoreText.text = (gameManager.score).ToString();
         experienceText.text = (gameManager.experience).ToString();
 
         if (gameManager.waveStarted)
