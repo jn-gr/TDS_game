@@ -35896,7 +35896,7 @@ MonoBehaviour:
   maxPanSpeed: 85.8
   secToMaxSpeed: 0.47
   zoomSpeed: 0.05
-  dragSpeed: 5
+  dragSpeed: 7
   dragZoomScale: 0.05
   enableMovementLimits: 1
   heightLimit: {x: 51, y: 51}
