@@ -8100,8 +8100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4552691f2512494d9fa4d179ad1e651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavesPer360: 6
-  rotationDuration: 15
+  wavesPerFullRotation: 6
+  rotationDuration: 8
 --- !u!1 &1025780510
 GameObject:
   m_ObjectHideFlags: 0
@@ -36645,6 +36645,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e7bd4691-bd51-4023-9f44-1e43587edbc7
     m_ActionName: 'RTS Camera/Right Arrow Encyclopedia[/Keyboard/rightArrow,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9c31a7bb-e209-4441-81b9-d877ced89592
+    m_ActionName: 'RTS Camera/Select[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ba4b1575-b2c0-469d-b719-933be6d3d80f
+    m_ActionName: 'RTS Camera/Cancel Tower[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: RTS Camera
