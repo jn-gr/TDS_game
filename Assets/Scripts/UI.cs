@@ -24,6 +24,8 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI totalKillsText;
     public TextMeshProUGUI experienceText;
     public GameObject enemiesLeftIcon;
+    public TextMeshProUGUI waveCounter;
+
 
     [Header("Hotbar")]
     public Button startWaveButton;
@@ -43,6 +45,10 @@ public class UI : MonoBehaviour
     public GameObject passiveSkillTreePanel;
     public float skillTreeFadeDuration = 0.3f;
 
+    [Header("Encyclopedia")]
+    public GameObject encyclopediaPanel;
+    public float encyclopediaFadeDuration = 0.3f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +66,7 @@ public class UI : MonoBehaviour
         goldText.text = (gameManager.currency).ToString();
         totalKillsText.text = (gameManager.totalKills).ToString();
         experienceText.text = (gameManager.experience).ToString();
+        waveCounter.text = "Wave: \n" + gameManager.waveNum;
 
         if (gameManager.waveStarted)
         {
@@ -190,5 +197,24 @@ public class UI : MonoBehaviour
     {
         CanvasGroup canvasGroup = passiveSkillTreePanel.GetComponent<CanvasGroup>();
         canvasGroup.alpha = 1f;
+    }
+
+    public void ToggleEncyclopedia()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            StartCoroutine(FadeCanvasGroup(Fade.In, encyclopediaPanel, encyclopediaFadeDuration));
+            Time.timeScale = 0;
+            blurryCameraEffect.enabled = true;
+        }
+        else
+        {
+            StartCoroutine(FadeCanvasGroup(Fade.Out, encyclopediaPanel, encyclopediaFadeDuration));
+            Time.timeScale = 1;
+            blurryCameraEffect.enabled = false;
+        }
+
     }
 }
