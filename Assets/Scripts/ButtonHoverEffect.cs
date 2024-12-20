@@ -31,4 +31,9 @@ public class ButtonHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerEx
             buttonImage.sprite = normalSprite; // Revert back on exit
         }
     }
+
+    public void MakeSpriteNormalAgain()
+    {
+        buttonImage.sprite = normalSprite;
+    }
 }

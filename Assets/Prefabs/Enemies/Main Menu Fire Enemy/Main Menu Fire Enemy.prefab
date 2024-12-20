@@ -164,6 +164,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9135187945374938186}
     m_Modifications:
+    - target: {fileID: 6191754675987444499, guid: 05d01e858e24bbf43b5235567859a423, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7025110967114424067, guid: 05d01e858e24bbf43b5235567859a423, type: 3}
       propertyPath: m_Name
       value: Small_Monster_Fire
