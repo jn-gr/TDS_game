@@ -217,4 +217,10 @@ public class UI : MonoBehaviour
         }
 
     }
+
+    public void RestartLevel()
+    {
+        SceneLoader.NextSceneName = "Main";
+        SceneManager.LoadScene("Loading Screen");
+    }
 }
