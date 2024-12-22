@@ -6,116 +6,20 @@ using UnityEngine;
 
 public static class PathGenerator
 {
-    //{
-    //    // Generates a single random path from the left edge to the right edge of the region.
-    //    // Moves allowed: right, up, down (no diagonals).
-    //    public static void Generate(CellT[,] cells, int width, int height)
-    //    {
-    //        System.Random rand = new System.Random();
-
-    //        // Pick a random start cell on the left edge
-    //        int startY = rand.Next(height);
-    //        CellT current = cells[0, startY];
-
-    //        int x = 0;
-    //        int y = startY;
-
-    //        // Continue until we reach the rightmost column
-    //        while (x < width - 1)
-    //        {
-    //            var candidates = new List<(int dx, int dy)>();
-
-    //            // Always try to go right if not at the last column
-    //            if (x < width - 1)
-    //            {
-    //                if (!cells[x + 1, y].IsWalkable) // do not allow to carve into an already walkable path, this stops loops forming
-    //                {
-    //                    candidates.Add((1, 0));
-    //                }
-    //            }
-
-    //            // can also go left
-    //            if (x > 0)
-    //            {
-    //                if (!cells[x - 1, y].IsWalkable) // dont go left if path is already carved
-    //                {
-
-    //                    candidates.Add((-1, 0));
-    //                }
-    //            }
-
-    //            // If not at the bottom row, can go down
-    //            if (y > 0)
-    //            {
-    //                if (!cells[x, y - 1].IsWalkable) // do not go down if path below is carved
-    //                {
-    //                    candidates.Add((0, -1));
-    //                }
-    //            }
-
-    //            // If not at the top row, can go up
-
-    //            if (y < height - 1)
-    //            {
-    //                if (!cells[x, y + 1].IsWalkable) // dont go up if path above is carved
-    //                {
-    //                    candidates.Add((0, 1));
-    //                }
-    //            }
-
-    //            UnityEngine.Debug.Log(candidates);
-    //            // Choose a random move
-    //            var chosen = candidates[rand.Next(candidates.Count)];
-    //            int newX = x + chosen.dx;
-    //            int newY = y + chosen.dy;
-
-    //            CellT nextCell = cells[newX, newY];
-    //            CarvePassage(current, nextCell);
-
-    //            current = nextCell;
-    //            x = newX;
-    //            y = newY;
-    //        }
-    //    }
-
-    //    private static void CarvePassage(CellT from, CellT to)
-    //    {
-    //        int dx = to.X - from.X;
-    //        int dy = to.Y - from.Y;
-
-    //        // Horizontal right move
-    //        if (dx == 1 && dy == 0)
-    //        {
-    //            from.IsOpenRight = true;
-    //            to.IsOpenLeft = true;
-    //        }
-    //        // Move up (0, -1)
-    //        else if (dx == 0 && dy == -1)
-    //        {
-    //            from.IsOpenUp = true;
-    //            to.IsOpenDown = true;
-    //        }
-    //        // Move down (0, 1)
-    //        else if (dx == 0 && dy == 1)
-    //        {
-    //            from.IsOpenDown = true;
-    //            to.IsOpenUp = true;
-    //        }
-    //    }
-    //}
-
-    public static void Generate(CellT[,] cells, int width, int height)
+    public static void Generate(Region region, int width, int height)
     {
         
         System.Random rand = new System.Random();
         bool pathGenerated = false;
 
+        // if the path doesnt reach the end, we try again, it will come up with a path eventually
         while (!pathGenerated)
         {
-            ResetCells(cells, width, height);
-            // Pick a random start cell on the left edge
-            int startY = rand.Next(height);
-            CellT current = cells[0, startY];
+            ResetCells(region.Cells, width, height);
+            
+            //int startY = rand.Next(height);
+            int startY = region.startCell.Y;
+            CellT current = region.Cells[0, startY];
 
             int x = 0;
             int y = startY;
@@ -123,16 +27,16 @@ public static class PathGenerator
 
             pathGenerated = true;
             //UnityEngine.Debug.Log((x, ",", y, "is the start"));
-            // Continue until we reach the rightmost column
+            // continue until we reach the rightmost column
             while (x < width - 1)
             {
                 var candidates = new List<(int dx, int dy)>();
 
                 // Add valid candidates
-                AddCandidate(cells, candidates, x, y, 1, 0, width, height); // Right
-                AddCandidate(cells, candidates, x, y, -1, 0, width, height); // Left
-                AddCandidate(cells, candidates, x, y, 0, -1, width, height); // Down
-                AddCandidate(cells, candidates, x, y, 0, 1, width, height); // Up
+                AddCandidate(region.Cells, candidates, x, y, 1, 0, width, height); // Right
+                AddCandidate(region.Cells, candidates, x, y, -1, 0, width, height); // Left
+                AddCandidate(region.Cells, candidates, x, y, 0, -1, width, height); // Down
+                AddCandidate(region.Cells, candidates, x, y, 0, 1, width, height); // Up
 
                 if (candidates.Count == 0)
                 {
@@ -143,17 +47,22 @@ public static class PathGenerator
                 }
                 
 
-                    // Choose a random move
+                    // pikc a random move
                     var chosen = candidates[rand.Next(candidates.Count)];
                     int newX = x + chosen.dx;
                     int newY = y + chosen.dy;
 
-                    CellT nextCell = cells[newX, newY];
+                    CellT nextCell = region.Cells[newX, newY];
                     CarvePassage(current, nextCell);
 
                     current = nextCell;
                     x = newX;
                     y = newY;
+
+                if (x == width - 1) 
+                { 
+                    region.endCell = current;
+                }
                 
             }
             
@@ -172,7 +81,7 @@ public static class PathGenerator
             // Check that the target cell is not already walkable
             if (!target.IsWalkable)
             {
-                // Ensure the target cell has unvisited neighbors to avoid dead ends
+                // Ensure the target cell has unvisited neighbors to avoid dead ends and loops
                 if (HasUnvisitedNeighbor(cells, newX, newY, width, height))
                 {
                     candidates.Add((dx, dy));

@@ -1,33 +1,47 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class MapManager : MonoBehaviour
 {
+    public Tilemap tilemap; 
+    public TileBase walkableTile; 
+    public TileBase nonWalkableTile; 
 
-    public GameObject walkableCellPrefab;
-    public GameObject nonWalkableCellPrefab;
+    public Vector3Int mazeOrigin = Vector3Int.zero;
 
-    public float cellSize = 1;
-
-    public Vector3 mazeOrigin = Vector3.zero;
+    public int regionWidth = 10;
+    public int regionHeight = 10;
 
     private Dictionary<(int, int), CellT> globalMap = new Dictionary<(int, int), CellT>();
 
     void Start()
     {
-        // Example: create an initial region at (0,0) with size 10x10
-        CreateInitialRegion(0, 0, 10, 10);
-    }
-    public void CreateInitialRegion(int originX, int originY, int width, int height)
-    {
-        Region initialRegion = new Region(originX, originY, width, height);
-        initialRegion.GeneratePath();
-        AddRegionToMap(initialRegion);
-        InstantiateRegionCells(initialRegion);
-        
+        // testing 
+        CreateInitialRegion(0, 0, regionWidth, regionHeight);
     }
 
+    public void CreateInitialRegion(int regionX, int regionY, int width, int height)
+    {
+        Region initialRegion = new Region(regionX, regionY, width, height);
+        initialRegion.GeneratePath();
+        AddRegionToMap(initialRegion);
+        DrawRegionOnTilemap(initialRegion);
+
+        Debug.Log(initialRegion.startCell.X);
+        Region newregion = ExpandRegion(initialRegion,regionX +1, regionY);
+        Region newregion1 = ExpandRegion(newregion,regionX +2, regionY);
+        Region newregion2 = ExpandRegion(newregion1, regionX + 3, regionY);
+        
+        // going any other direction doesnt work right now, because the endcell is acctually the start for region unlocking to left
+        // i will fix this
+
+
+
+    }
+
+
+    // adds each cell of a region to the global map dictionary . IMPORTANT!!, 
     private void AddRegionToMap(Region region)
     {
         for (int x = 0; x < region.Width; x++)
@@ -39,65 +53,69 @@ public class MapManager : MonoBehaviour
             }
         }
     }
-
-    public void ExpandRegion(int attachGlobalX, int attachGlobalY, int newWidth, int newHeight, int offsetX, int offsetY)
+    // newregion x and y will be given by calulating where the mouse clicks on the tilemap,
+    // and then with logic you can calculate which region was clicked by dividng by width and height
+    public Region ExpandRegion(Region existingRegion, int newRegionX, int newRegionY)
     {
-        int newOriginX = attachGlobalX + offsetX;
-        int newOriginY = attachGlobalY + offsetY;
+        // caclulate the direction between regions
+        (int x, int y) direction = (newRegionX - existingRegion.RegionX, newRegionY - existingRegion.RegionY);
 
-        Region newRegion = new Region(newOriginX, newOriginY, newWidth, newHeight);
+        Region newRegion = new Region(newRegionX, newRegionY, regionWidth, regionHeight);
+
+        // Set startCell and endCell based on direction
+        if (direction == (1, 0)) // Right
+        {
+            newRegion.startCell = new CellT(existingRegion.endCell.X + 1, existingRegion.endCell.Y);
+            // i probably dont need isopenright and all that, but for now ill keep
+            existingRegion.endCell.IsOpenRight = true;
+            newRegion.startCell.IsOpenLeft = true;
+        }
+        else if (direction == (-1, 0)) // Left
+        {
+            newRegion.startCell = new CellT(existingRegion.endCell.X - 1, existingRegion.endCell.Y);
+            existingRegion.endCell.IsOpenLeft = true;
+            newRegion.startCell.IsOpenRight = true;
+        }
+        else if (direction == (0, 1)) // Up
+        {
+            newRegion.startCell = new CellT(existingRegion.endCell.X, existingRegion.endCell.Y + 1);
+            existingRegion.endCell.IsOpenUp = true;
+            newRegion.startCell.IsOpenDown = true;
+        }
+        else if (direction == (0, -1)) // Down
+        {
+            newRegion.startCell = new CellT(existingRegion.endCell.X, existingRegion.endCell.Y - 1);
+            existingRegion.endCell.IsOpenDown = true;
+            newRegion.startCell.IsOpenUp = true;
+        }
+        else
+        {
+            Debug.LogError($"wrong direction: {direction}");
+        }
+
+       
         newRegion.GeneratePath();
 
-        ConnectRegions(attachGlobalX, attachGlobalY, newRegion);
-
+        // add the new region to the map and draw it
         AddRegionToMap(newRegion);
-        InstantiateRegionCells(newRegion);
+        DrawRegionOnTilemap(newRegion);
+        return newRegion;
     }
 
-    private void ConnectRegions(int attachGlobalX, int attachGlobalY, Region newRegion)
+
+
+    private void DrawRegionOnTilemap(Region region)
     {
-        // Simplified version of connecting one cell - assume that (attachGlobalX, attachGlobalY)
-        // lines up directly with one of newRegion's cells. We’ll choose the cell at (0,0) for simplicity.
-        // In a real scenario, you'd pick the correct boundary cell.
-
-        int localX = attachGlobalX - newRegion.OriginX;
-        int localY = attachGlobalY - newRegion.OriginY;
-
-        var attachingCell = newRegion.GetCellLocal(localX, localY);
-        var existingCell = globalMap[(attachGlobalX, attachGlobalY)];
-
-        // Carve a passage between existingCell and attachingCell in some direction.
-        // For simplicity, assume the new region is placed to the right of the existing cell:
-        // existing cell is at (attachGlobalX, attachGlobalY)
-        // new region starts at (attachGlobalX+1, attachGlobalY) basically.
-        // That means dx = 1, from existing to attaching cell.
-        existingCell.IsOpenRight = true;
-        attachingCell.IsOpenLeft = true;
-    }
-
-    private void InstantiateRegionCells(Region region)
-    {
-        GameObject regionGO = new GameObject("Region_" + region.OriginX + "_" + region.OriginY);
-        regionGO.transform.SetParent(GameObject.Find("Map").transform); // or another root like MapRoot
-
         for (int x = 0; x < region.Width; x++)
         {
             for (int y = 0; y < region.Height; y++)
             {
                 CellT cell = region.Cells[x, y];
                 (int globalX, int globalY) = region.LocalToGlobal(x, y);
-
-                // Determine world position:
-                Vector3 cellPosition = mazeOrigin + new Vector3(globalX * cellSize, 0f, globalY * cellSize);
-                //Vector3 cellPosition = mazeOrigin + new Vector3(globalX , 0f, globalY);
-
-                // Choose the prefab based on walkability:
-                GameObject prefabToUse = cell.IsWalkable ? walkableCellPrefab : nonWalkableCellPrefab;
-
-                GameObject cellGO = Instantiate(prefabToUse, cellPosition, Quaternion.identity, regionGO.transform);
-                cellGO.transform.localScale = new Vector3(cellSize, cellGO.transform.localScale.y, cellSize);
-
-                
+           
+                Vector3Int cellPosition = mazeOrigin + new Vector3Int(globalX, globalY, 0);               
+                TileBase tileToUse = cell.IsWalkable ? walkableTile : nonWalkableTile;              
+                tilemap.SetTile(cellPosition, tileToUse);
             }
         }
     }
