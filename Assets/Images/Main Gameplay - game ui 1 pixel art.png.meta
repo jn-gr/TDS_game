@@ -496,6 +496,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Help Button
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 92
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5188811603c231f468156fcd985af6de
+      internalID: -1800434906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Help Hover
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 78
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8c64382f0a56814a9bdd285f0f215c2
+      internalID: 1716928902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -520,6 +562,8 @@ TextureImporter:
       Game UI 1 - Wave Started: -1887388573
       Game UI 1 _ Tower 3 Icon: 1780268570
       Gold cost: -355680150
+      Help Button: -1800434906
+      Help Hover: 1716928902
       Hotbar Border: -433030693
       Hotbar Hover: -2019102909
       Hotbar background: -1201008588
