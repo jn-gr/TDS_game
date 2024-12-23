@@ -9,6 +9,9 @@ public class Spawner : MonoBehaviour
     private GameManager gameManager;
     private Coroutine spawnCoroutine;
 
+    // Reference to the main tower
+    public Transform mainTower;
+
     void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
@@ -40,19 +43,24 @@ public class Spawner : MonoBehaviour
 
             if (gameManager.CanSpawnEnemy())
             {
-                // Determine rotation based on the enemy type
-                Quaternion spawnRotation = Quaternion.identity;
+                // Determine spawn position
                 Vector3 spawnPosition = transform.position + new Vector3(0, 2, 0); // Base spawn position with Y offset
 
-                // Check if the enemy is a FireEnemy and increase Y position by 1
+                // Calculate rotation to face the main tower
+                Vector3 directionToTower = (mainTower.position - spawnPosition).normalized;
+                Quaternion spawnRotation = Quaternion.LookRotation(directionToTower);
+
+                // Adjust rotation to account for Blender's forward axis
+                Quaternion adjustedRotation = spawnRotation * Quaternion.Euler(-90, 180, 0);
+
+                // Check if the enemy is a FireEnemy and adjust Y position
                 if (enemyPrefab.GetComponent<FireEnemy>() != null)
                 {
-                    spawnRotation = Quaternion.Euler(-90, 0, 0);
                     spawnPosition.y += 1f;  // Increase Y position by 1 for FireEnemy
                 }
 
-                // Instantiate with position and the specified rotation
-                Instantiate(enemyPrefab, spawnPosition, spawnRotation);
+                // Instantiate the enemy with position and adjusted rotation
+                Instantiate(enemyPrefab, spawnPosition, adjustedRotation);
                 gameManager.EnemySpawned();
             }
             else
