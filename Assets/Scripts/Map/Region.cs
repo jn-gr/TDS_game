@@ -13,8 +13,8 @@ public class Region
     public int RegionX { get; private set; }
     public int RegionY { get; private set; }
 
-    public CellT startCell { get;  set; }
-    public CellT endCell { get; set; }
+    public List<CellT> startCells { get;  set; } = new List<CellT>();
+    public List<CellT> endCells { get; set; } = new List<CellT>();  
     
 
     public Region(int regionX, int regionY,int width, int height )
@@ -24,7 +24,7 @@ public class Region
         RegionX = regionX;
         RegionY = regionY;
         Cells = new CellT[width, height];
-        startCell = new CellT(0, height/2);
+        //startCell = new CellT(0, height/2);
 
         for (int x = 0; x < width; x++)
         {

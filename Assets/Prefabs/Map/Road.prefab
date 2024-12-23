@@ -212,7 +212,7 @@ Grid:
   m_CellSize: {x: 0.32, y: 0.32, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
-  m_CellSwizzle: 0
+  m_CellSwizzle: 1
 --- !u!114 &8001747615446459383
 MonoBehaviour:
   m_ObjectHideFlags: 0
