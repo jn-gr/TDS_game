@@ -119,48 +119,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Game UI 1 - Button Background
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 5
-        width: 45
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef0b9172cf7692e4290f3c9aeaddef46
-      internalID: 1409495662
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game UI 1 - Skills
-      rect:
-        serializedVersion: 2
-        x: 78
-        y: 5
-        width: 45
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 835eeffdc31d7144490dad502bf8e912
-      internalID: 679779506
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Game UI 1 - Skills Button
       rect:
         serializedVersion: 2
@@ -245,90 +203,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Game UI 1 - Button Border
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 35
-        width: 45
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2cde224aacaf737428d93c386a7538fe
-      internalID: -830825844
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game UI 1 - Tower 1 Icon
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 23
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a22678c2bdbd354082faed795b189a3
-      internalID: 676581905
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game UI 1 - Tower 2 Icon
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 23
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 871c1d8808a332e4ba73580352252ac4
-      internalID: 86763090
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game UI 1 _ Tower 3 Icon
-      rect:
-        serializedVersion: 2
-        x: 62
-        y: 23
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f8aca1be88da87c45ac491b48fa47a01
-      internalID: 1780268570
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Game UI 1 - Wave Started
       rect:
         serializedVersion: 2
@@ -379,7 +253,7 @@ TextureImporter:
         width: 13
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -400,7 +274,7 @@ TextureImporter:
         width: 17
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -421,7 +295,7 @@ TextureImporter:
         width: 17
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -434,13 +308,202 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tower Hover
+      name: Hotbar Border
       rect:
         serializedVersion: 2
-        x: 32
-        y: 53
+        x: 19
+        y: 23
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10d81c2404f34a7409b76b67e759704a
+      internalID: -433030693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hotbar background
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 23
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e394b8989a758364895c97d0b27479a9
+      internalID: -1201008588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hotbar Hover
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 41
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf7bd99b4e1ee9e47a4ede1e02eb81ce
+      internalID: -2019102909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower 1
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 6
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e36895e1899ee26418a3f128c93edb7b
+      internalID: 1657379047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower 2
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 6
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 576f7b258aa9ca84faa73a58b326a69a
+      internalID: 953497113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower 3
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 6
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddd0fbcd097292f4584a24659b284c24
+      internalID: 539757929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hotbar hotkey icon
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 0
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dbfff515ab3e5a45a2bc5ef0ad9f0f7
+      internalID: 1655827363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gold cost
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 59
         width: 15
-        height: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28a1060133f0c614291dfdbd130b614b
+      internalID: -355680150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Timer cost
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 59
+        width: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db8e335334c0fda4baba51da32d5173b
+      internalID: -251735482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Help Button
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 92
+        width: 15
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -448,8 +511,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a99bdd1d838da64fbf4796c8d38636b
-      internalID: 1647743678
+      spriteID: 5188811603c231f468156fcd985af6de
+      internalID: -1800434906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Help Hover
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 78
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8c64382f0a56814a9bdd285f0f215c2
+      internalID: 1716928902
       vertices: []
       indices: 
       edges: []
@@ -477,10 +561,23 @@ TextureImporter:
       Game UI 1 - Tower 2 Icon: 86763090
       Game UI 1 - Wave Started: -1887388573
       Game UI 1 _ Tower 3 Icon: 1780268570
+      Gold cost: -355680150
+      Help Button: -1800434906
+      Help Hover: 1716928902
+      Hotbar Border: -433030693
+      Hotbar Hover: -2019102909
+      Hotbar background: -1201008588
+      Hotbar hotkey icon: 1655827363
       Pause Hover: -955058961
       Skill Tree Hover: 437949354
       Start Wave Hover: -505329504
-      Tower Hover: 1647743678
+      Timer cost: -251735482
+      Tower 1: 1657379047
+      Tower 1 Hover: 1647743678
+      Tower 2: 953497113
+      Tower 2 Hover: 168572206
+      Tower 3: 539757929
+      Tower 3 Hover: -1300453737
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

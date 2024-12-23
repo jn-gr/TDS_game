@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.PostProcessing;
 using System.Linq;
+using UnityEngine.InputSystem;
 
 public class UI : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class UI : MonoBehaviour
     private bool isPaused = false;
     private PostProcessVolume blurryCameraEffect;
     private Transform[] allUI;
+    private PlayerInput playerInput;
+    private InputAction pauseAction;
+    private bool isPauseOnCooldown = false;
 
     [Header("Canvas Game Object")]
     public GameObject canvas;
@@ -22,9 +26,9 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI enemiesLeftText;
     public TextMeshProUGUI totalKillsText;
-    public TextMeshProUGUI scoreText;
     public TextMeshProUGUI experienceText;
     public GameObject enemiesLeftIcon;
+    public TextMeshProUGUI waveCounter;
 
     [Header("Hotbar")]
     public Button startWaveButton;
@@ -38,11 +42,34 @@ public class UI : MonoBehaviour
     [Header("Pause Menu")]
     public GameObject pausePanel;
     public float pauseFadeDuration = 0.3f;
+    public float pauseCooldownDuration = 0.5f;
 
     [Header("Skill Tree")]
     public GameObject activeSkillTreePanel;
     public GameObject passiveSkillTreePanel;
     public float skillTreeFadeDuration = 0.3f;
+
+    [Header("Encyclopedia")]
+    public GameObject encyclopediaPanel;
+    public float encyclopediaFadeDuration = 0.3f;
+
+    private void Awake()
+    {
+        playerInput = Camera.main.GetComponent<PlayerInput>();
+        InputActionMap actionMap = playerInput.actions.FindActionMap("RTS Camera");
+        pauseAction = actionMap.FindAction("Pause");
+    }
+    private void OnEnable()
+    {
+        pauseAction.performed += ctx => TryTogglePause();
+        pauseAction.Enable();
+    }
+
+    void OnDisable()
+    {
+        pauseAction.performed -= ctx => TryTogglePause();
+        pauseAction.Disable();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -60,8 +87,8 @@ public class UI : MonoBehaviour
         healthText.text = (gameManager.currentHealth).ToString();
         goldText.text = (gameManager.currency).ToString();
         totalKillsText.text = (gameManager.totalKills).ToString();
-        scoreText.text = (gameManager.score).ToString();
         experienceText.text = (gameManager.experience).ToString();
+        waveCounter.text = "Wave: \n" + gameManager.waveNum;
 
         if (gameManager.waveStarted)
         {
@@ -76,12 +103,6 @@ public class UI : MonoBehaviour
         if (gameManager.currentHealth <= 0)
         {
             GameOverScreen();
-        }
-
-        // When Escape key is pressed, open pause menu
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePause();
         }
     }
 
@@ -111,18 +132,36 @@ public class UI : MonoBehaviour
         Out
     }
 
-    private IEnumerator FadeCanvasGroup(Fade fadeAction, GameObject uiPanel, float fadeDuration)
+    enum Blurry
+    {
+        Yes,
+        No
+    }
+
+    private IEnumerator FadeCanvasGroup(Fade fadeAction, GameObject uiPanel, float fadeDuration, Blurry blurryAction)
     {
         CanvasGroup canvasGroup = uiPanel.GetComponent<CanvasGroup>();
         float startAlpha;
         float endAlpha;
+
+        if (blurryAction == Blurry.Yes)
+        {
+            blurryCameraEffect.enabled = true;
+        }
+
+        if (blurryAction == Blurry.No)
+        {
+            blurryCameraEffect.enabled = false;
+        }
 
         if (fadeAction == Fade.In)
         {
             uiPanel.gameObject.SetActive(true);
             startAlpha = 0.0f;
             endAlpha = 1.0f;
-        } else { 
+        }
+        else
+        {
             startAlpha = 1.0f;
             endAlpha = 0.0f;
         }
@@ -139,9 +178,26 @@ public class UI : MonoBehaviour
 
         canvasGroup.alpha = endAlpha;
 
-        if (fadeAction == Fade.Out) { 
+        if (fadeAction == Fade.Out)
+        {
             uiPanel.gameObject.SetActive(false);
         }
+    }
+
+    private void TryTogglePause()
+    {
+        if (!isPauseOnCooldown)
+        {
+            TogglePause();
+            StartCoroutine(PauseCooldown());
+        }
+    }
+
+    private IEnumerator PauseCooldown()
+    {
+        isPauseOnCooldown = true; // Start cooldown
+        yield return new WaitForSecondsRealtime(pauseCooldownDuration); // Wait for cooldown to complete
+        isPauseOnCooldown = false; // End cooldown
     }
 
     public void TogglePause()
@@ -150,15 +206,13 @@ public class UI : MonoBehaviour
 
         if (isPaused)
         {
-            StartCoroutine(FadeCanvasGroup(Fade.In, pausePanel, pauseFadeDuration));
+            StartCoroutine(FadeCanvasGroup(Fade.In, pausePanel, pauseFadeDuration, Blurry.Yes));
             Time.timeScale = 0;
-            blurryCameraEffect.enabled = true;
         }
         else
         {
-            StartCoroutine(FadeCanvasGroup(Fade.Out, pausePanel, pauseFadeDuration));
+            StartCoroutine(FadeCanvasGroup(Fade.Out, pausePanel, pauseFadeDuration, Blurry.No));
             Time.timeScale = 1;
-            blurryCameraEffect.enabled = false;
         }
 
     }
@@ -172,25 +226,46 @@ public class UI : MonoBehaviour
             }
         }
 
-        StartCoroutine(FadeCanvasGroup(Fade.In, gameOverOverlay, gameOverFadeDuration));
+        StartCoroutine(FadeCanvasGroup(Fade.In, gameOverOverlay, gameOverFadeDuration, Blurry.Yes));
     }
 
     public void SkillTreeOpen()
     {
-        StartCoroutine(FadeCanvasGroup(Fade.In, activeSkillTreePanel, skillTreeFadeDuration));
-        blurryCameraEffect.enabled = true;
+        StartCoroutine(FadeCanvasGroup(Fade.In, activeSkillTreePanel, skillTreeFadeDuration, Blurry.Yes));
     }
 
     public void SkillTreeClose()
     {
-        StartCoroutine(FadeCanvasGroup(Fade.Out, activeSkillTreePanel, skillTreeFadeDuration));
-        StartCoroutine(FadeCanvasGroup(Fade.Out, passiveSkillTreePanel, skillTreeFadeDuration));
-        blurryCameraEffect.enabled = false;
+        StartCoroutine(FadeCanvasGroup(Fade.Out, activeSkillTreePanel, skillTreeFadeDuration, Blurry.No));
+        StartCoroutine(FadeCanvasGroup(Fade.Out, passiveSkillTreePanel, skillTreeFadeDuration, Blurry.No));
     }
 
     public void PassiveSkillTreeOpen()
     {
         CanvasGroup canvasGroup = passiveSkillTreePanel.GetComponent<CanvasGroup>();
         canvasGroup.alpha = 1f;
+    }
+
+    public void ToggleEncyclopedia()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            StartCoroutine(FadeCanvasGroup(Fade.In, encyclopediaPanel, encyclopediaFadeDuration, Blurry.Yes));
+            Time.timeScale = 0;
+        }
+        else
+        {
+            StartCoroutine(FadeCanvasGroup(Fade.Out, encyclopediaPanel, encyclopediaFadeDuration, Blurry.No));
+            Time.timeScale = 1;
+        }
+
+    }
+
+    public void RestartLevel()
+    {
+        SceneLoader.NextSceneName = "Main";
+        SceneManager.LoadScene("Loading Screen");
     }
 }
