@@ -50,8 +50,8 @@ public class Region
         return ((RegionX * Width )+ x, (RegionY * Height)+ y);
     }
 
-    public void GeneratePath()
+    public void GeneratePath(Dictionary<(int, int), Region> regionMap)
     {
-        PathGenerator.Generate(this, Width, Height);
+        PathGenerator.Generate(this,regionMap, Width, Height);
     }
 }

@@ -6,7 +6,9 @@ public class MapManager : MonoBehaviour
 {
     public Tilemap tilemap; 
     public TileBase walkableTile; 
-    public TileBase nonWalkableTile; 
+    public TileBase nonWalkableTile;
+    public TileBase startTile;
+    public TileBase endTile;
     
 
     public Vector3Int mazeOrigin = Vector3Int.zero;
@@ -19,21 +21,21 @@ public class MapManager : MonoBehaviour
 
     void Start()
     {
-        // testing 
-        CreateInitialRegion(0, 0, regionWidth, regionHeight);
-        CreateInitialRegion(1, 0, regionWidth, regionHeight);
-        CreateInitialRegion(0, 1, regionWidth, regionHeight);
-        CreateInitialRegion(-1, 0, regionWidth, regionHeight);
 
-
-    
+        // 0 = Left, 1 = Right, 2 = Bottom, 3 = Top
+        // This will be used to create start map
+        CreateEmptyRegion(0, 0, regionWidth, regionHeight);
+        CreateInitialRegion(1, 0, regionWidth, regionHeight,0);
+        CreateInitialRegion(-1, 0, regionWidth, regionHeight, 1);
+        CreateInitialRegion(0, 1, regionWidth, regionHeight, 2);
+        CreateInitialRegion(0, -1, regionWidth, regionHeight, 3);
     }
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         { 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);           
-            Plane tilemapPlane = new Plane(Vector3.up, Vector3.zero); // Adjust Vector3.up to match your tilemap's normal
+            Plane tilemapPlane = new Plane(Vector3.up, Vector3.zero); 
 
             if (tilemapPlane.Raycast(ray, out float enter))
             {
@@ -47,40 +49,67 @@ public class MapManager : MonoBehaviour
 
                 Debug.Log(cellPosition);
 
-                if (globalRegionMap.TryGetValue((regionX, regionY), out Region clickedRegion))
-                {
-                    Debug.Log($"Clicked on region at ({regionX}, {regionY})");
+                Debug.Log($"Clicked on region at ({regionX}, {regionY})");
 
-                    // this is where we expand regions
-                    
-                }
-                else
-                {
-                    Debug.LogError($"No region found at ({regionX}, {regionY})");
-                } 
-                Debug.DrawLine(ray.origin, worldPosition, Color.red, 1f);
+                ExpandRegion(regionX, regionY);
+   
             }       
         }   
     }
 
-    private void CreateInitialRegion(int regionX, int regionY, int width, int height)
+    private void CreateEmptyRegion(int regionX, int regionY, int width, int height)
     {
         Region initialRegion = new Region(regionX, regionY, width, height);
-        globalRegionMap[(regionX,regionY)] = initialRegion;
-        initialRegion.GeneratePath();
+        
         AddRegionToMap(initialRegion);
         DrawRegionOnTilemap(initialRegion);
-
-        //Debug.Log(initialRegion.startCell.X);
-        //Region newregion = ExpandRegion(initialRegion, regionX, regionY+1);
+    }
+    private void CreateInitialRegion(int regionX, int regionY, int width, int height, int startSide)
+    {
         
+        Region initialRegion = new Region(regionX, regionY, width, height);
+        CellT startCell = null;
+        int startX = 0, startY = 0;
+  
+        switch (startSide)
+        {
+            case 0: // Left
+                startX = 0;
+                startY = height / 2;
+                startCell = new CellT(startX, startY) { IsOpenLeft = true }; // Connect this cell to the right
+                break;
+            case 1: // Right
+                startX = width - 1;
+                startY = height / 2;
+                startCell = new CellT(startX, startY) { IsOpenRight = true }; // Connect this cell to the left
+                break;
+            case 2: // Bottom
+                startX = width / 2;
+                startY = 0;
+                startCell = new CellT(startX, startY) { IsOpenDown = true }; // Connect this cell to the top
+                break;
+            case 3: // Top
+                startX = width / 2;
+                startY = height - 1;
+                startCell = new CellT(startX, startY) { IsOpenUp = true }; // Connect this cell to the bottom
+                break;
+            default:
+                Debug.LogError($"Invalid startSide: {startSide}");
+                return;
+        }
 
-        // going any other direction doesnt work right now, because the endcell is acctually the start for region unlocking to left
-        // i will fix this
+        // Add the start cell to both the list and the nested array. important
+        initialRegion.startCells.Add(startCell);
+        initialRegion.Cells[startX, startY] = startCell;
+
+        // genreate the region now
+        initialRegion.GeneratePath(globalRegionMap);
+        AddRegionToMap(initialRegion);
+        DrawRegionOnTilemap(initialRegion);  
     }
 
 
-    // adds each cell of a region to the global map dictionary . IMPORTANT!!, 
+    // adds each cell of a region to the global map dictionary and adds region to globalregion map too. IMPORTANT!!, 
     private void AddRegionToMap(Region region)
     {
         for (int x = 0; x < region.Width; x++)
@@ -91,65 +120,109 @@ public class MapManager : MonoBehaviour
                 globalMap[globalCoords] = region.Cells[x, y];
             }
         }
+        globalRegionMap[(region.RegionX, region.RegionY)] = region;
     }
-    // newregion x and y will be given by calulating where the mouse clicks on the tilemap,
-    // and then with logic you can calculate which region was clicked by dividng by width and height
 
-    // this function needs to be changed, its better to not expand from a region but rather create region and then connect with adjacent.
 
-    //the coordinates are checked with neighbouring regions, and checks if they have any endcells that point towards this region
-    // if so then we create a startcell 
-    // this should also work for if many paths lead to this region.
-    // theoritcally, if 3 regions all path towards this one, it should lead all 3 paths to the only remaining region left
-    public Region ExpandRegion(int newRegionX, int newRegionY)
+    /* Expand Region is called when a region is clicked on and it is passed the region coords
+     * What it does is manages the logic between regions and how they connect to each other
+     * it checks neihbours and sees if they have any paths that lead into the one the player wants to unlock
+     * if they do then we calculate this regions startcells
+     * once the regions startcells are assigned, we send it to be have its path generated
+     * if thats succesful, we then add the region to the dictionary of cells and also regions
+     * and then draw it on the tilemap   
+     */
+    
+    public void ExpandRegion(int newRegionX, int newRegionY)
     {
+        if (globalRegionMap.ContainsKey((newRegionX, newRegionY)))
+        {
+            Debug.LogWarning($"Region at ({newRegionX}, {newRegionY}) already exists.");
+            return;
+        }
+
         Region newRegion = new Region(newRegionX, newRegionY, regionWidth, regionHeight);
-        globalRegionMap[(newRegionX,newRegionY)] = newRegion;
+        
         List<Region> neighbouringRegions = GetNeighbouringRegions(newRegion);
 
-        foreach (Region neighbour in neighbouringRegions)
+        
+        if (!(neighbouringRegions.Count > 0))
         {
-            (int x, int y) direction = (newRegionX - neighbour.RegionX, newRegionY - neighbour.RegionY);
-
-            CellT matchingEndCell = FindMatchingEndCell(neighbour, direction);
-            if (matchingEndCell == null)
-            {
-                Debug.LogError($"No matching endCell found for direction: {direction}");
-                return null;
-            }
-
-            if (direction == (1, 0)) // Right
-            {
-                newRegion.startCells.Add(new CellT(matchingEndCell.X + 1, matchingEndCell.Y));
-                matchingEndCell.IsOpenRight = true;
-                newRegion.startCells[^1].IsOpenLeft = true; 
-            }
-            else if (direction == (-1, 0)) // Left
-            {
-                newRegion.startCells.Add(new CellT(matchingEndCell.X - 1, matchingEndCell.Y));
-                matchingEndCell.IsOpenLeft = true;
-                newRegion.startCells[^1].IsOpenRight = true;
-            }
-            else if (direction == (0, 1)) // Up
-            {
-                newRegion.startCells.Add(new CellT(matchingEndCell.X, matchingEndCell.Y + 1));
-                matchingEndCell.IsOpenUp = true;
-                newRegion.startCells[^1].IsOpenDown = true; 
-            }
-            else if (direction == (0, -1)) // Down
-            {
-                newRegion.startCells.Add(new CellT(matchingEndCell.X, matchingEndCell.Y - 1));
-                matchingEndCell.IsOpenDown = true;
-                newRegion.startCells[^1].IsOpenUp = true;
-            }
-
-
-
+            Debug.Log("you clicked on an unlockable region");
+            return;
         }
-        newRegion.GeneratePath();
+        else if (neighbouringRegions.Count == 4)
+        {
+            Debug.Log("you landlocked cant open this or this is already unlocked");
+            return;
+        }
+        bool foundMatchingEndCell = false;
+        
+        foreach (Region neighbour in neighbouringRegions)
+        { 
+            
+            (int x, int y) direction = (neighbour.RegionX - newRegionX, neighbour.RegionY - newRegionY);
+
+            List<CellT> matchingEndCells = FindEndCellFromNeighbour(neighbour, direction);
+
+            if (matchingEndCells.Count == 0)
+            {    
+                // only happens when no paths lead to this region so we cant have this unlockable
+                continue;
+            }
+
+            foundMatchingEndCell = true;
+            
+            foreach (CellT matchingEndCell in matchingEndCells)
+            {
+                CellT newStartCell = null;
+
+                if (direction == (1, 0)) // Right
+                {
+                    newStartCell = new CellT(regionWidth - 1, matchingEndCell.Y);
+                    matchingEndCell.IsOpenLeft = true;
+                    newStartCell.IsOpenRight = true;
+                }
+                else if (direction == (-1, 0)) // Left
+                {
+                    newStartCell = new CellT(0, matchingEndCell.Y);
+                    matchingEndCell.IsOpenRight = true;
+                    newStartCell.IsOpenLeft = true;
+                }
+                else if (direction == (0, 1)) // Up
+                {
+                    newStartCell = new CellT(matchingEndCell.X, regionHeight - 1);
+                    matchingEndCell.IsOpenDown = true;
+                    newStartCell.IsOpenUp = true;
+                }
+                else if (direction == (0, -1)) // Down
+                {
+                    newStartCell = new CellT(matchingEndCell.X, 0);
+                    matchingEndCell.IsOpenUp = true;
+                    newStartCell.IsOpenDown = true;
+                }
+
+                if (newStartCell != null)
+                {
+                    newRegion.startCells.Add(newStartCell);
+
+                    // Assign to Cells array
+                    newRegion.Cells[newStartCell.X, newStartCell.Y] = newStartCell;
+
+                    Debug.Log($"Added Start Cell: X = {newStartCell.X}, Y = {newStartCell.Y}");
+                }
+
+            }
+        }
+
+        if (!foundMatchingEndCell)
+        {
+            Debug.LogError($"No paths direct to this region, so we cant form a region here");
+            return;
+        }
+        newRegion.GeneratePath(globalRegionMap);
         AddRegionToMap(newRegion);
-        DrawRegionOnTilemap(newRegion);
-        return newRegion;
+        DrawRegionOnTilemap(newRegion);        
     }
 
 
@@ -157,7 +230,6 @@ public class MapManager : MonoBehaviour
     {
         List<Region> neighbours = new List<Region>();
 
-        // Define offsets for adjacent regions (left, right, top, bottom)
         (int x, int y)[] offsets = new (int, int)[]
         {
         (-1, 0), // Left
@@ -168,7 +240,7 @@ public class MapManager : MonoBehaviour
 
         foreach (var (dx, dy) in offsets)
         {
-            // Calculate neighbor's coordinates
+            // get neihbour coords
             (int neighbourX, int neighbourY) = (region.RegionX + dx, region.RegionY + dy);
 
             // Check if the neighbor exists in the dictionary
@@ -180,29 +252,47 @@ public class MapManager : MonoBehaviour
 
         return neighbours;
     }
-    private CellT FindMatchingEndCell(Region region, (int x, int y) direction)
+
+    /// <summary>
+    /// It finds the neighbouring end cell that go into this region you want to unlock
+    /// </summary>
+    /// <param name="neighbourRegion"></param>
+    /// <param name="direction"> The direction from the region you want to unlock , to its neighbouring regions</param>
+    /// <returns></returns>
+    private List<CellT> FindEndCellFromNeighbour(Region neighbourRegion, (int x, int y) direction)
     {
+        List<CellT> matchingEndCells = new List<CellT>();
+
         //Debug.Log(region.endCells);
-        foreach (var endCell in region.endCells)
+        foreach (var endCell in neighbourRegion.endCells)
         {
-            if (direction == (1, 0) && !endCell.IsOpenRight) // Right
+            //define local cell coords in this region
+            int regionLeft = 0;
+            int regionRight = regionWidth - 1;
+            int regionBottom = 0;
+            int regionTop = regionHeight - 1;
+ 
+
+            // Check if the endCell is adjacent to the specified boundary
+            if (direction == (1, 0) && endCell.X == regionLeft && !endCell.IsOpenLeft) // Right
             {
-                return endCell;
+                matchingEndCells.Add(endCell);
             }
-            else if (direction == (-1, 0) && !endCell.IsOpenLeft) // Left
+            else if (direction == (-1, 0) && endCell.X == regionRight && !endCell.IsOpenRight) // Left
             {
-                return endCell;
+                matchingEndCells.Add(endCell);
             }
-            else if (direction == (0, 1) && !endCell.IsOpenUp) // Up
+            else if (direction == (0, 1) && endCell.Y == regionBottom && !endCell.IsOpenDown) // Up
             {
-                return endCell;
+                
+                matchingEndCells.Add(endCell);
             }
-            else if (direction == (0, -1) && !endCell.IsOpenDown) // Down
+            else if (direction == (0, -1) && endCell.Y == regionTop && !endCell.IsOpenUp) // Down
             {
-                return endCell;
+                matchingEndCells.Add(endCell);
             }
         }
-        return null; // No matching endCell found
+        return matchingEndCells; 
     }
 
 
@@ -214,13 +304,27 @@ public class MapManager : MonoBehaviour
             {
                 CellT cell = region.Cells[x, y];
                 (int globalX, int globalY) = region.LocalToGlobal(x, y);
-           
-                Vector3Int cellPosition = mazeOrigin + new Vector3Int(globalX, globalY, 0);               
-                TileBase tileToUse = cell.IsWalkable ? walkableTile : nonWalkableTile;              
+
+                Vector3Int cellPosition = mazeOrigin + new Vector3Int(globalX, globalY, 0);
+                TileBase tileToUse;
+               
+                if (region.startCells.Contains(cell))
+                {
+                    tileToUse = startTile; 
+                }
+                else if (region.endCells.Contains(cell))
+                {
+                    tileToUse = endTile; 
+                }
+                else
+                {
+                    tileToUse = cell.IsWalkable ? walkableTile : nonWalkableTile;
+                }
                 tilemap.SetTile(cellPosition, tileToUse);
             }
         }
     }
+
     void OnDrawGizmos()
     {
         Vector3 mousePosition = Input.mousePosition;

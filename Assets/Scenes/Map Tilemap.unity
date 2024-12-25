@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 1798261928}
   - component: {fileID: 1798261927}
   - component: {fileID: 1798261926}
+  - component: {fileID: 1798261929}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -316,11 +317,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: -15.8
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15.8
+  orthographic size: 13.28
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -345,12 +346,39 @@ Transform:
   m_GameObject: {fileID: 1798261925}
   serializedVersion: 2
   m_LocalRotation: {x: 0.27781588, y: 0.36497167, z: -0.1150751, w: 0.8811196}
-  m_LocalPosition: {x: 0.11, y: 1, z: -0.07}
+  m_LocalPosition: {x: 8.3, y: 1, z: 1.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 35, y: 45, z: 0}
+--- !u!114 &1798261929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798261925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 768e3eb706002e14faa199c2c5826737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyboardOnly: 1
+  ScreenEdgeBorderThickness: 5
+  RTSMode: 1
+  FlyCameraMode: 0
+  minPanSpeed: 11.05
+  maxPanSpeed: 15.92
+  secToMaxSpeed: 0.99
+  zoomSpeed: 2.74
+  enableMovementLimits: 0
+  heightLimit: {x: 0, y: 0}
+  lenghtLimit: {x: 0, y: 0}
+  widthLimit: {x: 0, y: 0}
+  zoomLimit: {x: 14, y: 56}
+  rotationEnabled: 0
+  rotateSpeed: 0
 --- !u!1 &1885721157
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,6 +411,8 @@ MonoBehaviour:
   tilemap: {fileID: 1988486861}
   walkableTile: {fileID: 11400000, guid: d8de9a572e7331845baa14655ccc723f, type: 2}
   nonWalkableTile: {fileID: 11400000, guid: 8ea8bc23267a5944bb796dd2a2ebfa08, type: 2}
+  startTile: {fileID: 11400000, guid: d8de9a572e7331845baa14655ccc723f, type: 2}
+  endTile: {fileID: 11400000, guid: d8de9a572e7331845baa14655ccc723f, type: 2}
   mazeOrigin: {x: 0, y: 0, z: 0}
   regionWidth: 10
   regionHeight: 10
