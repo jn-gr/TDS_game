@@ -18,7 +18,7 @@ public static class PathGenerator
     // When 3 or more paths lead to a region. rather than trying to generate a path. I have done it so , the paths all merge into one cell. then that singular path paths off to a random direction
     
 
-    public static void Generate(Region region, Dictionary<(int, int), Region> regionMap, int width, int height)
+    public static void Generate(Region region, Dictionary<(int, int), Region> regionMap, Dictionary<(int, int), CellT> globalMap, int width, int height)
     {
         System.Random rand = new System.Random();
         bool pathGenerated = false;
@@ -71,10 +71,10 @@ public static class PathGenerator
                         {
                             var candidates = new List<(int dx, int dy)>();
                             // these are possible directions
-                            AddCandidate(region.Cells, candidates, x, y, 1, 0, width, height); // Right
-                            AddCandidate(region.Cells, candidates, x, y, -1, 0, width, height); // Left
-                            AddCandidate(region.Cells, candidates, x, y, 0, -1, width, height); // Down
-                            AddCandidate(region.Cells, candidates, x, y, 0, 1, width, height); // Up
+                            AddCandidate(region,globalMap, candidates, x, y, 1, 0, width, height); // Right
+                            AddCandidate(region, globalMap, candidates, x, y, -1, 0, width, height); // Left
+                            AddCandidate(region, globalMap, candidates, x, y, 0, -1, width, height); // Down
+                            AddCandidate(region, globalMap, candidates, x, y, 0, 1, width, height); // Up
 
                             if (IsEndReached(headCell, endSide, width, height))
                             {
@@ -311,7 +311,7 @@ public static class PathGenerator
         }
     }
 
-    private static void AddCandidate(CellT[,] cells, List<(int dx, int dy)> candidates, int x, int y, int dx, int dy, int width, int height)
+    private static void AddCandidate(Region region, Dictionary<(int, int), CellT> globalMap, List<(int dx, int dy)> candidates, int x, int y, int dx, int dy, int width, int height)
     {
         int newX = x + dx;
         int newY = y + dy;
@@ -319,12 +319,12 @@ public static class PathGenerator
         if (newX >= 0 && newX < width && newY >= 0 && newY < height)
         {
             //UnityEngine.Debug.Log((newX, ",",  newY, "is a candidate"));
-            CellT target = cells[newX, newY];
+            CellT target = region.Cells[newX, newY];
             // Check that the target cell is not already walkable
             if (!target.IsWalkable)
             {
                 // Ensure the target cell has unvisited neighbors to avoid dead ends and loops
-                if (HasUnvisitedNeighbor(cells, newX, newY, width, height))
+                if (HasUnvisitedNeighbor(region,globalMap, newX, newY, width, height))
                 {
                     candidates.Add((dx, dy));
                 }
@@ -332,32 +332,42 @@ public static class PathGenerator
         }
     }
 
-    private static bool HasUnvisitedNeighbor(CellT[,] cells, int x, int y, int width, int height)
+    private static bool HasUnvisitedNeighbor(Region region, Dictionary<(int, int), CellT> globalMap, int x, int y, int width, int height)
     {
-        int[] dx = { 1, -1, 0, 0 };
-        int[] dy = { 0, 0, 1, -1 };
-        int numberOfWalkableNeighbour = 0; 
+        int[] dx = { 1, -1, 0, 0, 1, 1, -1, -1 };
+        int[] dy = { 0, 0, 1, -1, 1, -1, 1, -1 };
+        int numberOfWalkableNeighbour = 0;
 
-        //UnityEngine.Debug.Log((x, ",", y, "We are checking if this cell now has neighbours"));
+        // Get global coordinates for the current cell
+        (int globalX, int globalY) = region.LocalToGlobal(x, y);
 
         for (int i = 0; i < dx.Length; i++)
         {
             int nx = x + dx[i];
             int ny = y + dy[i];
-            if (nx >= 0 && nx < width && ny >= 0 && ny < height && cells[nx, ny].IsWalkable)
+            int globalnx = globalX + dx[i];
+            int globalny = globalY + dy[i];
+
+
+            //Ensure the local coordinates are within bounds
+            if (nx >= 0 && nx < width && ny >= 0 && ny < height)
             {
-                //return true;
-                //UnityEngine.Debug.Log((nx, ",", ny, "is a neighbour "));
-                numberOfWalkableNeighbour++;
+                if (region.Cells[nx, ny].IsWalkable) numberOfWalkableNeighbour++;
+
+                // Check if the neighbor exists in the global map and is walkable
+
+            }
+            else
+            {
+                if (globalMap.TryGetValue((globalnx, globalny), out CellT neighborCell) && neighborCell.IsWalkable)
+                {
+                    numberOfWalkableNeighbour++;
+                }
             }
         }
-        // if the number of neighbours is greater than 1, we dont count it as a candidate
-        // the reason we do 1 is becuase, one of the neighbour will obviously be one that came from the previous cell so we dont regard that as a neighbour
-        if (numberOfWalkableNeighbour > 1) 
-        {
-            return false;
-        }
-        return true;
+
+        // If the number of neighbors is greater than 2, exclude as a candidate
+        return numberOfWalkableNeighbour <= 2;
     }
 
     private static void CarvePassage(CellT from, CellT to)

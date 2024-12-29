@@ -12,6 +12,7 @@ public class MapManager : MonoBehaviour
     public TileBase endTile;
 
     public GameObject spawnerPrefab;
+    public GameObject mainTowerPrefab;
     
 
     public Vector3Int mazeOrigin = Vector3Int.zero;
@@ -64,7 +65,15 @@ public class MapManager : MonoBehaviour
     private void CreateEmptyRegion(int regionX, int regionY, int width, int height)
     {
         Region initialRegion = new Region(regionX, regionY, width, height);
-        
+
+        Vector2Int centerCell = new Vector2Int(regionWidth / 2, regionHeight / 2);
+
+        Vector2Int globalCenter = new Vector2Int(centerCell.x, centerCell.y); // For region (0,0), no offset
+        Vector3Int globalTilemapPosition = new Vector3Int(globalCenter.x, globalCenter.y, 0);
+        Vector3 worldPosition = tilemap.CellToWorld(globalTilemapPosition);
+        GameObject mainTower = Instantiate(mainTowerPrefab, worldPosition, Quaternion.identity);
+
+
         AddRegionToMap(initialRegion);
         DrawRegionOnTilemap(initialRegion);
     }
@@ -107,7 +116,7 @@ public class MapManager : MonoBehaviour
         initialRegion.Cells[startX, startY] = startCell;
 
         // genreate the region now
-        initialRegion.GeneratePath(globalRegionMap);
+        initialRegion.GeneratePath(globalRegionMap,globalMap);
         AddRegionToMap(initialRegion);
         DrawRegionOnTilemap(initialRegion);
         AddRegionSpawners(initialRegion);
@@ -303,7 +312,7 @@ public class MapManager : MonoBehaviour
             return;
         }
         RemoveSpawnersInExpandedRegion(newRegion);
-        newRegion.GeneratePath(globalRegionMap);
+        newRegion.GeneratePath(globalRegionMap, globalMap);
         
         AddRegionToMap(newRegion);
         DrawRegionOnTilemap(newRegion);  

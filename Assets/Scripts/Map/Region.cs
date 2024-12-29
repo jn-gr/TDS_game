@@ -54,9 +54,9 @@ public class Region
         return ((RegionX * Width )+ x, (RegionY * Height)+ y);
     }
 
-    public void GeneratePath(Dictionary<(int, int), Region> regionMap)
+    public void GeneratePath(Dictionary<(int, int), Region> regionMap, Dictionary<(int, int), CellT> globalMap)
     {
-        PathGenerator.Generate(this,regionMap, Width, Height);
+        PathGenerator.Generate(this,regionMap, globalMap, Width, Height);
     }
 
     

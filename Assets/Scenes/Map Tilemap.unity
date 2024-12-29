@@ -224,6 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1389567575}
   - component: {fileID: 1389567576}
+  - component: {fileID: 1389567577}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -259,6 +260,29 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 1
+--- !u!114 &1389567577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389567574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be07e5b55acc53e48bd7507d8b90b967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridLayout: {fileID: 0}
+  MainTilemap: {fileID: 0}
+  whiteTile: {fileID: 11400000, guid: 90b2f6a5d7b53834d8caa553e8d8f424, type: 2}
+  layersToHit:
+    serializedVersion: 2
+    m_Bits: 0
+  NothingObject: {fileID: 0}
+  House_01: {fileID: 0}
+  Castle: {fileID: 0}
+  gameManager: {fileID: 0}
+  objectToPlace: {fileID: 0}
 --- !u!1 &1798261925
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,9 +438,10 @@ MonoBehaviour:
   startTile: {fileID: 11400000, guid: d8de9a572e7331845baa14655ccc723f, type: 2}
   endTile: {fileID: 11400000, guid: d8de9a572e7331845baa14655ccc723f, type: 2}
   spawnerPrefab: {fileID: 8829729180205213199, guid: b37a71b8ac8badc44bf47a8d7ea92391, type: 3}
+  mainTowerPrefab: {fileID: 8772523874860222815, guid: aae719d815927e24db5ca60ba1a713fe, type: 3}
   mazeOrigin: {x: 0, y: 0, z: 0}
-  regionWidth: 10
-  regionHeight: 10
+  regionWidth: 11
+  regionHeight: 11
 --- !u!4 &1885721159
 Transform:
   m_ObjectHideFlags: 0
