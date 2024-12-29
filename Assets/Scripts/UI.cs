@@ -225,7 +225,7 @@ public class UI : MonoBehaviour
                 transform.gameObject.SetActive(false);
             }
         }
-
+        //Play game over sound here
         StartCoroutine(FadeCanvasGroup(Fade.In, gameOverOverlay, gameOverFadeDuration, Blurry.Yes));
     }
 
