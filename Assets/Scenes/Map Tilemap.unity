@@ -317,7 +317,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -15.8
+  near clip plane: -37.74
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -413,6 +413,7 @@ MonoBehaviour:
   nonWalkableTile: {fileID: 11400000, guid: 8ea8bc23267a5944bb796dd2a2ebfa08, type: 2}
   startTile: {fileID: 11400000, guid: d8de9a572e7331845baa14655ccc723f, type: 2}
   endTile: {fileID: 11400000, guid: d8de9a572e7331845baa14655ccc723f, type: 2}
+  spawnerPrefab: {fileID: 8829729180205213199, guid: b37a71b8ac8badc44bf47a8d7ea92391, type: 3}
   mazeOrigin: {x: 0, y: 0, z: 0}
   regionWidth: 10
   regionHeight: 10

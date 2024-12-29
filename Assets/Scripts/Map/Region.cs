@@ -13,7 +13,11 @@ public class Region
     public int RegionX { get; private set; }
     public int RegionY { get; private set; }
 
+
+    // local coords within region
     public List<CellT> startCells { get;  set; } = new List<CellT>();
+
+    // local coords within region
     public List<CellT> endCells { get; set; } = new List<CellT>();  
     
 
@@ -54,4 +58,6 @@ public class Region
     {
         PathGenerator.Generate(this,regionMap, Width, Height);
     }
+
+    
 }

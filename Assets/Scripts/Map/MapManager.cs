@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class MapManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class MapManager : MonoBehaviour
     public TileBase nonWalkableTile;
     public TileBase startTile;
     public TileBase endTile;
+
+    public GameObject spawnerPrefab;
     
 
     public Vector3Int mazeOrigin = Vector3Int.zero;
@@ -18,6 +21,7 @@ public class MapManager : MonoBehaviour
 
     private Dictionary<(int, int), CellT> globalMap = new Dictionary<(int, int), CellT>();
     private Dictionary<(int, int), Region> globalRegionMap = new Dictionary<(int, int), Region>();
+    private Dictionary<(int, int), GameObject> spawnerPositions = new Dictionary<(int, int), GameObject>();
 
     void Start()
     {
@@ -105,7 +109,8 @@ public class MapManager : MonoBehaviour
         // genreate the region now
         initialRegion.GeneratePath(globalRegionMap);
         AddRegionToMap(initialRegion);
-        DrawRegionOnTilemap(initialRegion);  
+        DrawRegionOnTilemap(initialRegion);
+        AddRegionSpawners(initialRegion);
     }
 
 
@@ -123,6 +128,83 @@ public class MapManager : MonoBehaviour
         globalRegionMap[(region.RegionX, region.RegionY)] = region;
     }
 
+    public void AddRegionSpawners(Region region)
+    {
+        Dictionary<(int x, int y), GameObject> spawners = new Dictionary<(int x, int y), GameObject>();
+
+        // Iterate through end cells to place spawners just outside the region
+        foreach (CellT endCell in region.endCells)
+        {
+            Vector2Int spawnerPosition = Vector2Int.zero;
+
+            // Calculate the spawner position based on the end cell's direction
+            if (endCell.X == 0) // Left edge
+            {
+                spawnerPosition = new Vector2Int((region.RegionX * region.Width) -1, endCell.Y + (region.RegionY * region.Height));
+            }
+            else if (endCell.X == region.Width - 1) // Right edge
+            {
+                spawnerPosition = new Vector2Int(((region.RegionX +1) * region.Width), endCell.Y + (region.RegionY * region.Height));
+            }
+            else if (endCell.Y == 0) // Bottom edge
+            {
+                spawnerPosition = new Vector2Int(endCell.X + (region.RegionX * region.Width), (region.RegionY* region.Height)-1);
+            }
+            else if (endCell.Y == region.Height - 1) // Top edge
+            {
+                spawnerPosition = new Vector2Int(endCell.X + (region.RegionX * region.Width), ((region.RegionY + 1) * region.Height));
+            }
+
+            
+
+            // Instantiate the spawner GameObject (you can handle pooling here if needed)
+            GameObject spawner = GameObject.Instantiate(spawnerPrefab, tilemap.CellToWorld(new Vector3Int (spawnerPosition.x,spawnerPosition.y,0)), Quaternion.identity);
+
+            // Add the spawner to the dictionary
+            spawnerPositions[(spawnerPosition.x, spawnerPosition.y)] = spawner;
+            
+        }
+
+       
+    }
+
+    
+    void RemoveSpawnersInExpandedRegion(Region region)
+    {
+        
+        List<(int x,int y)> spawnersToRemove = new List<(int x, int y)>();
+
+        int regionLeft = (region.RegionX * region.Width) -1;
+        int regionRight = (region.RegionX + 1) * region.Width;
+        int regionBottom = region.RegionY * region.Height -1;
+        int regionTop = (region.RegionY + 1) * region.Height;
+
+        // when iterating dictionaries we can modify so thats why we make two.
+        foreach (var spawnerEntry in spawnerPositions)
+        {
+            (int x, int y) = spawnerEntry.Key;
+
+            if (x >= regionLeft && x <= regionRight && y >= regionBottom && y <= regionTop)
+            {
+                Debug.Log($"Spawner at ({x}, {y}) marked for removal");
+                spawnersToRemove.Add((x, y));
+            }
+            else
+            {
+                Debug.Log($"Spawner at ({x}, {y}) is outside expanded region borders");
+            }
+
+
+        }
+
+        foreach (var spawnerPosition in spawnersToRemove)
+        {
+            GameObject spawner = spawnerPositions[spawnerPosition];
+            Destroy(spawner); // Remove from the scene
+            spawnerPositions.Remove(spawnerPosition); // Remove from dictionary
+        }
+    }
+
 
     /* Expand Region is called when a region is clicked on and it is passed the region coords
      * What it does is manages the logic between regions and how they connect to each other
@@ -132,7 +214,7 @@ public class MapManager : MonoBehaviour
      * if thats succesful, we then add the region to the dictionary of cells and also regions
      * and then draw it on the tilemap   
      */
-    
+
     public void ExpandRegion(int newRegionX, int newRegionY)
     {
         if (globalRegionMap.ContainsKey((newRegionX, newRegionY)))
@@ -220,9 +302,12 @@ public class MapManager : MonoBehaviour
             Debug.LogError($"No paths direct to this region, so we cant form a region here");
             return;
         }
+        RemoveSpawnersInExpandedRegion(newRegion);
         newRegion.GeneratePath(globalRegionMap);
+        
         AddRegionToMap(newRegion);
-        DrawRegionOnTilemap(newRegion);        
+        DrawRegionOnTilemap(newRegion);  
+        AddRegionSpawners(newRegion);
     }
 
 
