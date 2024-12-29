@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NeutralBoss : NeutralEnemy
+public class FireBoss : FireEnemy
 {
     public override void Start()
     {

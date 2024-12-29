@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NeutralBoss : NeutralEnemy
+public class AirBoss : AirEnemy
 {
     public override void Start()
     {
@@ -12,6 +12,5 @@ public class NeutralBoss : NeutralEnemy
         damage *= 3;
         health *= 10;
         speed *= 0.8f;
-
     }
 }
