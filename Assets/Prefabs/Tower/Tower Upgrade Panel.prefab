@@ -1428,7 +1428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4034550928534705468
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1461,11 +1461,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd084455d6e97e43a0d39cfe37cb05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerManager: {fileID: 0}
+  upgradeButton: {fileID: 8379160706239084345}
   elementButtons:
   - {fileID: 7554917519173891001}
   - {fileID: 5018547654179452266}
   - {fileID: 7465132938736202093}
-  upgradeButton: {fileID: 8379160706239084345}
+  activeTower: {fileID: 0}
 --- !u!1 &8905174456779767810
 GameObject:
   m_ObjectHideFlags: 0
