@@ -12,7 +12,7 @@ public class CellT
     public bool IsOpenLeft { get; set; }
     public bool IsOpenRight { get; set; }
 
-    public PlaceableObject objectPlacedOnCell;
+    public GameObject objectPlacedOnCell;
 
     public CellT(int x, int y)
     {

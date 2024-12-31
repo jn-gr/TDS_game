@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 
 
@@ -14,8 +15,9 @@ public enum Element
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
     public MainTower mainTower;
-    public Spawner[] spawners;
+    //public Spawner[] spawners;
 
     public float currentHealth;
     public int currency;
@@ -43,7 +45,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        spawners = FindObjectsByType<Spawner>(FindObjectsSortMode.None);
+        Instance = this;
+        //spawners = FindObjectsByType<Spawner>(FindObjectsSortMode.None);
         currentHealth = mainTower.GetHealth();
         currency = 1000;
         waveStarted = false;
@@ -84,10 +87,15 @@ public class GameManager : MonoBehaviour
         enemiesSpawned = 0;
         enemiesAlive = totalEnemiesToSpawn;
 
-        foreach (Spawner spawner in spawners)
+        foreach (KeyValuePair<(int x, int y), Spawner> spawner in MapManager.Instance.spawnerPositions)
         {
-            spawner.StartSpawning();
+            spawner.Value.StartSpawning();
+            
         }
+        //foreach (Spawner spawner in spawners)
+        //{
+        //    spawner.StartSpawning();
+        //}
 
         Debug.Log($"Wave {waveNum} started: Spawning {totalEnemiesToSpawn} enemies.");
 
@@ -97,11 +105,12 @@ public class GameManager : MonoBehaviour
     public void EndWave()
     {
         waveStarted = false;
-        
 
-        foreach (Spawner spawner in spawners)
+
+        foreach (KeyValuePair<(int x, int y), Spawner> spawner in MapManager.Instance.spawnerPositions)
         {
-            spawner.StopSpawning();
+            spawner.Value.StopSpawning();
+            
         }
         Debug.Log($"Wave {waveNum} ended: Total Kills = {totalKills}, Score = {score}, Currency = {currency}, Experience = {experience}.");
     }

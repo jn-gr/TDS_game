@@ -1,17 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
 public class MapManager : MonoBehaviour
 {
+    public static MapManager Instance;
+
     public Tilemap tilemap; 
     public TileBase walkableTile; 
     public TileBase nonWalkableTile;
-    
 
+    
     public GameObject spawnerPrefab;
-    public GameObject mainTowerPrefab;
+    
     
 
     public Vector3Int mazeOrigin = Vector3Int.zero;
@@ -22,11 +25,12 @@ public class MapManager : MonoBehaviour
     [HideInInspector]
     public Dictionary<(int, int), CellT> globalMap = new Dictionary<(int, int), CellT>();
     private Dictionary<(int, int), Region> globalRegionMap = new Dictionary<(int, int), Region>();
-    private Dictionary<(int, int), GameObject> spawnerPositions = new Dictionary<(int, int), GameObject>();
+    [HideInInspector]
+    public Dictionary<(int, int), Spawner> spawnerPositions = new Dictionary<(int, int), Spawner>();
 
     void Start()
     {
-
+        Instance = this;
         // 0 = Left, 1 = Right, 2 = Bottom, 3 = Top
         // This will be used to create start map
         CreateEmptyRegion(0, 0, regionWidth, regionHeight);
@@ -37,6 +41,11 @@ public class MapManager : MonoBehaviour
     }
     void Update()
     {
+
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return; 
+        }
         if (Input.GetMouseButtonDown(0))
         { 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);           
@@ -69,9 +78,8 @@ public class MapManager : MonoBehaviour
         Vector2Int globalCenter = new Vector2Int(centerCell.x, centerCell.y); // For region (0,0), no offset
         Vector3Int globalTilemapPosition = new Vector3Int(globalCenter.x, globalCenter.y, 0);
         Vector3 worldPosition = tilemap.CellToWorld(globalTilemapPosition);
-        GameObject mainTower = Instantiate(mainTowerPrefab, worldPosition, Quaternion.identity);
-
-
+        GameManager.Instance.mainTower.transform.position = worldPosition;
+        
         AddRegionToMap(initialRegion);
         DrawRegionOnTilemap(initialRegion);
     }
@@ -165,7 +173,7 @@ public class MapManager : MonoBehaviour
             
 
             // Instantiate the spawner GameObject (you can handle pooling here if needed)
-            GameObject spawner = GameObject.Instantiate(spawnerPrefab, tilemap.CellToWorld(new Vector3Int (spawnerPosition.x,spawnerPosition.y,0)), Quaternion.identity);
+            Spawner spawner = GameObject.Instantiate(spawnerPrefab, tilemap.CellToWorld(new Vector3Int (spawnerPosition.x,spawnerPosition.y,0)), Quaternion.identity).GetComponent<Spawner>();
 
             // Add the spawner to the dictionary
             spawnerPositions[(spawnerPosition.x, spawnerPosition.y)] = spawner;
@@ -187,6 +195,7 @@ public class MapManager : MonoBehaviour
         int regionTop = (region.RegionY + 1) * region.Height;
 
         // when iterating dictionaries we can modify so thats why we make two.
+        // we add all spanwers we want to remove in one dictionary, then iterate through main one and remove them all
         foreach (var spawnerEntry in spawnerPositions)
         {
             (int x, int y) = spawnerEntry.Key;
@@ -206,8 +215,8 @@ public class MapManager : MonoBehaviour
 
         foreach (var spawnerPosition in spawnersToRemove)
         {
-            GameObject spawner = spawnerPositions[spawnerPosition];
-            Destroy(spawner); // Remove from the scene
+            Spawner spawner = spawnerPositions[spawnerPosition];
+            Destroy(spawner.gameObject); // Remove from the scene
             spawnerPositions.Remove(spawnerPosition); // Remove from dictionary
         }
     }

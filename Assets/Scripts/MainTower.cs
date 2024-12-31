@@ -3,13 +3,13 @@ using UnityEngine;
 public class MainTower : MonoBehaviour
 {
     public float currentHealth;
-    public GameManager gameManager;
+    //public GameManager gameManager;
 
     // Function to take away health from currentHealth
     public void TakeDamage(float incomingDamage)
     {
         currentHealth -= incomingDamage;
-        gameManager.UpdateHealth();
+        GameManager.Instance.UpdateHealth();
 
         if (currentHealth <= 0)
         {
@@ -38,7 +38,7 @@ public class MainTower : MonoBehaviour
                 Destroy(other.gameObject);
 
                 // Update the game manager's enemy count
-                gameManager.enemiesAlive--;
+                GameManager.Instance.enemiesAlive--;
             }
             else
             {
