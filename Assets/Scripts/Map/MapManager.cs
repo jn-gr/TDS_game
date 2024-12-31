@@ -8,8 +8,7 @@ public class MapManager : MonoBehaviour
     public Tilemap tilemap; 
     public TileBase walkableTile; 
     public TileBase nonWalkableTile;
-    public TileBase startTile;
-    public TileBase endTile;
+    
 
     public GameObject spawnerPrefab;
     public GameObject mainTowerPrefab;
@@ -20,7 +19,8 @@ public class MapManager : MonoBehaviour
     public int regionWidth = 10;
     public int regionHeight = 10;
 
-    private Dictionary<(int, int), CellT> globalMap = new Dictionary<(int, int), CellT>();
+    [HideInInspector]
+    public Dictionary<(int, int), CellT> globalMap = new Dictionary<(int, int), CellT>();
     private Dictionary<(int, int), Region> globalRegionMap = new Dictionary<(int, int), Region>();
     private Dictionary<(int, int), GameObject> spawnerPositions = new Dictionary<(int, int), GameObject>();
 
@@ -52,9 +52,7 @@ public class MapManager : MonoBehaviour
                     Mathf.FloorToInt((float)cellPosition.y / regionHeight)
                 );
 
-                Debug.Log(cellPosition);
-
-                Debug.Log($"Clicked on region at ({regionX}, {regionY})");
+                
 
                 ExpandRegion(regionX, regionY);
    
@@ -195,12 +193,12 @@ public class MapManager : MonoBehaviour
 
             if (x >= regionLeft && x <= regionRight && y >= regionBottom && y <= regionTop)
             {
-                Debug.Log($"Spawner at ({x}, {y}) marked for removal");
+                
                 spawnersToRemove.Add((x, y));
             }
             else
             {
-                Debug.Log($"Spawner at ({x}, {y}) is outside expanded region borders");
+                
             }
 
 
@@ -300,7 +298,7 @@ public class MapManager : MonoBehaviour
                     // Assign to Cells array
                     newRegion.Cells[newStartCell.X, newStartCell.Y] = newStartCell;
 
-                    Debug.Log($"Added Start Cell: X = {newStartCell.X}, Y = {newStartCell.Y}");
+                    
                 }
 
             }
@@ -402,18 +400,9 @@ public class MapManager : MonoBehaviour
                 Vector3Int cellPosition = mazeOrigin + new Vector3Int(globalX, globalY, 0);
                 TileBase tileToUse;
                
-                if (region.startCells.Contains(cell))
-                {
-                    tileToUse = startTile; 
-                }
-                else if (region.endCells.Contains(cell))
-                {
-                    tileToUse = endTile; 
-                }
-                else
-                {
-                    tileToUse = cell.IsWalkable ? walkableTile : nonWalkableTile;
-                }
+                
+                tileToUse = cell.IsWalkable ? walkableTile : nonWalkableTile;
+                
                 tilemap.SetTile(cellPosition, tileToUse);
             }
         }

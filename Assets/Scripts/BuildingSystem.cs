@@ -1,34 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class BuildingSystem : MonoBehaviour
 {
     public static BuildingSystem current;
 
-    public GridLayout gridLayout;
-    private Grid grid;
-    [SerializeField] private Tilemap MainTilemap;
-    [SerializeField] private TileBase whiteTile;
+    //public GridLayout gridLayout;
+    //private Grid grid;
+    //[SerializeField] private Tilemap MainTilemap;
+    //[SerializeField] private TileBase whiteTile;
 
-    public LayerMask layersToHit;
-    //Place Prefabs Here
-    public GameObject NothingObject;
-    public GameObject House_01;
-    public GameObject Castle;
+    //public LayerMask layersToHit;
+    ////Place Prefabs Here
+    //public GameObject NothingObject;
+    //public GameObject House_01;
+    //public GameObject Castle;
+    private MapManager mapManager;
     public GameManager gameManager;
 
     public PlaceableObject objectToPlace;
 
+    private Tilemap grid;
     #region Unity methods
 
     private void Awake()
     {
+        mapManager = GetComponent<MapManager>();
         gameManager = FindFirstObjectByType<GameManager>();
         current = this;
-        grid = gridLayout.gameObject.GetComponent<Grid>();
+        grid = mapManager.tilemap;
     }
 
     private void Update() //Selection of buildings (currently with keyboard buttons
@@ -42,18 +47,28 @@ public class BuildingSystem : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (CanBePlaced(objectToPlace))
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Plane tilemapPlane = new Plane(Vector3.up, Vector3.zero);
+                if (tilemapPlane.Raycast(ray, out float enter))
                 {
+                    Vector3 worldPosition = ray.GetPoint(enter);
+                    Vector3Int cellPosition = grid.WorldToCell(worldPosition);
+                   
+                    if (mapManager.globalMap.TryGetValue((cellPosition.x, cellPosition.y), out CellT clickedCell))
+                    {
+                        PlaceObject(clickedCell);
+                    }
+                    else
+                    {
+                        Debug.Log("cant place here");
+                        Destroy(objectToPlace.gameObject);
+                        objectToPlace = null;
+                    }
 
-                    objectToPlace.Place();
-                    Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
-                    TakeArea(start, objectToPlace.Size);
-                    objectToPlace = null; // we change this to null because once the object has been placed and locked we wont be able to move it
+
                 }
-                else
-                {
-                    Destroy(objectToPlace.gameObject);
-                }
+               
+                
             }
             else if (Input.GetMouseButtonDown(1))
             {
@@ -85,12 +100,22 @@ public class BuildingSystem : MonoBehaviour
 
     public static Vector3 GetMouseWorldPosition()  //Cast a ray from the camera to align building to mouse pointer
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 1000, BuildingSystem.current.layersToHit))
+        //if (Physics.Raycast(ray, out RaycastHit raycastHit, 1000, BuildingSystem.current.layersToHit))
+        //{
+        //    //Debug.Log("Ray hit: " + raycastHit.collider.name);
+        //    return raycastHit.point;
+        //}
+        //else
+        //{
+        //    return Vector3.zero;
+        //}
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Plane tilemapPlane = new Plane(Vector3.up, Vector3.zero);
+        if (tilemapPlane.Raycast(ray, out float enter))
         {
-            //Debug.Log("Ray hit: " + raycastHit.collider.name);
-            return raycastHit.point;
+            return ray.GetPoint(enter);
         }
         else
         {
@@ -100,24 +125,24 @@ public class BuildingSystem : MonoBehaviour
 
     public Vector3 SnapCoordinateToGrid(Vector3 position)  //Snap the cast ray to the grid
     {
-        Vector3Int cellPos = gridLayout.WorldToCell(position);
+        Vector3Int cellPos = grid.WorldToCell(position);
         position = grid.GetCellCenterLocal(cellPos);
         return position;
     }
 
-    private static TileBase[] GetTilesBlock(BoundsInt area, Tilemap tilemap)
-    {
-        TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
-        int counter = 0;
+    //private static TileBase[] GetTilesBlock(BoundsInt area, Tilemap tilemap)
+    //{
+    //    TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
+    //    int counter = 0;
 
-        foreach (var v in area.allPositionsWithin)
-        {
-            Vector3Int pos = new Vector3Int(v.x, v.y, 0);
-            array[counter] = tilemap.GetTile(pos);
-            counter++;
-        }
-        return array;
-    }
+    //    foreach (var v in area.allPositionsWithin)
+    //    {
+    //        Vector3Int pos = new Vector3Int(v.x, v.y, 0);
+    //        array[counter] = tilemap.GetTile(pos);
+    //        counter++;
+    //    }
+    //    return array;
+    //}
 
     #endregion
 
@@ -139,27 +164,40 @@ public class BuildingSystem : MonoBehaviour
         obj.AddComponent<ObjectDrag>();
     }
 
-    private bool CanBePlaced(PlaceableObject placeableObject)
+    private void PlaceObject(CellT cell)
     {
-        BoundsInt area = new BoundsInt();
-        area.position = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
-        area.size = placeableObject.Size;
-
-        TileBase[] baseArray = GetTilesBlock(area, MainTilemap);
-
-        foreach (var b in baseArray){
-            if (b == whiteTile)
-            {
-                return false;
-            }
+        if(cell.objectPlacedOnCell == null && !cell.IsWalkable)
+        {
+            objectToPlace.Place();
+            cell.objectPlacedOnCell = objectToPlace;
+            objectToPlace = null;
+            
         }
-        return true;
+        else
+        {
+            
+            Destroy(objectToPlace.gameObject);
+            objectToPlace = null;
+        }
+
+        Debug.Log($"{cell.objectPlacedOnCell} has been placed on {cell.X},{cell.Y}");
+       
+        //BoundsInt area = new BoundsInt();
+        //area.position = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
+        //area.size = placeableObject.Size;
+
+        //TileBase[] baseArray = GetTilesBlock(area, MainTilemap);
+
+        //foreach (var b in baseArray){
+        //    if (b == whiteTile)
+        //    {
+        //        return false;
+        //    }
+        //}
+        //return true;
     }
 
-    public void TakeArea(Vector3Int start, Vector3Int size) //Take area around building to stop overlapping buildings
-    {
-        MainTilemap.BoxFill(start, whiteTile, start.x, start.y, start.x +size.x, start.y + size.y);
-    }
+    
 
     #endregion
 
