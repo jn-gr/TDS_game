@@ -105,7 +105,7 @@ MonoBehaviour:
   selfDamageMultiplier: 0.9
   strongDamageMultiplier: 1.2
   weakDamageMultiplier: 0.8
-  element: 0
+  element: 2
   levitationHeight: 5
   levitationSpeed: 5
 --- !u!54 &1814133040055064014
