@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6688985192963772048}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.65528107, y: 0.050789863, z: 0.020398704, w: 0.75339967}
-  m_LocalPosition: {x: 0, y: 0.010299997, z: -0.026499981}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0.5237589, y: 0.047269616, z: 0.013840862, w: 0.85044146}
+  m_LocalPosition: {x: 0, y: 0.010299688, z: -0.026499692}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3531463776494828171}
-  m_LocalEulerAnglesHint: {x: 80.165, y: 37.198, z: 34.726}
+  m_LocalEulerAnglesHint: {x: 62.816, y: 11.989, z: 9.202}
 --- !u!198 &4779422999359876529
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -976,7 +976,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -1138,7 +1138,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -3551,7 +3551,7 @@ ParticleSystem:
     separateAxes: 0
     range: {x: 0, y: 1}
   ColorBySpeedModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -4837,6 +4837,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 909505947cef42a448db1f7530f078a4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 909505947cef42a448db1f7530f078a4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.24
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 909505947cef42a448db1f7530f078a4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.82
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 909505947cef42a448db1f7530f078a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -67.91107
       objectReference: {fileID: 0}
@@ -4875,6 +4887,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 909505947cef42a448db1f7530f078a4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 909505947cef42a448db1f7530f078a4, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 909505947cef42a448db1f7530f078a4, type: 3}
       propertyPath: m_Name

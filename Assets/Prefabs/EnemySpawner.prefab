@@ -96,6 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdfc01cb7b3dccc4681b4f620d4dc0e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 5038159768750370891, guid: f3b7797f659911a4da988f97c25671c5, type: 3}
+  enemyPrefab: {fileID: 6900620980332985846, guid: cd93e88ddd530374b96a01111046619f, type: 3}
   spawnInterval: 5
   mainTower: {fileID: 0}
