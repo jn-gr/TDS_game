@@ -253,7 +253,7 @@ TextureImporter:
         width: 11
         height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -274,7 +274,7 @@ TextureImporter:
         width: 11
         height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -295,7 +295,7 @@ TextureImporter:
         width: 11
         height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -316,7 +316,7 @@ TextureImporter:
         width: 11
         height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -324,6 +324,27 @@ TextureImporter:
       bones: []
       spriteID: 6d4aa7cfc6ac05c45aefbe6413641105
       internalID: -227694510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Upgrade button border hover
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 13
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 212949a19885a4144ab972178e9c8db5
+      internalID: 746791599
       vertices: []
       indices: 
       edges: []
@@ -348,6 +369,7 @@ TextureImporter:
       Game UI 1 - Upgrade Button Border: -719229605
       Game uI 1 - Tower Upgrade Circle: -60060571
       Upgrade Arrow: -522931992
+      Upgrade button border hover: 746791599
       Water upgrade: 1831798489
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
