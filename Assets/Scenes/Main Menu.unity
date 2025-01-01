@@ -2487,7 +2487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db0e94366c13fe4f85761b579bb5840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 6272448577178881763, guid: 642e115e43918ac48bcd77566f489041, type: 3}
+  objectPrefab: {fileID: 3383410944982298732, guid: 59db9c5f45156413eb9ab4b619f26308, type: 3}
   totalObjectsToSpawn: 0
   spawnInterval: 1.16
   spawnOffset: {x: 0, y: 0, z: 0}
