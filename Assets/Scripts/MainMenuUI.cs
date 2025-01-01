@@ -13,8 +13,22 @@ public class MainMenuUI : MonoBehaviour
     private Transform currentTarget; // The current target position and rotation
     private bool isMoving = false;
 
-    public void PlayGame()
+    public void PlayGameEasy()
     {
+        UserDifficulty.CurrentLevel = DifficultyLevel.Easy;
+        SceneLoader.NextSceneName = "Main";
+        SceneManager.LoadScene("Loading Screen");
+    }
+
+    public void PlayGameMedium()
+    {
+        UserDifficulty.CurrentLevel = DifficultyLevel.Medium;
+        SceneLoader.NextSceneName = "Main";
+        SceneManager.LoadScene("Loading Screen");
+    }
+    public void PlayGameHard()
+    {
+        UserDifficulty.CurrentLevel = DifficultyLevel.Hard;
         SceneLoader.NextSceneName = "Main";
         SceneManager.LoadScene("Loading Screen");
     }

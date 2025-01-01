@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1ebb104e4d6894b49bbf86accb0ef3c6
+guid: 53148d24ea82c544e9631a3f5678e661
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -103,237 +103,15 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Game UI 1 - Upgrade Button
+      name: Easy difficulty
       rect:
         serializedVersion: 2
-        x: 171
-        y: 88
-        width: 17
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dde93b4db3179d3419788905729d06c4
-      internalID: 191527720
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game UI  1 - Upgrade Tower Icon
-      rect:
-        serializedVersion: 2
-        x: 156
-        y: 90
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a750cc41528fae6409c58c470fe6057b
-      internalID: 648399503
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game UI 1 - Sell Tower Icon
-      rect:
-        serializedVersion: 2
-        x: 143
-        y: 90
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a14b1b2723d7334fb3898611a943794
-      internalID: 815428694
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game UI  1 - Exit Upgrade
-      rect:
-        serializedVersion: 2
-        x: 165
-        y: 34
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6420d25857db05f44b5d1a8fd520f4a4
-      internalID: -163318062
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game uI 1 - Tower Upgrade Circle
-      rect:
-        serializedVersion: 2
-        x: 150
-        y: 46
-        width: 40
-        height: 40
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 099a1e808cbe7674f82600e0e2dcd79a
-      internalID: -60060571
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Game UI 1 - Upgrade Button Border
-      rect:
-        serializedVersion: 2
-        x: 171
-        y: 13
-        width: 17
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef91b379430cc5e4dbadccdd0fdb8af4
-      internalID: -719229605
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Upgrade Arrow
-      rect:
-        serializedVersion: 2
-        x: 129
+        x: 3
         y: 89
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 438e03cbedf24fc4199fa900f290a043
-      internalID: -522931992
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire upgrade
-      rect:
-        serializedVersion: 2
-        x: 116
-        y: 89
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f1d4da3541136ae498581720c0a244bd
-      internalID: -246480858
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Water upgrade
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 89
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a302abcf8c292bc488fc7c67bee19e4f
-      internalID: 1831798489
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Air upgrade
-      rect:
-        serializedVersion: 2
-        x: 89
-        y: 89
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6d4aa7cfc6ac05c45aefbe6413641105
-      internalID: -227694510
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Upgrade button border hover
-      rect:
-        serializedVersion: 2
-        x: 150
-        y: 13
         width: 17
         height: 17
       alignment: 0
@@ -343,8 +121,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 212949a19885a4144ab972178e9c8db5
-      internalID: 746791599
+      spriteID: b293e382335dc244bb87d14121644550
+      internalID: -1838633991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Easy difficulty hover
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 71
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12d6f9d95bc36c447a2bcec9362abea2
+      internalID: -1145333904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medium difficulty
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 89
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d10d30db7811a145bd7ebb640c83d0d
+      internalID: -1649094592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medium difficulty hover
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 71
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81e583580be2c8b46aaf1af8c2d93249
+      internalID: -395112230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hard difficulty
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 89
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 164ff987eee460449aeb53dbc08df091
+      internalID: -1778736838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hard difficulty hover
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 71
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70ae4e3488c70fd4a8949b7cad5b8921
+      internalID: -55503293
       vertices: []
       indices: 
       edges: []
@@ -352,7 +235,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0015de7d57660bb46b5b9bf60449d96d
+    spriteID: cea466d26e22d6a40ba72545d00bde41
     internalID: 0
     vertices: []
     indices: 
@@ -360,17 +243,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Air upgrade: -227694510
-      Fire upgrade: -246480858
-      Game UI  1 - Exit Upgrade: -163318062
-      Game UI  1 - Upgrade Tower Icon: 648399503
-      Game UI 1 - Sell Tower Icon: 815428694
-      Game UI 1 - Upgrade Button: 191527720
-      Game UI 1 - Upgrade Button Border: -719229605
-      Game uI 1 - Tower Upgrade Circle: -60060571
-      Upgrade Arrow: -522931992
-      Upgrade button border hover: 746791599
-      Water upgrade: 1831798489
+      Easy difficulty: -1838633991
+      Easy difficulty hover: -1145333904
+      Hard difficulty: -1778736838
+      Hard difficulty hover: -55503293
+      Medium difficulty: -1649094592
+      Medium difficulty hover: -395112230
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
