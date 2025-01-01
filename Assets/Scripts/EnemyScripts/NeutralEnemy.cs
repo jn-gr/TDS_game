@@ -27,8 +27,6 @@ public class NeutralEnemy : MonoBehaviour
         speed = (float)(5 + (gameManager.waveNum * 1.5));
         element = Element.Neutral;
         startingY = transform.position.y;  // Set starting Y to initial Y
-
-
     }
 
     // Update is called once per frame
