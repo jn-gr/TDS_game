@@ -28,6 +28,7 @@ public class Tower : MonoBehaviour
     [SerializeField]  protected List<GameObject> enemiesInRange = new List<GameObject>();
 
     public bool placed;
+    public CellT cellPlacedOn;
 
     // Start is called before the first frame update
     public void Start()
@@ -124,6 +125,8 @@ public class Tower : MonoBehaviour
             upgradedTower.currentTier = currentTier + 1;
             upgradedTower.element = element;
             upgradedTower.placed = true;
+            upgradedTower.cellPlacedOn = cellPlacedOn;
+            cellPlacedOn.objectPlacedOnCell = upgradedTower.gameObject;
             Destroy(gameObject);
             return upgradedTower;
         }
@@ -138,6 +141,8 @@ public class Tower : MonoBehaviour
             upgradedTower.currentTier = currentTier;
             upgradedTower.element = Element.Fire;
             upgradedTower.placed = true;
+            upgradedTower.cellPlacedOn = cellPlacedOn;
+            cellPlacedOn.objectPlacedOnCell = upgradedTower.gameObject;
             Destroy(gameObject);
             return upgradedTower;
         }
@@ -155,6 +160,8 @@ public class Tower : MonoBehaviour
             upgradedTower.currentTier = currentTier;
             upgradedTower.element = Element.Water;
             upgradedTower.placed = true;
+            upgradedTower.cellPlacedOn = cellPlacedOn;
+            cellPlacedOn.objectPlacedOnCell = upgradedTower.gameObject;
             Destroy(gameObject);
             return upgradedTower;
         }
@@ -172,6 +179,8 @@ public class Tower : MonoBehaviour
             upgradedTower.currentTier = currentTier;
             upgradedTower.element = Element.Air;
             upgradedTower.placed = true;
+            upgradedTower.cellPlacedOn = cellPlacedOn;
+            cellPlacedOn.objectPlacedOnCell = upgradedTower.gameObject;
             Destroy(gameObject);
             return upgradedTower;
         }

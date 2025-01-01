@@ -14,7 +14,8 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        gameManager = FindFirstObjectByType<GameManager>();
+        gameManager = GameManager.Instance;
+        mainTower = gameManager.mainTower.transform;
     }
 
     public void StartSpawning()

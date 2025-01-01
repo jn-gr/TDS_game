@@ -169,7 +169,8 @@ public class BuildingSystem : MonoBehaviour
         if(cell.objectPlacedOnCell == null && !cell.IsWalkable)
         {
             objectToPlace.Place();
-            cell.objectPlacedOnCell = objectToPlace;
+            cell.objectPlacedOnCell = objectToPlace.gameObject;
+            objectToPlace.GetComponent<Tower>().cellPlacedOn = cell;
             objectToPlace = null;
             
         }
