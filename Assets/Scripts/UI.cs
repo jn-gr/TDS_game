@@ -209,6 +209,7 @@ public class UI : MonoBehaviour
 
         if (isPaused)
         {
+            SoundManager.PlaySound(SoundType.UiClick, 1);
             StartCoroutine(FadeCanvasGroup(Fade.In, pausePanel, pauseFadeDuration, Blurry.Yes));
             Time.timeScale = 0;
         }
@@ -229,6 +230,7 @@ public class UI : MonoBehaviour
             }
         }
         //Play game over sound here
+        SoundManager.PlaySound(SoundType.UiClick, 1);
         StartCoroutine(FadeCanvasGroup(Fade.In, gameOverOverlay, gameOverFadeDuration, Blurry.Yes));
     }
 
