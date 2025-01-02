@@ -77,6 +77,7 @@ public class MapManager : MonoBehaviour
 
         Vector2Int globalCenter = new Vector2Int(centerCell.x, centerCell.y); // For region (0,0), no offset
         Vector3Int globalTilemapPosition = new Vector3Int(globalCenter.x, globalCenter.y, 0);
+        initialRegion.GenerateCenterPath(globalRegionMap, globalMap);
         Vector3 worldPosition = tilemap.CellToWorld(globalTilemapPosition);
         GameManager.Instance.mainTower.transform.position = worldPosition;
         
