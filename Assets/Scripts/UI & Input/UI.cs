@@ -102,10 +102,7 @@ public class UI : MonoBehaviour
 
         if (gameManager.currentHealth <= 0)
         {
-            //Play game over sound here
-            //SoundManager.PlaySound(SoundType.UiClick, 1);
             GameOverScreen();
-            return;
         }
     }
 
