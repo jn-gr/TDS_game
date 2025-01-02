@@ -6,6 +6,7 @@ using System.Linq;
 
 public class NeutralEnemy : MonoBehaviour
 {
+    private bool pathToTargetFound = false;
     public static NeutralEnemy Instance { get; private set; }
     private List<Vector3> pathToTarget;
     private int currentPathIndex;
@@ -113,7 +114,13 @@ public class NeutralEnemy : MonoBehaviour
 
     private void UpdatePath()
     {
-        Vector3Int targetCell = new Vector3Int(5,5,0);
+        if (pathToTargetFound)
+        {
+            Debug.Log("Path to target already found. Skipping update.");
+            return;
+        }
+
+        Vector3Int targetCell = new Vector3Int(5, 5, 0);
         if (!MapManager.Instance.globalMap.TryGetValue((targetCell.x, targetCell.y), out CellT targetCellData) || !targetCellData.IsWalkable)
         {
             Debug.LogError($"Target cell {targetCell} is not walkable.");
@@ -125,7 +132,6 @@ public class NeutralEnemy : MonoBehaviour
             return;
         }
         currentCell = MapManager.Instance.tilemap.WorldToCell(transform.position);
-
         Debug.Log($"Updating path from {currentCell} to {targetCell}");
         List<Vector3Int> path = FindPath(currentCell, targetCell);
 
@@ -137,6 +143,7 @@ public class NeutralEnemy : MonoBehaviour
                 pathToTarget.Add(MapManager.Instance.tilemap.GetCellCenterWorld(cell));
             }
             currentPathIndex = 0;
+            pathToTargetFound = true; // Mark the path as found
             Debug.Log("Path successfully updated.");
         }
         else
@@ -147,7 +154,6 @@ public class NeutralEnemy : MonoBehaviour
         pathNeedsUpdate = false;
         lastPathUpdateTime = Time.time;
     }
-
 
     private List<Vector3Int> FindPath(Vector3Int start, Vector3Int target)
     {
