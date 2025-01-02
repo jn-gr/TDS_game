@@ -26,6 +26,9 @@ public class BuildingSystem : MonoBehaviour
     public PlaceableObject objectToPlace;
 
     private Tilemap grid;
+
+    public ToastPanel toastPanel;
+
     #region Unity methods
 
     private void Awake()
@@ -91,6 +94,7 @@ public class BuildingSystem : MonoBehaviour
         else
         {
             Debug.Log("insufficient gold");
+            toastPanel.ShowMessage("Insufficient Gold");
         }
     }
 
@@ -179,6 +183,7 @@ public class BuildingSystem : MonoBehaviour
             
             Destroy(objectToPlace.gameObject);
             objectToPlace = null;
+            toastPanel.ShowMessage("Can't Place Tower Here");
         }
 
         Debug.Log($"{cell.objectPlacedOnCell} has been placed on {cell.X},{cell.Y}");
