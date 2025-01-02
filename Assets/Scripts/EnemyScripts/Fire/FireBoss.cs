@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AirBoss : AirEnemy
+public class FireBoss : FireEnemy
 {
     public override void Start()
     {
         base.Start();
 
         // Multiply damage, health and speed for boss
-        damage *= 3;
-        health *= 10;
+        damage *= 5;
+        health *= 6;
         speed *= 0.8f;
+
     }
 }
