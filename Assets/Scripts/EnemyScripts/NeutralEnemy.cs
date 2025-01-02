@@ -91,7 +91,7 @@ public class NeutralEnemy : MonoBehaviour
             transform.position = new Vector3(transform.position.x, startingY + currentHeight, transform.position.z);
 
             // If close enough to the target, move to the next point
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            if (Vector3.Distance(transform.position, targetPosition) < 0.5f)
             {
                 currentPathIndex++;
             }
