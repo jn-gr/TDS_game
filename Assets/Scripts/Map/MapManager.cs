@@ -24,7 +24,8 @@ public class MapManager : MonoBehaviour
 
     [HideInInspector]
     public Dictionary<(int, int), CellT> globalMap = new Dictionary<(int, int), CellT>();
-    private Dictionary<(int, int), Region> globalRegionMap = new Dictionary<(int, int), Region>();
+    [HideInInspector]
+    public Dictionary<(int, int), Region> globalRegionMap = new Dictionary<(int, int), Region>();
     [HideInInspector]
     public Dictionary<(int, int), Spawner> spawnerPositions = new Dictionary<(int, int), Spawner>();
 
@@ -34,10 +35,21 @@ public class MapManager : MonoBehaviour
         // 0 = Left, 1 = Right, 2 = Bottom, 3 = Top
         // This will be used to create start map
         CreateEmptyRegion(0, 0, regionWidth, regionHeight);
-        CreateInitialRegion(1, 0, regionWidth, regionHeight,0);
-        CreateInitialRegion(-1, 0, regionWidth, regionHeight, 1);
-        CreateInitialRegion(0, 1, regionWidth, regionHeight, 2);
-        CreateInitialRegion(0, -1, regionWidth, regionHeight, 3);
+        ExpandRegion(1, 0);
+        ExpandRegion(-1, 0);
+        ExpandRegion(0, 1);
+        ExpandRegion(0, -1);
+
+
+        //if (SaveLoadManager.Instance.isLoad) LoadGame();
+    }
+    public void LoadGame()
+    {
+        //SaveLoadManager.Instance.LoadGame();
+        //globalMap = SaveLoadManager.Instance.globalMap;
+        //globalRegionMap = SaveLoadManager.Instance.globalRegionMap;
+        //spawnerPositions = SaveLoadManager.Instance.spawnerPositions;
+        LoadFullMap();
     }
     void Update()
     {
@@ -138,7 +150,7 @@ public class MapManager : MonoBehaviour
             for (int y = 0; y < region.Height; y++)
             {
                 var globalCoords = region.LocalToGlobal(x, y);
-                globalMap[globalCoords] = region.Cells[x, y];
+                globalMap[globalCoords] = region.Cells[x,y];
             }
         }
         globalRegionMap[(region.RegionX, region.RegionY)] = region;
@@ -171,10 +183,10 @@ public class MapManager : MonoBehaviour
                 spawnerPosition = new Vector2Int(endCell.X + (region.RegionX * region.Width), ((region.RegionY + 1) * region.Height));
             }
 
-            
+
 
             // Instantiate the spawner GameObject (you can handle pooling here if needed)
-            Spawner spawner = GameObject.Instantiate(spawnerPrefab, tilemap.CellToWorld(new Vector3Int (spawnerPosition.x,spawnerPosition.y,0)), Quaternion.identity).GetComponent<Spawner>();
+            Spawner spawner = GameObject.Instantiate(spawnerPrefab, tilemap.GetCellCenterWorld(new Vector3Int(spawnerPosition.x, spawnerPosition.y, 0)), Quaternion.identity).GetComponent<Spawner>();
 
             // Add the spawner to the dictionary
             spawnerPositions[(spawnerPosition.x, spawnerPosition.y)] = spawner;
@@ -216,6 +228,7 @@ public class MapManager : MonoBehaviour
 
         foreach (var spawnerPosition in spawnersToRemove)
         {
+            Debug.Log(spawnerPosition);
             Spawner spawner = spawnerPositions[spawnerPosition];
             Destroy(spawner.gameObject); // Remove from the scene
             spawnerPositions.Remove(spawnerPosition); // Remove from dictionary
@@ -444,13 +457,34 @@ public class MapManager : MonoBehaviour
 
                 Vector3Int cellPosition = mazeOrigin + new Vector3Int(globalX, globalY, 0);
                 TileBase tileToUse;
-               
-                
+
+                if (cell.objectPlacedOnCell != null)
+                {
+                    Instantiate(cell.objectPlacedOnCell, tilemap.GetCellCenterWorld(new Vector3Int(cell.X, cell.Y)), Quaternion.identity);
+                }
                 tileToUse = cell.IsWalkable ? walkableTile : nonWalkableTile;
                 
                 tilemap.SetTile(cellPosition, tileToUse);
             }
         }
+    }
+
+    public void LoadFullMap()
+    {
+        foreach (var kvp in globalRegionMap)
+        {
+            
+            Region region = kvp.Value;
+            
+            DrawRegionOnTilemap(region);
+
+            
+
+            // Perform your logic here
+            
+        }
+
+        
     }
 
     void OnDrawGizmos()
