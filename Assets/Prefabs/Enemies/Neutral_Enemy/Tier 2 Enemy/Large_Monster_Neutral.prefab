@@ -4878,7 +4878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bc256025b1469a746918dcc5f2e68f27, type: 3}
       propertyPath: m_Name
-      value: Neutral_Tier_2
+      value: Large_Monster_Neutral
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bc256025b1469a746918dcc5f2e68f27, type: 3}
       propertyPath: m_TagString
@@ -4897,6 +4897,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bc256025b1469a746918dcc5f2e68f27, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2076657423915893644}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bc256025b1469a746918dcc5f2e68f27, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -763594007599570920}
   m_SourcePrefab: {fileID: 100100000, guid: bc256025b1469a746918dcc5f2e68f27, type: 3}
 --- !u!1 &1476365506599972159 stripped
 GameObject:
@@ -4951,6 +4954,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08, y: 0.059999987, z: 0.057368413}
   m_Center: {x: 0.015000001, y: -0.009999998, z: 0.01868421}
+--- !u!114 &-763594007599570920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476365506599972159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59bfd1439f970d54ca4ce7831cbcccce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  health: 20
+  speed: 5
+  selfDamageMultiplier: 0.9
+  strongDamageMultiplier: 1.2
+  weakDamageMultiplier: 0.8
+  element: 0
+  levitationHeight: 5
+  levitationSpeed: 5
 --- !u!4 &2249207404463372165 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bc256025b1469a746918dcc5f2e68f27, type: 3}

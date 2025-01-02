@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NeutralEnemy : MonoBehaviour
 {
-    public float damage = 10;
+    public float damage = 5;
     public float health = 20;
     public float speed = 5;
     public float selfDamageMultiplier = 0.9f;

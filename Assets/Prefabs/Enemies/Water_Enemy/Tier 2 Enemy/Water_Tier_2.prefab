@@ -4897,6 +4897,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ec590ddabd9233c47a6632b9494fb506, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2867446115823018267}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ec590ddabd9233c47a6632b9494fb506, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1213939501760325722}
   m_SourcePrefab: {fileID: 100100000, guid: ec590ddabd9233c47a6632b9494fb506, type: 3}
 --- !u!1 &1456462915519590877 stripped
 GameObject:
@@ -4951,6 +4954,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08, y: 0.059999987, z: 0.057368413}
   m_Center: {x: 0.015000001, y: -0.009999998, z: 0.01868421}
+--- !u!114 &-1213939501760325722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456462915519590877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2307911b08cd60429ca81a95c8d60d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  health: 20
+  speed: 5
+  selfDamageMultiplier: 0.9
+  strongDamageMultiplier: 1.2
+  weakDamageMultiplier: 0.8
+  element: 2
+  levitationHeight: 5
+  levitationSpeed: 5
 --- !u!4 &2269169771924908903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ec590ddabd9233c47a6632b9494fb506, type: 3}
