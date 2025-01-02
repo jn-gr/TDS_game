@@ -214,10 +214,10 @@ public class NeutralEnemy : MonoBehaviour
             if (MapManager.Instance.globalMap.TryGetValue((neighborPos.x, neighborPos.y), out CellT cell) && cell.IsWalkable)
             {
                 // Ensure connectivity between cells
-                if ((dir == Vector3Int.right && cell.IsOpenLeft) ||
-                    (dir == Vector3Int.left && cell.IsOpenRight) ||
-                    (dir == Vector3Int.up && cell.IsOpenDown) ||
-                    (dir == Vector3Int.down && cell.IsOpenUp))
+                if ((dir == Vector3Int.right && cell.IsWalkable) ||
+                    (dir == Vector3Int.left && cell.IsWalkable) ||
+                    (dir == Vector3Int.up && cell.IsWalkable) ||
+                    (dir == Vector3Int.down && cell.IsWalkable))
                 {
                     neighbors.Add(neighborPos);
                 }

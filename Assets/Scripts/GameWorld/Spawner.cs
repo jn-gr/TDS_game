@@ -52,7 +52,7 @@ public class Spawner : MonoBehaviour
                 {
                     Vector3 spawnPosition = MapManager.Instance.tilemap.GetCellCenterWorld(walkableTile);
                     // Adjust the Y position to ensure mobs are not clipping
-                    spawnPosition.y += 0.3f;
+                    spawnPosition.y += 0.4f;
 
                     // Adjust rotation to face the main tower
                     Vector3 directionToTower = (mainTower.position - spawnPosition).normalized;
