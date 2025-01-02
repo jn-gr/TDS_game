@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Debug.Log("Level chosen is : " + UserDifficulty.CurrentLevel);
-        NeutralEnemy.UpdateUserDifficulty();
         Instance = this;
         //spawners = FindObjectsByType<Spawner>(FindObjectsSortMode.None);
         currentHealth = mainTower.GetHealth();

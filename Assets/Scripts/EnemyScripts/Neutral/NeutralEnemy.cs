@@ -128,37 +128,35 @@ public class NeutralEnemy : MonoBehaviour
         }
     }
 
-    // Static method to update difficulty based on user setting
-    public static void UpdateUserDifficulty()
+    public static void ScaleStatsForWave(int waveNumber)
     {
+        // Base scaling for wave number
+        float waveDamage = 5 + (waveNumber * 0.5f);
+        float waveHealth = 10 + (waveNumber * 1.1f);
+        float waveSpeed = 1 + (waveNumber * 0.2f);
+
+        // Apply difficulty multipliers
         if (UserDifficulty.CurrentLevel == DifficultyLevel.Hard)
         {
-            Debug.Log("Hard enemies will be spawned");
-            GlobalDamage *= 3.0f;
-            GlobalHealth *= 3.0f;
-            GlobalSpeed *= 1.5f;
+            GlobalDamage = waveDamage * 3.0f;
+            GlobalHealth = waveHealth * 3.0f;
+            GlobalSpeed = waveSpeed * 1.5f;
         }
         else if (UserDifficulty.CurrentLevel == DifficultyLevel.Medium)
         {
-            Debug.Log("Medium enemies will be spawned");
-            GlobalDamage *= 2.0f;
-            GlobalHealth *= 2.0f;
-            GlobalSpeed *= 1.25f;
+            GlobalDamage = waveDamage * 2.0f;
+            GlobalHealth = waveHealth * 2.0f;
+            GlobalSpeed = waveSpeed * 1.25f;
         }
-        else
+        else // Easy difficulty
         {
-            Debug.Log("Easy enemies will be spawned");
+            GlobalDamage = waveDamage;
+            GlobalHealth = waveHealth;
+            GlobalSpeed = waveSpeed;
         }
-    }
 
-    // Static method to scale stats based on wave number
-    public static void ScaleStatsForWave(int waveNumber)
-    {
-        GlobalDamage = 5 + (waveNumber * 0.5f);
-        GlobalHealth = 10 + (waveNumber * 1.1f);
-        GlobalSpeed = 1 + (waveNumber * 0.2f);
-
-        Debug.Log($"Stats scaled for wave {waveNumber}: Damage={GlobalDamage}, Health={GlobalHealth}, Speed={GlobalSpeed}");
+        Debug.Log($"Stats scaled for wave {waveNumber} and difficulty {UserDifficulty.CurrentLevel}: " +
+                  $"Damage={GlobalDamage}, Health={GlobalHealth}, Speed={GlobalSpeed}");
     }
 
     private void UpdatePath()
