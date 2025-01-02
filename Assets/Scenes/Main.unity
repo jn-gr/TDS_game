@@ -14089,7 +14089,7 @@ GameObject:
   - component: {fileID: 1707816282}
   m_Layer: 5
   m_Name: Toast
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16135,10 +16135,10 @@ RectTransform:
   - {fileID: 698306999}
   - {fileID: 378923407}
   - {fileID: 239445554}
-  - {fileID: 621592172}
-  - {fileID: 1185301778}
-  - {fileID: 1430840912}
   - {fileID: 1707816281}
+  - {fileID: 621592172}
+  - {fileID: 1430840912}
+  - {fileID: 1185301778}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
