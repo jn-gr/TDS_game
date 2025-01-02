@@ -102,7 +102,10 @@ public class UI : MonoBehaviour
 
         if (gameManager.currentHealth <= 0)
         {
+            //Play game over sound here
+            //SoundManager.PlaySound(SoundType.UiClick, 1);
             GameOverScreen();
+            return;
         }
     }
 
@@ -229,8 +232,6 @@ public class UI : MonoBehaviour
                 transform.gameObject.SetActive(false);
             }
         }
-        //Play game over sound here
-        SoundManager.PlaySound(SoundType.UiClick, 1);
         StartCoroutine(FadeCanvasGroup(Fade.In, gameOverOverlay, gameOverFadeDuration, Blurry.Yes));
     }
 
