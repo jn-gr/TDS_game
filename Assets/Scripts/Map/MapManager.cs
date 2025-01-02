@@ -465,5 +465,19 @@ public class MapManager : MonoBehaviour
             Gizmos.color = kvp.Value.IsWalkable ? Color.green : Color.red;
             Gizmos.DrawCube(worldPos, Vector3.one * 0.5f);
         }
+        if (tilemap != null)
+        {
+            // Highlight (0, 0) as yellow
+            Vector3Int originPosition = new Vector3Int(0, 0, 0);
+            Vector3 originWorldPosition = tilemap.GetCellCenterWorld(originPosition);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawCube(originWorldPosition, Vector3.one * 0.5f); // Size of the cube
+
+            // Highlight (3, 3) as purple
+            Vector3Int targetPosition = new Vector3Int(5, 5, 0);
+            Vector3 targetWorldPosition = tilemap.GetCellCenterWorld(targetPosition);
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawCube(targetWorldPosition, Vector3.one * 0.5f); // Size of the cube
+        }
     }
 }

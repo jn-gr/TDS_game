@@ -30,32 +30,31 @@ public class NeutralEnemy : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
-        // Ensure only one instance exists
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Debug.LogWarning("Multiple instances of NeutralEnemy detected! Destroying duplicate.");
-            Destroy(this.gameObject);
-            return;
-        }
+        if (Instance == null) Instance = this;
         gameManager = FindFirstObjectByType<GameManager>();
         castle = gameManager.mainTower;
+
         health = (int)(8 + (gameManager.waveNum * 1.1));
         speed = (float)(5 + (gameManager.waveNum * 1.5));
         element = Element.Neutral;
-        startingY = transform.position.y; // Set starting Y to initial Y
+        startingY = transform.position.y;
+
         pathToTarget = new List<Vector3>();
         currentPathIndex = 0;
         pathNeedsUpdate = true;
-        lastPathUpdateTime = 0f;
 
-        // Move enemy to nearest walkable tile
         Vector3Int currentCell = MapManager.Instance.tilemap.WorldToCell(transform.position);
         Vector3Int nearestWalkable = MapManager.Instance.FindNearestWalkableTile(currentCell);
-        transform.position = MapManager.Instance.tilemap.GetCellCenterWorld(nearestWalkable);
+        if (!MapManager.Instance.globalMap.TryGetValue((nearestWalkable.x, nearestWalkable.y), out CellT nearestWalkableData) || !nearestWalkableData.IsWalkable)
+        {
+            Debug.LogError($"Starting position {nearestWalkable} is not walkable.");
+            return;
+        }
+        //transform.position = MapManager.Instance.tilemap.GetCellCenterWorld(nearestWalkable);
+        Vector3 targetPosition = MapManager.Instance.tilemap.GetCellCenterWorld(nearestWalkable);
+        // Apply a Y offset to place the mob correctly above the ground
+        float yOffset = GetComponent<Collider>().bounds.extents.y; // Adjust this value based on the mob's height
+        transform.position = new Vector3(targetPosition.x, targetPosition.y + yOffset, targetPosition.z);
     }
 
     // Update is called once per frame
@@ -74,20 +73,28 @@ public class NeutralEnemy : MonoBehaviour
         if (pathToTarget.Count > 0 && currentPathIndex < pathToTarget.Count)
         {
             Vector3 targetPosition = pathToTarget[currentPathIndex];
+            Vector3 direction = targetPosition - transform.position;
+
+            // Rotate to face the direction of movement
+            if (direction != Vector3.zero) // Avoid errors if direction is zero
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, direction.normalized);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10f); // Smooth rotation
+            }
+
+            // Move toward the target position
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
             // Apply levitation effect
             float currentHeight = Mathf.Abs(Mathf.Sin(Time.time * levitationSpeed)) * levitationHeight;
             transform.position = new Vector3(transform.position.x, startingY + currentHeight, transform.position.z);
 
+            // If close enough to the target, move to the next point
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
                 currentPathIndex++;
             }
         }
-        // Calculate smooth levitation effect with sine wave (shifted to stay above the plane)
-
-        // Apply the levitation effect to the Y position
     }
 
     public virtual void TakeDamage(float damage, Element element)
@@ -106,20 +113,23 @@ public class NeutralEnemy : MonoBehaviour
 
     private void UpdatePath()
     {
+        Vector3Int targetCell = new Vector3Int(5,5,0);
+        if (!MapManager.Instance.globalMap.TryGetValue((targetCell.x, targetCell.y), out CellT targetCellData) || !targetCellData.IsWalkable)
+        {
+            Debug.LogError($"Target cell {targetCell} is not walkable.");
+            return;
+        }
         if (MapManager.Instance == null || MapManager.Instance.tilemap == null)
         {
             Debug.LogError("MapManager.Instance or its tilemap is null");
             return;
         }
-
-        Vector3Int targetCell = MapManager.Instance.tilemap.WorldToCell(castle.transform.position);
         currentCell = MapManager.Instance.tilemap.WorldToCell(transform.position);
 
+        Debug.Log($"Updating path from {currentCell} to {targetCell}");
         List<Vector3Int> path = FindPath(currentCell, targetCell);
 
-        Debug.Log($"Trying to find path from {currentCell} to {targetCell}");
-
-        if (path != null)
+        if (path != null && path.Count > 0)
         {
             pathToTarget.Clear();
             foreach (Vector3Int cell in path)
@@ -127,10 +137,11 @@ public class NeutralEnemy : MonoBehaviour
                 pathToTarget.Add(MapManager.Instance.tilemap.GetCellCenterWorld(cell));
             }
             currentPathIndex = 0;
+            Debug.Log("Path successfully updated.");
         }
         else
         {
-            Debug.LogWarning($"Path could not be found from {currentCell} to {targetCell}");
+            Debug.LogWarning($"No path found from {currentCell} to {targetCell}");
         }
 
         pathNeedsUpdate = false;
@@ -145,13 +156,14 @@ public class NeutralEnemy : MonoBehaviour
         var closedSet = new HashSet<Vector3Int>();
         var cameFrom = new Dictionary<Vector3Int, Vector3Int>();
         var gScore = new Dictionary<Vector3Int, float> { [start] = 0 };
-        var fScore = new Dictionary<Vector3Int, float> { [start] = Vector3.Distance(start, target) };
+        var fScore = new Dictionary<Vector3Int, float> { [start] = Mathf.Abs(start.x - target.x) + Mathf.Abs(start.y - target.y) };
 
-        openSet.Add(new PathNode(start, 0, Vector3.Distance(start, target)));
+        openSet.Add(new PathNode(start, 0, fScore[start]));
 
         while (openSet.Count > 0)
         {
             var current = openSet.OrderBy(node => node.FScore).First();
+            Debug.Log($"Processing node {current.Position}");
 
             if (current.Position == target)
             {
@@ -161,19 +173,20 @@ public class NeutralEnemy : MonoBehaviour
 
             openSet.Remove(current);
             closedSet.Add(current.Position);
-            Debug.Log($"Processing node {current.Position}");
 
             foreach (var neighbor in GetNeighbors(current.Position))
             {
+                Debug.Log($"Processing neighbor: {neighbor}");
                 if (closedSet.Contains(neighbor)) continue;
 
                 float tentativeGScore = gScore[current.Position] + 1;
 
                 if (!gScore.ContainsKey(neighbor) || tentativeGScore < gScore[neighbor])
                 {
+                    Debug.Log($"Updating neighbor {neighbor}, GScore: {tentativeGScore}");
                     cameFrom[neighbor] = current.Position;
                     gScore[neighbor] = tentativeGScore;
-                    float h = Vector3.Distance(neighbor, target);
+                    float h = Mathf.Abs(neighbor.x - target.x) + Mathf.Abs(neighbor.y - target.y);
                     fScore[neighbor] = gScore[neighbor] + h;
 
                     if (!openSet.Any(n => n.Position == neighbor))
@@ -183,7 +196,7 @@ public class NeutralEnemy : MonoBehaviour
                 }
             }
         }
-        Debug.LogWarning("No path found from {start} to {target}");
+        Debug.LogWarning($"No path found from {start} to {target}");
         return null;
     }
 
@@ -224,6 +237,22 @@ public class NeutralEnemy : MonoBehaviour
         }
         path.Reverse();
         return path;
+    }
+    private void OnDrawGizmos()
+    {
+        if (pathToTarget != null && pathToTarget.Count > 0)
+        {
+            Gizmos.color = Color.green;
+            for (int i = 0; i < pathToTarget.Count - 1; i++)
+            {
+                Gizmos.DrawLine(pathToTarget[i], pathToTarget[i + 1]);
+            }
+
+            foreach (var point in pathToTarget)
+            {
+                Gizmos.DrawSphere(point, 0.2f);
+            }
+        }
     }
 }
 
