@@ -6,6 +6,30 @@ using System.Linq;
 
 public class NeutralEnemy : MonoBehaviour
 {
+
+    // Static variables shared by all instances
+    public static float GlobalDamage = 5;
+    public static float GlobalHealth = 10;
+    public static float GlobalSpeed = 1;
+
+    // Instance-specific variables initialized from static
+    public float damage;
+    public float health;
+    public float speed;
+
+    public float selfDamageMultiplier = 0.9f;
+    public float strongDamageMultiplier = 1.2f;
+    public float weakDamageMultiplier = 0.8f;
+
+    protected MainTower castle;
+    protected GameManager gameManager;
+    protected bool isDead;
+
+    public Element element;
+    public float levitationHeight = 5f; // Max height to levitate
+    public float levitationSpeed = 5f;   // Speed of levitation
+    private float startingY;              // Starting Y position
+
     private bool pathToTargetFound = false;
     public static NeutralEnemy Instance { get; private set; }
     private List<Vector3> pathToTarget;
@@ -14,19 +38,6 @@ public class NeutralEnemy : MonoBehaviour
     private bool pathNeedsUpdate;
     private float pathUpdateCooldown = 1f; // How often to recalculate path
     private float lastPathUpdateTime;
-    public float damage = 5;
-    public float health = 20;
-    public float speed = 2;
-    public float selfDamageMultiplier = 0.9f;
-    public float strongDamageMultiplier = 1.2f;
-    public float weakDamageMultiplier = 0.8f;
-    protected MainTower castle;
-    protected GameManager gameManager;
-    protected bool isDead;
-    public Element element;
-    public float levitationHeight = 5f; // Max height to levitate
-    public float levitationSpeed = 5f;   // Speed of levitation
-    private float startingY;              // Starting Y position
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -35,8 +46,13 @@ public class NeutralEnemy : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>();
         castle = gameManager.mainTower;
 
-        health = (int)(8 + (gameManager.waveNum * 1.1));
-        speed = (float)(5 + (gameManager.waveNum * 1.5));
+        // Initialize instance-specific variables from static values
+        damage = GlobalDamage;
+        health = GlobalHealth;
+        speed = GlobalSpeed;
+
+        //health = (int)(8 + (gameManager.waveNum * 1.1));
+        //speed = (float)(5 + (gameManager.waveNum * 1.5));
         element = Element.Neutral;
         startingY = transform.position.y;
 
@@ -102,7 +118,7 @@ public class NeutralEnemy : MonoBehaviour
     {
         if (isDead) return;
 
-        health -= damage * 1.0f;
+        health -= damage;
 
         if (health <= 0)
         {
@@ -110,6 +126,39 @@ public class NeutralEnemy : MonoBehaviour
             gameManager.EnemyKilled();
             Destroy(gameObject);
         }
+    }
+
+    // Static method to update difficulty based on user setting
+    public static void UpdateUserDifficulty()
+    {
+        if (UserDifficulty.CurrentLevel == DifficultyLevel.Hard)
+        {
+            Debug.Log("Hard enemies will be spawned");
+            GlobalDamage *= 3.0f;
+            GlobalHealth *= 3.0f;
+            GlobalSpeed *= 1.5f;
+        }
+        else if (UserDifficulty.CurrentLevel == DifficultyLevel.Medium)
+        {
+            Debug.Log("Medium enemies will be spawned");
+            GlobalDamage *= 2.0f;
+            GlobalHealth *= 2.0f;
+            GlobalSpeed *= 1.25f;
+        }
+        else
+        {
+            Debug.Log("Easy enemies will be spawned");
+        }
+    }
+
+    // Static method to scale stats based on wave number
+    public static void ScaleStatsForWave(int waveNumber)
+    {
+        GlobalDamage = 5 + (waveNumber * 0.5f);
+        GlobalHealth = 10 + (waveNumber * 1.1f);
+        GlobalSpeed = 1 + (waveNumber * 0.2f);
+
+        Debug.Log($"Stats scaled for wave {waveNumber}: Damage={GlobalDamage}, Health={GlobalHealth}, Speed={GlobalSpeed}");
     }
 
     private void UpdatePath()

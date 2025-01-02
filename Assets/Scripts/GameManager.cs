@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Level chosen is : " + UserDifficulty.CurrentLevel);
+        NeutralEnemy.UpdateUserDifficulty();
         Instance = this;
         //spawners = FindObjectsByType<Spawner>(FindObjectsSortMode.None);
         currentHealth = mainTower.GetHealth();
@@ -83,6 +85,10 @@ public class GameManager : MonoBehaviour
     {
         waveStarted = true;
         waveNum++;
+
+        // Scale stats for all NeutralEnemies based on the current wave number
+        NeutralEnemy.ScaleStatsForWave(waveNum);
+
         totalEnemiesToSpawn = 4 + Mathf.RoundToInt(waveNum * 1.2f);
         enemiesSpawned = 0;
         enemiesAlive = totalEnemiesToSpawn;
