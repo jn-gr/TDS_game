@@ -74,9 +74,9 @@ public class GameManager : MonoBehaviour
         currency += 50;
         score += 100;
         experience += 100;
-        enemiesAlive--; ;
+        enemiesAlive--;
 
-        Debug.Log($"Wave {waveNum}: Enemy {enemiesAlive} has been killed");
+        Debug.Log($"Wave {waveNum}: Enemy killed. Enemies alive: {enemiesAlive}");
     }
 
 

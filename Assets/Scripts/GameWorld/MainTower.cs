@@ -35,10 +35,8 @@ public class MainTower : MonoBehaviour
             if (enemyComponent != null) // Check if the object has the NeutralEnemy component
             {
                 TakeDamage(enemyComponent.damage);
-                Destroy(other.gameObject);
+                enemyComponent.TakeDamage(enemyComponent.health * 100.0f,enemyComponent.element); // Effectively "kills" the enemy
 
-                // Update the game manager's enemy count
-                GameManager.Instance.enemiesAlive--;
             }
             else
             {

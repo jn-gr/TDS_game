@@ -117,12 +117,12 @@ public class NeutralEnemy : MonoBehaviour
     public virtual void TakeDamage(float damage, Element element)
     {
         if (isDead) return;
-
         health -= damage;
 
         if (health <= 0)
         {
             isDead = true;
+            Debug.Log("NeutralEnemy is dead. Calling EnemyKilled.");
             gameManager.EnemyKilled();
             Destroy(gameObject);
         }
