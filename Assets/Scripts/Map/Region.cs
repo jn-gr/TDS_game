@@ -59,5 +59,10 @@ public class Region
         PathGenerator.Generate(this,regionMap, globalMap, Width, Height);
     }
 
-    
+    public void GenerateCenterPath(Dictionary<(int, int), Region> regionMap, Dictionary<(int, int), CellT> globalMap)
+    {
+        PathGenerator.GenerateCenterRegion(this, regionMap, globalMap, Width, Height);
+    }
+
+
 }

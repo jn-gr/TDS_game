@@ -229,8 +229,6 @@ public class UI : MonoBehaviour
                 transform.gameObject.SetActive(false);
             }
         }
-        //Play game over sound here
-        SoundManager.PlaySound(SoundType.UiClick, 1);
         StartCoroutine(FadeCanvasGroup(Fade.In, gameOverOverlay, gameOverFadeDuration, Blurry.Yes));
     }
 
