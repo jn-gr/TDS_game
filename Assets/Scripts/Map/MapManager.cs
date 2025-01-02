@@ -396,6 +396,41 @@ public class MapManager : MonoBehaviour
         return matchingEndCells; 
     }
 
+    public Vector3Int FindNearestWalkableTile(Vector3Int startCell)
+    {
+        Queue<Vector3Int> toCheck = new Queue<Vector3Int>();
+        HashSet<Vector3Int> checkedCells = new HashSet<Vector3Int>();
+        toCheck.Enqueue(startCell);
+
+        while (toCheck.Count > 0)
+        {
+            Vector3Int current = toCheck.Dequeue();
+            if (checkedCells.Contains(current))
+                continue;
+
+            checkedCells.Add(current);
+
+            if (globalMap.TryGetValue((current.x, current.y), out CellT cell) && cell.IsWalkable)
+            {
+                return current; // Found a walkable tile
+            }
+
+            // Enqueue neighbors
+            var directions = new Vector3Int[]
+            {
+                Vector3Int.right, Vector3Int.left, Vector3Int.up, Vector3Int.down
+            };
+
+            foreach (var dir in directions)
+            {
+                Vector3Int neighbor = current + dir;
+                if (!checkedCells.Contains(neighbor))
+                    toCheck.Enqueue(neighbor);
+            }
+        }
+
+        return startCell; // Fallback to starting cell if no walkable tile found
+    }
 
     private void DrawRegionOnTilemap(Region region)
     {
@@ -423,5 +458,11 @@ public class MapManager : MonoBehaviour
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(worldPosition, 0.2f);
+        foreach (var kvp in MapManager.Instance.globalMap)
+        {
+            Vector3 worldPos = MapManager.Instance.tilemap.GetCellCenterWorld(new Vector3Int(kvp.Key.Item1, kvp.Key.Item2, 0));
+            Gizmos.color = kvp.Value.IsWalkable ? Color.green : Color.red;
+            Gizmos.DrawCube(worldPos, Vector3.one * 0.5f);
+        }
     }
 }

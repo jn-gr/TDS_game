@@ -44,25 +44,24 @@ public class Spawner : MonoBehaviour
 
             if (gameManager.CanSpawnEnemy())
             {
-                // Determine spawn position
-                Vector3 spawnPosition = transform.position + new Vector3(0, 2, 0); // Base spawn position with Y offset
+                // Find a walkable tile near the spawner position
+                Vector3Int cellPosition = MapManager.Instance.tilemap.WorldToCell(transform.position);
+                Vector3Int walkableTile = MapManager.Instance.FindNearestWalkableTile(cellPosition);
 
-                // Calculate rotation to face the main tower
-                Vector3 directionToTower = (mainTower.position - spawnPosition).normalized;
-                Quaternion spawnRotation = Quaternion.LookRotation(directionToTower);
-
-                // Adjust rotation to account for Blender's forward axis
-                Quaternion adjustedRotation = spawnRotation * Quaternion.Euler(-90, 180, 0);
-
-                // Check if the enemy is a FireEnemy and adjust Y position
-                if (enemyPrefab.GetComponent<FireEnemy>() != null)
+                if (walkableTile != null)
                 {
-                    spawnPosition.y += 1f;  // Increase Y position by 1 for FireEnemy
-                }
+                    Vector3 spawnPosition = MapManager.Instance.tilemap.GetCellCenterWorld(walkableTile);
+                    // Adjust the Y position to ensure mobs are not clipping
+                    spawnPosition.y += 0.3f;
 
-                // Instantiate the enemy with position and adjusted rotation
-                Instantiate(enemyPrefab, spawnPosition, adjustedRotation);
-                gameManager.EnemySpawned();
+                    // Adjust rotation to face the main tower
+                    Vector3 directionToTower = (mainTower.position - spawnPosition).normalized;
+                    Quaternion spawnRotation = Quaternion.LookRotation(directionToTower);
+
+                    // Instantiate the enemy with position and rotation
+                    Instantiate(enemyPrefab, spawnPosition, spawnRotation);
+                    gameManager.EnemySpawned();
+                }
             }
             else
             {
