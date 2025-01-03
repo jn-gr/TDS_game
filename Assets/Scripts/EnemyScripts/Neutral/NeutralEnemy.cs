@@ -14,9 +14,9 @@ public class NeutralEnemy : MonoBehaviour
     private bool pathNeedsUpdate;
     private float pathUpdateCooldown = 1f; // How often to recalculate path
     private float lastPathUpdateTime;
-    public float damage = 10;
+    public float damage = 5;
     public float health = 20;
-    public float speed = 5;
+    public float speed = 2;
     public float selfDamageMultiplier = 0.9f;
     public float strongDamageMultiplier = 1.2f;
     public float weakDamageMultiplier = 0.8f;
