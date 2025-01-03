@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.4
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.038701724, g: 0.14061871, b: 0.28594738, a: 0.4}
+  m_IndirectSpecularColor: {r: 0.039004784, g: 0.14048305, b: 0.28770217, a: 0.4}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6578,6 +6578,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1609003472}
+        m_TargetAssemblyTypeName: SaveLoadManager, Assembly-CSharp
+        m_MethodName: SaveGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &878044575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7597,6 +7609,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 5911407321941813047, guid: af5a62c4eb56a86428dca3c0c8876107, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1609003472}
+        m_TargetAssemblyTypeName: SaveLoadManager, Assembly-CSharp
+        m_MethodName: LoadGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -13016,6 +13040,7 @@ GameObject:
   - component: {fileID: 1609003468}
   - component: {fileID: 1609003470}
   - component: {fileID: 1609003471}
+  - component: {fileID: 1609003472}
   m_Layer: 3
   m_Name: GameManager
   m_TagString: Untagged
@@ -13167,6 +13192,18 @@ MonoBehaviour:
   towerLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &1609003472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609003466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d349068765fa5f4ab6b4958958a02ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1623321153
 GameObject:
   m_ObjectHideFlags: 0

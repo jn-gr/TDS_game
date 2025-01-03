@@ -10,8 +10,8 @@ public class Region
 
     public CellT[,] Cells;
 
-    public int RegionX { get; private set; }
-    public int RegionY { get; private set; }
+    public int RegionX { get; set; }
+    public int RegionY { get; set; }
 
 
     // local coords within region
@@ -34,7 +34,9 @@ public class Region
         {
             for (int y = 0; y < height; y++)
             {
-                Cells[x, y] = new CellT(x, y); 
+                //var globalCoords = LocalToGlobal(x, y);
+                //Cells[x,y] = new CellT(globalCoords.globalX, globalCoords.globalY); 
+                Cells[x,y] = new CellT(x,y); 
                 //Debug.Log(x + "," + y);
             }
         }

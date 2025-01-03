@@ -38,7 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 0.4
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+<<<<<<< HEAD
+  m_IndirectSpecularColor: {r: 0.039004784, g: 0.14048305, b: 0.28770217, a: 0.4}
+=======
   m_IndirectSpecularColor: {r: 0.03869987, g: 0.14068735, b: 0.28641108, a: 0.4}
+>>>>>>> 01c23b67e22012ffce5e6e10619f341227c18af8
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -490,6 +494,18 @@ MonoBehaviour:
       - m_Target: {fileID: 127430085}
         m_TargetAssemblyTypeName: ButtonHoverEffect, Assembly-CSharp
         m_MethodName: MakeSpriteNormalAgain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1281911525}
+        m_TargetAssemblyTypeName: SaveLoadManager, Assembly-CSharp
+        m_MethodName: OnLoadGameClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1979,6 +1995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   objectToPlace: {fileID: 0}
+  toastPanel: {fileID: 0}
 --- !u!156049354 &587163669
 Grid:
   m_ObjectHideFlags: 0
@@ -54329,6 +54346,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1280353704}
   m_CullTransparentMesh: 1
+--- !u!1 &1281911524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1281911526}
+  - component: {fileID: 1281911525}
+  m_Layer: 0
+  m_Name: LoadGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1281911525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281911524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d349068765fa5f4ab6b4958958a02ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLoad: 0
+--- !u!4 &1281911526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281911524}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.877522, y: -10.150836, z: 14.914451}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1284036834
 GameObject:
   m_ObjectHideFlags: 0
@@ -56956,3 +57018,4 @@ SceneRoots:
   - {fileID: 1936038662}
   - {fileID: 587163670}
   - {fileID: 354771318}
+  - {fileID: 1281911526}
