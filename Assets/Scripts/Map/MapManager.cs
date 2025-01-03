@@ -460,7 +460,8 @@ public class MapManager : MonoBehaviour
 
                 if (cell.objectPlacedOnCell != null)
                 {
-                    Instantiate(cell.objectPlacedOnCell, tilemap.GetCellCenterWorld(new Vector3Int(cell.X, cell.Y)), Quaternion.identity);
+                    GameObject tower = Instantiate(cell.objectPlacedOnCell, tilemap.GetCellCenterWorld(new Vector3Int(cell.X, cell.Y)), Quaternion.identity);
+                    tower.GetComponent<Tower>().placed = true;
                 }
                 tileToUse = cell.IsWalkable ? walkableTile : nonWalkableTile;
                 
