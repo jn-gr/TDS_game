@@ -145,7 +145,7 @@ public class UI : MonoBehaviour
     // Button connected to start wave button. Starts waves.
     public void StartWave()
     {
-        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+        SoundManager.PlaySound(SoundType.UiClick, 0.5f);
         gameManager.StartWave();
         startWaveButton.image.sprite = waveStartedSprite;
         startWaveButton.interactable = false;
@@ -159,7 +159,7 @@ public class UI : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+        SoundManager.PlaySound(SoundType.UiClick,0.5f);
         SceneLoader.NextSceneName = "Main Menu";
         SceneManager.LoadScene("Loading Screen");
     }
@@ -168,7 +168,7 @@ public class UI : MonoBehaviour
     {
         Debug.Log("Put Save And Go Home Logic Here");
 
-        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+        SoundManager.PlaySound(SoundType.UiClick,0.5f);
         SceneLoader.NextSceneName = "Main Menu";
         SceneManager.LoadScene("Loading Screen");
     }
@@ -235,7 +235,7 @@ public class UI : MonoBehaviour
     {
         if (!isPauseOnCooldown)
         {
-            SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+            SoundManager.PlaySound(SoundType.UiClick, 0.5f);
             TogglePause();
             StartCoroutine(PauseCooldown());
         }
@@ -254,7 +254,7 @@ public class UI : MonoBehaviour
 
         if (isPaused)
         {
-            SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+            SoundManager.PlaySound(SoundType.UiClick, 0.5f);
             StartCoroutine(FadeCanvasGroup(Fade.In, pausePanel, pauseFadeDuration, Blurry.Yes));
             Time.timeScale = 0;
         }
@@ -278,20 +278,20 @@ public class UI : MonoBehaviour
 
     public void SkillTreeOpen()
     {
-        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+        SoundManager.PlaySound(SoundType.UiClick, 0.5f);
         StartCoroutine(FadeCanvasGroup(Fade.In, activeSkillTreePanel, skillTreeFadeDuration, Blurry.Yes));
     }
 
     public void SkillTreeClose()
     {
-        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+        SoundManager.PlaySound(SoundType.UiClick, 0.5f);
         StartCoroutine(FadeCanvasGroup(Fade.Out, activeSkillTreePanel, skillTreeFadeDuration, Blurry.No));
         StartCoroutine(FadeCanvasGroup(Fade.Out, passiveSkillTreePanel, skillTreeFadeDuration, Blurry.No));
     }
 
     public void PassiveSkillTreeOpen()
     {
-        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+        SoundManager.PlaySound(SoundType.UiClick, 0.5f);
         CanvasGroup canvasGroup = passiveSkillTreePanel.GetComponent<CanvasGroup>();
         canvasGroup.alpha = 1f;
     }
@@ -302,7 +302,7 @@ public class UI : MonoBehaviour
 
         if (isPaused)
         {
-            SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+            SoundManager.PlaySound(SoundType.UiClick, 0.5f);
             StartCoroutine(FadeCanvasGroup(Fade.In, encyclopediaPanel, encyclopediaFadeDuration, Blurry.Yes));
             Time.timeScale = 0;
         }
@@ -316,7 +316,7 @@ public class UI : MonoBehaviour
 
     public void RestartLevel()
     {
-        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+        SoundManager.PlaySound(SoundType.UiClick, 0.5f);
         SceneLoader.NextSceneName = "Main";
         SceneManager.LoadScene("Loading Screen");
     }

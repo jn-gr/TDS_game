@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Spawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
@@ -60,7 +61,9 @@ public class Spawner : MonoBehaviour
 
 
                     // Instantiate the enemy with position and rotation
+                    SoundManager.PlaySound(SoundType.MonsterSpawn, 0.1f);
                     Instantiate(enemyPrefab, spawnPosition, spawnRotation);
+
                     gameManager.EnemySpawned();
                 }
             }
