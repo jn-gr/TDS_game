@@ -15,32 +15,39 @@ In Fortress of Elements, your mission is to defend your Main Castle from waves o
 ### Basic Mechanics:
 - Towers: Place towers strategically to attack and eliminate enemies. Towers can be upgraded with Gold to improve their damage, range, and attack speed. Towers can also be infused with elemental powers for special effects.  
 - Gold: Earn Gold by killing enemies. Spend it wisely to build new towers, upgrade existing ones, or enhance towers with elemental powers.
-- Skill Tree: Upgrade passive abilities in the Skill Tree using Gold. These skills provide powerful benefits that enhance your towers, increase resource gains, and improve survivability.
+- Skill Tree: Upgrade abilities in the Skill Tree using Gold. These skills provide powerful benefits that enhance your towers, increase resource gains, and improve survivability.
 - Map Expansion: Expand the map as you play by choosing where to add new tiles. Strategically extend paths to create chokepoints and optimize your defenses.
 - Waves: Enemies arrive in waves, with increasing numbers, health, and strength. Stay ahead of the difficulty curve by planning your defenses carefully.
 - Castle Health: Your Main Castle has limited health. Each enemy that reaches the castle damages it. The game ends when the castle’s health reaches zero.
 - Score: Your score reflects the number of enemies killed and waves survived. Compete to reach the top score!
 
 ### Tower Types:
-- RapidFire: A fast-shooting tower with a high attack speed, ideal for dealing with large groups of weaker enemies.
+- Rapid Fire: A fast-shooting tower with a high attack speed, ideal for dealing with large groups of weaker enemies.
 - Sniper: A long-range tower with high single-target damage, excellent for eliminating tough enemies and bosses.
 - Turret: A balanced tower with moderate damage and range, designed for steady and consistent performance.
-- All Towers are upgradeable by 3 tiers and also all the elements : Neutral(Default), Fire, Water and Air.
+- All Towers are upgradeable by 3 tiers and also all the elements : Neutral, Fire, Water and Air.
 
 ### Enemies:
 - Tier 1 Enemies: Enemies that come in waves, increasing in difficulty over time.
 - Tier 2 Enemies: These enemies are Stronger, faster and have increased hp compared to tier 1 Enemies, also increases in difficulty over time.
 - Bosses: Large, powerful enemies that appear periodically. They have high health, power and poses a significant challenge.
-- All Enemies are either one of the four elements: Neutral(Default), Fire, Water and Air.
+- All Enemies are either one of the four elements: Neutral, Fire, Water and Air.
 
 ### Game Controls:
-- **Mouse Click**: 
-  - **Left Click**: Select a tower to place or upgrade.
-  - **Right Click**: Cancel tower placement or return to the previous action.
+- Mouse Click: 
+  - Left Click: Select a tower to place or upgrade
+  - Right Click: Cancel tower placement or move camera
+- WASD: Move camera
+- Drag Mouse To Edges Of Screen: Move Camera
+- T: Open Skill Tree
+- H: Open Help
+- Enter: Start Next Wave
+- 1/2/3: Choose Tower To Place
+- 4: Use Active Ability
 
 ### Tips and Strategies:
 - Plan Ahead: Position towers strategically to cover key choke points and maximize their effectiveness.
-- Diversify Your Towers: Use a mix of RapidFire, Sniper, and Turret towers to handle different enemy types.
+- Diversify Your Towers: Use a mix of Rapid Fire, Sniper, and Turret towers to handle different enemy types.
 - Elemental Matchups: Pay attention to enemy elements and use the right elemental upgrades to exploit their weaknesses.
 - Upgrade Wisely: Focus on upgrading a few key towers rather than spreading your resources too thin.
 - Skill Tree: Invest in the Skill Tree to gain passive advantages that scale as the game progresses.
