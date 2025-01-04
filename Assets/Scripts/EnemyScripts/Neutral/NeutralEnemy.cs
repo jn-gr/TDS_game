@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 
 public class NeutralEnemy : MonoBehaviour
@@ -51,8 +52,9 @@ public class NeutralEnemy : MonoBehaviour
         health = GlobalHealth;
         speed = GlobalSpeed;
 
-        //health = (int)(8 + (gameManager.waveNum * 1.1));
-        //speed = (float)(5 + (gameManager.waveNum * 1.5));
+        health = (int)(8 + (gameManager.waveNum * 1.1));
+        speed = (float)Math.Min(25.0, (5.0+(gameManager.waveNum * 1.5)));
+        
         element = Element.Neutral;
         startingY = transform.position.y;
 
