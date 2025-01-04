@@ -53137,7 +53137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf81f021d87d69949847e378417a1236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isForSoundEffects: 0
+  isForSoundEffects: 1
   muteSprite: {fileID: -998444857, guid: edbc2de42673a234fa99716ec391e12b, type: 3}
   muteSpriteHover: {fileID: 1079861275, guid: edbc2de42673a234fa99716ec391e12b, type: 3}
   unmuteSprite: {fileID: 1639386214, guid: edbc2de42673a234fa99716ec391e12b, type: 3}
