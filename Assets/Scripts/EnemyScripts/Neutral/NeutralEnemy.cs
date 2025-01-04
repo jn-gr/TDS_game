@@ -96,8 +96,9 @@ public class NeutralEnemy : MonoBehaviour
             Vector3 horizontalDirection = new Vector3(direction.x, 90, direction.z); // Ignore Y axis
             if (horizontalDirection != Vector3.zero) // Avoid errors if direction is zero
             {
+                Quaternion rotationOffset = Quaternion.Euler(0, 0, 180); // Adjust this value as needed
                 Quaternion targetRotation = Quaternion.LookRotation(horizontalDirection, Vector3.up);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10f); // Smooth rotation
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation * rotationOffset, Time.deltaTime * 10f); // Smooth rotation
             }
 
             // Move toward the target position
