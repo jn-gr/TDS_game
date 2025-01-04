@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 
 public class NeutralEnemy : MonoBehaviour
@@ -26,8 +27,8 @@ public class NeutralEnemy : MonoBehaviour
     protected bool isDead;
 
     public Element element;
-    public float levitationHeight = 5f; // Max height to levitate
-    public float levitationSpeed = 5f;   // Speed of levitation
+    public float levitationHeight = 2f; // Max height to levitate
+    public float levitationSpeed = 2f;   // Speed of levitation
     private float startingY;              // Starting Y position
 
     private bool pathToTargetFound = false;
@@ -51,8 +52,9 @@ public class NeutralEnemy : MonoBehaviour
         health = GlobalHealth;
         speed = GlobalSpeed;
 
-        //health = (int)(8 + (gameManager.waveNum * 1.1));
-        //speed = (float)(5 + (gameManager.waveNum * 1.5));
+        health = (int)(8 + (gameManager.waveNum * 1.1));
+        speed = (float)Math.Min(25.0, (5.0+(gameManager.waveNum * 1.5)));
+        
         element = Element.Neutral;
         startingY = transform.position.y;
 
@@ -93,16 +95,18 @@ public class NeutralEnemy : MonoBehaviour
             Vector3 direction = targetPosition - transform.position;
 
             // Rotate to face the direction of movement
-            if (direction != Vector3.zero) // Avoid errors if direction is zero
+            Vector3 horizontalDirection = new Vector3(direction.x, 90, direction.z); // Ignore Y axis
+            if (horizontalDirection != Vector3.zero) // Avoid errors if direction is zero
             {
-                Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, direction.normalized);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10f); // Smooth rotation
+                Quaternion rotationOffset = Quaternion.Euler(0, 0, 180); // Adjust this value as needed
+                Quaternion targetRotation = Quaternion.LookRotation(horizontalDirection, Vector3.up);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation * rotationOffset, Time.deltaTime * 10f); // Smooth rotation
             }
 
             // Move toward the target position
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
-            // Apply levitation effect
+            //// Apply levitation effect
             float currentHeight = Mathf.Abs(Mathf.Sin(Time.time * levitationSpeed)) * levitationHeight;
             transform.position = new Vector3(transform.position.x, startingY + currentHeight, transform.position.z);
 
@@ -113,6 +117,7 @@ public class NeutralEnemy : MonoBehaviour
             }
         }
     }
+
 
     public virtual void TakeDamage(float damage, Element element)
     {

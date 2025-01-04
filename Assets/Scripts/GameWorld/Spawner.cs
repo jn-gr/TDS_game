@@ -58,6 +58,7 @@ public class Spawner : MonoBehaviour
                     Vector3 directionToTower = (mainTower.position - spawnPosition).normalized;
                     Quaternion spawnRotation = Quaternion.LookRotation(directionToTower);
 
+
                     // Instantiate the enemy with position and rotation
                     Instantiate(enemyPrefab, spawnPosition, spawnRotation);
                     gameManager.EnemySpawned();

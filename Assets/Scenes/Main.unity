@@ -14897,6 +14897,21 @@ MonoBehaviour:
   - {fileID: 3022830877294750256, guid: db61c4a8f745c634a8a9c934bcc168fd, type: 3}
   - {fileID: 388600068937551363, guid: 0e6bc779a7488584dba71337e033bd61, type: 3}
   - {fileID: 8688734913727126355, guid: 3984a3664e1b88b4281bae578b675382, type: 3}
+  tierOneEnemy:
+  - {fileID: 6900620980332985846, guid: cd93e88ddd530374b96a01111046619f, type: 3}
+  - {fileID: 3383410944982298732, guid: d14f1f5303445784581454cdd574a78a, type: 3}
+  - {fileID: 162885365935547001, guid: 10b69ee9ca1013649b44a796215a4192, type: 3}
+  - {fileID: 9074469432287360973, guid: 42ea84f13adeb544cb628766f05f646a, type: 3}
+  tierTwoEnemy:
+  - {fileID: 1476365506599972159, guid: 6a6b3e81dfe4bb7439533f312a17b0bf, type: 3}
+  - {fileID: 4150928241459888665, guid: cdcc6b5e90e05f743ac349d0fecfcc19, type: 3}
+  - {fileID: 1456462915519590877, guid: f8115eaed11344943b31a65ebf3ff5b1, type: 3}
+  - {fileID: 7216294752636565412, guid: f435a90d4e9f9d64eba92cfc875ab16a, type: 3}
+  boss:
+  - {fileID: 3550762112413462233, guid: 719a84e4f66f7984b9bc07859a22a513, type: 3}
+  - {fileID: 3223090991524122891, guid: 8fddc9f097c3e5040a0712b4752f2fa5, type: 3}
+  - {fileID: 4200054379334754353, guid: 21063dcfd7a458e43bd56b84a093bdad, type: 3}
+  - {fileID: 9074469432287360973, guid: 42ea84f13adeb544cb628766f05f646a, type: 3}
 --- !u!114 &1609003468
 MonoBehaviour:
   m_ObjectHideFlags: 0
