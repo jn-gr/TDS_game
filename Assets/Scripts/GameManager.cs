@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
         // Assign random prefabs to spawners and start spawning
         foreach (KeyValuePair<(int x, int y), Spawner> spawner in MapManager.Instance.spawnerPositions)
         {
-            if (waveNum % 10 == 0) // Every 10th wave, spawn a boss
+            if (waveNum >= 10 && waveNum % 10 == 0)
             {
                 int randomBossIndex = UnityEngine.Random.Range(0, boss.Length); // Corrected range
                 spawner.Value.enemyPrefab = boss[randomBossIndex];
