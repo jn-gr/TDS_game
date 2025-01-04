@@ -4946,8 +4946,8 @@ MonoBehaviour:
   strongDamageMultiplier: 1.2
   weakDamageMultiplier: 0.8
   element: 1
-  levitationHeight: 5
-  levitationSpeed: 5
+  levitationHeight: 0.1
+  levitationSpeed: 0.5
 --- !u!65 &2350361406481489952
 BoxCollider:
   m_ObjectHideFlags: 0

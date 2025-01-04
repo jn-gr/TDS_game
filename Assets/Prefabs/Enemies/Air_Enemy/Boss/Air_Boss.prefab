@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.5852646, y: -0, z: -0, w: 0.8108424}
   m_LocalPosition: {x: 0, y: 0.000000007690922, z: -0.027499365}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8549289435920903543}
@@ -4838,27 +4838,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c01324629c9443f4196d6ebdf33bd338, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c01324629c9443f4196d6ebdf33bd338, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.24
+      value: 6.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c01324629c9443f4196d6ebdf33bd338, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.82
+      value: 14.099999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c01324629c9443f4196d6ebdf33bd338, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -65.00455
+      value: -13.391294
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c01324629c9443f4196d6ebdf33bd338, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000019073486
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c01324629c9443f4196d6ebdf33bd338, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -130.87663
+      value: 16.979227
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c01324629c9443f4196d6ebdf33bd338, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4946,8 +4946,8 @@ MonoBehaviour:
   strongDamageMultiplier: 1.2
   weakDamageMultiplier: 0.8
   element: 3
-  levitationHeight: 5
-  levitationSpeed: 5
+  levitationHeight: 0.1
+  levitationSpeed: 0.5
 --- !u!65 &8144409376253137856
 BoxCollider:
   m_ObjectHideFlags: 0

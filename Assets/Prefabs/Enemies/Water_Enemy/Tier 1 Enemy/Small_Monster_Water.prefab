@@ -4941,8 +4941,8 @@ MonoBehaviour:
   strongDamageMultiplier: 1.2
   weakDamageMultiplier: 0.8
   element: 2
-  levitationHeight: 5
-  levitationSpeed: 5
+  levitationHeight: 0.1
+  levitationSpeed: 0.5
 --- !u!54 &5787854947680522265
 Rigidbody:
   m_ObjectHideFlags: 0

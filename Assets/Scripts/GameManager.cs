@@ -39,6 +39,10 @@ public class GameManager : MonoBehaviour
     public GameObject[] sniperPrefabs; // 12 prefabs 
     public GameObject[] rapidFirePrefabs; // 12 prefabs 
 
+    public GameObject[] tierOneEnemy; // Neutral, Fire, Water, Air Tier One Enemies
+    public GameObject[] tierTwoEnemy; // Neutral, Fire, Water, Air Tier Two Enemies
+    public GameObject[] boss; // Neutral, Fire, Water, Air Boss Enemies
+
     public event Action WaveEnded;
     public event Action WaveStarted;
 
@@ -47,11 +51,20 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Level chosen is : " + UserDifficulty.CurrentLevel);
         Instance = this;
-        //spawners = FindObjectsByType<Spawner>(FindObjectsSortMode.None);
+
         currentHealth = mainTower.GetHealth();
         currency = 1000;
         waveStarted = false;
+    }
 
+    // Helper method to log array details
+    void LogArray(string arrayName, GameObject[] array)
+    {
+        Debug.Log($"{arrayName} Size: {array.Length}");
+        for (int i = 0; i < array.Length; i++)
+        {
+            Debug.Log($"{arrayName}[{i}]: {(array[i] != null ? array[i].name : "NULL")}");
+        }
     }
 
     void Update()
@@ -92,20 +105,37 @@ public class GameManager : MonoBehaviour
         enemiesSpawned = 0;
         enemiesAlive = totalEnemiesToSpawn;
 
+        // Assign random prefabs to spawners and start spawning
         foreach (KeyValuePair<(int x, int y), Spawner> spawner in MapManager.Instance.spawnerPositions)
         {
+            if (waveNum % 10 == 0) // Every 10th wave, spawn a boss
+            {
+                int randomBossIndex = UnityEngine.Random.Range(0, boss.Length); // Corrected range
+                spawner.Value.enemyPrefab = boss[randomBossIndex];
+            }
+            else
+            {
+                int randomTier = UnityEngine.Random.Range(0, 2); // Choose between Tier One and Tier Two
+                if (randomTier == 0)
+                {
+                    int randomEnemyIndex = UnityEngine.Random.Range(0, tierOneEnemy.Length); // Corrected range
+                    spawner.Value.enemyPrefab = tierOneEnemy[randomEnemyIndex];
+                }
+                else
+                {
+                    int randomEnemyIndex = UnityEngine.Random.Range(0, tierTwoEnemy.Length); // Corrected range
+                    spawner.Value.enemyPrefab = tierTwoEnemy[randomEnemyIndex];
+                }
+            }
+
             spawner.Value.StartSpawning();
-            
         }
-        //foreach (Spawner spawner in spawners)
-        //{
-        //    spawner.StartSpawning();
-        //}
 
         Debug.Log($"Wave {waveNum} started: Spawning {totalEnemiesToSpawn} enemies.");
-
         WaveStarted?.Invoke();
     }
+
+
 
     public void EndWave()
     {
