@@ -21,13 +21,11 @@ public class MainMenuEnemySpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("OnEnable called, starting spawning...");
         StartSpawning();
     }
 
     private void Awake()
     {
-        Debug.Log("Awake called, resetting variables.");
         isSpawning = false;
         objectsSpawned = 0;
     }
@@ -38,31 +36,26 @@ public class MainMenuEnemySpawner : MonoBehaviour
         {
             isSpawning = true;
             StopAllCoroutines();
-            Debug.Log("Starting spawning process.");
             StartCoroutine(SpawnRoutine());
         }
     }
 
     public void StopSpawning()
     {
-        Debug.Log("Stopping spawning process.");
         isSpawning = false;
     }
 
     private IEnumerator SpawnRoutine()
     {
         yield return new WaitForSeconds(0.1f);
-        Debug.Log("SpawnRoutine started.");
 
         while (isSpawning && (totalObjectsToSpawn == 0 || objectsSpawned < totalObjectsToSpawn))
         {
-            Debug.Log($"Spawning object {objectsSpawned + 1}/{totalObjectsToSpawn}.");
             SpawnObject();
             objectsSpawned++;
             yield return new WaitForSeconds(spawnInterval);
         }
 
-        Debug.Log("SpawnRoutine stopped.");
         isSpawning = false;
     }
 
@@ -76,13 +69,11 @@ public class MainMenuEnemySpawner : MonoBehaviour
 
         Vector3 spawnPosition = transform.position + spawnOffset;
         GameObject spawnedObject = Instantiate(objectPrefab, spawnPosition, transform.rotation);
-        Debug.Log($"Spawned object {spawnedObject.name} at {spawnPosition}.");
 
         Rigidbody rb = spawnedObject.GetComponent<Rigidbody>();
         if (rb == null)
         {
             rb = spawnedObject.AddComponent<Rigidbody>();
-            Debug.LogWarning("Added Rigidbody to spawned object.");
         }
 
         rb.AddForce(forceDirection.normalized * initialForce, ForceMode.Impulse);
@@ -99,7 +90,6 @@ public class MainMenuEnemySpawner : MonoBehaviour
     private IEnumerator DestroyAfterDelay(GameObject obj)
     {
         yield return new WaitForSeconds(objectLifetime);
-        Debug.Log($"Destroying object {obj.name} after {objectLifetime} seconds.");
         if (obj != null)
         {
             Destroy(obj);

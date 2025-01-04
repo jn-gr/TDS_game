@@ -2,16 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
+    private Transform currentTarget; // The current target position and rotation
+    private bool isMoving = false;
+    private float soundEffectVolume;
+    private float musicVolume;
+
+    [Header("Camera Movement Variables")]
     public Camera mainCamera; // Reference to the main camera (assign via Inspector)
     public Transform[] targetPositions; // Array of target positions and rotations
     public float moveSpeed = 5f; // Speed of camera movement
     public float rotateSpeed = 100f; // Speed of camera rotation
 
-    private Transform currentTarget; // The current target position and rotation
-    private bool isMoving = false;
+    [Header("Settings Volume Variables")]
+    public Image soundEffectButton;
+    public Sprite soundEffectMute;
+    public Sprite soundEffectUnmute;
+    public Image musicButton;
+    public Sprite musicMute;
+    public Sprite musicUnmute;
 
     public void PlayGameEasy()
     {
@@ -49,6 +61,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void Update()
     {
+        // Moves the camera if the camera is told to move.
         if (isMoving && mainCamera != null && currentTarget != null)
         {
             // Move the camera towards the target position
@@ -71,6 +84,69 @@ public class MainMenuUI : MonoBehaviour
             {
                 isMoving = false; // Stop moving the camera
             }
+        }
+    }
+
+    public void LoadGame()
+    {
+        Debug.Log("Enter Load Game Logic Here");
+    }
+
+    private void Start()
+    {
+        // Gets volume variables from PlayerPrefs
+        soundEffectVolume = PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f);
+        musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+
+        // Changes volume sprites based on if they're 1 or 0.
+        if (soundEffectVolume == 1)
+        {
+            soundEffectButton.sprite = soundEffectUnmute;
+        }
+        else
+        {
+            soundEffectButton.sprite = soundEffectMute;
+        }
+
+        if (musicVolume == 1)
+        {
+            musicButton.sprite = musicUnmute;
+        }
+        else
+        {
+            musicButton.sprite = musicMute;
+        }
+    }
+
+    public void SoundEffectToggle()
+    {
+        if (soundEffectVolume == 1.0f)
+        {
+            PlayerPrefs.SetFloat("SoundEffectVolume", 0.0f);
+            soundEffectVolume = PlayerPrefs.GetFloat("SoundEffectVolume");
+            soundEffectButton.sprite = soundEffectMute;
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("SoundEffectVolume", 1.0f);
+            soundEffectVolume = PlayerPrefs.GetFloat("SoundEffectVolume");
+            soundEffectButton.sprite = soundEffectUnmute;
+        }
+    }
+
+    public void MusicToggle()
+    {
+        if (musicVolume == 1.0f)
+        {
+            PlayerPrefs.SetFloat("MusicVolume", 0.0f);
+            musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+            musicButton.sprite = musicMute;
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("MusicVolume", 1.0f);
+            musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+            musicButton.sprite = musicUnmute;
         }
     }
 }
