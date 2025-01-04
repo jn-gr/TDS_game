@@ -93,10 +93,12 @@ public class NeutralEnemy : MonoBehaviour
             Vector3 direction = targetPosition - transform.position;
 
             // Rotate to face the direction of movement
-            if (direction != Vector3.zero) // Avoid errors if direction is zero
+            Vector3 horizontalDirection = new Vector3(direction.x, 90, direction.z); // Ignore Y axis
+            if (horizontalDirection != Vector3.zero) // Avoid errors if direction is zero
             {
-                Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, direction.normalized);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10f); // Smooth rotation
+                Quaternion rotationOffset = Quaternion.Euler(0, 0, 180); // Adjust this value as needed
+                Quaternion targetRotation = Quaternion.LookRotation(horizontalDirection, Vector3.up);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation * rotationOffset, Time.deltaTime * 10f); // Smooth rotation
             }
 
             // Move toward the target position
@@ -113,6 +115,7 @@ public class NeutralEnemy : MonoBehaviour
             }
         }
     }
+
 
     public virtual void TakeDamage(float damage, Element element)
     {
