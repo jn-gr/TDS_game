@@ -25,6 +25,10 @@ public class MainMenuUI : MonoBehaviour
     public Sprite musicMute;
     public Sprite musicUnmute;
 
+    [Header("Audio Variables")]
+    public AudioSource bgmAudioSource; // Reference to the AudioSource for BGM
+    public AudioClip bgmClip;          // The AudioClip for the BGM
+
     public void PlayGameEasy()
     {
         UserDifficulty.CurrentLevel = DifficultyLevel.Easy;
@@ -38,6 +42,7 @@ public class MainMenuUI : MonoBehaviour
         SceneLoader.NextSceneName = "Main";
         SceneManager.LoadScene("Loading Screen");
     }
+
     public void PlayGameHard()
     {
         UserDifficulty.CurrentLevel = DifficultyLevel.Hard;
@@ -105,49 +110,30 @@ public class MainMenuUI : MonoBehaviour
         }
         PlayerPrefs.Save();
 
-        // Changes volume sprites based on if they're 1 or 0.
-        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
-        {
-            soundEffectButton.sprite = soundEffectMute;
-        }
-        else
-        {
-            soundEffectButton.sprite = soundEffectUnmute;
-        }
+        // Update volume sprites based on PlayerPrefs values
+        UpdateSoundEffectSprite();
+        UpdateMusicSprite();
 
-        if (PlayerPrefs.GetFloat("MusicVolume") == 1)
-        {
-            musicButton.sprite = musicUnmute;
-        }
-        else
-        {
-            musicButton.sprite = musicMute;
-        }
+        // Play or stop BGM based on the MusicVolume
+        UpdateBGM();
     }
 
     public void SoundEffectToggle()
     {
         if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
         {
-            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
-            {
-                SoundManager.PlaySound(SoundType.UiClick, 0.5f);
-
-            }
             PlayerPrefs.SetInt("SoundEffectVolume", 0);
             PlayerPrefs.Save();
             soundEffectButton.sprite = soundEffectUnmute;
         }
         else
         {
-            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
-            {
-                SoundManager.PlaySound(SoundType.UiClick, 0.5f);
-
-            }
             PlayerPrefs.SetInt("SoundEffectVolume", 1);
             PlayerPrefs.Save();
             soundEffectButton.sprite = soundEffectMute;
+
+            // Play click sound only when unmuting
+            SoundManager.PlaySound(SoundType.UiClick, 0.5f);
         }
     }
 
@@ -155,26 +141,72 @@ public class MainMenuUI : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("MusicVolume") == 1)
         {
-            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
-            {
-                SoundManager.PlaySound(SoundType.UiClick, 0.5f);
-
-            }
             PlayerPrefs.SetInt("MusicVolume", 0);
             PlayerPrefs.Save();
-            musicButton.sprite = musicUnmute;
+            musicButton.sprite = musicMute;
+
+            // Stop the BGM
+            UpdateBGM();
         }
         else
         {
+            PlayerPrefs.SetInt("MusicVolume", 1);
+            PlayerPrefs.Save();
+            musicButton.sprite = musicUnmute;
+
+            // Play the BGM
+            UpdateBGM();
+
+            // Play click sound only if sound effects are enabled
             if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
             {
                 SoundManager.PlaySound(SoundType.UiClick, 0.5f);
-
             }
-            SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
-            PlayerPrefs.SetInt("MusicVolume", 1);
-            PlayerPrefs.Save();
+        }
+    }
+
+    private void UpdateBGM()
+    {
+        if (PlayerPrefs.GetInt("MusicVolume") == 1)
+        {
+            if (!bgmAudioSource.isPlaying)
+            {
+                bgmAudioSource.clip = bgmClip;
+                bgmAudioSource.loop = true; // Enable looping
+                bgmAudioSource.volume = 0.5f; // Set desired volume
+                bgmAudioSource.Play(); // Start playing
+            }
+        }
+        else
+        {
+            if (bgmAudioSource.isPlaying)
+            {
+                bgmAudioSource.Stop(); // Stop playing the BGM
+            }
+        }
+    }
+
+    private void UpdateSoundEffectSprite()
+    {
+        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+        {
+            soundEffectButton.sprite = soundEffectMute;
+        }
+        else
+        {
+            soundEffectButton.sprite = soundEffectUnmute;
+        }
+    }
+
+    private void UpdateMusicSprite()
+    {
+        if (PlayerPrefs.GetInt("MusicVolume") == 1)
+        {
             musicButton.sprite = musicMute;
+        }
+        else
+        {
+            musicButton.sprite = musicUnmute;
         }
     }
 }
