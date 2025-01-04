@@ -94,21 +94,28 @@ public class MainMenuUI : MonoBehaviour
 
     private void Start()
     {
-        // Gets volume variables from PlayerPrefs
-        soundEffectVolume = PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f);
-        musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+        // Initialize PlayerPrefs with default values if not already set
+        if (!PlayerPrefs.HasKey("SoundEffectVolume"))
+        {
+            PlayerPrefs.SetInt("SoundEffectVolume", 1);
+        }
+        if (!PlayerPrefs.HasKey("MusicVolume"))
+        {
+            PlayerPrefs.SetInt("MusicVolume", 1);
+        }
+        PlayerPrefs.Save();
 
         // Changes volume sprites based on if they're 1 or 0.
-        if (soundEffectVolume == 1)
-        {
-            soundEffectButton.sprite = soundEffectUnmute;
-        }
-        else
+        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
         {
             soundEffectButton.sprite = soundEffectMute;
         }
+        else
+        {
+            soundEffectButton.sprite = soundEffectUnmute;
+        }
 
-        if (musicVolume == 1)
+        if (PlayerPrefs.GetFloat("MusicVolume") == 1)
         {
             musicButton.sprite = musicUnmute;
         }
@@ -120,33 +127,54 @@ public class MainMenuUI : MonoBehaviour
 
     public void SoundEffectToggle()
     {
-        if (soundEffectVolume == 1.0f)
+        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
         {
-            PlayerPrefs.SetFloat("SoundEffectVolume", 0.0f);
-            soundEffectVolume = PlayerPrefs.GetFloat("SoundEffectVolume");
-            soundEffectButton.sprite = soundEffectMute;
+            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+            {
+                SoundManager.PlaySound(SoundType.UiClick, 0.5f);
+
+            }
+            PlayerPrefs.SetInt("SoundEffectVolume", 0);
+            PlayerPrefs.Save();
+            soundEffectButton.sprite = soundEffectUnmute;
         }
         else
         {
-            PlayerPrefs.SetFloat("SoundEffectVolume", 1.0f);
-            soundEffectVolume = PlayerPrefs.GetFloat("SoundEffectVolume");
-            soundEffectButton.sprite = soundEffectUnmute;
+            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+            {
+                SoundManager.PlaySound(SoundType.UiClick, 0.5f);
+
+            }
+            PlayerPrefs.SetInt("SoundEffectVolume", 1);
+            PlayerPrefs.Save();
+            soundEffectButton.sprite = soundEffectMute;
         }
     }
 
     public void MusicToggle()
     {
-        if (musicVolume == 1.0f)
+        if (PlayerPrefs.GetInt("MusicVolume") == 1)
         {
-            PlayerPrefs.SetFloat("MusicVolume", 0.0f);
-            musicVolume = PlayerPrefs.GetFloat("MusicVolume");
-            musicButton.sprite = musicMute;
+            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+            {
+                SoundManager.PlaySound(SoundType.UiClick, 0.5f);
+
+            }
+            PlayerPrefs.SetInt("MusicVolume", 0);
+            PlayerPrefs.Save();
+            musicButton.sprite = musicUnmute;
         }
         else
         {
-            PlayerPrefs.SetFloat("MusicVolume", 1.0f);
-            musicVolume = PlayerPrefs.GetFloat("MusicVolume");
-            musicButton.sprite = musicUnmute;
+            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+            {
+                SoundManager.PlaySound(SoundType.UiClick, 0.5f);
+
+            }
+            SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+            PlayerPrefs.SetInt("MusicVolume", 1);
+            PlayerPrefs.Save();
+            musicButton.sprite = musicMute;
         }
     }
 }
