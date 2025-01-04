@@ -104,7 +104,7 @@ public class UI : MonoBehaviour
         goldText.text = (gameManager.currency).ToString();
         totalKillsText.text = (gameManager.totalKills).ToString();
         experienceText.text = (gameManager.experience).ToString();
-        waveCounter.text = "Wave: \n" + gameManager.waveNum + "/" + gameManager.GetLastWaveNumber();
+        waveCounter.text = "Wave: \n" + gameManager.waveNum + WaveNumSlashRemaining();
 
         if (gameManager.waveStarted)
         {
@@ -128,6 +128,18 @@ public class UI : MonoBehaviour
         //{
         //    activeSkillButton.interactable = false;
         //}
+    }
+
+    private string WaveNumSlashRemaining()
+    {
+        if (gameManager.waveNum <= gameManager.GetLastWaveNumber())
+        {
+            return "/" + gameManager.GetLastWaveNumber();
+        }
+        else
+        {
+            return "";
+        }
     }
 
     // Button connected to start wave button. Starts waves.
@@ -154,7 +166,7 @@ public class UI : MonoBehaviour
 
     public void SaveAndBackToMainMenu()
     {
-        // Put save level code here
+        Debug.Log("Put Save And Go Home Logic Here");
 
         SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
         SceneLoader.NextSceneName = "Main Menu";
