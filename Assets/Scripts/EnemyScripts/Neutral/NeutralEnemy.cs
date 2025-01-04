@@ -27,7 +27,7 @@ public class NeutralEnemy : MonoBehaviour
     protected bool isDead;
 
     public Element element;
-    public float levitationHeight = 2f; // Max height to levitate
+    public float levitationHeight = 5f; // Max height to levitate
     public float levitationSpeed = 2f;   // Speed of levitation
     private float startingY;              // Starting Y position
 
@@ -53,7 +53,7 @@ public class NeutralEnemy : MonoBehaviour
         speed = GlobalSpeed;
 
         health = (int)(8 + (gameManager.waveNum * 1.1));
-        speed = (float)Math.Min(25.0, (5.0+(gameManager.waveNum * 1.5)));
+        speed = (float)Math.Min(25.0, (1.0+(gameManager.waveNum * 0.2)));
         
         element = Element.Neutral;
         startingY = transform.position.y;
