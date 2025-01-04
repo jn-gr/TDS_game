@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     public event Action WaveEnded;
     public event Action WaveStarted;
-
+    public event Action LastWaveCompleted;
 
     void Start()
     {
@@ -107,6 +107,23 @@ public class GameManager : MonoBehaviour
         WaveStarted?.Invoke();
     }
 
+    public int GetLastWaveNumber()
+    {
+        DifficultyLevel difficulty = UserDifficulty.CurrentLevel;
+
+        switch (difficulty)
+        {
+            case DifficultyLevel.Easy:
+                return 50; 
+            case DifficultyLevel.Medium:
+                return 100; 
+            case DifficultyLevel.Hard:
+                return 150; 
+            default:
+                return 1; // Should only show up in development.
+        }
+    }
+
     public void EndWave()
     {
         waveStarted = false;
@@ -118,7 +135,13 @@ public class GameManager : MonoBehaviour
             
         }
         Debug.Log($"Wave {waveNum} ended: Total Kills = {totalKills}, Score = {score}, Currency = {currency}, Experience = {experience}.");
+
+        if (waveNum == GetLastWaveNumber())
+        {
+            LastWaveCompleted?.Invoke();
+        }
     }
+
     public void EnemySpawned()
     {
         enemiesSpawned++;

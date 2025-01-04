@@ -66,6 +66,10 @@ public class UI : MonoBehaviour
     public GameObject encyclopediaPanel;
     public float encyclopediaFadeDuration = 0.3f;
 
+    [Header("Game Won")]
+    public GameObject gameWonOverlay;
+    public float gameWonFadeDuration = 1.0f;
+
     private void Awake()
     {
         playerInput = Camera.main.GetComponent<PlayerInput>();
@@ -90,6 +94,7 @@ public class UI : MonoBehaviour
         blurryCameraEffect = GetComponent<PostProcessVolume>();
         allUI = canvas.GetComponentsInChildren<Transform>(true).ToArray();
         gameManager.WaveEnded += EndOfWave;
+        gameManager.LastWaveCompleted += EndOfLastWave;
     }
 
     void Update()
@@ -99,7 +104,7 @@ public class UI : MonoBehaviour
         goldText.text = (gameManager.currency).ToString();
         totalKillsText.text = (gameManager.totalKills).ToString();
         experienceText.text = (gameManager.experience).ToString();
-        waveCounter.text = "Wave: \n" + gameManager.waveNum;
+        waveCounter.text = "Wave: \n" + gameManager.waveNum + "/" + gameManager.GetLastWaveNumber();
 
         if (gameManager.waveStarted)
         {
@@ -142,6 +147,15 @@ public class UI : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+        SceneLoader.NextSceneName = "Main Menu";
+        SceneManager.LoadScene("Loading Screen");
+    }
+
+    public void SaveAndBackToMainMenu()
+    {
+        // Put save level code here
+
         SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
         SceneLoader.NextSceneName = "Main Menu";
         SceneManager.LoadScene("Loading Screen");
@@ -242,7 +256,6 @@ public class UI : MonoBehaviour
 
     private void GameOverScreen()
     {
-        blurryCameraEffect.enabled = true;
         foreach (Transform transform in allUI) {
             if (transform.CompareTag("UI")) {
                 transform.gameObject.SetActive(false);
@@ -329,6 +342,22 @@ public class UI : MonoBehaviour
     public void Skill6ButtonClicked()
     {
         Debug.Log("Passive Skill 6 Button Clicked");
+    }
+
+    public void EndOfLastWave()
+    {
+        isPaused = true;
+
+        StartCoroutine(FadeCanvasGroup(Fade.In, gameWonOverlay, pauseFadeDuration, Blurry.Yes));
+        Time.timeScale = 0;
+    }
+
+    public void ContinueToFreeplay()
+    {
+        isPaused = false;
+
+        StartCoroutine(FadeCanvasGroup(Fade.Out, gameWonOverlay, pauseFadeDuration, Blurry.No));
+        Time.timeScale = 1;
     }
 
 }
