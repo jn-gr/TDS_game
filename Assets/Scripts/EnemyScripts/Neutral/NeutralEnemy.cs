@@ -26,8 +26,8 @@ public class NeutralEnemy : MonoBehaviour
     protected bool isDead;
 
     public Element element;
-    public float levitationHeight = 5f; // Max height to levitate
-    public float levitationSpeed = 5f;   // Speed of levitation
+    public float levitationHeight = 2f; // Max height to levitate
+    public float levitationSpeed = 2f;   // Speed of levitation
     private float startingY;              // Starting Y position
 
     private bool pathToTargetFound = false;
@@ -104,7 +104,7 @@ public class NeutralEnemy : MonoBehaviour
             // Move toward the target position
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
-            // Apply levitation effect
+            //// Apply levitation effect
             float currentHeight = Mathf.Abs(Mathf.Sin(Time.time * levitationSpeed)) * levitationHeight;
             transform.position = new Vector3(transform.position.x, startingY + currentHeight, transform.position.z);
 

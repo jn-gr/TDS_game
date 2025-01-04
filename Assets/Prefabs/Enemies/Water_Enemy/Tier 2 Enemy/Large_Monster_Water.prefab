@@ -4846,7 +4846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ec590ddabd9233c47a6632b9494fb506, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ec590ddabd9233c47a6632b9494fb506, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4985,8 +4985,8 @@ MonoBehaviour:
   strongDamageMultiplier: 1.2
   weakDamageMultiplier: 0.8
   element: 2
-  levitationHeight: 5
-  levitationSpeed: 5
+  levitationHeight: 0.1
+  levitationSpeed: 0.5
 --- !u!4 &2269169771924908903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ec590ddabd9233c47a6632b9494fb506, type: 3}

@@ -4985,8 +4985,8 @@ MonoBehaviour:
   strongDamageMultiplier: 1.2
   weakDamageMultiplier: 0.8
   element: 0
-  levitationHeight: 5
-  levitationSpeed: 5
+  levitationHeight: 0.1
+  levitationSpeed: 0.5
 --- !u!4 &2249207404463372165 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bc256025b1469a746918dcc5f2e68f27, type: 3}
