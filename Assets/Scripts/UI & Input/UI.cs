@@ -44,14 +44,31 @@ public class UI : MonoBehaviour
     public float pauseFadeDuration = 0.3f;
     public float pauseCooldownDuration = 0.5f;
 
+    //[Header("Skill Tree Script w/ Logic")]
+    //public SkillTree skillTree;
+
     [Header("Skill Tree")]
     public GameObject activeSkillTreePanel;
     public GameObject passiveSkillTreePanel;
     public float skillTreeFadeDuration = 0.3f;
+    public TextMeshProUGUI activeSkillLevelText;
+    public TextMeshProUGUI passiveSkill1LevelText;
+    public TextMeshProUGUI passiveSkill2LevelText;
+    public TextMeshProUGUI passiveSkill3LevelText;
+    public TextMeshProUGUI passiveSkill4LevelText;
+    public TextMeshProUGUI passiveSkill5LevelText;
+    public TextMeshProUGUI passiveSkill6LevelText;
+
+    [Header("Active Skill Button")]
+    public Button activeSkillButton;
 
     [Header("Encyclopedia")]
     public GameObject encyclopediaPanel;
     public float encyclopediaFadeDuration = 0.3f;
+
+    [Header("Game Won")]
+    public GameObject gameWonOverlay;
+    public float gameWonFadeDuration = 1.0f;
 
     private void Awake()
     {
@@ -71,16 +88,15 @@ public class UI : MonoBehaviour
         pauseAction.Disable();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
         blurryCameraEffect = GetComponent<PostProcessVolume>();
         allUI = canvas.GetComponentsInChildren<Transform>(true).ToArray();
         gameManager.WaveEnded += EndOfWave;
+        gameManager.LastWaveCompleted += EndOfLastWave;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Checks all info on UI per frame. Gold, health, wave progress, etc.
@@ -88,7 +104,7 @@ public class UI : MonoBehaviour
         goldText.text = (gameManager.currency).ToString();
         totalKillsText.text = (gameManager.totalKills).ToString();
         experienceText.text = (gameManager.experience).ToString();
-        waveCounter.text = "Wave: \n" + gameManager.waveNum;
+        waveCounter.text = "Wave: \n" + gameManager.waveNum + "/" + gameManager.GetLastWaveNumber();
 
         if (gameManager.waveStarted)
         {
@@ -104,12 +120,20 @@ public class UI : MonoBehaviour
         {
             GameOverScreen();
         }
+
+        //if (skillTree.isActiveSkillAvailable)
+        //{
+        //    activeSkillButton.interactable = true;
+        //} else
+        //{
+        //    activeSkillButton.interactable = false;
+        //}
     }
 
     // Button connected to start wave button. Starts waves.
     public void StartWave()
     {
-        SoundManager.PlaySound(SoundType.UiClick, 1);
+        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
         gameManager.StartWave();
         startWaveButton.image.sprite = waveStartedSprite;
         startWaveButton.interactable = false;
@@ -123,7 +147,16 @@ public class UI : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SoundManager.PlaySound(SoundType.UiClick, 1);
+        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
+        SceneLoader.NextSceneName = "Main Menu";
+        SceneManager.LoadScene("Loading Screen");
+    }
+
+    public void SaveAndBackToMainMenu()
+    {
+        // Put save level code here
+
+        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
         SceneLoader.NextSceneName = "Main Menu";
         SceneManager.LoadScene("Loading Screen");
     }
@@ -190,7 +223,7 @@ public class UI : MonoBehaviour
     {
         if (!isPauseOnCooldown)
         {
-            SoundManager.PlaySound(SoundType.UiClick, 1);
+            SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
             TogglePause();
             StartCoroutine(PauseCooldown());
         }
@@ -209,7 +242,7 @@ public class UI : MonoBehaviour
 
         if (isPaused)
         {
-            SoundManager.PlaySound(SoundType.UiClick, 1);
+            SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
             StartCoroutine(FadeCanvasGroup(Fade.In, pausePanel, pauseFadeDuration, Blurry.Yes));
             Time.timeScale = 0;
         }
@@ -223,7 +256,6 @@ public class UI : MonoBehaviour
 
     private void GameOverScreen()
     {
-        blurryCameraEffect.enabled = true;
         foreach (Transform transform in allUI) {
             if (transform.CompareTag("UI")) {
                 transform.gameObject.SetActive(false);
@@ -234,20 +266,20 @@ public class UI : MonoBehaviour
 
     public void SkillTreeOpen()
     {
-        SoundManager.PlaySound(SoundType.UiClick, 1);
+        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
         StartCoroutine(FadeCanvasGroup(Fade.In, activeSkillTreePanel, skillTreeFadeDuration, Blurry.Yes));
     }
 
     public void SkillTreeClose()
     {
-        SoundManager.PlaySound(SoundType.UiClick, 1);
+        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
         StartCoroutine(FadeCanvasGroup(Fade.Out, activeSkillTreePanel, skillTreeFadeDuration, Blurry.No));
         StartCoroutine(FadeCanvasGroup(Fade.Out, passiveSkillTreePanel, skillTreeFadeDuration, Blurry.No));
     }
 
     public void PassiveSkillTreeOpen()
     {
-        SoundManager.PlaySound(SoundType.UiClick, 1);
+        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
         CanvasGroup canvasGroup = passiveSkillTreePanel.GetComponent<CanvasGroup>();
         canvasGroup.alpha = 1f;
     }
@@ -258,7 +290,7 @@ public class UI : MonoBehaviour
 
         if (isPaused)
         {
-            SoundManager.PlaySound(SoundType.UiClick, 1);
+            SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
             StartCoroutine(FadeCanvasGroup(Fade.In, encyclopediaPanel, encyclopediaFadeDuration, Blurry.Yes));
             Time.timeScale = 0;
         }
@@ -272,8 +304,60 @@ public class UI : MonoBehaviour
 
     public void RestartLevel()
     {
-        SoundManager.PlaySound(SoundType.UiClick, 1);
+        SoundManager.PlaySound(SoundType.UiClick, PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f));
         SceneLoader.NextSceneName = "Main";
         SceneManager.LoadScene("Loading Screen");
     }
+
+    public void ActiveSkillButtonClicked()
+    {
+        Debug.Log("Active Skill Button Clicked");
+    }
+
+    public void Skill1ButtonClicked()
+    {
+        Debug.Log("Passive Skill 1 Button Clicked");
+    }
+
+    public void Skill2ButtonClicked()
+    {
+        Debug.Log("Passive Skill 2 Button Clicked");
+    }
+
+    public void Skill3ButtonClicked()
+    {
+        Debug.Log("Passive Skill 3 Button Clicked");
+    }
+
+    public void Skill4ButtonClicked()
+    {
+        Debug.Log("Passive Skill 4 Button Clicked");
+    }
+
+    public void Skill5ButtonClicked()
+    {
+        Debug.Log("Passive Skill 5 Button Clicked");
+    }
+
+    public void Skill6ButtonClicked()
+    {
+        Debug.Log("Passive Skill 6 Button Clicked");
+    }
+
+    public void EndOfLastWave()
+    {
+        isPaused = true;
+
+        StartCoroutine(FadeCanvasGroup(Fade.In, gameWonOverlay, pauseFadeDuration, Blurry.Yes));
+        Time.timeScale = 0;
+    }
+
+    public void ContinueToFreeplay()
+    {
+        isPaused = false;
+
+        StartCoroutine(FadeCanvasGroup(Fade.Out, gameWonOverlay, pauseFadeDuration, Blurry.No));
+        Time.timeScale = 1;
+    }
+
 }
