@@ -2685,11 +2685,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -2846,7 +2846,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
     octaves: 1
     octaveMultiplier: 0.5
@@ -3819,7 +3819,7 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 0
+    enabled: 1
     ratio: 0
     light: {fileID: 0}
     randomDistribution: 1
@@ -3934,7 +3934,7 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 0
+    enabled: 1
     mode: 0
     ratio: 1
     lifetime:
@@ -4071,7 +4071,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4778,6 +4778,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 67ec54b62641a8c47ad94ba0ed027cbc, type: 2}
+  - {fileID: 2100000, guid: 67ec54b62641a8c47ad94ba0ed027cbc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4850,15 +4851,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 345b7394d4e4b5941a6e0574fe02e94b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.57176
+      value: -14.54994
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 345b7394d4e4b5941a6e0574fe02e94b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.573
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 345b7394d4e4b5941a6e0574fe02e94b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.055462
+      value: 0.8324106
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 345b7394d4e4b5941a6e0574fe02e94b, type: 3}
       propertyPath: m_LocalRotation.w
