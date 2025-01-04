@@ -1,4 +1,5 @@
 # Fortress of Elements
+![Fortress of elements logo](https://github.com/jn-gr/TDS_game/blob/main/Assets/Images/Fortress%20of%20elements%20logo%20idea%201.png)
 
 ## Game Overview
 In Fortress of Elements, your mission is to defend your Main Castle from waves of relentless enemies spawning from Enemy Spawners. Strategically place and upgrade towers to destroy incoming foes and prevent them from reaching your castle. Each wave grows more challenging, introducing tougher enemies and greater numbers. Test your strategy, survive as long as you can, and aim for the highest score before your castle falls!
