@@ -23,6 +23,22 @@ public class Spawner : MonoBehaviour
     {
         if (spawnCoroutine == null)
         {
+            if(gameManager.waveNum >= 10 && gameManager.waveNum % 10 == 0)
+            {
+                if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+                {
+                    SoundManager.PlaySound(SoundType.MonsterSpawn, 0.5f);
+
+                }
+            }
+            else
+            {
+                if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+                {
+                    SoundManager.PlaySound(SoundType.MonsterSound, 0.5f);
+
+                }
+            }
             spawnCoroutine = StartCoroutine(SpawnEnemies());
         }
     }
@@ -59,12 +75,6 @@ public class Spawner : MonoBehaviour
                     Vector3 directionToTower = (mainTower.position - spawnPosition).normalized;
                     Quaternion spawnRotation = Quaternion.LookRotation(directionToTower);
 
-
-                    if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
-                    {
-                        SoundManager.PlaySound(SoundType.MonsterSpawn, 0.05f);
-
-                    }
                     // Instantiate the enemy with position and rotation
                     Instantiate(enemyPrefab, spawnPosition, spawnRotation);
 
