@@ -11,13 +11,11 @@ public class MainMenuUI : MonoBehaviour
     private float soundEffectVolume;
     private float musicVolume;
 
-    [Header("Camera Movement Variables")]
     public Camera mainCamera; // Reference to the main camera (assign via Inspector)
     public Transform[] targetPositions; // Array of target positions and rotations
     public float moveSpeed = 5f; // Speed of camera movement
     public float rotateSpeed = 100f; // Speed of camera rotation
 
-    [Header("Settings Volume Variables")]
     public Image soundEffectButton;
     public Sprite soundEffectMute;
     public Sprite soundEffectUnmute;
@@ -25,7 +23,6 @@ public class MainMenuUI : MonoBehaviour
     public Sprite musicMute;
     public Sprite musicUnmute;
 
-    [Header("Audio Variables")]
     public AudioSource bgmAudioSource; // Reference to the AudioSource for BGM
     public AudioClip bgmClip;          // The AudioClip for the BGM
 

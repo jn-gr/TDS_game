@@ -11263,19 +11263,19 @@ MonoBehaviour:
     - {fileID: 0}
   - name: BGM
     sounds:
-    - {fileID: 8300000, guid: f16e5a776046142f2a70439c174588b7, type: 3}
+    - {fileID: 8300000, guid: 9b372ff76a6b91844b7c3d9196611897, type: 3}
   - name: MonsterSound
     sounds:
     - {fileID: 0}
   - name: WindMonsterSound
     sounds:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: 7709c939ef4bb3944a7a09a87b70c345, type: 3}
   - name: FireMonsterSound
     sounds:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: f865c6fc233eb4e40be18ba63e404007, type: 3}
   - name: WaterMonsterSound
     sounds:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: 6c2b43d023116bb4bafaca525d98818c, type: 3}
   - name: MonsterSpawn
     sounds:
     - {fileID: 8300000, guid: 76ed52206e8d52a4ea6381f32d357fe9, type: 3}
@@ -11297,6 +11297,9 @@ MonoBehaviour:
   - name: RegionUnlock
     sounds:
     - {fileID: 0}
+  - name: BossSpawn
+    sounds:
+    - {fileID: 8300000, guid: 926b4bbf8bbba8c49a817f278c5f0ed7, type: 3}
 --- !u!82 &1290638370
 AudioSource:
   m_ObjectHideFlags: 0
