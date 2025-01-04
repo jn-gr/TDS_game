@@ -44,10 +44,23 @@ public class UI : MonoBehaviour
     public float pauseFadeDuration = 0.3f;
     public float pauseCooldownDuration = 0.5f;
 
+    //[Header("Skill Tree Script w/ Logic")]
+    //public SkillTree skillTree;
+
     [Header("Skill Tree")]
     public GameObject activeSkillTreePanel;
     public GameObject passiveSkillTreePanel;
     public float skillTreeFadeDuration = 0.3f;
+    public TextMeshProUGUI activeSkillLevelText;
+    public TextMeshProUGUI passiveSkill1LevelText;
+    public TextMeshProUGUI passiveSkill2LevelText;
+    public TextMeshProUGUI passiveSkill3LevelText;
+    public TextMeshProUGUI passiveSkill4LevelText;
+    public TextMeshProUGUI passiveSkill5LevelText;
+    public TextMeshProUGUI passiveSkill6LevelText;
+
+    [Header("Active Skill Button")]
+    public Button activeSkillButton;
 
     [Header("Encyclopedia")]
     public GameObject encyclopediaPanel;
@@ -71,7 +84,6 @@ public class UI : MonoBehaviour
         pauseAction.Disable();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
@@ -80,7 +92,6 @@ public class UI : MonoBehaviour
         gameManager.WaveEnded += EndOfWave;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Checks all info on UI per frame. Gold, health, wave progress, etc.
@@ -104,6 +115,14 @@ public class UI : MonoBehaviour
         {
             GameOverScreen();
         }
+
+        //if (skillTree.isActiveSkillAvailable)
+        //{
+        //    activeSkillButton.interactable = true;
+        //} else
+        //{
+        //    activeSkillButton.interactable = false;
+        //}
     }
 
     // Button connected to start wave button. Starts waves.
@@ -276,4 +295,40 @@ public class UI : MonoBehaviour
         SceneLoader.NextSceneName = "Main";
         SceneManager.LoadScene("Loading Screen");
     }
+
+    public void ActiveSkillButtonClicked()
+    {
+        Debug.Log("Active Skill Button Clicked");
+    }
+
+    public void Skill1ButtonClicked()
+    {
+        Debug.Log("Passive Skill 1 Button Clicked");
+    }
+
+    public void Skill2ButtonClicked()
+    {
+        Debug.Log("Passive Skill 2 Button Clicked");
+    }
+
+    public void Skill3ButtonClicked()
+    {
+        Debug.Log("Passive Skill 3 Button Clicked");
+    }
+
+    public void Skill4ButtonClicked()
+    {
+        Debug.Log("Passive Skill 4 Button Clicked");
+    }
+
+    public void Skill5ButtonClicked()
+    {
+        Debug.Log("Passive Skill 5 Button Clicked");
+    }
+
+    public void Skill6ButtonClicked()
+    {
+        Debug.Log("Passive Skill 6 Button Clicked");
+    }
+
 }
