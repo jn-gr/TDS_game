@@ -41,8 +41,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4493585093827132993, guid: 006f02532c6fd7e47b06ef29e0fc8f43, type: 3}
     - target: {fileID: -1677194458527633132, guid: 98f86db51a74c5f4ea2f72912157820c, type: 3}
+      propertyPath: damage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1677194458527633132, guid: 98f86db51a74c5f4ea2f72912157820c, type: 3}
+      propertyPath: fireRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1677194458527633132, guid: 98f86db51a74c5f4ea2f72912157820c, type: 3}
       propertyPath: currentTier
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1677194458527633132, guid: 98f86db51a74c5f4ea2f72912157820c, type: 3}
+      propertyPath: projectileForce
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2397201029870798111, guid: 98f86db51a74c5f4ea2f72912157820c, type: 3}
       propertyPath: m_LocalPosition.x

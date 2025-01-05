@@ -83,15 +83,15 @@ public class GameManager : MonoBehaviour
     {
         if (waveStarted && enemiesSpawned == totalEnemiesToSpawn && enemiesAlive == 0)
         {
-            Debug.Log("hello");
-            EndWave();
             WaveEnded?.Invoke();
+            EndWave();
+            GetComponent<UI>().EndOfWave();
         }
     }
 
     public void UpdateHealth()
     {
-        currentHealth = mainTower.GetHealth();
+        currentHealth = Mathf.Round(mainTower.GetHealth());
     }
 
     public void EnemyKilled()

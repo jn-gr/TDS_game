@@ -149,6 +149,7 @@ public class UI : MonoBehaviour
         //{
         //    activeSkillButton.interactable = false;
         //}
+
     }
 
     private string WaveNumSlashRemaining()
@@ -491,7 +492,16 @@ public class UI : MonoBehaviour
         {
             if (i < passiveSkills.Count) // Ensure we don't go out of bounds
             {
-                passiveSkillLevelTexts[i].text = $"Level {passiveSkills[i].CurrentLevel}/{passiveSkills[i].MaxLevel}";
+                passiveSkillLevelTexts[i].text = $"{passiveSkills[i].CurrentLevel}/{passiveSkills[i].MaxLevel}";
+            }
+        }
+
+        // Update active skill levels
+        for (int i = 0; i < activeSkillLevelTexts.Length; i++)
+        {
+            if (i < activeSkills.Count) // Ensure we don't go out of bounds
+            {
+                activeSkillLevelTexts[i].text = $"{activeSkills[i].CurrentLevel}/{activeSkills[i].MaxLevel}";
             }
         }
 
@@ -499,8 +509,8 @@ public class UI : MonoBehaviour
         for (int i = 0; i < activeSkills.Count; i++)
         {
             activeSkillCooldownTexts[i].text = activeSkills[i].IsAvailable 
-                ? "Ready" 
-                : $"Cooldown: {activeSkills[i].Cooldown:F1}s";
+                ? "RDY" 
+                : $"{activeSkills[i].Cooldown:F1}s";
         }
     }
 
@@ -519,17 +529,17 @@ public class UI : MonoBehaviour
     //     }
     // }
 
-        public void UpdateActiveSkillCooldown(string skillName, float remainingCooldown)
+    public void UpdateActiveSkillCooldown(string skillName,  float remainingCooldown)
     {
+        Debug.Log("COOLDOWN FOR TIMEF:" + remainingCooldown);
         for (int i = 0; i < activeSkillCooldownTexts.Length; i++)
         {
-            if (activeSkillCooldownTexts[i].name == skillName)
-            {
-                activeSkillCooldownTexts[i].text = remainingCooldown > 0
-                    ? $"Cooldown: {remainingCooldown:F1}s"
-                    : "Ready";
-                break;
-            }
+            Debug.Log($"Checking {activeSkillCooldownTexts[i].name} for match...");
+            activeSkillCooldownTexts[i].text = remainingCooldown > 0
+                ? $"{remainingCooldown:F1}s"
+                : "RDY";
+            Debug.Log($"Updated {activeSkillCooldownTexts[i].name} with text: {activeSkillCooldownTexts[i].text}");
+            break;
         }
     }
     public void ShowToastMessage(string message)

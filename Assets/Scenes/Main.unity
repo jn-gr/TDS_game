@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.4
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.03869987, g: 0.14068735, b: 0.28641108, a: 0.4}
+  m_IndirectSpecularColor: {r: 0.038701724, g: 0.14061871, b: 0.28594738, a: 0.4}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4453,9 +4453,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Ignite enemies on fire.
+  m_text: 'Stop elemental movement for a duration.
 
-    Cost: 100 Gold'
+    Cost: ? xp'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fca10131d306089488bdba28b3593db6, type: 2}
   m_sharedMaterial: {fileID: 3719597408502533223, guid: fca10131d306089488bdba28b3593db6, type: 2}
@@ -11452,10 +11452,10 @@ MonoBehaviour:
   soundList:
   - name: TowerAttack
     sounds:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: a21e847ed78aecd40954ee51f5b55ad7, type: 3}
   - name: Hurt
     sounds:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: 174422daf05a75044b9ddc687a87ff3c, type: 3}
   - name: TowerPlace
     sounds:
     - {fileID: 8300000, guid: ef759d0f83b6d4282a0bf347a5bb4353, type: 3}
@@ -11467,7 +11467,7 @@ MonoBehaviour:
     - {fileID: 0}
   - name: BGM
     sounds:
-    - {fileID: 8300000, guid: 9b372ff76a6b91844b7c3d9196611897, type: 3}
+    - {fileID: 8300000, guid: f16e5a776046142f2a70439c174588b7, type: 3}
   - name: MonsterSound
     sounds:
     - {fileID: 0}
@@ -11500,7 +11500,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 1e67a23896971ed4e9a08e82e4102148, type: 3}
   - name: RegionUnlock
     sounds:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: ef759d0f83b6d4282a0bf347a5bb4353, type: 3}
   - name: BossSpawn
     sounds:
     - {fileID: 8300000, guid: 926b4bbf8bbba8c49a817f278c5f0ed7, type: 3}
@@ -14564,6 +14564,7 @@ GameObject:
   - component: {fileID: 1609003470}
   - component: {fileID: 1609003471}
   - component: {fileID: 1609003472}
+  - component: {fileID: 1609003473}
   m_Layer: 3
   m_Name: GameManager
   m_TagString: Untagged
@@ -14682,7 +14683,7 @@ MonoBehaviour:
   activeSkillTreePanel: {fileID: 378923406}
   passiveSkillTreePanel: {fileID: 205047054}
   activeSkillCooldownTexts:
-  - {fileID: 1309377731}
+  - {fileID: 492972924}
   activeSkillLevelTexts:
   - {fileID: 979166909}
   passiveSkillLevelTexts:
@@ -14843,6 +14844,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1609003473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609003466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a657a31ae684d2bae87ef8a5b7a98e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 1609003468}
 --- !u!1 &1623321153
 GameObject:
   m_ObjectHideFlags: 0
