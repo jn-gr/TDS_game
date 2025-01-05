@@ -10,9 +10,11 @@ using UnityEngine.InputSystem;
 
 public class UI : MonoBehaviour
 {
+    public ToastPanel toastPanel;
+    // public SkillTree skillTree = SkillTree.Instance;
     private GameManager gameManager;
     private bool isPaused = false;
-    private PostProcessVolume blurryCameraEffect;
+    //private PostProcessVolume blurryCameraEffect;
     private Transform[] allUI;
     private PlayerInput playerInput;
     private InputAction pauseAction;
@@ -50,14 +52,17 @@ public class UI : MonoBehaviour
     [Header("Skill Tree")]
     public GameObject activeSkillTreePanel;
     public GameObject passiveSkillTreePanel;
+    public TextMeshProUGUI[] activeSkillCooldownTexts;
+    public TextMeshProUGUI[] activeSkillLevelTexts;
+    public TextMeshProUGUI[] passiveSkillLevelTexts;
     public float skillTreeFadeDuration = 0.3f;
-    public TextMeshProUGUI activeSkillLevelText;
-    public TextMeshProUGUI passiveSkill1LevelText;
-    public TextMeshProUGUI passiveSkill2LevelText;
-    public TextMeshProUGUI passiveSkill3LevelText;
-    public TextMeshProUGUI passiveSkill4LevelText;
-    public TextMeshProUGUI passiveSkill5LevelText;
-    public TextMeshProUGUI passiveSkill6LevelText;
+    // public TextMeshProUGUI activeSkillLevelText;
+    // public TextMeshProUGUI passiveSkill1LevelText;
+    // public TextMeshProUGUI passiveSkill2LevelText;
+    // public TextMeshProUGUI passiveSkill3LevelText;
+    // public TextMeshProUGUI passiveSkill4LevelText;
+    // public TextMeshProUGUI passiveSkill5LevelText;
+    // public TextMeshProUGUI passiveSkill6LevelText;
 
     [Header("Active Skill Button")]
     public Button activeSkillButton;
@@ -91,7 +96,13 @@ public class UI : MonoBehaviour
     void Start()
     {
         gameManager = FindFirstObjectByType<GameManager>();
-        blurryCameraEffect = GetComponent<PostProcessVolume>();
+        Transform parent1 = GameObject.Find("SkillHotbar").transform;
+        activeSkillCooldownTexts = parent1.GetComponentsInChildren<TextMeshProUGUI>();
+        Transform parent2 = GameObject.Find("ActiveSkillsPanel").transform;
+        activeSkillCooldownTexts = parent2.GetComponentsInChildren<TextMeshProUGUI>();
+        Transform parent3 = GameObject.Find("PassiveSkillsPanel").transform;
+        passiveSkillLevelTexts = parent3.GetComponentsInChildren<TextMeshProUGUI>();
+        //blurryCameraEffect = GetComponent<PostProcessVolume>();
         allUI = canvas.GetComponentsInChildren<Transform>(true).ToArray();
         gameManager.WaveEnded += EndOfWave;
         gameManager.LastWaveCompleted += EndOfLastWave;
@@ -203,15 +214,15 @@ public class UI : MonoBehaviour
         float startAlpha;
         float endAlpha;
 
-        if (blurryAction == Blurry.Yes)
-        {
-            blurryCameraEffect.enabled = true;
-        }
+        // if (blurryAction == Blurry.Yes)
+        // {
+        //     blurryCameraEffect.enabled = true;
+        // }
 
-        if (blurryAction == Blurry.No)
-        {
-            blurryCameraEffect.enabled = false;
-        }
+        // if (blurryAction == Blurry.No)
+        // {
+        //     blurryCameraEffect.enabled = false;
+        // }
 
         if (fadeAction == Fade.In)
         {
@@ -330,9 +341,11 @@ public class UI : MonoBehaviour
 
         }
         CanvasGroup canvasGroup = passiveSkillTreePanel.GetComponent<CanvasGroup>();
+        StartCoroutine(FadeCanvasGroup(Fade.In, passiveSkillTreePanel, 0, Blurry.No));
+        //StartCoroutine(FadeCanvasGroup(Fade.Out, activeSkillTreePanel, skillTreeFadeDuration, Blurry.No));
         canvasGroup.alpha = 1f;
     }
-
+    
     public void ToggleEncyclopedia()
     {
         isPaused = !isPaused;
@@ -366,16 +379,6 @@ public class UI : MonoBehaviour
         SceneManager.LoadScene("Loading Screen");
     }
 
-    public void ActiveSkillButtonClicked()
-    {
-        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
-        {
-            SoundManager.PlaySound(SoundType.UiClick, 0.5f);
-
-        }
-        Debug.Log("Active Skill Button Clicked");
-    }
-
     public void Skill1ButtonClicked()
     {
         if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
@@ -384,6 +387,7 @@ public class UI : MonoBehaviour
 
         }
         Debug.Log("Passive Skill 1 Button Clicked");
+        OnPassiveSkillButtonClicked(0);
     }
 
     public void Skill2ButtonClicked()
@@ -394,6 +398,7 @@ public class UI : MonoBehaviour
 
         }
         Debug.Log("Passive Skill 2 Button Clicked");
+        OnPassiveSkillButtonClicked(1);
     }
 
     public void Skill3ButtonClicked()
@@ -404,6 +409,7 @@ public class UI : MonoBehaviour
 
         }
         Debug.Log("Passive Skill 3 Button Clicked");
+        OnPassiveSkillButtonClicked(2);
     }
 
     public void Skill4ButtonClicked()
@@ -414,6 +420,7 @@ public class UI : MonoBehaviour
 
         }
         Debug.Log("Passive Skill 4 Button Clicked");
+        OnPassiveSkillButtonClicked(3);
     }
 
     public void Skill5ButtonClicked()
@@ -424,6 +431,7 @@ public class UI : MonoBehaviour
 
         }
         Debug.Log("Passive Skill 5 Button Clicked");
+        OnPassiveSkillButtonClicked(4);
     }
 
     public void Skill6ButtonClicked()
@@ -434,6 +442,113 @@ public class UI : MonoBehaviour
 
         }
         Debug.Log("Passive Skill 6 Button Clicked");
+        OnPassiveSkillButtonClicked(5);
+    }
+
+    public void ActiveSkillButtonClicked()
+    {
+        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+        {
+            SoundManager.PlaySound(SoundType.UiClick, 0.5f);
+
+        }
+        Debug.Log("Active Skill Button Clicked");
+        OnActiveSkillButtonClicked(0);
+    }
+
+    public void ActivateActiveSkillButtonClicked(int skillIndex)
+    {
+        Debug.Log("HOTBARKILLPRESSED");
+        //activeSkillButton
+        SkillTree.Instance.ActivateSkill(skillIndex);
+    }
+
+    public void OnPassiveSkillButtonClicked(int skillIndex)
+    {
+        SkillTree.Instance.LevelUpPassiveSkill(skillIndex);
+    }
+
+    public void OnActiveSkillButtonClicked(int skillIndex)
+    {
+        SkillTree.Instance.LevelUpActiveSkill(skillIndex);
+    }
+
+    public void UpdateSkillTreeUI(List<BaseSkill> passiveSkills, List<BaseActiveSkill> activeSkills)
+    {
+        // Update passive skill levels
+        for (int i = 0; i < passiveSkillLevelTexts.Length; i++)
+        {
+            if (i < passiveSkills.Count) // Ensure we don't go out of bounds
+            {
+                passiveSkillLevelTexts[i].text = $"Level {passiveSkills[i].CurrentLevel}/{passiveSkills[i].MaxLevel}";
+            }
+        }
+
+        // Update active skill cooldowns
+        for (int i = 0; i < activeSkills.Count; i++)
+        {
+            activeSkillCooldownTexts[i].text = activeSkills[i].IsAvailable 
+                ? "Ready" 
+                : $"Cooldown: {activeSkills[i].Cooldown:F1}s";
+        }
+    }
+
+    // public void UpgradeSkill(int skillIndex)
+    // {
+    //     if (SkillTree.Instance.CanUnlockSkill(skillIndex))
+    //     {
+    //         SkillTree.Instance.UnlockSkill(skillIndex);
+    //         UpdateSkillTreeUI(SkillTree.Instance.PassiveSkills, SkillTree.Instance.ActiveSkills);
+    //         Debug.Log($"SKILL UPGRADED: Skill Index {skillIndex}, Skill Level: {SkillTree.Instance.PassiveSkills[skillIndex].CurrentLevel}");
+    //         toastPanel.ShowMessage($"{SkillTree.Instance.PassiveSkills[skillIndex].Name} upgraded to Level {SkillTree.Instance.PassiveSkills[skillIndex].CurrentLevel}");
+    //     }
+    //     else
+    //     {
+    //         toastPanel.ShowMessage("Cannot upgrade skill. Not enough XP or max level reached.");
+    //     }
+    // }
+
+        public void UpdateActiveSkillCooldown(string skillName, float remainingCooldown)
+    {
+        for (int i = 0; i < activeSkillCooldownTexts.Length; i++)
+        {
+            if (activeSkillCooldownTexts[i].name == skillName)
+            {
+                activeSkillCooldownTexts[i].text = remainingCooldown > 0
+                    ? $"Cooldown: {remainingCooldown:F1}s"
+                    : "Ready";
+                break;
+            }
+        }
+    }
+    public void ShowToastMessage(string message)
+    {
+        toastPanel.ShowMessage(message);
+    }
+
+    public void ToggleEncyclopedia()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            SoundManager.PlaySound(SoundType.UiClick, 0.5f);
+            StartCoroutine(FadeCanvasGroup(Fade.In, encyclopediaPanel, encyclopediaFadeDuration, Blurry.Yes));
+            Time.timeScale = 0;
+        }
+        else
+        {
+            StartCoroutine(FadeCanvasGroup(Fade.Out, encyclopediaPanel, encyclopediaFadeDuration, Blurry.No));
+            Time.timeScale = 1;
+        }
+
+    }
+
+    public void RestartLevel()
+    {
+        SoundManager.PlaySound(SoundType.UiClick, 0.5f);
+        SceneLoader.NextSceneName = "Main";
+        SceneManager.LoadScene("Loading Screen");
     }
 
     public void EndOfLastWave()
