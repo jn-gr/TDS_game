@@ -598,4 +598,13 @@ public class UI : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void playClick()
+    {
+        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+        {
+            SoundManager.PlaySound(SoundType.UiClick, 0.5f);
+
+        }
+    }
+
 }
