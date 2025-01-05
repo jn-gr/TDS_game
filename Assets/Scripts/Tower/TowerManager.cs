@@ -6,7 +6,19 @@ public class TowerManager : MonoBehaviour
     public Tower selectedTower; // Currently selected turret
     public TowerUI towerUI; // Reference to the TowerUI script (assigned in Inspector)
     public LayerMask towerLayer;
+    public static TowerManager Instance;
 
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        //DontDestroyOnLoad(gameObject);
+    }
     void Update()
     {
         // Handle mouse clicks for turret selection

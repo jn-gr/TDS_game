@@ -39,7 +39,7 @@ public class ObjectDrag : MonoBehaviour
             Vector3 newPosition = mouseWorldPosition + offset;
 
             // Snap to grid if needed
-            transform.position = BuildingSystem.current.SnapCoordinateToGrid(newPosition);
+            transform.position = BuildingSystem.Instance.SnapCoordinateToGrid(newPosition);
         }
     }
 

@@ -3,65 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//public class TowerUI : MonoBehaviour
-//{
-//    private Tower activeTower;
-//    private TowerManager manager;
-//    public Button[] elementButtons;
-//    public Button upgradeButton;
-//    // Start is called before the first frame update
 
-//    private void Start()
-//    {
-//        manager = GetComponentInParent<TowerManager>();
-//        activeTower = manager.activeTower;
-//        HandleUIUpgradeButton();
-//        HandleUIElementButtons();
-//    }
-
-//    public void HandleUIElementButtons()
-//    {
-//        if (activeTower.element != Element.Neutral)
-//        {
-//            foreach (Button button in elementButtons)
-//            {
-//                button.gameObject.SetActive(false);
-//            }
-//        }
-//    }
-//    public void HandleUIUpgradeButton()
-//    {
-//        if (activeTower.currentTier == 2)
-//        {
-//            upgradeButton.gameObject.SetActive(false);
-//        }
-        
-//    }
-
-//    public void UpgradeTower()
-//    {
-//        tower.UpgradeTower();
-//    }
-
-
-//    public void FireUpgrade()
-//    {
-//        tower.FireUpgrade();
-//    }
-//    public void WaterUpgrade()
-//    {
-//        tower.WaterUpgrade();
-//    }
-//    public void AirUpgrade()
-//    {
-//        tower.AirUpgrade();
-//    }
-//    public void SellTurret()
-//    {
-
-//    }
-
-//}
 
 
 public class TowerUI : MonoBehaviour
@@ -74,6 +16,10 @@ public class TowerUI : MonoBehaviour
 
     public Tower activeTower; // Currently selected turret's data
 
+    public void Start()
+    {
+        towerManager = TowerManager.Instance;
+    }
     private void Update()
     {
         if(activeTower != null)

@@ -74,20 +74,13 @@ public class NeutralEnemy : MonoBehaviour
         // Apply a Y offset to place the mob correctly above the ground
         float yOffset = GetComponent<Collider>().bounds.extents.y; // Adjust this value based on the mob's height
         transform.position = new Vector3(targetPosition.x, targetPosition.y + yOffset, targetPosition.z);
+        UpdatePath();
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
-        if (Time.time - lastPathUpdateTime > pathUpdateCooldown)
-        {
-            pathNeedsUpdate = true;
-        }
-
-        if (pathNeedsUpdate)
-        {
-            UpdatePath();
-        }
+       
 
         if (pathToTarget.Count > 0 && currentPathIndex < pathToTarget.Count)
         {
