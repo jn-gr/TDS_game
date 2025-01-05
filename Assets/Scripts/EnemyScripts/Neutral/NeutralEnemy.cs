@@ -47,14 +47,15 @@ public class NeutralEnemy : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>();
         castle = gameManager.mainTower;
 
+        health = (int)(8 + (gameManager.waveNum * 1.1));
+        speed = (float)Math.Min(40.0, (1.0+(gameManager.waveNum * 0.2)));
+        ScaleStatsForWave(gameManager.waveNum);
+
         // Initialize instance-specific variables from static values
         damage = GlobalDamage;
         health = GlobalHealth;
         speed = GlobalSpeed;
 
-        health = (int)(8 + (gameManager.waveNum * 1.1));
-        speed = (float)Math.Min(40.0, (1.0+(gameManager.waveNum * 0.2)));
-        
         element = Element.Neutral;
         startingY = transform.position.y;
 
@@ -133,13 +134,9 @@ public class NeutralEnemy : MonoBehaviour
         // Base scaling for wave number
         float waveDamage = 5 + (waveNumber * 0.5f);
         float waveHealth = 10 + (waveNumber * 1.1f);
-        float waveSpeed = 1 + (waveNumber * 0.2f);
-        waveSpeed *= 0.5f;
+        float waveSpeed = 1 + ((waveNumber * 0.2f))*mobSlowingSkill.getEffect();
+        Debug.Log(waveSpeed);
 
-        //Debug.Log(waveSpeed);
-        //waveSpeed *= mobSlowingSkill.getEffect();
-        //Debug.Log(waveSpeed);
-        //Debug.Log(mobSlowingSkill.getEffect());
 
         // Apply difficulty multipliers
         if (UserDifficulty.CurrentLevel == DifficultyLevel.Hard)
@@ -176,16 +173,16 @@ public class NeutralEnemy : MonoBehaviour
         Vector3Int targetCell = new Vector3Int(5, 5, 0);
         if (!MapManager.Instance.globalMap.TryGetValue((targetCell.x, targetCell.y), out CellT targetCellData) || !targetCellData.IsWalkable)
         {
-            Debug.LogError($"Target cell {targetCell} is not walkable.");
+            //Debug.LogError($"Target cell {targetCell} is not walkable.");
             return;
         }
         if (MapManager.Instance == null || MapManager.Instance.tilemap == null)
         {
-            Debug.LogError("MapManager.Instance or its tilemap is null");
+            //Debug.LogError("MapManager.Instance or its tilemap is null");
             return;
         }
         currentCell = MapManager.Instance.tilemap.WorldToCell(transform.position);
-        Debug.Log($"Updating path from {currentCell} to {targetCell}");
+        //Debug.Log($"Updating path from {currentCell} to {targetCell}");
         List<Vector3Int> path = FindPath(currentCell, targetCell);
 
         if (path != null && path.Count > 0)
@@ -197,11 +194,11 @@ public class NeutralEnemy : MonoBehaviour
             }
             currentPathIndex = 0;
             pathToTargetFound = true; // Mark the path as found
-            Debug.Log("Path successfully updated.");
+            //Debug.Log("Path successfully updated.");
         }
         else
         {
-            Debug.LogWarning($"No path found from {currentCell} to {targetCell}");
+            //Debug.LogWarning($"No path found from {currentCell} to {targetCell}");
         }
 
         pathNeedsUpdate = false;

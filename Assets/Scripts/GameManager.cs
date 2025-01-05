@@ -119,12 +119,10 @@ public class GameManager : MonoBehaviour
 
     public void StartWave()
     {
-        waveStarted = true;
         waveNum++;
-
         // Scale stats for all NeutralEnemies based on the current wave number
-        NeutralEnemy.ScaleStatsForWave(waveNum);
-
+        //NeutralEnemy.ScaleStatsForWave(waveNum);
+        waveStarted = true;
         totalEnemiesToSpawn = 4 + Mathf.RoundToInt(waveNum * 1.2f);
         enemiesSpawned = 0;
         enemiesAlive = totalEnemiesToSpawn;
