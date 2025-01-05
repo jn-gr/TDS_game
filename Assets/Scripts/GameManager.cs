@@ -31,9 +31,6 @@ public class GameManager : MonoBehaviour
     public int enemiesSpawned;
     public int enemiesAlive;
 
-
-    [Header("Tower Prefab Pool")]
-
     // lvl1 nuetral,fire,water,air, lv2 so on
     public GameObject[] turretPrefabs; // 12 prefabs 
     public GameObject[] sniperPrefabs; // 12 prefabs 
@@ -42,6 +39,9 @@ public class GameManager : MonoBehaviour
     public GameObject[] tierOneEnemy; // Neutral, Fire, Water, Air Tier One Enemies
     public GameObject[] tierTwoEnemy; // Neutral, Fire, Water, Air Tier Two Enemies
     public GameObject[] boss; // Neutral, Fire, Water, Air Boss Enemies
+
+    public AudioSource bgmAudioSource; // Reference to the AudioSource for BGM
+    public AudioClip bgmClip;          // Background music clip
 
     public event Action WaveEnded;
     public event Action WaveStarted;
@@ -55,6 +55,32 @@ public class GameManager : MonoBehaviour
         currentHealth = mainTower.GetHealth();
         currency = 1000;
         waveStarted = false;
+
+        // Play or stop BGM based on the existing PlayerPrefs value for MusicVolume
+        UpdateBGM();
+    }
+
+    private void UpdateBGM()
+    {
+        int musicVolume = PlayerPrefs.GetInt("MusicVolume", 1); // Default to 1 if somehow missing
+
+        if (musicVolume == 1) // Music is enabled
+        {
+            if (!bgmAudioSource.isPlaying)
+            {
+                bgmAudioSource.clip = bgmClip;
+                bgmAudioSource.loop = true; // Enable looping
+                bgmAudioSource.volume = 0.5f; // Set volume
+                bgmAudioSource.Play(); // Play the BGM
+            }
+        }
+        else // Music is disabled
+        {
+            if (bgmAudioSource.isPlaying)
+            {
+                bgmAudioSource.Stop(); // Stop the BGM
+            }
+        }
     }
 
     // Helper method to log array details
