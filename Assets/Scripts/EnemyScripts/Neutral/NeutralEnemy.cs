@@ -74,20 +74,22 @@ public class NeutralEnemy : MonoBehaviour
         // Apply a Y offset to place the mob correctly above the ground
         float yOffset = GetComponent<Collider>().bounds.extents.y; // Adjust this value based on the mob's height
         transform.position = new Vector3(targetPosition.x, targetPosition.y + yOffset, targetPosition.z);
+        UpdatePath();
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
-        if (Time.time - lastPathUpdateTime > pathUpdateCooldown)
-        {
-            pathNeedsUpdate = true;
-        }
-
-        if (pathNeedsUpdate)
-        {
-            UpdatePath();
-        }
+        //if (Time.time - lastPathUpdateTime > pathUpdateCooldown)
+        //{
+        //    pathNeedsUpdate = true;
+        //    Debug.Log("hii");
+        //}
+        //if (pathToTarget.Count == 0) {
+        //    Debug.Log("hii");
+        //    UpdatePath();
+        //}
+        
 
         if (pathToTarget.Count > 0 && currentPathIndex < pathToTarget.Count)
         {
@@ -111,10 +113,15 @@ public class NeutralEnemy : MonoBehaviour
             transform.position = new Vector3(transform.position.x, startingY + currentHeight, transform.position.z);
 
             // If close enough to the target, move to the next point
-            if (Vector3.Distance(transform.position, targetPosition) < 0.5f)
+            if (Vector3.Distance(transform.position, targetPosition) < 0.65f)
             {
                 currentPathIndex++;
             }
+
+
+            // Get the current target waypoint
+            
+
         }
     }
 

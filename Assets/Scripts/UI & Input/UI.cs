@@ -185,7 +185,7 @@ public class UI : MonoBehaviour
 
     public void SaveAndBackToMainMenu()
     {
-        Debug.Log("Put Save And Go Home Logic Here");
+        SaveLoadManager.Instance.SaveGame();
 
         if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
         {
