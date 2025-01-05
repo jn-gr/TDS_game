@@ -601,21 +601,17 @@ public class UI : MonoBehaviour
 
     private IEnumerator PauseTimeCoroutine()
     {
-        // Pause time
         ActiveSkillManager.SpeedInt = 0;
-        Debug.Log("yo " + ActiveSkillManager.SpeedInt);
 
-        // Wait for 10 real-time seconds
         float pauseDuration = 10f;
         float elapsedTime = 0f;
 
         while (elapsedTime < pauseDuration)
         {
-            elapsedTime += Time.unscaledDeltaTime; // Use unscaledDeltaTime to track real-time
-            yield return null; // Wait for the next frame
+            elapsedTime += Time.unscaledDeltaTime;
+            yield return null; 
         }
 
-        // Resume time
         ActiveSkillManager.SpeedInt = 1;
     }
 
