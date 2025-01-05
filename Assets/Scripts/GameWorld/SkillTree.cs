@@ -40,7 +40,7 @@ public class FireRateSkill : BaseSkill
 {
     public float FireRateBonus { get; private set; }
 
-    public FireRateSkill() : base("Fire Rate", "Increases the rate of fire for towers.", 1.5f) { }
+    public FireRateSkill() : base("Fire Rate", "Increases the rate of fire for towers.", 1.8f) { }
 
     public override void ApplyEffect()
     {
@@ -72,7 +72,7 @@ public class GoldEarnSkill : BaseSkill
 {
     public float GoldMultiplier { get; private set; }
 
-    public GoldEarnSkill() : base("Gold Earn", "Increases the gold earned per wave.", 2.0f) { }
+    public GoldEarnSkill() : base("Gold Earn", "Increases the gold earned per wave.", 3.0f) { }
 
     public override void ApplyEffect()
     {
@@ -89,7 +89,7 @@ public class XpBoostSkill : BaseSkill
 {
     public float XpMultiplier { get; private set; }
 
-    public XpBoostSkill() : base("XP Boost", "Increases the XP earned per wave.", 1.7f) { }
+    public XpBoostSkill() : base("XP Boost", "Increases the XP earned per wave.", 4.0f) { }
 
     public override void ApplyEffect()
     {
@@ -121,7 +121,7 @@ public class TowerDamageSkill : BaseSkill
 {
     public float DamageBonus { get; private set; }
 
-    public TowerDamageSkill() : base("Tower Damage", "Increases tower damage.", 1.4f) { }
+    public TowerDamageSkill() : base("Tower Damage", "Increases tower damage.", 2.5f) { }
 
     public override void ApplyEffect()
     {
@@ -176,21 +176,22 @@ public abstract class BaseActiveSkill : BaseSkill
 public class StopTimeSkill : BaseActiveSkill
 {
     public float Duration { get; private set; }
+    public bool IsActive { get; private set;} = false;
 
-    public StopTimeSkill() : base("Stop Time", "Temporarily stops all enemies for a duration.", 2.5f, 10f) { }
+    public StopTimeSkill() : base("Stop Time", "Temporarily stops all enemies for a duration.", 4.0f, 40f) { }
 
     public override void ApplyEffect()
     {
-        Duration = CurrentLevel * 2; // Example: Each level adds 2 seconds to the duration
+        Duration = CurrentLevel * 0.4f; // Example: Each level adds 0.4 seconds to the duration
+        IsActive = true;
         Debug.Log($"Stopping time for {Duration} seconds.");
         GameManager.Instance.StartCoroutine(StopTimeRoutine(Duration));
     }
 
     private IEnumerator StopTimeRoutine(float duration)
     {
-        NeutralEnemy.GlobalSpeed = 0; // Freeze enemy movement
         yield return new WaitForSeconds(duration);
-        NeutralEnemy.GlobalSpeed = 1; // Reset to normal speed
+        IsActive = false;
         Debug.Log("Time resumed.");
     }
 }
@@ -246,6 +247,11 @@ public class SkillTree : MonoBehaviour
     public T GetSkill<T>() where T : BaseSkill
     {
         return PassiveSkills.Find(skill => skill is T) as T;
+    }
+
+    public T GetActiveSkill<T>() where T : BaseSkill
+    {
+        return ActiveSkills.Find(skill => skill is T) as T;
     }
 
     public void LevelUpPassiveSkill(int skillIndex)

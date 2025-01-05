@@ -41,6 +41,8 @@ public class NeutralEnemy : MonoBehaviour
     private float pathUpdateCooldown = 1f; // How often to recalculate path
     private float lastPathUpdateTime;
 
+    private bool Skillactivate;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -98,8 +100,13 @@ public class NeutralEnemy : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation * rotationOffset, Time.deltaTime * 10f); // Smooth rotation
             }
 
+            if(SkillTree.Instance.GetActiveSkill<StopTimeSkill>().IsActive)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, 0 * Time.deltaTime);
+            }else{
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            }
             // Move toward the target position
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime * ActiveSkillManager.SpeedInt);
 
             //// Apply levitation effect
             float currentHeight = Mathf.Abs(Mathf.Sin(Time.time * levitationSpeed)) * levitationHeight;
@@ -111,6 +118,11 @@ public class NeutralEnemy : MonoBehaviour
                 currentPathIndex++;
             }
         }
+    }
+
+    public void ApplySkillEffect(bool isAffected)
+    {
+        Skillactivate = isAffected;
     }
 
 

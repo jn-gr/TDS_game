@@ -44,6 +44,8 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
+        var firerateskill = SkillTree.Instance.GetSkill<FireRateSkill>();
+        float skillmultiplier = firerateskill.getEffect();
         if (placed)
         {
             // Clean up any destroyed enemies from the list
@@ -54,9 +56,8 @@ public class Tower : MonoBehaviour
 
                 if (fireCooldown <= 0f)
                 {
-                    
                     Shoot();
-                    fireCooldown = 1f / fireRate;
+                    fireCooldown = 1f / (fireRate * (1 + skillmultiplier));
                 }
                 fireCooldown -= Time.deltaTime;
 
