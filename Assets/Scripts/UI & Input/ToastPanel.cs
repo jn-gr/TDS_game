@@ -9,10 +9,24 @@ public class ToastPanel : MonoBehaviour
     private Coroutine activeAnimation;
     private TextMeshProUGUI messageText;
 
+    public static ToastPanel Instance;
+
     [Header("Animation Settings")]
     public float fadeInDuration = 0.5f;
     public float displayDuration = 2.0f;
     public float fadeOutDuration = 0.5f;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        //DontDestroyOnLoad(gameObject);
+    }
 
 
     void Start()

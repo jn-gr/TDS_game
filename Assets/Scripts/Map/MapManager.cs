@@ -12,16 +12,16 @@ public class MapManager : MonoBehaviour
     public Tilemap tilemap; 
     public TileBase walkableTile; 
     public TileBase nonWalkableTile;
-    public TileBase greenHighlightTile;
-    public TileBase redHighlightTile;
+    
     private Plane tilemapPlane;
 
     public Tilemap highlightTilemap;
-    public TileBase highlightTile; 
+    public TileBase greenHighlightTile;
+    public TileBase redHighlightTile;
 
     public GameObject spawnerPrefab;
 
-    public ToastPanel toastPanel;
+    private ToastPanel toastPanel;
 
     public int regionUnlockPrice;
     
@@ -62,7 +62,7 @@ public class MapManager : MonoBehaviour
         GameManager.Instance.currency += regionUnlockPrice * 4; // you dont pay for the first 4 region unlocks
 
         tilemapPlane = new Plane(Vector3.up, Vector3.zero);
-
+        toastPanel = ToastPanel.Instance;
 
         //if (SaveLoadManager.Instance.isLoad) LoadGame();
     }

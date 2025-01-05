@@ -269,7 +269,7 @@ public class SaveLoadUtility
                 Cells = new CellT[serialRegion.Width, serialRegion.Height]
             };
 
-            Debug.Log($"{serialRegion.Cells.Length} this is length");
+            
             for (int i = 0; i < serialRegion.Cells.Length; i++)
             {
                 var serialCell = serialRegion.Cells[i];

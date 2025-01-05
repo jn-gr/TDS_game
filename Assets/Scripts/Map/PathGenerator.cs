@@ -151,7 +151,7 @@ public static class PathGenerator
      public static void GenerateCenterRegion(Region region, Dictionary<(int, int), Region> regionMap, Dictionary<(int, int), CellT> globalMap, int width, int height)
     {
         (int x, int y) = (region.Width/2, region.Height / 2);
-        UnityEngine.Debug.Log((x, y));
+        
         CellT centerCell = region.GetCellLocal(x, y);
         PathFromMergePointToSide(centerCell, 0, region, width, height);
         PathFromMergePointToSide(centerCell, 1, region, width, height);
