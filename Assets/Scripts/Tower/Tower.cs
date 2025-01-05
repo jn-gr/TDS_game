@@ -33,11 +33,11 @@ public class Tower : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        //if (currentTier == 0 && element == Element.Neutral) // spawned in turrets are not placed, but all upgraded either tier or element remain placed
-        //{
-        //    placed = false;
-        //}
-        gameManager = GameManager.Instance;
+        if (currentTier == 0 && element == Element.Neutral) // spawned in turrets are not placed, but all upgraded either tier or element remain placed
+        {
+            placed = false;
+        }
+        gameManager = FindAnyObjectByType<GameManager>();
         
     }
 
@@ -131,7 +131,6 @@ public class Tower : MonoBehaviour
             upgradedTower.element = element;
             upgradedTower.placed = true;
             upgradedTower.cellPlacedOn = cellPlacedOn;
-            Debug.Log((cellPlacedOn));
             cellPlacedOn.objectPlacedOnCell = upgradedTower.gameObject;
             Destroy(gameObject);
             return upgradedTower;

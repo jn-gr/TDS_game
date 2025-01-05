@@ -47,22 +47,10 @@ public class GameManager : MonoBehaviour
     public event Action WaveStarted;
     public event Action LastWaveCompleted;
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        //DontDestroyOnLoad(gameObject);
-    }
-
     void Start()
     {
         Debug.Log("Level chosen is : " + UserDifficulty.CurrentLevel);
-        
+        Instance = this;
 
         currentHealth = mainTower.GetHealth();
         currency = 1000;
