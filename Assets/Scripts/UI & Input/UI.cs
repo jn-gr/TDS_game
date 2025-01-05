@@ -368,16 +368,16 @@ public class UI : MonoBehaviour
 
     // }
 
-    public void RestartLevel()
-    {
-        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
-        {
-            SoundManager.PlaySound(SoundType.UiClick, 0.5f);
+    // public void RestartLevel()
+    // {
+    //     if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+    //     {
+    //         SoundManager.PlaySound(SoundType.UiClick, 0.5f);
 
-        }
-        SceneLoader.NextSceneName = "Main";
-        SceneManager.LoadScene("Loading Screen");
-    }
+    //     }
+    //     SceneLoader.NextSceneName = "Main";
+    //     SceneManager.LoadScene("Loading Screen");
+    // }
 
     public void Skill1ButtonClicked()
     {
