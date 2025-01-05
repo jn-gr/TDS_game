@@ -346,27 +346,27 @@ public class UI : MonoBehaviour
         canvasGroup.alpha = 1f;
     }
     
-    public void ToggleEncyclopedia()
-    {
-        isPaused = !isPaused;
+    // public void ToggleEncyclopedia()
+    // {
+    //     isPaused = !isPaused;
 
-        if (isPaused)
-        {
-            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
-            {
-                SoundManager.PlaySound(SoundType.UiClick, 0.5f);
+    //     if (isPaused)
+    //     {
+    //         if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+    //         {
+    //             SoundManager.PlaySound(SoundType.UiClick, 0.5f);
 
-            }
-            StartCoroutine(FadeCanvasGroup(Fade.In, encyclopediaPanel, encyclopediaFadeDuration, Blurry.Yes));
-            Time.timeScale = 0;
-        }
-        else
-        {
-            StartCoroutine(FadeCanvasGroup(Fade.Out, encyclopediaPanel, encyclopediaFadeDuration, Blurry.No));
-            Time.timeScale = 1;
-        }
+    //         }
+    //         StartCoroutine(FadeCanvasGroup(Fade.In, encyclopediaPanel, encyclopediaFadeDuration, Blurry.Yes));
+    //         Time.timeScale = 0;
+    //     }
+    //     else
+    //     {
+    //         StartCoroutine(FadeCanvasGroup(Fade.Out, encyclopediaPanel, encyclopediaFadeDuration, Blurry.No));
+    //         Time.timeScale = 1;
+    //     }
 
-    }
+    // }
 
     public void RestartLevel()
     {
