@@ -8,20 +8,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class BuildingSystem : MonoBehaviour
 {
-    public static BuildingSystem current;
-
-    //public GridLayout gridLayout;
-    //private Grid grid;
-    //[SerializeField] private Tilemap MainTilemap;
-    //[SerializeField] private TileBase whiteTile;
-
-    //public LayerMask layersToHit;
-    ////Place Prefabs Here
-    //public GameObject NothingObject;
-    //public GameObject House_01;
-    //public GameObject Castle;
-    private MapManager mapManager;
-    public GameManager gameManager;
+    public static BuildingSystem Instance;
 
     public PlaceableObject objectToPlace;
 
@@ -33,10 +20,20 @@ public class BuildingSystem : MonoBehaviour
 
     private void Awake()
     {
-        mapManager = GetComponent<MapManager>();
-        gameManager = FindFirstObjectByType<GameManager>();
-        current = this;
-        grid = mapManager.tilemap;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        
+    }
+    private void Start()
+    {
+       
+        
+        grid = MapManager.Instance.tilemap;
     }
 
     private void Update() //Selection of buildings (currently with keyboard buttons
@@ -56,10 +53,20 @@ public class BuildingSystem : MonoBehaviour
                 {
                     Vector3 worldPosition = ray.GetPoint(enter);
                     Vector3Int cellPosition = grid.WorldToCell(worldPosition);
-                   
-                    if (mapManager.globalMap.TryGetValue((cellPosition.x, cellPosition.y), out CellT clickedCell))
+
+                    (int regionX, int regionY) = (
+                    Mathf.FloorToInt((float)cellPosition.x / MapManager.Instance.regionWidth),
+                    Mathf.FloorToInt((float)cellPosition.y / MapManager.Instance.regionHeight)
+                );
+
+                    if (MapManager.Instance.globalRegionMap.TryGetValue((regionX, regionY), out Region clickedRegion))
                     {
-                        PlaceObject(clickedCell);
+                        int regionWidth = MapManager.Instance.regionWidth;
+                        int regionHeight = MapManager.Instance.regionHeight;
+                        int modularX = ((cellPosition.x % regionWidth) + regionWidth) % regionWidth;
+                        int modularY = ((cellPosition.y % regionHeight) + regionHeight) % regionHeight;
+                        //Debug.Log((cellPosition.x % MapManager.Instance.regionWidth, cellPosition.y % MapManager.Instance.regionHeight));
+                        PlaceObject(clickedRegion.Cells[modularX,modularY]);
                     }
                     else
                     {
@@ -85,7 +92,7 @@ public class BuildingSystem : MonoBehaviour
     public void PlaceObject( GameObject tower) 
     {
         
-        if (gameManager.currency >= 100)
+        if (GameManager.Instance.currency >= 100)
         {
             Debug.Log("hello");
             InitializeWithObject(tower);

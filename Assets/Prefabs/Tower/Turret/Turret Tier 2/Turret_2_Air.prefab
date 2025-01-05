@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: element
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2999837092773742147, guid: 27e9effcd3944fc45a32ebbc25f7ef00, type: 3}
+      propertyPath: currentTier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7126005944146286461, guid: 27e9effcd3944fc45a32ebbc25f7ef00, type: 3}
       propertyPath: m_Name
       value: Turret_2_Air

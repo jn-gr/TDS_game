@@ -166,7 +166,7 @@ public class UI : MonoBehaviour
 
     public void SaveAndBackToMainMenu()
     {
-        Debug.Log("Put Save And Go Home Logic Here");
+        SaveLoadManager.Instance.SaveGame();
 
         SoundManager.PlaySound(SoundType.UiClick,0.5f);
         SceneLoader.NextSceneName = "Main Menu";
