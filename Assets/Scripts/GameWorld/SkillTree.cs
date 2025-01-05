@@ -47,6 +47,9 @@ public class FireRateSkill : BaseSkill
         FireRateBonus = CurrentLevel * 0.1f; // Example: Each level adds a 10% bonus
         Debug.Log($"Fire rate increased by {FireRateBonus * 100}%.");
     }
+    public override float getEffect(){
+        return FireRateBonus;
+    }
 }
 
 public class MobSlowingSkill : BaseSkill
@@ -57,8 +60,11 @@ public class MobSlowingSkill : BaseSkill
 
     public override void ApplyEffect()
     {
-        SlowEffectDuration = CurrentLevel * 0.5f; //Each level adds 0.5 seconds to slow duration
+        SlowEffectDuration = CurrentLevel * 0.01f; //Each level adds 0.01 seconds to slow duration
         Debug.Log($"Slow effect duration increased to {SlowEffectDuration} seconds.");
+    }
+    public override float getEffect(){
+        return SlowEffectDuration;
     }
 }
 
@@ -73,6 +79,10 @@ public class GoldEarnSkill : BaseSkill
         GoldMultiplier = 1 + (CurrentLevel * 0.05f); //Each level adds a 5% bonus
         Debug.Log($"Gold multiplier is now {GoldMultiplier}x.");
     }
+
+    public override float getEffect(){
+        return GoldMultiplier;
+    }
 }
 
 public class XpBoostSkill : BaseSkill
@@ -83,8 +93,11 @@ public class XpBoostSkill : BaseSkill
 
     public override void ApplyEffect()
     {
-        XpMultiplier = 1 + (CurrentLevel * 0.05f); // Example: Each level adds a 5% bonus
+        XpMultiplier = 1 + (CurrentLevel * 0.005f); // Example: Each level adds a 0.5% interest
         Debug.Log($"XP multiplier is now {XpMultiplier}x.");
+    }
+    public override float getEffect(){
+        return XpMultiplier;
     }
 }
 
@@ -96,8 +109,11 @@ public class RegenPerWaveSkill : BaseSkill
 
     public override void ApplyEffect()
     {
-        RegenAmount = CurrentLevel * 5; // Example: Each level restores 5% HP
+        RegenAmount = CurrentLevel * 1.1; // Example: Each level restores 1.1% HP
         Debug.Log($"Regen amount per wave is now {RegenAmount}%.");
+    }
+    public override float getEffect(){
+        return RegenAmount;
     }
 }
 
