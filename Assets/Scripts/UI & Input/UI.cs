@@ -473,7 +473,6 @@ public class UI : MonoBehaviour
         Debug.Log("HOTBARKILLPRESSED");
         //activeSkillButton
         SkillTree.Instance.ActivateSkill(skillIndex);
-        StartCoroutine(PauseTimeCoroutine());
     }
 
     public void OnPassiveSkillButtonClicked(int skillIndex)
@@ -599,20 +598,13 @@ public class UI : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    private IEnumerator PauseTimeCoroutine()
+    public void playClick()
     {
-        ActiveSkillManager.SpeedInt = 0;
-
-        float pauseDuration = 10f;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < pauseDuration)
+        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
         {
-            elapsedTime += Time.unscaledDeltaTime;
-            yield return null; 
-        }
+            SoundManager.PlaySound(SoundType.UiClick, 0.5f);
 
-        ActiveSkillManager.SpeedInt = 1;
+        }
     }
 
 }

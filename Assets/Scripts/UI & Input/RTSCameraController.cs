@@ -63,14 +63,15 @@ public class RTSCameraController : MonoBehaviour
     private float panIncrease = 0.0f;
     private bool isDragging = false;
     private Camera cam;
+    public static RTSCameraController Instance;
     private Vector2 currentMousePosition;
     private Vector2 moveInput;
     private Vector2 zoomInput;
 
     void Awake()
     {
-        // Get references to input actions
-        playerInput = GetComponent<PlayerInput>();
+    // Get references to input actions
+    playerInput = GetComponent<PlayerInput>();
         InputActionMap actionMap = playerInput.actions.FindActionMap("RTS Camera");
         
         moveAction = actionMap.FindAction("Move");

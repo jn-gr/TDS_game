@@ -208,4 +208,12 @@ public class MainMenuUI : MonoBehaviour
             musicButton.sprite = musicUnmute;
         }
     }
+    public void playClick()
+    {
+        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+        {
+            SoundManager.PlaySound(SoundType.UiClick, 0.5f);
+
+        }
+    }
 }
