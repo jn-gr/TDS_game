@@ -96,8 +96,10 @@ public class BuildingSystem : MonoBehaviour
         
         if (GameManager.Instance.currency >= 100)
         {
-            Debug.Log("hello");
-            InitializeWithObject(tower);
+            if (objectToPlace == null)
+            {
+                InitializeWithObject(tower);
+            }
             
         }
         else
