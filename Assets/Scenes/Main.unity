@@ -11452,10 +11452,10 @@ MonoBehaviour:
   soundList:
   - name: TowerAttack
     sounds:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: a21e847ed78aecd40954ee51f5b55ad7, type: 3}
   - name: Hurt
     sounds:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: 174422daf05a75044b9ddc687a87ff3c, type: 3}
   - name: TowerPlace
     sounds:
     - {fileID: 8300000, guid: ef759d0f83b6d4282a0bf347a5bb4353, type: 3}
@@ -11467,7 +11467,7 @@ MonoBehaviour:
     - {fileID: 0}
   - name: BGM
     sounds:
-    - {fileID: 8300000, guid: 9b372ff76a6b91844b7c3d9196611897, type: 3}
+    - {fileID: 8300000, guid: f16e5a776046142f2a70439c174588b7, type: 3}
   - name: MonsterSound
     sounds:
     - {fileID: 0}
@@ -11494,16 +11494,15 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 8c2ce42f568003840b563cce9d950ed6, type: 3}
   - name: UiUpgrade
     sounds:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: 1e67a23896971ed4e9a08e82e4102148, type: 3}
   - name: UiInsufficient
     sounds:
-    - {fileID: 8300000, guid: 1e67a23896971ed4e9a08e82e4102148, type: 3}
+    - {fileID: 0}
   - name: RegionUnlock
     sounds:
-    - {fileID: 0}
-  - name: BossSpawn
-    sounds:
     - {fileID: 8300000, guid: 926b4bbf8bbba8c49a817f278c5f0ed7, type: 3}
+  - name: BossSpawn
+    sounds: []
 --- !u!82 &1290638370
 AudioSource:
   m_ObjectHideFlags: 0
