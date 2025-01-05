@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
     //public Spawner[] spawners;
 
     public float currentHealth;
-    public int currency;
-    public int experience;
+    public float currency;
+    public float experience;
     public int totalKills;
     public int score;
     public int waveNum;
@@ -96,6 +96,9 @@ public class GameManager : MonoBehaviour
 
     public void EnemyKilled()
     {
+        var xpBoostSkill = SkillTree.Instance.GetSkill<XpBoostSkill>();
+        var goldEarnSkill = SkillTree.Instance.GetSkill<GoldEarnSkill>();
+
         totalKills++;
         currency += 50;
         score += 100;
@@ -103,8 +106,12 @@ public class GameManager : MonoBehaviour
         enemiesAlive--;
 
         //skill tree multipliers
-        experience *= XpBoostSkill.getEffect();
-        currency *= GoldEarnSkill.getEffect();
+        experience *= xpBoostSkill.getEffect();
+        currency *= goldEarnSkill.getEffect();
+        currency = Mathf.Round(currency);
+        experience = Mathf.Round(experience);
+
+        Debug.Log(xpBoostSkill.getEffect());
 
         Debug.Log($"Wave {waveNum}: Enemy killed. Enemies alive: {enemiesAlive}");
     }

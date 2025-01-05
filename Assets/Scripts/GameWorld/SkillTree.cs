@@ -47,7 +47,7 @@ public class FireRateSkill : BaseSkill
         FireRateBonus = CurrentLevel * 0.1f; // Example: Each level adds a 10% bonus
         Debug.Log($"Fire rate increased by {FireRateBonus * 100}%.");
     }
-    public override float getEffect(){
+    public float getEffect(){
         return FireRateBonus;
     }
 }
@@ -60,10 +60,10 @@ public class MobSlowingSkill : BaseSkill
 
     public override void ApplyEffect()
     {
-        SlowEffectDuration = CurrentLevel * 0.01f; //Each level adds 0.01 seconds to slow duration
+        SlowEffectDuration = 1-(CurrentLevel * 0.03f);
         Debug.Log($"Slow effect duration increased to {SlowEffectDuration} seconds.");
     }
-    public override float getEffect(){
+    public float getEffect(){
         return SlowEffectDuration;
     }
 }
@@ -80,7 +80,7 @@ public class GoldEarnSkill : BaseSkill
         Debug.Log($"Gold multiplier is now {GoldMultiplier}x.");
     }
 
-    public override float getEffect(){
+    public float getEffect(){
         return GoldMultiplier;
     }
 }
@@ -96,7 +96,7 @@ public class XpBoostSkill : BaseSkill
         XpMultiplier = 1 + (CurrentLevel * 0.005f); // Example: Each level adds a 0.5% interest
         Debug.Log($"XP multiplier is now {XpMultiplier}x.");
     }
-    public override float getEffect(){
+    public float getEffect(){
         return XpMultiplier;
     }
 }
@@ -109,10 +109,10 @@ public class RegenPerWaveSkill : BaseSkill
 
     public override void ApplyEffect()
     {
-        RegenAmount = CurrentLevel * 1.1; // Example: Each level restores 1.1% HP
+        RegenAmount = CurrentLevel * 1.1f; // Example: Each level restores 1.1% HP
         Debug.Log($"Regen amount per wave is now {RegenAmount}%.");
     }
-    public override float getEffect(){
+    public float getEffect(){
         return RegenAmount;
     }
 }
@@ -281,7 +281,12 @@ public class SkillTree : MonoBehaviour
         }
         ui.UpdateSkillTreeUI(PassiveSkills, ActiveSkills); // Initial UI update
     }
-    
+
+    public T GetSkill<T>() where T : BaseSkill
+    {
+        return PassiveSkills.Find(skill => skill is T) as T;
+    }
+
     public void LevelUpPassiveSkill(int skillIndex)
     {
         if (skillIndex >= 0 && skillIndex < PassiveSkills.Count)

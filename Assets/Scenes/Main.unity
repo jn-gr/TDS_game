@@ -14713,7 +14713,7 @@ MonoBehaviour:
   mainTower: {fileID: 757290341}
   currentHealth: 100
   currency: 0
-  experience: 0
+  experience: 1000
   totalKills: 0
   score: 0
   waveNum: 0

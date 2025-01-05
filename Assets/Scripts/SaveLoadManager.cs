@@ -10,8 +10,8 @@ using static Unity.PlasticSCM.Editor.WebApi.CredentialsResponse;
 public class GameStats
 {
     public float CurrentHealth;
-    public int Currency;
-    public int Experience;
+    public float Currency;
+    public float Experience;
     public int TotalKills;
     public int Score;
     public int WaveNum;
