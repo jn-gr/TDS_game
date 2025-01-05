@@ -239,9 +239,7 @@ public class MapManager : MonoBehaviour
     public void ExpandRegion(int newRegionX, int newRegionY)
     {
         if (globalRegionMap.ContainsKey((newRegionX, newRegionY)))
-        {
-            toastPanel.ShowMessage("This Region is already unlocked");
-            
+        {            
             return;
         }
 
