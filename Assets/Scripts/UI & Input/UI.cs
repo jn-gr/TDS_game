@@ -204,8 +204,7 @@ public class UI : MonoBehaviour
             SoundManager.PlaySound(SoundType.UiClick, 0.5f);
 
         }
-        SceneLoader.NextSceneName = "Main Menu";
-        SceneManager.LoadScene("Loading Screen");
+        Application.Quit();
     }
 
     enum Fade
