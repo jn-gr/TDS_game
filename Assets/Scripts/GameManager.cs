@@ -97,8 +97,9 @@ public class GameManager : MonoBehaviour
     {
         if (waveStarted && enemiesSpawned == totalEnemiesToSpawn && enemiesAlive == 0)
         {
-            EndWave();
             WaveEnded?.Invoke();
+            EndWave();
+            GetComponent<UI>().EndOfWave();
         }
     }
 
@@ -106,7 +107,6 @@ public class GameManager : MonoBehaviour
     {
         currentHealth = Mathf.Round(mainTower.GetHealth());
     }
-
 
     public void EnemyKilled()
     {
