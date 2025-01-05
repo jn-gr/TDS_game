@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public int damage;
+    public float damage;
     public float force;
     public GameObject enemyTarget;
     public Element element;
@@ -50,7 +50,7 @@ public class Projectile : MonoBehaviour
     }
 
 
-    public void SetDamage(int damage)
+    public void SetDamage(float damage)
     {
         this.damage = damage;
     }

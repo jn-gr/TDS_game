@@ -103,14 +103,14 @@ public class GameManager : MonoBehaviour
             totalKills++;
             currency += 100;
             score += 500;
-            experience += 100;
+            experience += 10;
             enemiesAlive--;
         }else if(tier == 2)
         {
             totalKills++;
             currency += 50;
             score += 250;
-            experience += 50;
+            experience += 5;
             enemiesAlive--;
         }
         else
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
             totalKills++;
             currency += 25;
             score += 100;
-            experience += 25;
+            experience += 1;
             enemiesAlive--;
         }
         //skill tree multipliers
@@ -189,6 +189,8 @@ public class GameManager : MonoBehaviour
     public void EndWave()
     {
         waveStarted = false;
+        var healthRegen = SkillTree.Instance.GetSkill<RegenPerWaveSkill>();
+        currentHealth *= healthRegen.getEffect();
 
 
         foreach (KeyValuePair<(int x, int y), Spawner> spawner in MapManager.Instance.spawnerPositions)

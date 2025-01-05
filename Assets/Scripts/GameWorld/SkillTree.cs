@@ -109,7 +109,7 @@ public class RegenPerWaveSkill : BaseSkill
 
     public override void ApplyEffect()
     {
-        RegenAmount = CurrentLevel * 1.1f; // Example: Each level restores 1.1% HP
+        RegenAmount = 1 + (CurrentLevel * 0.025f);
         Debug.Log($"Regen amount per wave is now {RegenAmount}%.");
     }
     public float getEffect(){
@@ -119,14 +119,18 @@ public class RegenPerWaveSkill : BaseSkill
 
 public class TowerDamageSkill : BaseSkill
 {
-    public int DamageBonus { get; private set; }
+    public float DamageBonus { get; private set; }
 
     public TowerDamageSkill() : base("Tower Damage", "Increases tower damage.", 1.4f) { }
 
     public override void ApplyEffect()
     {
-        DamageBonus = CurrentLevel * 2; // Example: Each level adds 2 damage
+        DamageBonus = 1+(CurrentLevel * 0.015f);
         Debug.Log($"Tower damage increased by {DamageBonus}.");
+    }
+    public float getEffect()
+    {
+        return DamageBonus;
     }
 }
 
