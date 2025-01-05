@@ -99,7 +99,7 @@ public class NeutralEnemy : MonoBehaviour
             }
 
             // Move toward the target position
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime * ActiveSkillManager.SpeedInt);
 
             //// Apply levitation effect
             float currentHeight = Mathf.Abs(Mathf.Sin(Time.time * levitationSpeed)) * levitationHeight;
