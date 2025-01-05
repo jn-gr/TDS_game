@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.4
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.038701724, g: 0.14061871, b: 0.28594738, a: 0.4}
+  m_IndirectSpecularColor: {r: 0.03869987, g: 0.14068735, b: 0.28641108, a: 0.4}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -53139,7 +53139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf81f021d87d69949847e378417a1236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isForSoundEffects: 1
+  isForSoundEffects: 0
   muteSprite: {fileID: -998444857, guid: edbc2de42673a234fa99716ec391e12b, type: 3}
   muteSpriteHover: {fileID: 1079861275, guid: edbc2de42673a234fa99716ec391e12b, type: 3}
   unmuteSprite: {fileID: 1639386214, guid: edbc2de42673a234fa99716ec391e12b, type: 3}
