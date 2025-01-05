@@ -179,6 +179,11 @@ public class BuildingSystem : MonoBehaviour
     {
         if(cell.objectPlacedOnCell == null && !cell.IsWalkable)
         {
+            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+            {
+                SoundManager.PlaySound(SoundType.TowerPlace, 0.5f);
+
+            }
             objectToPlace.Place();
             cell.objectPlacedOnCell = objectToPlace.gameObject;
             objectToPlace.GetComponent<Tower>().cellPlacedOn = cell;
@@ -187,7 +192,11 @@ public class BuildingSystem : MonoBehaviour
         }
         else
         {
-            
+            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+            {
+                SoundManager.PlaySound(SoundType.UiInsufficient, 0.5f);
+
+            }
             Destroy(objectToPlace.gameObject);
             objectToPlace = null;
             toastPanel.ShowMessage("Can't Place Tower Here");

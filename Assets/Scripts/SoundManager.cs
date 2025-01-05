@@ -21,7 +21,8 @@ public enum SoundType
     UiClose,
     UiUpgrade,
     UiInsufficient,
-    RegionUnlock
+    RegionUnlock,
+    BossSpawn
 }
 
 [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]

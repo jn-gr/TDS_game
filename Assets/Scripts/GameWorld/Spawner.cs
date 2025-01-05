@@ -58,10 +58,24 @@ public class Spawner : MonoBehaviour
                     // Adjust rotation to face the main tower
                     Vector3 directionToTower = (mainTower.position - spawnPosition).normalized;
                     Quaternion spawnRotation = Quaternion.LookRotation(directionToTower);
+                    if (gameManager.waveNum >= 10 && gameManager.waveNum % 10 == 0)
+                    {
+                        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+                        {
+                            SoundManager.PlaySound(SoundType.BossSpawn, 0.2f);
 
+                        }
+                    }
+                    else
+                    {
+                        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+                        {
+                            SoundManager.PlaySound(SoundType.MonsterSpawn, 0.2f);
+
+                        }
+                    }
 
                     // Instantiate the enemy with position and rotation
-                    SoundManager.PlaySound(SoundType.MonsterSpawn, 0.1f);
                     Instantiate(enemyPrefab, spawnPosition, spawnRotation);
 
                     gameManager.EnemySpawned();

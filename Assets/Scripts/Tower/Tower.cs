@@ -120,6 +120,11 @@ public class Tower : MonoBehaviour
         // 0 is tier 1, 1 is tier 2 you can only upgrade 2 times
         if (currentTier < 2)
         {
+            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+            {
+                SoundManager.PlaySound(SoundType.TowerLevel, 0.5f);
+
+            }
             // the tower type variable is overrided in the child classes, thats how we are able to spawn the correct type of prefab
             Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier + 1, element), transform.position, transform.rotation).GetComponent<Tower>();
             upgradedTower.currentTier = currentTier + 1;
@@ -138,6 +143,10 @@ public class Tower : MonoBehaviour
         // need ti implement costs of changing element
         if(element != Element.Fire)
         {
+            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+            {
+                SoundManager.PlaySound(SoundType.FireMonsterSound, 0.3f);
+            }
             Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier, Element.Fire), transform.position, transform.rotation).GetComponent<Tower>();
             upgradedTower.currentTier = currentTier;
             upgradedTower.element = Element.Fire;
@@ -157,6 +166,10 @@ public class Tower : MonoBehaviour
     {
         if (element != Element.Water)
         {
+            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+            {
+                SoundManager.PlaySound(SoundType.WaterMonsterSound, 0.3f);
+            }
             Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier, Element.Water), transform.position, transform.rotation).GetComponent<Tower>();
             upgradedTower.currentTier = currentTier;
             upgradedTower.element = Element.Water;
@@ -176,6 +189,10 @@ public class Tower : MonoBehaviour
     {
         if (element != Element.Air)
         {
+            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+            {
+                SoundManager.PlaySound(SoundType.WindMonsterSound, 0.3f);
+            }
             Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier, Element.Air), transform.position, transform.rotation).GetComponent<Tower>();
             upgradedTower.currentTier = currentTier;
             upgradedTower.element = Element.Air;

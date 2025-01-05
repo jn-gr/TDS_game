@@ -11,19 +11,20 @@ public class MainMenuUI : MonoBehaviour
     private float soundEffectVolume;
     private float musicVolume;
 
-    [Header("Camera Movement Variables")]
     public Camera mainCamera; // Reference to the main camera (assign via Inspector)
     public Transform[] targetPositions; // Array of target positions and rotations
     public float moveSpeed = 5f; // Speed of camera movement
     public float rotateSpeed = 100f; // Speed of camera rotation
 
-    [Header("Settings Volume Variables")]
     public Image soundEffectButton;
     public Sprite soundEffectMute;
     public Sprite soundEffectUnmute;
     public Image musicButton;
     public Sprite musicMute;
     public Sprite musicUnmute;
+
+    public AudioSource bgmAudioSource; // Reference to the AudioSource for BGM
+    public AudioClip bgmClip;          // The AudioClip for the BGM
 
     public void PlayGameEasy()
     {
@@ -38,6 +39,7 @@ public class MainMenuUI : MonoBehaviour
         SceneLoader.NextSceneName = "Main";
         SceneManager.LoadScene("Loading Screen");
     }
+
     public void PlayGameHard()
     {
         UserDifficulty.CurrentLevel = DifficultyLevel.Hard;
@@ -98,58 +100,113 @@ public class MainMenuUI : MonoBehaviour
 
     private void Start()
     {
-        // Gets volume variables from PlayerPrefs
-        soundEffectVolume = PlayerPrefs.GetFloat("SoundEffectVolume", 1.0f);
-        musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+        // Initialize PlayerPrefs with default values if not already set
+        if (!PlayerPrefs.HasKey("SoundEffectVolume"))
+        {
+            PlayerPrefs.SetInt("SoundEffectVolume", 1);
+        }
+        if (!PlayerPrefs.HasKey("MusicVolume"))
+        {
+            PlayerPrefs.SetInt("MusicVolume", 1);
+        }
+        PlayerPrefs.Save();
 
-        // Changes volume sprites based on if they're 1 or 0.
-        if (soundEffectVolume == 1)
-        {
-            soundEffectButton.sprite = soundEffectUnmute;
-        }
-        else
-        {
-            soundEffectButton.sprite = soundEffectMute;
-        }
+        // Update volume sprites based on PlayerPrefs values
+        UpdateSoundEffectSprite();
+        UpdateMusicSprite();
 
-        if (musicVolume == 1)
-        {
-            musicButton.sprite = musicUnmute;
-        }
-        else
-        {
-            musicButton.sprite = musicMute;
-        }
+        // Play or stop BGM based on the MusicVolume
+        UpdateBGM();
     }
 
     public void SoundEffectToggle()
     {
-        if (soundEffectVolume == 1.0f)
+        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
         {
-            PlayerPrefs.SetFloat("SoundEffectVolume", 0.0f);
-            soundEffectVolume = PlayerPrefs.GetFloat("SoundEffectVolume");
-            soundEffectButton.sprite = soundEffectMute;
+            PlayerPrefs.SetInt("SoundEffectVolume", 0);
+            PlayerPrefs.Save();
+            soundEffectButton.sprite = soundEffectUnmute;
         }
         else
         {
-            PlayerPrefs.SetFloat("SoundEffectVolume", 1.0f);
-            soundEffectVolume = PlayerPrefs.GetFloat("SoundEffectVolume");
-            soundEffectButton.sprite = soundEffectUnmute;
+            PlayerPrefs.SetInt("SoundEffectVolume", 1);
+            PlayerPrefs.Save();
+            soundEffectButton.sprite = soundEffectMute;
+
+            // Play click sound only when unmuting
+            SoundManager.PlaySound(SoundType.UiClick, 0.5f);
         }
     }
 
     public void MusicToggle()
     {
-        if (musicVolume == 1.0f)
+        if (PlayerPrefs.GetInt("MusicVolume") == 1)
         {
-            PlayerPrefs.SetFloat("MusicVolume", 0.0f);
-            musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+            PlayerPrefs.SetInt("MusicVolume", 0);
+            PlayerPrefs.Save();
+            musicButton.sprite = musicMute;
+
+            // Stop the BGM
+            UpdateBGM();
+        }
+        else
+        {
+            PlayerPrefs.SetInt("MusicVolume", 1);
+            PlayerPrefs.Save();
+            musicButton.sprite = musicUnmute;
+
+            // Play the BGM
+            UpdateBGM();
+
+            // Play click sound only if sound effects are enabled
+            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+            {
+                SoundManager.PlaySound(SoundType.UiClick, 0.5f);
+            }
+        }
+    }
+
+    private void UpdateBGM()
+    {
+        if (PlayerPrefs.GetInt("MusicVolume") == 1)
+        {
+            if (!bgmAudioSource.isPlaying)
+            {
+                bgmAudioSource.clip = bgmClip;
+                bgmAudioSource.loop = true; // Enable looping
+                bgmAudioSource.volume = 0.5f; // Set desired volume
+                bgmAudioSource.Play(); // Start playing
+            }
+        }
+        else
+        {
+            if (bgmAudioSource.isPlaying)
+            {
+                bgmAudioSource.Stop(); // Stop playing the BGM
+            }
+        }
+    }
+
+    private void UpdateSoundEffectSprite()
+    {
+        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+        {
+            soundEffectButton.sprite = soundEffectMute;
+        }
+        else
+        {
+            soundEffectButton.sprite = soundEffectUnmute;
+        }
+    }
+
+    private void UpdateMusicSprite()
+    {
+        if (PlayerPrefs.GetInt("MusicVolume") == 1)
+        {
             musicButton.sprite = musicMute;
         }
         else
         {
-            PlayerPrefs.SetFloat("MusicVolume", 1.0f);
-            musicVolume = PlayerPrefs.GetFloat("MusicVolume");
             musicButton.sprite = musicUnmute;
         }
     }
