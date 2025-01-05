@@ -102,6 +102,10 @@ public class GameManager : MonoBehaviour
         experience += 100;
         enemiesAlive--;
 
+        //skill tree multipliers
+        experience *= XpBoostSkill.getEffect();
+        currency *= GoldEarnSkill.getEffect();
+
         Debug.Log($"Wave {waveNum}: Enemy killed. Enemies alive: {enemiesAlive}");
     }
 

@@ -133,6 +133,8 @@ public class NeutralEnemy : MonoBehaviour
         float waveHealth = 10 + (waveNumber * 1.1f);
         float waveSpeed = 1 + (waveNumber * 0.2f);
 
+        waveSpeed *= MobSlowingSkill.getEffect();
+
         // Apply difficulty multipliers
         if (UserDifficulty.CurrentLevel == DifficultyLevel.Hard)
         {
