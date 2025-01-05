@@ -512,7 +512,7 @@ public class MapManager : MonoBehaviour
 
     public void HoverRegion(int regionX, int regionY)
     {
-        Debug.Log((regionX, regionY));
+        
         bool valid = false;
         // Clear any previous highlights
         highlightTilemap.ClearAllTiles();
