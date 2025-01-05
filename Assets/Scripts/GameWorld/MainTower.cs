@@ -34,6 +34,11 @@ public class MainTower : MonoBehaviour
 
             if (enemyComponent != null) // Check if the object has the NeutralEnemy component
             {
+                if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+                {
+                    SoundManager.PlaySound(SoundType.Hurt, 0.5f);
+
+                }
                 TakeDamage(enemyComponent.damage);
                 enemyComponent.TakeDamage(enemyComponent.health * 100.0f,enemyComponent.element); // Effectively "kills" the enemy
 

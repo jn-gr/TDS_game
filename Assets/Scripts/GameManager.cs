@@ -104,8 +104,9 @@ public class GameManager : MonoBehaviour
 
     public void UpdateHealth()
     {
-        currentHealth = mainTower.GetHealth();
+        currentHealth = Mathf.Round(mainTower.GetHealth());
     }
+
 
     public void EnemyKilled()
     {
