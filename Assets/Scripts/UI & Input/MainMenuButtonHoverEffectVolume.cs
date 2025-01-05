@@ -47,11 +47,11 @@ public class MainMenuButtonHoverEffectVolume : MonoBehaviour, IPointerEnterHandl
 
         if (isHover)
         {
-            buttonImage.sprite = (PlayerPrefs.GetFloat(prefsKey, 1.0f) == 1.0f) ? unmuteSpriteHover : muteSpriteHover;
+            buttonImage.sprite = (PlayerPrefs.GetInt(prefsKey, 1) == 1) ?  muteSpriteHover : unmuteSpriteHover;
         }
         else
         {
-            buttonImage.sprite = (PlayerPrefs.GetFloat(prefsKey, 1.0f) == 1.0f) ? unmuteSprite : muteSprite;
+            buttonImage.sprite = (PlayerPrefs.GetInt(prefsKey, 1) == 1) ?  muteSprite : unmuteSprite;
         }
     }
 }
