@@ -5342,7 +5342,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 40, y: 31.14, z: 40}
+  m_Size: {x: 20, y: 20, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &757290341
 MonoBehaviour:
@@ -11176,7 +11176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 768e3eb706002e14faa199c2c5826737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyboardOnly: 0
+  keyboardOnly: 1
   ScreenEdgeBorderThickness: 5
   RTSMode: 1
   FlyCameraMode: 0
