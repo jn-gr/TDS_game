@@ -95,7 +95,7 @@ public class UI : MonoBehaviour
 
     void Start()
     {
-        gameManager = FindFirstObjectByType<GameManager>();
+        gameManager = GameManager.Instance;
         Transform parent1 = GameObject.Find("SkillHotbar").transform;
         activeSkillCooldownTexts = parent1.GetComponentsInChildren<TextMeshProUGUI>();
         Transform parent2 = GameObject.Find("ActiveSkillsPanel").transform;
@@ -104,12 +104,22 @@ public class UI : MonoBehaviour
         passiveSkillLevelTexts = parent3.GetComponentsInChildren<TextMeshProUGUI>();
         //blurryCameraEffect = GetComponent<PostProcessVolume>();
         allUI = canvas.GetComponentsInChildren<Transform>(true).ToArray();
-        gameManager.WaveEnded += EndOfWave;
+        if (gameManager != null)
+        {
+            gameManager.WaveEnded += EndOfWave;
+            Debug.Log("Subscribed to WaveEnded event.");
+        }
+        else
+        {
+            Debug.Log("it is emtpy");
+        }
+        //gameManager.WaveEnded += EndOfWave;
         gameManager.LastWaveCompleted += EndOfLastWave;
     }
 
     void Update()
     {
+        
         // Checks all info on UI per frame. Gold, health, wave progress, etc.
         healthText.text = (gameManager.currentHealth).ToString();
         goldText.text = (gameManager.currency).ToString();
@@ -174,6 +184,7 @@ public class UI : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        
         if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
         {
             SoundManager.PlaySound(SoundType.UiClick, 0.5f);
@@ -185,7 +196,7 @@ public class UI : MonoBehaviour
 
     public void SaveAndBackToMainMenu()
     {
-        Debug.Log("Put Save And Go Home Logic Here");
+        SaveLoadManager.Instance.SaveGame();
 
         if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
         {
