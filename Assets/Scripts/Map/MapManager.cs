@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class MapManager : MonoBehaviour
 {
@@ -12,18 +11,10 @@ public class MapManager : MonoBehaviour
     public Tilemap tilemap; 
     public TileBase walkableTile; 
     public TileBase nonWalkableTile;
-    public TileBase greenHighlightTile;
-    public TileBase redHighlightTile;
-    private Plane tilemapPlane;
 
-    public Tilemap highlightTilemap;
-    public TileBase highlightTile; 
-
+    
     public GameObject spawnerPrefab;
-
-    public ToastPanel toastPanel;
-
-    public int regionUnlockPrice;
+    
     
 
     public Vector3Int mazeOrigin = Vector3Int.zero;
@@ -38,20 +29,9 @@ public class MapManager : MonoBehaviour
     [HideInInspector]
     public Dictionary<(int, int), Spawner> spawnerPositions = new Dictionary<(int, int), Spawner>();
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        //DontDestroyOnLoad(gameObject);
-    }
     void Start()
     {
-        
+        Instance = this;
         // 0 = Left, 1 = Right, 2 = Bottom, 3 = Top
         // This will be used to create start map
         CreateEmptyRegion(0, 0, regionWidth, regionHeight);
@@ -59,9 +39,6 @@ public class MapManager : MonoBehaviour
         ExpandRegion(-1, 0);
         ExpandRegion(0, 1);
         ExpandRegion(0, -1);
-        GameManager.Instance.currency += regionUnlockPrice * 4; // you dont pay for the first 4 region unlocks
-
-        tilemapPlane = new Plane(Vector3.up, Vector3.zero);
 
 
         //if (SaveLoadManager.Instance.isLoad) LoadGame();
@@ -81,38 +58,27 @@ public class MapManager : MonoBehaviour
         {
             return; 
         }
-        if (!GameManager.Instance.waveStarted) // can only unlock before wave starts;
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Input.GetMouseButtonDown(0))
+        { 
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);           
+            Plane tilemapPlane = new Plane(Vector3.up, Vector3.zero); 
+
             if (tilemapPlane.Raycast(ray, out float enter))
             {
-                Vector3 worldPosition = ray.GetPoint(enter);
+                Vector3 worldPosition = ray.GetPoint(enter); 
                 Vector3Int cellPosition = tilemap.WorldToCell(worldPosition);
-                (int regionX, int regionY) = (
-                        Mathf.FloorToInt((float)cellPosition.x / regionWidth),
-                        Mathf.FloorToInt((float)cellPosition.y / regionHeight)
-                    );
-                if (Input.GetMouseButtonDown(0))
-                {
-                    if (GameManager.Instance.currency >= regionUnlockPrice)
-                    {
-                        ExpandRegion(regionX, regionY);
-                        return;
-                    }
-                    else
-                    {
-                        toastPanel.ShowMessage("You do not have enough Gold");
-                        return;
-                    }
-                }
-                HoverRegion(regionX,regionY);
 
-            }
-        }
-        else
-        {
-            highlightTilemap.ClearAllTiles();
-        }
+                (int regionX, int regionY) = (
+                    Mathf.FloorToInt((float)cellPosition.x / regionWidth),
+                    Mathf.FloorToInt((float)cellPosition.y / regionHeight)
+                );
+
+                
+
+                ExpandRegion(regionX, regionY);
+   
+            }       
+        }   
     }
 
     private void CreateEmptyRegion(int regionX, int regionY, int width, int height)
@@ -130,7 +96,50 @@ public class MapManager : MonoBehaviour
         AddRegionToMap(initialRegion);
         DrawRegionOnTilemap(initialRegion);
     }
-    
+    private void CreateInitialRegion(int regionX, int regionY, int width, int height, int startSide)
+    {
+        
+        Region initialRegion = new Region(regionX, regionY, width, height);
+        CellT startCell = null;
+        int startX = 0, startY = 0;
+  
+        switch (startSide)
+        {
+            case 0: // Left
+                startX = 0;
+                startY = height / 2;
+                startCell = new CellT(startX, startY) { IsOpenLeft = true }; // Connect this cell to the right
+                break;
+            case 1: // Right
+                startX = width - 1;
+                startY = height / 2;
+                startCell = new CellT(startX, startY) { IsOpenRight = true }; // Connect this cell to the left
+                break;
+            case 2: // Bottom
+                startX = width / 2;
+                startY = 0;
+                startCell = new CellT(startX, startY) { IsOpenDown = true }; // Connect this cell to the top
+                break;
+            case 3: // Top
+                startX = width / 2;
+                startY = height - 1;
+                startCell = new CellT(startX, startY) { IsOpenUp = true }; // Connect this cell to the bottom
+                break;
+            default:
+                Debug.LogError($"Invalid startSide: {startSide}");
+                return;
+        }
+
+        // Add the start cell to both the list and the nested array. important
+        initialRegion.startCells.Add(startCell);
+        initialRegion.Cells[startX, startY] = startCell;
+
+        // genreate the region now
+        initialRegion.GeneratePath(globalRegionMap,globalMap);
+        AddRegionToMap(initialRegion);
+        DrawRegionOnTilemap(initialRegion);
+        AddRegionSpawners(initialRegion);
+    }
 
 
     // adds each cell of a region to the global map dictionary and adds region to globalregion map too. IMPORTANT!!, 
@@ -240,8 +249,7 @@ public class MapManager : MonoBehaviour
     {
         if (globalRegionMap.ContainsKey((newRegionX, newRegionY)))
         {
-            toastPanel.ShowMessage("This Region is already unlocked");
-            
+            Debug.LogWarning($"Region at ({newRegionX}, {newRegionY}) already exists.");
             return;
         }
 
@@ -252,12 +260,12 @@ public class MapManager : MonoBehaviour
         
         if (!(neighbouringRegions.Count > 0))
         {
-            toastPanel.ShowMessage("No path leads to this region");
+            Debug.Log("you clicked on an unlockable region");
             return;
         }
         else if (neighbouringRegions.Count == 4)
         {
-            toastPanel.ShowMessage("Landlocked region. Cannot unlock");
+            Debug.Log("you landlocked cant open this or this is already unlocked");
             return;
         }
         bool foundMatchingEndCell = false;
@@ -321,18 +329,18 @@ public class MapManager : MonoBehaviour
 
         if (!foundMatchingEndCell)
         {
-            
+            Debug.LogError($"No paths direct to this region, so we cant form a region here");
             return;
         }
         RemoveSpawnersInExpandedRegion(newRegion);
         newRegion.GeneratePath(globalRegionMap, globalMap);
-        GameManager.Instance.currency -= regionUnlockPrice;
+        
         AddRegionToMap(newRegion);
         DrawRegionOnTilemap(newRegion);  
         AddRegionSpawners(newRegion);
     }
 
-    
+
     private List<Region> GetNeighbouringRegions(Region region)
     {
         List<Region> neighbours = new List<Region>();
@@ -349,34 +357,6 @@ public class MapManager : MonoBehaviour
         {
             // get neihbour coords
             (int neighbourX, int neighbourY) = (region.RegionX + dx, region.RegionY + dy);
-
-            // Check if the neighbor exists in the dictionary
-            if (globalRegionMap.TryGetValue((neighbourX, neighbourY), out Region neighbourRegion))
-            {
-                neighbours.Add(neighbourRegion);
-            }
-        }
-
-        return neighbours;
-    }
-
-    private List<Region> GetNeighbouringRegionsFromCoords(int regionX, int regionY)
-    {
-        // get region from dictionary with region x and region y
-        List<Region> neighbours = new List<Region>();
-
-        (int x, int y)[] offsets = new (int, int)[]
-        {
-        (-1, 0), // Left
-        (1, 0),  // Right
-        (0, -1), // Bottom
-        (0, 1)   // Top
-        };
-
-        foreach (var (dx, dy) in offsets)
-        {
-            // get neihbour coords
-            (int neighbourX, int neighbourY) = (regionX + dx, regionY + dy);
 
             // Check if the neighbor exists in the dictionary
             if (globalRegionMap.TryGetValue((neighbourX, neighbourY), out Region neighbourRegion))
@@ -480,10 +460,8 @@ public class MapManager : MonoBehaviour
 
                 if (cell.objectPlacedOnCell != null)
                 {
-                    GameObject tower = Instantiate(cell.objectPlacedOnCell, tilemap.GetCellCenterWorld(new Vector3Int((region.Width * region.RegionX) +cell.X, (region.Height * region.RegionY) + cell.Y)), Quaternion.identity);
-                    
+                    GameObject tower = Instantiate(cell.objectPlacedOnCell, tilemap.GetCellCenterWorld(new Vector3Int(cell.X, cell.Y)), Quaternion.identity);
                     tower.GetComponent<Tower>().placed = true;
-                    tower.GetComponent<Tower>().cellPlacedOn = cell;
                 }
                 tileToUse = cell.IsWalkable ? walkableTile : nonWalkableTile;
                 
@@ -510,69 +488,6 @@ public class MapManager : MonoBehaviour
         
     }
 
-    public void HoverRegion(int regionX, int regionY)
-    {
-        Debug.Log((regionX, regionY));
-        bool valid = false;
-        // Clear any previous highlights
-        highlightTilemap.ClearAllTiles();
-
-        if (globalRegionMap.TryGetValue((regionX, regionY), out Region region)){
-            // return do not hover this area. since its already unclocked
-            return;
-        }
-        List <Region> neighbourRegions = GetNeighbouringRegionsFromCoords(regionX, regionY);
-        if (GameManager.Instance.currency < regionUnlockPrice)
-        {
-            valid = false;
-        }
-        else if (neighbourRegions.Count <= 0)
-        {
-            //red tiles
-            valid = false;
-        }
-        else if (neighbourRegions.Count == 4)
-        {
-            valid = false;
-        }
-        else
-        {
-            
-            foreach (Region neighbour in neighbourRegions)
-            {
-
-                (int x, int y) direction = (neighbour.RegionX - regionX, neighbour.RegionY - regionY);
-
-                List<CellT> matchingEndCells = FindEndCellFromNeighbour(neighbour, direction);
-
-                if (matchingEndCells.Count > 0)
-                {
-                    valid = true;
-
-                }
-            }
-        }
-
-
-
-            // Calculate the region's origin based on the region's coordinates
-            Vector3Int regionOrigin = new Vector3Int(regionX * regionWidth, regionY * regionHeight, 0);
-
-        // Iterate through the cells in the region and apply the highlight
-        TileBase tileToSet = valid ? greenHighlightTile : redHighlightTile;
-        for (int x = 0; x < regionWidth; x++)
-        {
-            for (int y = 0; y < regionHeight; y++)
-            {
-                Vector3Int cellPosition = regionOrigin + new Vector3Int(x, y, 0);
-
-                // Apply the highlight tile (you can customize the highlight tile as needed)
-                highlightTilemap.SetTile(cellPosition, tileToSet); // Replace with a highlight tile
-            }
-        }
-    }
-
-    
     void OnDrawGizmos()
     {
         Vector3 mousePosition = Input.mousePosition;

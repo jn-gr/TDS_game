@@ -82,7 +82,6 @@ public class SaveLoadUtility
             TotalKills = gameManager.totalKills,
             Score = gameManager.score,
             WaveNum = gameManager.waveNum
-
         };
 
 
@@ -92,7 +91,7 @@ public class SaveLoadUtility
         {
             var globalCoords = cellPair.Key;
             var cell = cellPair.Value;
-
+            
             cellPairs.Add(new KeyValuePairCell
             {
                 GlobalX = globalCoords.Item1,
@@ -105,8 +104,7 @@ public class SaveLoadUtility
                     IsOpenDown = cell.IsOpenDown,
                     IsOpenLeft = cell.IsOpenLeft,
                     IsOpenRight = cell.IsOpenRight,
-                    TowerIndex = -1,
-                    TowerType = -1,
+                    
                     ObjectPlacedOnCellName = cell.objectPlacedOnCell?.name
                 }
             });
@@ -135,9 +133,8 @@ public class SaveLoadUtility
                     CellT cell = region.Cells[x, y];
                     if (cell.objectPlacedOnCell != null)
                     {
-                        if (cell.objectPlacedOnCell.GetComponent<Turret>() != null)
+                        if (cell.objectPlacedOnCell.GetComponent<Tower>() != null)
                         {
-                            Debug.Log($"Tower detected on cell at {x}, {y}");
                             towerType = 0;
                             
                             string objectName = cell.objectPlacedOnCell.name.Replace("(Clone)", "").Trim();
@@ -154,7 +151,6 @@ public class SaveLoadUtility
                         }
                         else if (cell.objectPlacedOnCell.GetComponent<Sniper>() != null)
                         {
-                            Debug.Log($"Sniper detected on cell at {x}, {y}");
                             towerType = 1;
                             
                             string objectName = cell.objectPlacedOnCell.name.Replace("(Clone)", "").Trim();
@@ -171,7 +167,6 @@ public class SaveLoadUtility
                         }
                         else if (cell.objectPlacedOnCell.GetComponent<RapidFire>() != null)
                         {
-                            Debug.Log($"Rapid detected on cell at {x}, {y}");
                             towerType = 2;
                             
                             string objectName = cell.objectPlacedOnCell.name.Replace("(Clone)", "").Trim();
@@ -269,28 +264,22 @@ public class SaveLoadUtility
                 Cells = new CellT[serialRegion.Width, serialRegion.Height]
             };
 
-            Debug.Log($"{serialRegion.Cells.Length} this is length");
             for (int i = 0; i < serialRegion.Cells.Length; i++)
             {
                 var serialCell = serialRegion.Cells[i];
-                
                 GameObject objectOnCell = null;
                 if (serialCell.TowerType != -1)
                 {
                     
                     if (serialCell.TowerType == 0)
                     {
-                        Debug.Log(GameManager.Instance.turretPrefabs.Count());
-                        Debug.Log(serialCell.TowerIndex);
                         objectOnCell = GameManager.Instance.turretPrefabs[serialCell.TowerIndex];
-
-                        
                     }
                     else if (serialCell.TowerType ==1)
                     {
                         objectOnCell = GameManager.Instance.sniperPrefabs[serialCell.TowerIndex];
                     }
-                    else if (serialCell.TowerType == 2)
+                    if (serialCell.TowerType == 2)
                     {
                         objectOnCell = GameManager.Instance.rapidFirePrefabs[serialCell.TowerIndex];
                     }
@@ -314,20 +303,6 @@ public class SaveLoadUtility
             mapManager.globalRegionMap[(region.RegionX, region.RegionY)] = region;
         }
 
-        foreach (var spawnerPair in mapManager.spawnerPositions)
-        {
-            Spawner spawner = spawnerPair.Value;
-
-            // Check if the spawner's GameObject is not null
-            if (spawner != null && spawner.gameObject != null)
-            {
-                GameObject.Destroy(spawner.gameObject); // Destroy the GameObject
-            }
-        }
-
-        // Clear the dictionary after destroying the GameObjects
-        
-        mapManager.spawnerPositions.Clear();
         foreach (var spawn in gameData.Spawns)
         {
             // Instantiate the spawner prefab at the correct position
@@ -344,21 +319,8 @@ public class SaveLoadUtility
 public class SaveLoadManager : MonoBehaviour
 {
     private const string SaveFilePath = "savegame.json";
-    public static SaveLoadManager Instance { get; private set; }
 
-    
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject); 
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject); 
-    }
-    public void SaveGame()
+    public static void SaveGame()
     {
         SerializableGameData data = SaveLoadUtility.ConvertToSerializable(MapManager.Instance, GameManager.Instance);
         string json = JsonUtility.ToJson(data, true);
@@ -366,35 +328,27 @@ public class SaveLoadManager : MonoBehaviour
         Debug.Log("Game Saved");
     }
 
-    public void LoadGame()
+    public static void LoadGame()
     {
-        StartCoroutine(LoadGameCo());
-
-        static IEnumerator LoadGameCo()
+        string filePath = Path.Combine(Application.persistentDataPath, SaveFilePath);
+        if (File.Exists(filePath))
         {
-            while (GameManager.Instance == null || MapManager.Instance == null)
+            string json = File.ReadAllText(filePath);
+            SerializableGameData data = JsonUtility.FromJson<SerializableGameData>(json);
+            SaveLoadUtility.LoadFromSerializable(MapManager.Instance,GameManager.Instance, data);
+            Debug.Log("Game Loaded");
+            MapManager.Instance.LoadGame();
+            foreach (var regionPair in MapManager.Instance.globalRegionMap)
             {
-                yield return null; // Wait for the next frame
-            }
+                var coords = regionPair.Key; // This is the (int, int) tuple key
+                Region region = regionPair.Value; // This is the Region object
 
-            // Optionally, you can add a small delay to ensure the instance is fully ready
-            
-            string filePath = Path.Combine(Application.persistentDataPath, SaveFilePath);
-            if (File.Exists(filePath))
-            {
-                string json = File.ReadAllText(filePath);
-                SerializableGameData data = JsonUtility.FromJson<SerializableGameData>(json);
-                SaveLoadUtility.LoadFromSerializable(MapManager.Instance, GameManager.Instance, data);
-                Debug.Log("Game Loaded");
-                MapManager.Instance.LoadGame();
-               
+                Debug.Log($"Region Coordinates: X = {coords.Item1}, Y = {coords.Item2}");
             }
-            else
-            {
-                Debug.LogWarning("Save file not found");
-            }
-
         }
-        
+        else
+        {
+            Debug.LogWarning("Save file not found");
+        }
     }
 }

@@ -91,11 +91,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void LoadGame()
     {
-        SaveLoadManager.Instance.LoadGame();
-        SceneLoader.NextSceneName = "Main";
-        SceneManager.LoadScene("Loading Screen");
-       
-        
+        Debug.Log("Enter Load Game Logic Here");
     }
 
     private void Start()
