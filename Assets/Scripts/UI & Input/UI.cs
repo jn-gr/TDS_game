@@ -473,6 +473,7 @@ public class UI : MonoBehaviour
         Debug.Log("HOTBARKILLPRESSED");
         //activeSkillButton
         SkillTree.Instance.ActivateSkill(skillIndex);
+        StartCoroutine(PauseTimeCoroutine());
     }
 
     public void OnPassiveSkillButtonClicked(int skillIndex)
@@ -596,6 +597,26 @@ public class UI : MonoBehaviour
 
         StartCoroutine(FadeCanvasGroup(Fade.Out, gameWonOverlay, pauseFadeDuration, Blurry.No));
         Time.timeScale = 1;
+    }
+
+    private IEnumerator PauseTimeCoroutine()
+    {
+        // Pause time
+        ActiveSkillManager.SpeedInt = 0;
+        Debug.Log("yo " + ActiveSkillManager.SpeedInt);
+
+        // Wait for 10 real-time seconds
+        float pauseDuration = 10f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < pauseDuration)
+        {
+            elapsedTime += Time.unscaledDeltaTime; // Use unscaledDeltaTime to track real-time
+            yield return null; // Wait for the next frame
+        }
+
+        // Resume time
+        ActiveSkillManager.SpeedInt = 1;
     }
 
 }
