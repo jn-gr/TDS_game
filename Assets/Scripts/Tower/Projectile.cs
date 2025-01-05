@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 
 
@@ -8,7 +9,7 @@ public class Projectile : MonoBehaviour
 {
     public float damage;
     public float force;
-    public GameObject enemyTarget;
+    public GameObject target;
     public Element element;
     // Start is called before the first frame update
     private Rigidbody rb;
@@ -33,20 +34,36 @@ public class Projectile : MonoBehaviour
 
 
 
-    void Update()
+    //void FixedUpdate()
+    //{
+    //    if (enemyTarget)
+    //    {
+    //        Vector3 targetDirection = (enemyTarget.transform.position - transform.position).normalized;
+    //        float speed = rb.velocity.magnitude;
+    //        Vector3 newDirection = Vector3.RotateTowards(rb.velocity.normalized, targetDirection, turnSpeed * Mathf.Deg2Rad * Time.deltaTime, 0f);
+    //        rb.velocity = newDirection * speed;
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
+
+    //}
+
+    private void FixedUpdate()
     {
-        if (enemyTarget)
-        {
-            Vector3 targetDirection = (enemyTarget.transform.position - transform.position).normalized;
-            float speed = rb.velocity.magnitude;
-            Vector3 newDirection = Vector3.RotateTowards(rb.velocity.normalized, targetDirection, turnSpeed * Mathf.Deg2Rad * Time.deltaTime, 0f);
-            rb.velocity = newDirection * speed;
-        }
-        else
+        if (target == null)
         {
             Destroy(gameObject);
+            return;
         }
 
+        // Move towards the target
+        Vector3 direction = (target.transform.position - transform.position).normalized;
+        transform.position += direction * force * Time.fixedDeltaTime;
+
+        // Optionally, align the projectile to face the target
+        transform.LookAt(target.transform);
     }
 
 
@@ -56,7 +73,7 @@ public class Projectile : MonoBehaviour
     }
     public void SetTarget(GameObject target)
     {
-        enemyTarget = target;
+        this.target = target;
     }
     public void SetForce(float force)
     {
@@ -65,7 +82,7 @@ public class Projectile : MonoBehaviour
     public void SetElement(Element element)
     {
         this.element = element;
-        this.element = element;
+        
 
         
         switch (element)

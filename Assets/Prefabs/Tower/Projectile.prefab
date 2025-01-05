@@ -127,7 +127,7 @@ MonoBehaviour:
   waterMaterial: {fileID: 2100000, guid: 69ca4c247fbf228429a072e19aee2e47, type: 2}
   neutralMaterial: {fileID: 2100000, guid: 62aefaf150acb6b4faebebb07ef561ba, type: 2}
   airMaterial: {fileID: 2100000, guid: fb10b5255fabfd54ebd3bab4f3720ec4, type: 2}
-  turnSpeed: 100
+  turnSpeed: 355.6
 --- !u!54 &-5596567141994039862
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -84,20 +84,48 @@ public class Tower : MonoBehaviour
 
     public virtual void Shoot()
     {
-        var damageBoost = SkillTree.Instance.GetSkill<TowerDamageSkill>();
-        Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation, transform); // spawns a projectile
-        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        //var damageBoost = SkillTree.Instance.GetSkill<TowerDamageSkill>();
+        //Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation, transform); // spawns a projectile
+        //Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
-        Vector3 direction = (enemyTarget.transform.position - shootPoint.position).normalized;
-        rb.AddForce(direction * projectileForce, ForceMode.Impulse); // using the physics, pushes the projectile in a direction
+        //Vector3 direction = (enemyTarget.transform.position - shootPoint.position).normalized;
+        //rb.AddForce(direction * projectileForce, ForceMode.Impulse); // using the physics, pushes the projectile in a direction
+        //projectile.SetForce(projectileForce);
+        //projectile.SetDamage(damage * damageBoost.getEffect());
+        //Debug.Log(damage);
+        //Debug.Log(damage * damageBoost.getEffect());
+        //projectile.SetTarget(enemyTarget);
+        //projectile.SetElement(element);
+
+        var damageBoost = SkillTree.Instance.GetSkill<TowerDamageSkill>();
+        Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation, transform);
         projectile.SetForce(projectileForce);
         projectile.SetDamage(damage * damageBoost.getEffect());
-        Debug.Log(damage);
-        Debug.Log(damage* damageBoost.getEffect());
         projectile.SetTarget(enemyTarget);
         projectile.SetElement(element);
 
+        // Enable homing behavior
         
+
+
+    }
+
+    private Vector3 PredictTargetPosition(GameObject target, float projectileSpeed, float projectileMass)
+    {
+        Rigidbody enemyRb = target.GetComponent<Rigidbody>();
+        if (enemyRb == null) return target.transform.position; // If no rigidbody, return current position
+
+        // Enemy's velocity
+        Vector3 enemyVelocity = enemyRb.velocity;
+
+        // Distance to the target
+        Vector3 toTarget = target.transform.position - shootPoint.position;
+
+        // Time to hit the target
+        float timeToHit = toTarget.magnitude / (projectileSpeed / projectileMass);
+
+        // Predicted position
+        return target.transform.position + enemyVelocity * timeToHit;
     }
 
     private void OnTriggerEnter(Collider other)

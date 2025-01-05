@@ -125,6 +125,8 @@ public class RTSCameraController : MonoBehaviour
 
     void Update()
     {
+
+        
         #region Camera Mode
         if (RTSMode) FlyCameraMode = false;
         if (FlyCameraMode) RTSMode = false;
