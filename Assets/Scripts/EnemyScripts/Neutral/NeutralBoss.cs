@@ -7,7 +7,7 @@ public class NeutralBoss : NeutralEnemy
     public override void Start()
     {
         base.Start();
-
+        Tier = 3;
         // Multiply damage, health and speed for boss
         damage *= 5;
         health *= 6;

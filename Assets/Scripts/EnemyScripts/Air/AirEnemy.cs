@@ -33,7 +33,7 @@ public class AirEnemy : NeutralEnemy
         if (health <= 0)
         {
             isDead = true;
-            gameManager.EnemyKilled();
+            gameManager.EnemyKilled(Tier);
             Destroy(gameObject);
         }
     }

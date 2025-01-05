@@ -94,26 +94,38 @@ public class GameManager : MonoBehaviour
         currentHealth = Mathf.Round(mainTower.GetHealth());
     }
 
-    public void EnemyKilled()
+    public void EnemyKilled(int tier)
     {
         var xpBoostSkill = SkillTree.Instance.GetSkill<XpBoostSkill>();
         var goldEarnSkill = SkillTree.Instance.GetSkill<GoldEarnSkill>();
-
-        totalKills++;
-        currency += 50;
-        score += 100;
-        experience += 100;
-        enemiesAlive--;
-
+        if (tier == 3)
+        {
+            totalKills++;
+            currency += 100;
+            score += 500;
+            experience += 100;
+            enemiesAlive--;
+        }else if(tier == 2)
+        {
+            totalKills++;
+            currency += 50;
+            score += 250;
+            experience += 50;
+            enemiesAlive--;
+        }
+        else
+        {
+            totalKills++;
+            currency += 25;
+            score += 100;
+            experience += 25;
+            enemiesAlive--;
+        }
         //skill tree multipliers
         experience *= xpBoostSkill.getEffect();
         currency *= goldEarnSkill.getEffect();
         currency = Mathf.Round(currency);
         experience = Mathf.Round(experience);
-
-        Debug.Log(xpBoostSkill.getEffect());
-
-        Debug.Log($"Wave {waveNum}: Enemy killed. Enemies alive: {enemiesAlive}");
     }
 
 

@@ -27,6 +27,7 @@ public class NeutralEnemy : MonoBehaviour
     protected bool isDead;
 
     public Element element;
+    public int Tier = 1;
     public float levitationHeight = 5f; // Max height to levitate
     public float levitationSpeed = 2f;   // Speed of levitation
     private float startingY;              // Starting Y position
@@ -122,7 +123,7 @@ public class NeutralEnemy : MonoBehaviour
         {
             isDead = true;
             Debug.Log("NeutralEnemy is dead. Calling EnemyKilled.");
-            gameManager.EnemyKilled();
+            gameManager.EnemyKilled(Tier);
             Destroy(gameObject);
         }
     }

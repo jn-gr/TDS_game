@@ -76,7 +76,7 @@ public class GoldEarnSkill : BaseSkill
 
     public override void ApplyEffect()
     {
-        GoldMultiplier = 1 + (CurrentLevel * 0.05f); //Each level adds a 5% bonus
+        GoldMultiplier = 1 + (CurrentLevel * 0.005f); //Each level adds a 0.5% bonus
         Debug.Log($"Gold multiplier is now {GoldMultiplier}x.");
     }
 
@@ -190,49 +190,6 @@ public class StopTimeSkill : BaseActiveSkill
         Debug.Log("Time resumed.");
     }
 }
-//More Active skills Below if time permits.
-// public class MeteorShowerSkill : BaseActiveSkill
-// {
-//     public int Meteors { get; private set; }
-
-//     public MeteorShowerSkill() : base("Meteor Shower", "Drops meteors on enemies for massive damage.", 3.0f, 15f) { }
-
-//     public override void ApplyEffect()
-//     {
-//         Meteors = CurrentLevel * 5; // Example: Each level adds 5 meteors
-//         Debug.Log($"Meteor shower called with {Meteors} meteors.");
-//         GameManager.Instance.StartCoroutine(MeteorShowerRoutine(Meteors));
-//     }
-
-//     private IEnumerator MeteorShowerRoutine(int count)
-//     {
-//         for (int i = 0; i < count; i++)
-//         {
-//             Vector3 randomPosition = GetRandomEnemyPosition();
-//             if (randomPosition != Vector3.zero)
-//             {
-//                 SpawnMeteor(randomPosition);
-//             }
-//             yield return new WaitForSeconds(0.2f); // Delay between meteors
-//         }
-//     }
-
-//     private Vector3 GetRandomEnemyPosition()
-//     {
-//         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-//         if (enemies.Length > 0)
-//         {
-//             return enemies[Random.Range(0, enemies.Length)].transform.position;
-//         }
-//         return Vector3.zero;
-//     }
-
-//     private void SpawnMeteor(Vector3 position)
-//     {
-//         Debug.Log($"Meteor spawned at {position}!");
-//         // Instantiate meteor prefab and apply damage logic
-//     }
-// }
 
 public class SkillTree : MonoBehaviour
 {
