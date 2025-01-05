@@ -39,7 +39,7 @@ public class DayNightLightRotate : MonoBehaviour
         isRotating = true;
         rotationProgress = 0f;
         Quaternion startRotation = transform.rotation;
-        targetRotation *= Quaternion.Euler(anglePerWave, 0, 0);
+        targetRotation *= Quaternion.Euler(-anglePerWave, 0, 0);
 
         while (rotationProgress < 1f)
         {
