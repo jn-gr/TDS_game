@@ -532,14 +532,14 @@ public class UI : MonoBehaviour
 
     public void UpdateActiveSkillCooldown(string skillName,  float remainingCooldown)
     {
-        Debug.Log("COOLDOWN FOR TIMEF:" + remainingCooldown);
+        //Debug.Log("COOLDOWN FOR TIMEF:" + remainingCooldown);
         for (int i = 0; i < activeSkillCooldownTexts.Length; i++)
         {
-            Debug.Log($"Checking {activeSkillCooldownTexts[i].name} for match...");
+            //Debug.Log($"Checking {activeSkillCooldownTexts[i].name} for match...");
             activeSkillCooldownTexts[i].text = remainingCooldown > 0
                 ? $"{remainingCooldown:F1}s"
                 : "RDY";
-            Debug.Log($"Updated {activeSkillCooldownTexts[i].name} with text: {activeSkillCooldownTexts[i].text}");
+            //Debug.Log($"Updated {activeSkillCooldownTexts[i].name} with text: {activeSkillCooldownTexts[i].text}");
             break;
         }
     }
