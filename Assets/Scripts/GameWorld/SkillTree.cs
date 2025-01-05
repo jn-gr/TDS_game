@@ -47,6 +47,9 @@ public class FireRateSkill : BaseSkill
         FireRateBonus = CurrentLevel * 0.1f; // Example: Each level adds a 10% bonus
         Debug.Log($"Fire rate increased by {FireRateBonus * 100}%.");
     }
+    public float getEffect(){
+        return FireRateBonus;
+    }
 }
 
 public class MobSlowingSkill : BaseSkill
@@ -57,8 +60,11 @@ public class MobSlowingSkill : BaseSkill
 
     public override void ApplyEffect()
     {
-        SlowEffectDuration = CurrentLevel * 0.5f; //Each level adds 0.5 seconds to slow duration
+        SlowEffectDuration = 1-(CurrentLevel * 0.03f);
         Debug.Log($"Slow effect duration increased to {SlowEffectDuration} seconds.");
+    }
+    public float getEffect(){
+        return SlowEffectDuration;
     }
 }
 
@@ -70,8 +76,12 @@ public class GoldEarnSkill : BaseSkill
 
     public override void ApplyEffect()
     {
-        GoldMultiplier = 1 + (CurrentLevel * 0.05f); //Each level adds a 5% bonus
+        GoldMultiplier = 1 + (CurrentLevel * 0.005f); //Each level adds a 0.5% bonus
         Debug.Log($"Gold multiplier is now {GoldMultiplier}x.");
+    }
+
+    public float getEffect(){
+        return GoldMultiplier;
     }
 }
 
@@ -83,8 +93,11 @@ public class XpBoostSkill : BaseSkill
 
     public override void ApplyEffect()
     {
-        XpMultiplier = 1 + (CurrentLevel * 0.05f); // Example: Each level adds a 5% bonus
+        XpMultiplier = 1 + (CurrentLevel * 0.005f); // Example: Each level adds a 0.5% interest
         Debug.Log($"XP multiplier is now {XpMultiplier}x.");
+    }
+    public float getEffect(){
+        return XpMultiplier;
     }
 }
 
@@ -96,21 +109,28 @@ public class RegenPerWaveSkill : BaseSkill
 
     public override void ApplyEffect()
     {
-        RegenAmount = CurrentLevel * 5; // Example: Each level restores 5% HP
+        RegenAmount = 1 + (CurrentLevel * 0.025f);
         Debug.Log($"Regen amount per wave is now {RegenAmount}%.");
+    }
+    public float getEffect(){
+        return RegenAmount;
     }
 }
 
 public class TowerDamageSkill : BaseSkill
 {
-    public int DamageBonus { get; private set; }
+    public float DamageBonus { get; private set; }
 
     public TowerDamageSkill() : base("Tower Damage", "Increases tower damage.", 1.4f) { }
 
     public override void ApplyEffect()
     {
-        DamageBonus = CurrentLevel * 2; // Example: Each level adds 2 damage
+        DamageBonus = 1+(CurrentLevel * 0.015f);
         Debug.Log($"Tower damage increased by {DamageBonus}.");
+    }
+    public float getEffect()
+    {
+        return DamageBonus;
     }
 }
 
@@ -174,49 +194,6 @@ public class StopTimeSkill : BaseActiveSkill
         Debug.Log("Time resumed.");
     }
 }
-//More Active skills Below if time permits.
-// public class MeteorShowerSkill : BaseActiveSkill
-// {
-//     public int Meteors { get; private set; }
-
-//     public MeteorShowerSkill() : base("Meteor Shower", "Drops meteors on enemies for massive damage.", 3.0f, 15f) { }
-
-//     public override void ApplyEffect()
-//     {
-//         Meteors = CurrentLevel * 5; // Example: Each level adds 5 meteors
-//         Debug.Log($"Meteor shower called with {Meteors} meteors.");
-//         GameManager.Instance.StartCoroutine(MeteorShowerRoutine(Meteors));
-//     }
-
-//     private IEnumerator MeteorShowerRoutine(int count)
-//     {
-//         for (int i = 0; i < count; i++)
-//         {
-//             Vector3 randomPosition = GetRandomEnemyPosition();
-//             if (randomPosition != Vector3.zero)
-//             {
-//                 SpawnMeteor(randomPosition);
-//             }
-//             yield return new WaitForSeconds(0.2f); // Delay between meteors
-//         }
-//     }
-
-//     private Vector3 GetRandomEnemyPosition()
-//     {
-//         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-//         if (enemies.Length > 0)
-//         {
-//             return enemies[Random.Range(0, enemies.Length)].transform.position;
-//         }
-//         return Vector3.zero;
-//     }
-
-//     private void SpawnMeteor(Vector3 position)
-//     {
-//         Debug.Log($"Meteor spawned at {position}!");
-//         // Instantiate meteor prefab and apply damage logic
-//     }
-// }
 
 public class SkillTree : MonoBehaviour
 {
@@ -265,7 +242,12 @@ public class SkillTree : MonoBehaviour
         }
         ui.UpdateSkillTreeUI(PassiveSkills, ActiveSkills); // Initial UI update
     }
-    
+
+    public T GetSkill<T>() where T : BaseSkill
+    {
+        return PassiveSkills.Find(skill => skill is T) as T;
+    }
+
     public void LevelUpPassiveSkill(int skillIndex)
     {
         if (skillIndex >= 0 && skillIndex < PassiveSkills.Count)

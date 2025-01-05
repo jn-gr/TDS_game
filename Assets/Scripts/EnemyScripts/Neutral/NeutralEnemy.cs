@@ -27,6 +27,7 @@ public class NeutralEnemy : MonoBehaviour
     protected bool isDead;
 
     public Element element;
+    public int Tier = 1;
     public float levitationHeight = 5f; // Max height to levitate
     public float levitationSpeed = 2f;   // Speed of levitation
     private float startingY;              // Starting Y position
@@ -47,14 +48,15 @@ public class NeutralEnemy : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>();
         castle = gameManager.mainTower;
 
+        health = (int)(8 + (gameManager.waveNum * 1.1));
+        speed = (float)Math.Min(40.0, (1.0+(gameManager.waveNum * 0.2)));
+        ScaleStatsForWave(gameManager.waveNum);
+
         // Initialize instance-specific variables from static values
         damage = GlobalDamage;
         health = GlobalHealth;
         speed = GlobalSpeed;
 
-        health = (int)(8 + (gameManager.waveNum * 1.1));
-        speed = (float)Math.Min(25.0, (1.0+(gameManager.waveNum * 0.2)));
-        
         element = Element.Neutral;
         startingY = transform.position.y;
 
@@ -121,17 +123,21 @@ public class NeutralEnemy : MonoBehaviour
         {
             isDead = true;
             Debug.Log("NeutralEnemy is dead. Calling EnemyKilled.");
-            gameManager.EnemyKilled();
+            gameManager.EnemyKilled(Tier);
             Destroy(gameObject);
         }
     }
 
     public static void ScaleStatsForWave(int waveNumber)
     {
+        var mobSlowingSkill = SkillTree.Instance.GetSkill<MobSlowingSkill>();
+
         // Base scaling for wave number
         float waveDamage = 5 + (waveNumber * 0.5f);
         float waveHealth = 10 + (waveNumber * 1.1f);
-        float waveSpeed = 1 + (waveNumber * 0.2f);
+        float waveSpeed = 1 + ((waveNumber * 0.2f))*mobSlowingSkill.getEffect();
+        Debug.Log(waveSpeed);
+
 
         // Apply difficulty multipliers
         if (UserDifficulty.CurrentLevel == DifficultyLevel.Hard)
@@ -168,16 +174,16 @@ public class NeutralEnemy : MonoBehaviour
         Vector3Int targetCell = new Vector3Int(5, 5, 0);
         if (!MapManager.Instance.globalMap.TryGetValue((targetCell.x, targetCell.y), out CellT targetCellData) || !targetCellData.IsWalkable)
         {
-            Debug.LogError($"Target cell {targetCell} is not walkable.");
+            //Debug.LogError($"Target cell {targetCell} is not walkable.");
             return;
         }
         if (MapManager.Instance == null || MapManager.Instance.tilemap == null)
         {
-            Debug.LogError("MapManager.Instance or its tilemap is null");
+            //Debug.LogError("MapManager.Instance or its tilemap is null");
             return;
         }
         currentCell = MapManager.Instance.tilemap.WorldToCell(transform.position);
-        Debug.Log($"Updating path from {currentCell} to {targetCell}");
+        //Debug.Log($"Updating path from {currentCell} to {targetCell}");
         List<Vector3Int> path = FindPath(currentCell, targetCell);
 
         if (path != null && path.Count > 0)
@@ -189,11 +195,11 @@ public class NeutralEnemy : MonoBehaviour
             }
             currentPathIndex = 0;
             pathToTargetFound = true; // Mark the path as found
-            Debug.Log("Path successfully updated.");
+            //Debug.Log("Path successfully updated.");
         }
         else
         {
-            Debug.LogWarning($"No path found from {currentCell} to {targetCell}");
+            //Debug.LogWarning($"No path found from {currentCell} to {targetCell}");
         }
 
         pathNeedsUpdate = false;
@@ -202,7 +208,7 @@ public class NeutralEnemy : MonoBehaviour
 
     private List<Vector3Int> FindPath(Vector3Int start, Vector3Int target)
     {
-        Debug.Log($"Finding path from {start} to {target}");
+        //Debug.Log($"Finding path from {start} to {target}");
         var openSet = new List<PathNode>();
         var closedSet = new HashSet<Vector3Int>();
         var cameFrom = new Dictionary<Vector3Int, Vector3Int>();
@@ -214,11 +220,11 @@ public class NeutralEnemy : MonoBehaviour
         while (openSet.Count > 0)
         {
             var current = openSet.OrderBy(node => node.FScore).First();
-            Debug.Log($"Processing node {current.Position}");
+            //Debug.Log($"Processing node {current.Position}");
 
             if (current.Position == target)
             {
-                Debug.Log($"Path found from {start} to {target}");
+                //Debug.Log($"Path found from {start} to {target}");
                 return ReconstructPath(cameFrom, current.Position);
             }
 
@@ -227,14 +233,14 @@ public class NeutralEnemy : MonoBehaviour
 
             foreach (var neighbor in GetNeighbors(current.Position))
             {
-                Debug.Log($"Processing neighbor: {neighbor}");
+                //Debug.Log($"Processing neighbor: {neighbor}");
                 if (closedSet.Contains(neighbor)) continue;
 
                 float tentativeGScore = gScore[current.Position] + 1;
 
                 if (!gScore.ContainsKey(neighbor) || tentativeGScore < gScore[neighbor])
                 {
-                    Debug.Log($"Updating neighbor {neighbor}, GScore: {tentativeGScore}");
+                    //Debug.Log($"Updating neighbor {neighbor}, GScore: {tentativeGScore}");
                     cameFrom[neighbor] = current.Position;
                     gScore[neighbor] = tentativeGScore;
                     float h = Mathf.Abs(neighbor.x - target.x) + Mathf.Abs(neighbor.y - target.y);
@@ -247,7 +253,7 @@ public class NeutralEnemy : MonoBehaviour
                 }
             }
         }
-        Debug.LogWarning($"No path found from {start} to {target}");
+        //Debug.LogWarning($"No path found from {start} to {target}");
         return null;
     }
 
@@ -274,7 +280,7 @@ public class NeutralEnemy : MonoBehaviour
                 }
             }
         }
-        Debug.Log($"Neighbors of {position}: {string.Join(", ", neighbors)}");
+        //Debug.Log($"Neighbors of {position}: {string.Join(", ", neighbors)}");
         return neighbors;
     }
 

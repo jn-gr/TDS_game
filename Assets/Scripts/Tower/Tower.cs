@@ -10,7 +10,7 @@ public class Tower : MonoBehaviour
 
     public int currentTier;
     protected virtual string towerType => "Turret";
-    public int damage;
+    public float damage;
     public Element element;
     
     public Projectile projectilePrefab;
@@ -84,13 +84,16 @@ public class Tower : MonoBehaviour
 
     public virtual void Shoot()
     {
+        var damageBoost = SkillTree.Instance.GetSkill<TowerDamageSkill>();
         Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation, transform); // spawns a projectile
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
         Vector3 direction = (enemyTarget.transform.position - shootPoint.position).normalized;
         rb.AddForce(direction * projectileForce, ForceMode.Impulse); // using the physics, pushes the projectile in a direction
         projectile.SetForce(projectileForce);
-        projectile.SetDamage(damage);
+        projectile.SetDamage(damage * damageBoost.getEffect());
+        Debug.Log(damage);
+        Debug.Log(damage* damageBoost.getEffect());
         projectile.SetTarget(enemyTarget);
         projectile.SetElement(element);
 

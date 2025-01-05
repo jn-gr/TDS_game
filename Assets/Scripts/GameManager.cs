@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
     //public Spawner[] spawners;
 
     public float currentHealth;
-    public int currency;
-    public int experience;
+    public float currency;
+    public float experience;
     public int totalKills;
     public int score;
     public int waveNum;
@@ -94,26 +94,47 @@ public class GameManager : MonoBehaviour
         currentHealth = Mathf.Round(mainTower.GetHealth());
     }
 
-    public void EnemyKilled()
+    public void EnemyKilled(int tier)
     {
-        totalKills++;
-        currency += 50;
-        score += 100;
-        experience += 100;
-        enemiesAlive--;
-
-        Debug.Log($"Wave {waveNum}: Enemy killed. Enemies alive: {enemiesAlive}");
+        var xpBoostSkill = SkillTree.Instance.GetSkill<XpBoostSkill>();
+        var goldEarnSkill = SkillTree.Instance.GetSkill<GoldEarnSkill>();
+        if (tier == 3)
+        {
+            totalKills++;
+            currency += 100;
+            score += 500;
+            experience += 10;
+            enemiesAlive--;
+        }else if(tier == 2)
+        {
+            totalKills++;
+            currency += 50;
+            score += 250;
+            experience += 5;
+            enemiesAlive--;
+        }
+        else
+        {
+            totalKills++;
+            currency += 25;
+            score += 100;
+            experience += 1;
+            enemiesAlive--;
+        }
+        //skill tree multipliers
+        experience *= xpBoostSkill.getEffect();
+        currency *= goldEarnSkill.getEffect();
+        currency = Mathf.Round(currency);
+        experience = Mathf.Round(experience);
     }
 
 
     public void StartWave()
     {
-        waveStarted = true;
         waveNum++;
-
         // Scale stats for all NeutralEnemies based on the current wave number
-        NeutralEnemy.ScaleStatsForWave(waveNum);
-
+        //NeutralEnemy.ScaleStatsForWave(waveNum);
+        waveStarted = true;
         totalEnemiesToSpawn = 4 + Mathf.RoundToInt(waveNum * 1.2f);
         enemiesSpawned = 0;
         enemiesAlive = totalEnemiesToSpawn;
@@ -168,6 +189,8 @@ public class GameManager : MonoBehaviour
     public void EndWave()
     {
         waveStarted = false;
+        var healthRegen = SkillTree.Instance.GetSkill<RegenPerWaveSkill>();
+        currentHealth *= healthRegen.getEffect();
 
 
         foreach (KeyValuePair<(int x, int y), Spawner> spawner in MapManager.Instance.spawnerPositions)

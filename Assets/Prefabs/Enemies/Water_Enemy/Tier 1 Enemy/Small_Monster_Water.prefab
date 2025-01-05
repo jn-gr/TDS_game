@@ -4942,6 +4942,7 @@ MonoBehaviour:
   strongDamageMultiplier: 1.2
   weakDamageMultiplier: 0.8
   element: 2
+  Tier: 1
   levitationHeight: 0.1
   levitationSpeed: 0.5
 --- !u!54 &5787854947680522265

@@ -7,7 +7,7 @@ public class NeutralEnemyTier2 : NeutralEnemy
     public override void Start()
     {
         base.Start();
-
+        Tier = 2;
         // Multiply damage, health and speed for Tier 2
         damage *= 2;
         health *= 3;
