@@ -168,7 +168,7 @@ public class NeutralEnemy : MonoBehaviour
     {
         if (pathToTargetFound)
         {
-            Debug.Log("Path to target already found. Skipping update.");
+            //Debug.Log("Path to target already found. Skipping update.");
             return;
         }
 
