@@ -9,11 +9,9 @@ public class MainMenuEnemySpawner : MonoBehaviour
     public float spawnInterval = 1f;
     public Vector3 spawnOffset = Vector3.zero;
 
-    [Header("Force Settings")]
-    public float initialForce = 500f;
-    public Vector3 forceDirection = Vector3.forward;
-    public bool continuousForce = false;
-    public float continuousForceAmount = 200f;
+    [Header("Movement Settings")]
+    public GameObject mainTower; // Reference to MainTower GameObject
+    public float moveSpeed = 5f;
     public float objectLifetime = 3f;
 
     private int objectsSpawned = 0;
@@ -28,6 +26,15 @@ public class MainMenuEnemySpawner : MonoBehaviour
     {
         isSpawning = false;
         objectsSpawned = 0;
+
+        if (mainTower == null)
+        {
+            mainTower = GameObject.Find("MainTower");
+            if (mainTower == null)
+            {
+                Debug.LogError("MainTower GameObject not found! Please assign it in the inspector or ensure it exists in the scene.");
+            }
+        }
     }
 
     public void StartSpawning()
@@ -70,54 +77,72 @@ public class MainMenuEnemySpawner : MonoBehaviour
         Vector3 spawnPosition = transform.position + spawnOffset;
         GameObject spawnedObject = Instantiate(objectPrefab, spawnPosition, transform.rotation);
 
-        Rigidbody rb = spawnedObject.GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            rb = spawnedObject.AddComponent<Rigidbody>();
-        }
-
-        rb.AddForce(forceDirection.normalized * initialForce, ForceMode.Impulse);
-
-        if (continuousForce)
-        {
-            var forceApplier = spawnedObject.AddComponent<ObjectForceApplier>();
-            forceApplier.Initialize(continuousForceAmount, forceDirection.normalized);
-        }
-
-        StartCoroutine(DestroyAfterDelay(spawnedObject));
-    }
-
-    private IEnumerator DestroyAfterDelay(GameObject obj)
-    {
-        yield return new WaitForSeconds(objectLifetime);
-        if (obj != null)
-        {
-            Destroy(obj);
-        }
+        var mover = spawnedObject.AddComponent<ObjectMover>();
+        mover.Initialize(mainTower, moveSpeed, objectLifetime);
     }
 }
-
-
-// Separate component to handle continuous force
-public class ObjectForceApplier : MonoBehaviour
+public class ObjectMover : MonoBehaviour
 {
-    private float forceAmount;
-    private Vector3 forceDirection;
-    private Rigidbody rb;
+    private GameObject target;
+    private float speed;
+    private float lifetime;
 
-    public void Initialize(float force, Vector3 direction)
+    private float originalY; // Store the original height
+    public float levitationHeight = 2f; // Maximum levitation height above the original position
+    public float levitationSpeed = 2f; // Speed of levitation
+    public float rotationSpeed = 100f; // Speed of rotation around its axis
+
+    public void Initialize(GameObject targetObject, float moveSpeed, float objectLifetime)
     {
-        forceAmount = force;
-        forceDirection = direction.normalized;
-        rb = GetComponent<Rigidbody>();
+        target = targetObject;
+        speed = moveSpeed;
+        lifetime = objectLifetime;
+
+        // Store the original Y position
+        originalY = transform.position.y;
+
+        StartCoroutine(DestroyAfterLifetime());
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        // Apply force in FixedUpdate for consistent physics
-        if (rb != null)
+        if (target == null)
         {
-            rb.AddForce(forceDirection * forceAmount * Time.fixedDeltaTime, ForceMode.Force);
+            Debug.LogWarning("Target is null. Destroying object.");
+            Destroy(gameObject);
+            return;
         }
+
+        // Calculate levitation effect
+        float levitationOffset = Mathf.Sin(Time.time * levitationSpeed) * levitationHeight;
+
+        // Move towards the target while applying levitation
+        Vector3 targetPosition = new Vector3(
+            target.transform.position.x,
+            originalY + Mathf.Abs(levitationOffset), // Ensure it doesn't go below the original height
+            target.transform.position.z
+        );
+
+        // Update position
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+
+        // Apply rotation around the object's axis
+        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.Self);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the object touching this one is the mainTower
+        if (other.gameObject == target)
+        {
+            Debug.Log("Object reached the MainTower and will be destroyed.");
+            Destroy(gameObject);
+        }
+    }
+
+    private IEnumerator DestroyAfterLifetime()
+    {
+        yield return new WaitForSeconds(lifetime);
+        Destroy(gameObject);
     }
 }
