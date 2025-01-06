@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.4
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.038701724, g: 0.14061871, b: 0.28594738, a: 0.4}
+  m_IndirectSpecularColor: {r: 0.0004706104, g: 0.00076956063, b: 0.0039070747, a: 0.4}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3701,7 +3701,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainTower
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6568325568226774990, guid: 575837890be0b4344abc37653ddfa107, type: 3}
+      propertyPath: currentHealth
+      value: 100
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6568325568226774990, guid: 575837890be0b4344abc37653ddfa107, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -5662,7 +5667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11035fc6e468ca42b6aae0eee54e117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 1000
+  currentHealth: 100
 --- !u!1 &763735420
 GameObject:
   m_ObjectHideFlags: 0
@@ -15286,7 +15291,7 @@ MonoBehaviour:
   mainTower: {fileID: 757290341}
   currentHealth: 100
   currency: 0
-  experience: 1000
+  experience: 0
   totalKills: 0
   score: 0
   waveNum: 0
