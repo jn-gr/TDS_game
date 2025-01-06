@@ -183,6 +183,11 @@ public class UI : MonoBehaviour
     {
         startWaveButton.image.sprite = startWaveSprite;
         startWaveButton.interactable = true;
+
+        if (gameManager.waveNum == gameManager.GetLastWaveNumber())
+        {
+            EndOfLastWave();
+        }
     }
 
     public void BackToMainMenu()

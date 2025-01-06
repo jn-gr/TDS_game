@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.4
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00047439532, g: 0.0007684457, b: 0.0039261826, a: 0.4}
+  m_IndirectSpecularColor: {r: 0.0004706104, g: 0.00076956063, b: 0.0039070747, a: 0.4}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7651,7 +7651,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Save & Exit to Desktop
+  m_text: 'Save & Go
+
+    To Home'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fca10131d306089488bdba28b3593db6, type: 2}
   m_sharedMaterial: {fileID: 3719597408502533223, guid: fca10131d306089488bdba28b3593db6, type: 2}
@@ -10150,12 +10152,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 14.2
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 12
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
