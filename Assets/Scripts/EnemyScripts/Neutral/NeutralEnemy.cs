@@ -113,7 +113,7 @@ public class NeutralEnemy : MonoBehaviour
             transform.position = new Vector3(transform.position.x, startingY + currentHeight, transform.position.z);
 
             // If close enough to the target, move to the next point
-            if (Vector3.Distance(transform.position, targetPosition) < 0.5f)
+            if (Vector3.Distance(transform.position, targetPosition) < 0.65f)
             {
                 currentPathIndex++;
             }
@@ -154,15 +154,15 @@ public class NeutralEnemy : MonoBehaviour
         // Apply difficulty multipliers
         if (UserDifficulty.CurrentLevel == DifficultyLevel.Hard)
         {
-            GlobalDamage = waveDamage * 3.0f;
-            GlobalHealth = waveHealth * 3.0f;
-            GlobalSpeed = waveSpeed * 1.5f;
+            GlobalDamage = waveDamage * 1.2f;
+            GlobalHealth = waveHealth * 1.2f;
+            GlobalSpeed = waveSpeed * 1.2f;
         }
         else if (UserDifficulty.CurrentLevel == DifficultyLevel.Medium)
         {
-            GlobalDamage = waveDamage * 2.0f;
-            GlobalHealth = waveHealth * 2.0f;
-            GlobalSpeed = waveSpeed * 1.25f;
+            GlobalDamage = waveDamage * 1.1f;
+            GlobalHealth = waveHealth * 1.1f;
+            GlobalSpeed = waveSpeed * 1.1f;
         }
         else // Easy difficulty
         {

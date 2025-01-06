@@ -4916,7 +4916,7 @@ PrefabInstance:
       addedObject: {fileID: -6725919740609819741}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a6c3498d48740d244a7659e174b9000b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -8837180642878515505}
+      addedObject: {fileID: 8377022509990772461}
   m_SourcePrefab: {fileID: 100100000, guid: a6c3498d48740d244a7659e174b9000b, type: 3}
 --- !u!4 &6091187305369478988 stripped
 Transform:
@@ -4976,7 +4976,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-8837180642878515505
+--- !u!114 &8377022509990772461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4989,12 +4989,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  health: 20
+  health: 10
   speed: 5
   selfDamageMultiplier: 0.9
   strongDamageMultiplier: 1.2
   weakDamageMultiplier: 0.8
   element: 0
   Tier: 1
-  levitationHeight: 5
-  levitationSpeed: 2
+  levitationHeight: 0.1
+  levitationSpeed: 0.5

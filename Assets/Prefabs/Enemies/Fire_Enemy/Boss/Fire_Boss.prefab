@@ -4988,8 +4988,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3d581c7657f14a4188a47fdc1bcad49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  health: 20
+  damage: 5
+  health: 10
   speed: 5
   selfDamageMultiplier: 0.9
   strongDamageMultiplier: 1.2
