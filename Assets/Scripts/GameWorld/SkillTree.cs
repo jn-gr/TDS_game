@@ -22,11 +22,14 @@ public abstract class BaseSkill
 
     public int GetUpgradeCost()
     {
+
         return Mathf.CeilToInt((CurrentLevel + 1) * CostMultiplier);
     }
+    
 
     public virtual void Upgrade()
     {
+        Debug.Log("being upgraded");
         if (CurrentLevel < MaxLevel)
         {
             CurrentLevel++;
@@ -50,6 +53,8 @@ public class FireRateSkill : BaseSkill
     public float getEffect(){
         return FireRateBonus;
     }
+
+    
 }
 
 public class MobSlowingSkill : BaseSkill
@@ -252,6 +257,12 @@ public class SkillTree : MonoBehaviour
     public T GetActiveSkill<T>() where T : BaseSkill
     {
         return ActiveSkills.Find(skill => skill is T) as T;
+    }
+
+    public T GetCurrentLevel<T>() where T : BaseSkill
+    {
+        return PassiveSkills.Find(skill => skill is T) as T;
+
     }
 
     public void LevelUpPassiveSkill(int skillIndex)

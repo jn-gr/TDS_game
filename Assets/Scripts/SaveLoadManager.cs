@@ -14,6 +14,19 @@ public class DifficultySerializable
 }
 
 [System.Serializable]
+public class SkillsSerializable
+{
+    public int skill1;
+    public int skill2;
+    public int skill3;
+    public int skill4;
+    public int skill5;
+    public int skill6;
+    public int skill7;
+
+}
+
+[System.Serializable]
 public class GameStats
 {
     public float CurrentHealth;
@@ -71,6 +84,7 @@ public class SerializableSpawner
 public class SerializableGameData
 {
     public DifficultySerializable Difficulty;
+    public SkillsSerializable Skills;
     public GameStats Stats;
     public KeyValuePairCell[] GlobalMapCells;
     public SerializableRegion[] GlobalRegions;
@@ -84,6 +98,18 @@ public class SaveLoadUtility
         gameData.Difficulty = new DifficultySerializable
         {
             Difficulty = UserDifficulty.CurrentLevel
+        };
+
+        gameData.Skills = new SkillsSerializable
+        {
+            skill1 = SkillTree.Instance.PassiveSkills[0].CurrentLevel,
+            skill2 = SkillTree.Instance.PassiveSkills[1].CurrentLevel,
+            skill3 = SkillTree.Instance.PassiveSkills[2].CurrentLevel,
+            skill4 = SkillTree.Instance.PassiveSkills[3].CurrentLevel,
+            skill5 = SkillTree.Instance.PassiveSkills[4].CurrentLevel,
+            skill6 = SkillTree.Instance.PassiveSkills[5].CurrentLevel,
+            skill7 = SkillTree.Instance.ActiveSkills[0].CurrentLevel
+
         };
         gameData.Stats = new GameStats
         {
@@ -251,8 +277,39 @@ public class SaveLoadUtility
         {
             UserDifficulty.CurrentLevel = gameData.Difficulty.Difficulty;
         }
+        if (gameData.Skills != null)
         {
-            
+            for (int i = 0; i < gameData.Skills.skill1; i++)
+            {
+                SkillTree.Instance.PassiveSkills[0].Upgrade();
+            }
+            for (int i = 0; i < gameData.Skills.skill2; i++)
+            {
+                SkillTree.Instance.PassiveSkills[1].Upgrade();
+            }
+            for (int i = 0; i < gameData.Skills.skill3; i++)
+            {
+                SkillTree.Instance.PassiveSkills[2].Upgrade();
+            }
+            for (int i = 0; i < gameData.Skills.skill4; i++)
+            {
+                SkillTree.Instance.PassiveSkills[3].Upgrade();
+            }
+            for (int i = 0; i < gameData.Skills.skill5; i++)
+            {
+                SkillTree.Instance.PassiveSkills[4].Upgrade();
+            }
+            for (int i = 0; i < gameData.Skills.skill6; i++)
+            {
+                SkillTree.Instance.PassiveSkills[5].Upgrade();
+            }
+            for (int i = 0; i < gameData.Skills.skill7; i++)
+            {
+                SkillTree.Instance.ActiveSkills[0].Upgrade();
+            }
+
+            SkillTree.Instance.ui.UpdateSkillTreeUI(SkillTree.Instance.PassiveSkills, SkillTree.Instance.ActiveSkills);
+           
         }
         if (gameData.Stats != null)
         {
