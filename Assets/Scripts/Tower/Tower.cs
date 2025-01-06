@@ -224,5 +224,13 @@ public class Tower : MonoBehaviour
         }
         
     }
-
+    public virtual void SellTower()
+    {
+        if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+        {
+            SoundManager.PlaySound(SoundType.UiClick, 0.3f);
+        }
+        Destroy(gameObject);
+        gameManager.currency += 75;
+    }
 }
