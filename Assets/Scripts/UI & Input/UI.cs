@@ -315,11 +315,6 @@ public class UI : MonoBehaviour
 
     private void GameOverScreen()
     {
-        foreach (Transform transform in allUI) {
-            if (transform.CompareTag("UI")) {
-                transform.gameObject.SetActive(false);
-            }
-        }
         StartCoroutine(FadeCanvasGroup(Fade.In, gameOverOverlay, gameOverFadeDuration, Blurry.Yes));
     }
 
