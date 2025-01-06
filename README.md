@@ -57,3 +57,14 @@ In Fortress of Elements, your mission is to defend your Main Castle from waves o
 ### Credits
 
 Thank you for playing Fortress of Elements! We hope you enjoy the challenge and fun of defending your castle against the elemental hordes.
+
+### References
+
+- Sound Assets
+The following sound effects were used in this project, all sourced from Pixabay. Each sound is licensed under the Pixabay License, allowing for free use in commercial and non-commercial projects.
+
+Wind Sound: [Wind Sound by Pixabay](https://pixabay.com/sound-effects/wind-2-44150/)
+Fire Sound: [Fire Sound Effects by Pixabay](https://pixabay.com/sound-effects/fire-sound-effects-224089/)
+Water Sound: [Water Sound by Pixabay](https://pixabay.com/sound-effects/water-sound-1-235477/)
+Hit Sound: [Hit Sound by Pixabay](https://pixabay.com/sound-effects/hit-flesh-02-266309/)
+For more information about licensing, visit the Pixabay License Terms.
