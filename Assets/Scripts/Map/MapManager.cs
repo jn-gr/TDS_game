@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using static UnityEngine.RuleTile.TilingRuleOutput;
@@ -39,9 +38,6 @@ public class MapManager : MonoBehaviour
     [HideInInspector]
     public Dictionary<(int, int), Spawner> spawnerPositions = new Dictionary<(int, int), Spawner>();
 
-    private PlayerInput playerInput;
-    private InputAction selectAction;
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -52,22 +48,7 @@ public class MapManager : MonoBehaviour
 
         Instance = this;
         //DontDestroyOnLoad(gameObject);
-
-        playerInput = Camera.main.GetComponent<PlayerInput>();
-        InputActionMap actionMap = playerInput.actions.FindActionMap("RTS Camera");
-        selectAction = actionMap.FindAction("Select");
     }
-
-    void OnEnable()
-    {
-        selectAction.Enable();
-    }
-
-    void OnDisable()
-    {
-        selectAction.Disable();
-    }
-    
     void Start()
     {
         
@@ -95,24 +76,23 @@ public class MapManager : MonoBehaviour
     }
     void Update()
     {
+
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            return;
+            return; 
         }
-
         if (!GameManager.Instance.waveStarted) // can only unlock before wave starts;
         {
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (tilemapPlane.Raycast(ray, out float enter))
             {
                 Vector3 worldPosition = ray.GetPoint(enter);
                 Vector3Int cellPosition = tilemap.WorldToCell(worldPosition);
                 (int regionX, int regionY) = (
-                    Mathf.FloorToInt((float)cellPosition.x / regionWidth),
-                    Mathf.FloorToInt((float)cellPosition.y / regionHeight)
-                );
-
-                if (selectAction.triggered)
+                        Mathf.FloorToInt((float)cellPosition.x / regionWidth),
+                        Mathf.FloorToInt((float)cellPosition.y / regionHeight)
+                    );
+                if (Input.GetMouseButtonDown(0))
                 {
                     if (GameManager.Instance.currency >= regionUnlockPrice)
                     {
@@ -125,7 +105,8 @@ public class MapManager : MonoBehaviour
                         return;
                     }
                 }
-                HoverRegion(regionX, regionY);
+                HoverRegion(regionX,regionY);
+
             }
         }
         else
