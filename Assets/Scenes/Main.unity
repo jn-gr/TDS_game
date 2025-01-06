@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.4
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.03869987, g: 0.14068735, b: 0.28641108, a: 0.4}
+  m_IndirectSpecularColor: {r: 0.038701724, g: 0.14061871, b: 0.28594738, a: 0.4}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10116,7 +10116,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You have defeated all the enemies!
+  m_text: You have defeated all the enemies! You hope that soon trees, birds, and
+    people may soon return to these desacrated yet rescued lands. though... A bigger
+    kingdom would suit such a King nicely.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fca10131d306089488bdba28b3593db6, type: 2}
   m_sharedMaterial: {fileID: 3719597408502533223, guid: fca10131d306089488bdba28b3593db6, type: 2}

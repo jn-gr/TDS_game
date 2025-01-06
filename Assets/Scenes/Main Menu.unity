@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.4
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0004706104, g: 0.00076956063, b: 0.0039070747, a: 0.4}
+  m_IndirectSpecularColor: {r: 0.00047063097, g: 0.00076907704, b: 0.003901525, a: 0.4}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lore
+  m_text: A letter
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fca10131d306089488bdba28b3593db6, type: 2}
   m_sharedMaterial: {fileID: 3719597408502533223, guid: fca10131d306089488bdba28b3593db6, type: 2}
@@ -207,9 +207,9 @@ MonoBehaviour:
   m_fontSize: 12.8
   m_fontSizeBase: 12.8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 7
+  m_fontSizeMax: 10
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -1984,7 +1984,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lore
+  m_text: "Welcome Prince, your father the king left you and this keep on a quest
+    to put an end to the elemental storm, its been years and now its time for you
+    to take back control over these lands.  \nA close friend of the royal family,
+    the wizard Falx has been working hard on strange mechanical devices powered by
+    some 'temporal' mechanics. I know little of the arcane but it suits the task
+    of putting down the elementals down effectively. Good luck Prince."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fca10131d306089488bdba28b3593db6, type: 2}
   m_sharedMaterial: {fileID: 3719597408502533223, guid: fca10131d306089488bdba28b3593db6, type: 2}
@@ -2014,9 +2019,9 @@ MonoBehaviour:
   m_fontSize: 7
   m_fontSizeBase: 7
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 5
+  m_fontSizeMax: 7
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
