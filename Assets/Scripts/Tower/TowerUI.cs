@@ -95,9 +95,10 @@ public class TowerUI : MonoBehaviour
         activeTower = activeTower.AirUpgrade();
         towerManager.selectedTower = activeTower;
     }
-    public void SellTurret()
+    public void SellTower()
     {
-
+        activeTower.SellTower();
+        towerManager.selectedTower = null;
     }
 }
 
