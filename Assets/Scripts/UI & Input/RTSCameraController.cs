@@ -70,8 +70,8 @@ public class RTSCameraController : MonoBehaviour
 
     void Awake()
     {
-    // Get references to input actions
-    playerInput = GetComponent<PlayerInput>();
+        // Get references to input actions
+        playerInput = GetComponent<PlayerInput>();
         InputActionMap actionMap = playerInput.actions.FindActionMap("RTS Camera");
         
         moveAction = actionMap.FindAction("Move");

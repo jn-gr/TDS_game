@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -17,6 +18,10 @@ public class BuildingSystem : MonoBehaviour
 
     public ToastPanel toastPanel;
 
+    private PlayerInput playerInput;
+    private InputAction selectAction;
+    private InputAction cancelTowerAction;
+
     #region Unity methods
 
     private void Awake()
@@ -29,63 +34,77 @@ public class BuildingSystem : MonoBehaviour
 
         Instance = this;
 
+        playerInput = Camera.main.GetComponent<PlayerInput>();
+        InputActionMap actionMap = playerInput.actions.FindActionMap("RTS Camera");
+        selectAction = actionMap.FindAction("Select");
+        cancelTowerAction = actionMap.FindAction("Cancel Tower");
+
     }
+
+    void OnEnable()
+    {
+        selectAction.Enable();
+        cancelTowerAction.Enable();
+
+        selectAction.performed += OnPlaceActionPerformed;
+        cancelTowerAction.performed += OnCancelActionPerformed;
+    }
+
+    void OnDisable()
+    {
+        selectAction.Disable();
+        cancelTowerAction.Disable();
+
+        selectAction.performed -= OnPlaceActionPerformed;
+        cancelTowerAction.performed -= OnCancelActionPerformed;
+    }
+
     private void Start()
     {
-
-
         grid = MapManager.Instance.tilemap;
-    
     }
 
-    private void Update() //Selection of buildings (currently with keyboard buttons
+    private void OnPlaceActionPerformed(InputAction.CallbackContext context)
     {
+        if (objectToPlace == null) return;
 
-        if (!objectToPlace)
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Plane tilemapPlane = new Plane(Vector3.up, Vector3.zero);
+        
+        if (tilemapPlane.Raycast(ray, out float enter))
         {
-            return;
+            Vector3 worldPosition = ray.GetPoint(enter);
+            Vector3Int cellPosition = grid.WorldToCell(worldPosition);
+
+            (int regionX, int regionY) = (
+                Mathf.FloorToInt((float)cellPosition.x / MapManager.Instance.regionWidth),
+                Mathf.FloorToInt((float)cellPosition.y / MapManager.Instance.regionHeight)
+            );
+
+            if (MapManager.Instance.globalRegionMap.TryGetValue((regionX, regionY), out Region clickedRegion))
+            {
+                int regionWidth = MapManager.Instance.regionWidth;
+                int regionHeight = MapManager.Instance.regionHeight;
+                int modularX = ((cellPosition.x % regionWidth) + regionWidth) % regionWidth;
+                int modularY = ((cellPosition.y % regionHeight) + regionHeight) % regionHeight;
+                
+                PlaceObject(clickedRegion.Cells[modularX, modularY]);
+            }
+            else
+            {
+                Debug.Log("Can't place here");
+                Destroy(objectToPlace.gameObject);
+                objectToPlace = null;
+            }
         }
+    }
+
+    private void OnCancelActionPerformed(InputAction.CallbackContext context)
+    {
         if (objectToPlace != null)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Plane tilemapPlane = new Plane(Vector3.up, Vector3.zero);
-                if (tilemapPlane.Raycast(ray, out float enter))
-                {
-                    Vector3 worldPosition = ray.GetPoint(enter);
-                    Vector3Int cellPosition = grid.WorldToCell(worldPosition);
-
-                    (int regionX, int regionY) = (
-                    Mathf.FloorToInt((float)cellPosition.x / MapManager.Instance.regionWidth),
-                    Mathf.FloorToInt((float)cellPosition.y / MapManager.Instance.regionHeight)
-                );
-
-                    if (MapManager.Instance.globalRegionMap.TryGetValue((regionX, regionY), out Region clickedRegion))
-                    {
-                        int regionWidth = MapManager.Instance.regionWidth;
-                        int regionHeight = MapManager.Instance.regionHeight;
-                        int modularX = ((cellPosition.x % regionWidth) + regionWidth) % regionWidth;
-                        int modularY = ((cellPosition.y % regionHeight) + regionHeight) % regionHeight;
-                        //Debug.Log((cellPosition.x % MapManager.Instance.regionWidth, cellPosition.y % MapManager.Instance.regionHeight));
-                        PlaceObject(clickedRegion.Cells[modularX, modularY]);
-                    }
-                    else
-                    {
-                        Debug.Log("cant place here");
-                        Destroy(objectToPlace.gameObject);
-                        objectToPlace = null;
-                    }
-
-
-                }
-
-
-            }
-            else if (Input.GetMouseButtonDown(1))
-            {
-                Destroy(objectToPlace.gameObject);
-            }
+            Destroy(objectToPlace.gameObject);
+            objectToPlace = null;
         }
     }
 
