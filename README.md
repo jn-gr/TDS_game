@@ -2,7 +2,7 @@
 ![Fortress of elements logo](https://github.com/jn-gr/TDS_game/blob/main/Assets/Images/Fortress%20of%20elements%20logo%20idea%201.png)
 
 ## Game Overview
-In Fortress of Elements, your mission is to defend your Main Castle from waves of relentless enemies spawning from Enemy Spawners. Strategically place and upgrade towers to destroy incoming foes and prevent them from reaching your castle. Each wave grows more challenging, introducing tougher enemies and greater numbers. Test your strategy, survive as long as you can, and aim for the highest score before your castle falls!
+In Fortress of Elements, you play as a Prince of a Kingdom making your last stand and it is your duty to protect your realm from waves of relentless enemies. Strategically place and upgrade towers to destroy incoming foes and prevent them from reaching your castle. Each wave grows more challenging, introducing tougher enemies and greater numbers. Test your strategy, survive as long as you can, and aim for the highest score before your castle falls!
 
 ## How to Play
 
@@ -47,7 +47,7 @@ In Fortress of Elements, your mission is to defend your Main Castle from waves o
 - 4: Use Active Ability
 
 ### Tips and Strategies:
-- Plan Ahead: Position towers strategically to cover key choke points and maximize their effectiveness.
+- Plan Ahead: Position towers strategically to cover key choke points and maximize their effectiveness and also expand paths to grow your kingdom size.
 - Diversify Your Towers: Use a mix of Rapid Fire, Sniper, and Turret towers to handle different enemy types.
 - Elemental Matchups: Pay attention to enemy elements and use the right elemental upgrades to exploit their weaknesses.
 - Upgrade Wisely: Focus on upgrading a few key towers rather than spreading your resources too thin.
