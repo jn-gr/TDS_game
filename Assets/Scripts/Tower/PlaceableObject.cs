@@ -10,14 +10,10 @@ public class PlaceableObject : MonoBehaviour
     
     private GameManager gameManager;
 
-    
 
     private void Start()
     {
-        //GetColliderVertexPositionsLocal();
-        //CalculateSizeInCells();
         gameManager = FindFirstObjectByType<GameManager>();
-
     }
 
     public virtual void Place()
@@ -26,7 +22,6 @@ public class PlaceableObject : MonoBehaviour
         Destroy(drag);
         gameObject.GetComponent<Tower>().placed = true;
         gameManager.currency -= 100;
-        //Overide here for building timers, or non functional buildings
         //Invoke events for placement
     }
 

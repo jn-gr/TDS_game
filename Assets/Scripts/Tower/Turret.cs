@@ -13,7 +13,4 @@ public class Turret : Tower
             enemyTarget = enemiesInRange[0];
         }
     }
-
-    
-
 }

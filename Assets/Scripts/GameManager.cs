@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public MainTower mainTower;
-    //public Spawner[] spawners;
 
     public float currentHealth;
     public float currency;
@@ -35,9 +34,9 @@ public class GameManager : MonoBehaviour
     [Header("Tower Prefab Pool")]
 
     // lvl1 nuetral,fire,water,air, lv2 so on
-    public GameObject[] turretPrefabs; // 12 prefabs 
-    public GameObject[] sniperPrefabs; // 12 prefabs 
-    public GameObject[] rapidFirePrefabs; // 12 prefabs 
+    public GameObject[] turretPrefabs; 
+    public GameObject[] sniperPrefabs;  
+    public GameObject[] rapidFirePrefabs;  
 
     public GameObject[] tierOneEnemy; // Neutral, Fire, Water, Air Tier One Enemies
     public GameObject[] tierTwoEnemy; // Neutral, Fire, Water, Air Tier Two Enemies
@@ -54,9 +53,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
-        //DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -69,15 +66,6 @@ public class GameManager : MonoBehaviour
         waveStarted = false;
     }
 
-    // Helper method to log array details
-    void LogArray(string arrayName, GameObject[] array)
-    {
-        Debug.Log($"{arrayName} Size: {array.Length}");
-        for (int i = 0; i < array.Length; i++)
-        {
-            Debug.Log($"{arrayName}[{i}]: {(array[i] != null ? array[i].name : "NULL")}");
-        }
-    }
 
     void Update()
     {
@@ -133,7 +121,6 @@ public class GameManager : MonoBehaviour
     {
         waveNum++;
         // Scale stats for all NeutralEnemies based on the current wave number
-        //NeutralEnemy.ScaleStatsForWave(waveNum);
         waveStarted = true;
         totalEnemiesToSpawn = 4 + Mathf.RoundToInt(waveNum * 1.2f);
         enemiesSpawned = 0;

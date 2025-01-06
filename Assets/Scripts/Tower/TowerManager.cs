@@ -17,18 +17,16 @@ public class TowerManager : MonoBehaviour
             return;
         }
         Instance = this;
-        //DontDestroyOnLoad(gameObject);
+        
     }
     void Update()
     {
-        // Handle mouse clicks for turret selection
+        
         if (Input.GetMouseButtonDown(0))
-        {
-            // Ignore clicks on UI elements
+        {           
             if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 return;
-
-            // Perform a raycast to detect turrets
+      
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(ray);
             foreach (RaycastHit hit in hits)
@@ -43,11 +41,9 @@ public class TowerManager : MonoBehaviour
                             SelectTurret(tower);
                             return;
                         }
-                    }
-                    
+                    }                  
                 }
-            }
-            
+            }            
             // If no turret is clicked, deselect the current turret
             DeselectTurret();
         }

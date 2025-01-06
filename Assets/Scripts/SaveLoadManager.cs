@@ -57,7 +57,7 @@ public class SerializableCellT
     public bool IsOpenRight;
     public int TowerType;
     public int TowerIndex;
-    public string ObjectPlacedOnCellName; // Store GameObject by name or unique ID
+    public string ObjectPlacedOnCellName;
 }
 
 [System.Serializable]
@@ -67,9 +67,9 @@ public class SerializableRegion
     public int Height;
     public int RegionX;
     public int RegionY;
-    public SerializableCellT[] Cells; // Flattened array for serialization
+    public SerializableCellT[] Cells; 
     public int[] StartCellsIndices; // Indices of start cells in the Cells array
-    public int[] EndCellsIndices; // Indices of end cells in the Cells array
+    public int[] EndCellsIndices; 
 }
 
 
@@ -151,8 +151,6 @@ public class SaveLoadUtility
         gameData.GlobalMapCells = cellPairs.ToArray();
 
         // Serialize globalRegionMap
-
-
         List<SerializableRegion> regionList = new List<SerializableRegion>();
 
 
@@ -174,7 +172,7 @@ public class SaveLoadUtility
                     {
                         if (cell.objectPlacedOnCell.GetComponent<Turret>() != null)
                         {
-                            Debug.Log($"Tower detected on cell at {x}, {y}");
+                            
                             towerType = 0;
 
                             string objectName = cell.objectPlacedOnCell.name.Replace("(Clone)", "").Trim();
@@ -191,7 +189,7 @@ public class SaveLoadUtility
                         }
                         else if (cell.objectPlacedOnCell.GetComponent<Sniper>() != null)
                         {
-                            Debug.Log($"Sniper detected on cell at {x}, {y}");
+                            
                             towerType = 1;
 
                             string objectName = cell.objectPlacedOnCell.name.Replace("(Clone)", "").Trim();
@@ -208,7 +206,7 @@ public class SaveLoadUtility
                         }
                         else if (cell.objectPlacedOnCell.GetComponent<RapidFire>() != null)
                         {
-                            Debug.Log($"Rapid detected on cell at {x}, {y}");
+                           
                             towerType = 2;
 
                             string objectName = cell.objectPlacedOnCell.name.Replace("(Clone)", "").Trim();
@@ -330,7 +328,7 @@ public class SaveLoadUtility
                 IsOpenDown = pair.Cell.IsOpenDown,
                 IsOpenLeft = pair.Cell.IsOpenLeft,
                 IsOpenRight = pair.Cell.IsOpenRight
-                // ObjectPlacedOnCell can be reconstructed if needed
+                
             };
             mapManager.globalMap[(pair.GlobalX, pair.GlobalY)] = cell;
         }
@@ -400,12 +398,11 @@ public class SaveLoadUtility
             }
         }
 
-        // Clear the dictionary after destroying the GameObjects
+        
 
         mapManager.spawnerPositions.Clear();
         foreach (var spawn in gameData.Spawns)
         {
-            // Instantiate the spawner prefab at the correct position
             Vector3 spawnPosition = mapManager.tilemap.GetCellCenterWorld(new Vector3Int(spawn.X, spawn.Y, 0));
             Spawner spawner = GameObject.Instantiate(mapManager.spawnerPrefab, spawnPosition, Quaternion.identity).GetComponent<Spawner>();
 
@@ -452,7 +449,6 @@ public class SaveLoadManager : MonoBehaviour
                 yield return null; // Wait for the next frame
             }
 
-            // Optionally, you can add a small delay to ensure the instance is fully ready
 
             string filePath = Path.Combine(Application.persistentDataPath, SaveFilePath);
             if (File.Exists(filePath))

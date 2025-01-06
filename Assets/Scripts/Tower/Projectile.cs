@@ -26,29 +26,10 @@ public class Projectile : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         
         projectileRenderer = gameObject.GetComponent<Renderer>();
-        Destroy(gameObject, 5); // dies after 5 seconds
+        Destroy(gameObject, 3); 
     }
 
-    // Update is called once per frame
 
-
-
-
-    //void FixedUpdate()
-    //{
-    //    if (enemyTarget)
-    //    {
-    //        Vector3 targetDirection = (enemyTarget.transform.position - transform.position).normalized;
-    //        float speed = rb.velocity.magnitude;
-    //        Vector3 newDirection = Vector3.RotateTowards(rb.velocity.normalized, targetDirection, turnSpeed * Mathf.Deg2Rad * Time.deltaTime, 0f);
-    //        rb.velocity = newDirection * speed;
-    //    }
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //    }
-
-    //}
 
     private void FixedUpdate()
     {
@@ -57,12 +38,9 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        // Move towards the target
+      
         Vector3 direction = (target.transform.position - transform.position).normalized;
         transform.position += direction * force * Time.fixedDeltaTime;
-
-        // Optionally, align the projectile to face the target
         transform.LookAt(target.transform);
     }
 
@@ -84,7 +62,6 @@ public class Projectile : MonoBehaviour
         this.element = element;
         
 
-        
         switch (element)
         {
             case Element.Fire:
@@ -104,7 +81,6 @@ public class Projectile : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the collider has a component that implements IDamageable
         NeutralEnemy damageable = other.GetComponent<NeutralEnemy>();
 
         if (damageable != null)

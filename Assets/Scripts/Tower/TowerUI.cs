@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
-
 public class TowerUI : MonoBehaviour
 {
     public TowerManager towerManager;
@@ -69,10 +66,6 @@ public class TowerUI : MonoBehaviour
         gameObject.SetActive(false);
         activeTower = null;
     }
-
-    
-    
-
     public void UpgradeTower()
     {
         activeTower =activeTower.UpgradeTower();

@@ -55,21 +55,13 @@ public class RapidFire : Tower
         {
             if (target != null)
             {
-                Debug.Log("shoot");
-                Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation, transform); // spawns a projectile
-                Rigidbody rb = projectile.GetComponent<Rigidbody>();
-
-                Vector3 direction = (target.transform.position - shootPoint.position).normalized;
-                rb.AddForce(direction * projectileForce, ForceMode.Impulse); // using the physics, pushes the projectile in a direction
+                var damageBoost = SkillTree.Instance.GetSkill<TowerDamageSkill>();
+                Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation, transform);
                 projectile.SetForce(projectileForce);
-                projectile.SetDamage(damage);
-                projectile.SetTarget(target);
+                projectile.SetDamage(damage * damageBoost.getEffect());
+                projectile.SetTarget(enemyTarget);
                 projectile.SetElement(element);
             }
-        }
-        
+        } 
     }
-
-    
-
 }

@@ -31,12 +31,6 @@ public class UpgradeTowerUI : MonoBehaviour
                 }
             }
         }
-
-        // Check if the panel should be closed
-        //if (activePanel != null && !IsMouseOverUI())
-        //{
-        //    ClosePanelIfMouseLeaves();
-        //}
     }
 
     void TogglePanel()
@@ -58,24 +52,5 @@ public class UpgradeTowerUI : MonoBehaviour
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
         RectTransform rectTransform = activePanel.GetComponent<RectTransform>();
         rectTransform.position = screenPosition;
-    }
-
-    void ClosePanelIfMouseLeaves()
-    {
-        RectTransform rectTransform = activePanel.GetComponent<RectTransform>();
-        Vector3 mousePosition = Input.mousePosition;
-
-        // Check if the mouse is outside the panel's bounds
-        if (!RectTransformUtility.RectangleContainsScreenPoint(rectTransform, mousePosition, Camera.main))
-        {
-            Destroy(activePanel);
-            activePanel = null;
-        }
-    }
-
-    bool IsMouseOverUI()
-    {
-        // Check if the mouse is over any UI element
-        return EventSystem.current.IsPointerOverGameObject();
     }
 }

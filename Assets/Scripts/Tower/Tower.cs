@@ -67,13 +67,6 @@ public class Tower : MonoBehaviour
             {
                 enemyTarget = null;
             }
-            //else
-            //{
-            //    // Clean up any destroyed enemies from the list
-            
-
-            //    DecideEnemy();
-            //}
         }
     }
 
@@ -84,22 +77,17 @@ public class Tower : MonoBehaviour
     }
 
     public virtual void Shoot()
-    {
-        
+    {      
         var damageBoost = SkillTree.Instance.GetSkill<TowerDamageSkill>();
         Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation, transform);
         projectile.SetForce(projectileForce);
         projectile.SetDamage(damage * damageBoost.getEffect());
         projectile.SetTarget(enemyTarget);
         projectile.SetElement(element);
-
     }
-
-   
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.CompareTag("Enemy"))
         {
             GameObject enemy = other.gameObject;

@@ -47,7 +47,6 @@ public class MapManager : MonoBehaviour
         }
 
         Instance = this;
-        //DontDestroyOnLoad(gameObject);
     }
     void Start()
     {
@@ -60,19 +59,12 @@ public class MapManager : MonoBehaviour
         ExpandRegion(-1, 0);
         ExpandRegion(0, 1);
         ExpandRegion(0, -1);
-        
-
         tilemapPlane = new Plane(Vector3.up, Vector3.zero);
-        toastPanel = ToastPanel.Instance;
-
-        //if (SaveLoadManager.Instance.isLoad) LoadGame();
+        toastPanel = ToastPanel.Instance; 
     }
     public void LoadGame()
     {
-        //SaveLoadManager.Instance.LoadGame();
-        //globalMap = SaveLoadManager.Instance.globalMap;
-        //globalRegionMap = SaveLoadManager.Instance.globalRegionMap;
-        //spawnerPositions = SaveLoadManager.Instance.spawnerPositions;
+      
         LoadFullMap();
     }
     void Update()
@@ -123,8 +115,6 @@ public class MapManager : MonoBehaviour
         DrawRegionOnTilemap(initialRegion);
     }
     
-
-
     // adds each cell of a region to the global map dictionary and adds region to globalregion map too. IMPORTANT!!, 
     private void AddRegionToMap(Region region)
     {
@@ -143,7 +133,6 @@ public class MapManager : MonoBehaviour
     {
         Dictionary<(int x, int y), GameObject> spawners = new Dictionary<(int x, int y), GameObject>();
 
-        // Iterate through end cells to place spawners just outside the region
         foreach (CellT endCell in region.endCells)
         {
             Vector2Int spawnerPosition = Vector2Int.zero;
@@ -166,17 +155,12 @@ public class MapManager : MonoBehaviour
                 spawnerPosition = new Vector2Int(endCell.X + (region.RegionX * region.Width), ((region.RegionY + 1) * region.Height));
             }
 
-
-
             // Instantiate the spawner GameObject (you can handle pooling here if needed)
             Spawner spawner = GameObject.Instantiate(spawnerPrefab, tilemap.GetCellCenterWorld(new Vector3Int(spawnerPosition.x, spawnerPosition.y, 0)), Quaternion.identity).GetComponent<Spawner>();
 
             // Add the spawner to the dictionary
-            spawnerPositions[(spawnerPosition.x, spawnerPosition.y)] = spawner;
-            
-        }
-
-       
+            spawnerPositions[(spawnerPosition.x, spawnerPosition.y)] = spawner;       
+        }   
     }
 
     
@@ -195,18 +179,10 @@ public class MapManager : MonoBehaviour
         foreach (var spawnerEntry in spawnerPositions)
         {
             (int x, int y) = spawnerEntry.Key;
-
             if (x >= regionLeft && x <= regionRight && y >= regionBottom && y <= regionTop)
-            {
-                
+            {               
                 spawnersToRemove.Add((x, y));
             }
-            else
-            {
-                
-            }
-
-
         }
 
         foreach (var spawnerPosition in spawnersToRemove)
@@ -306,13 +282,9 @@ public class MapManager : MonoBehaviour
                 if (newStartCell != null)
                 {
                     newRegion.startCells.Add(newStartCell);
-
                     // Assign to Cells array
-                    newRegion.Cells[newStartCell.X, newStartCell.Y] = newStartCell;
-
-                    
+                    newRegion.Cells[newStartCell.X, newStartCell.Y] = newStartCell;   
                 }
-
             }
         }
 
@@ -328,8 +300,7 @@ public class MapManager : MonoBehaviour
         DrawRegionOnTilemap(newRegion);  
         AddRegionSpawners(newRegion);
     }
-
-    
+  
     private List<Region> GetNeighbouringRegions(Region region)
     {
         List<Region> neighbours = new List<Region>();
@@ -346,20 +317,17 @@ public class MapManager : MonoBehaviour
         {
             // get neihbour coords
             (int neighbourX, int neighbourY) = (region.RegionX + dx, region.RegionY + dy);
-
             // Check if the neighbor exists in the dictionary
             if (globalRegionMap.TryGetValue((neighbourX, neighbourY), out Region neighbourRegion))
             {
                 neighbours.Add(neighbourRegion);
             }
         }
-
         return neighbours;
     }
 
     private List<Region> GetNeighbouringRegionsFromCoords(int regionX, int regionY)
     {
-        // get region from dictionary with region x and region y
         List<Region> neighbours = new List<Region>();
 
         (int x, int y)[] offsets = new (int, int)[]
@@ -381,7 +349,6 @@ public class MapManager : MonoBehaviour
                 neighbours.Add(neighbourRegion);
             }
         }
-
         return neighbours;
     }
 
@@ -394,17 +361,13 @@ public class MapManager : MonoBehaviour
     private List<CellT> FindEndCellFromNeighbour(Region neighbourRegion, (int x, int y) direction)
     {
         List<CellT> matchingEndCells = new List<CellT>();
-
-        //Debug.Log(region.endCells);
         foreach (var endCell in neighbourRegion.endCells)
         {
-            //define local cell coords in this region
             int regionLeft = 0;
             int regionRight = regionWidth - 1;
             int regionBottom = 0;
             int regionTop = regionHeight - 1;
  
-
             // Check if the endCell is adjacent to the specified boundary
             if (direction == (1, 0) && endCell.X == regionLeft && !endCell.IsOpenLeft) // Right
             {
@@ -415,8 +378,7 @@ public class MapManager : MonoBehaviour
                 matchingEndCells.Add(endCell);
             }
             else if (direction == (0, 1) && endCell.Y == regionBottom && !endCell.IsOpenDown) // Up
-            {
-                
+            {                
                 matchingEndCells.Add(endCell);
             }
             else if (direction == (0, -1) && endCell.Y == regionTop && !endCell.IsOpenUp) // Down
@@ -492,19 +454,10 @@ public class MapManager : MonoBehaviour
     public void LoadFullMap()
     {
         foreach (var kvp in globalRegionMap)
-        {
-            
-            Region region = kvp.Value;
-            
-            DrawRegionOnTilemap(region);
-
-            
-
-            // Perform your logic here
-            
-        }
-
-        
+        {           
+            Region region = kvp.Value;           
+            DrawRegionOnTilemap(region);      
+        }       
     }
 
     public void HoverRegion(int regionX, int regionY)
@@ -533,8 +486,7 @@ public class MapManager : MonoBehaviour
             valid = false;
         }
         else
-        {
-            
+        {          
             foreach (Region neighbour in neighbourRegions)
             {
 
@@ -549,10 +501,7 @@ public class MapManager : MonoBehaviour
                 }
             }
         }
-
-
-
-            // Calculate the region's origin based on the region's coordinates
+            // calcluate the region's origin based on the region's coordinates
             Vector3Int regionOrigin = new Vector3Int(regionX * regionWidth, regionY * regionHeight, 0);
 
         // Iterate through the cells in the region and apply the highlight
@@ -562,14 +511,12 @@ public class MapManager : MonoBehaviour
             for (int y = 0; y < regionHeight; y++)
             {
                 Vector3Int cellPosition = regionOrigin + new Vector3Int(x, y, 0);
-
                 // Apply the highlight tile (you can customize the highlight tile as needed)
                 highlightTilemap.SetTile(cellPosition, tileToSet); // Replace with a highlight tile
             }
         }
     }
-
-    
+ 
     void OnDrawGizmos()
     {
         Vector3 mousePosition = Input.mousePosition;

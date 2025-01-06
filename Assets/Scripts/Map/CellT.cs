@@ -27,7 +27,7 @@ public class CellT
     {
         get
         {
-            // A cell is considered walkable if it has at least one open direction
+            // cell is considered walkable if it has at least one open direction
             return IsOpenUp || IsOpenDown || IsOpenLeft || IsOpenRight;
         }
     }

@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
-    private Transform currentTarget; // The current target position and rotation
+    private Transform currentTarget; 
     private bool isMoving = false;
     private float soundEffectVolume;
     private float musicVolume;
 
-    public Camera mainCamera; // Reference to the main camera (assign via Inspector)
-    public Transform[] targetPositions; // Array of target positions and rotations
-    public float moveSpeed = 5f; // Speed of camera movement
-    public float rotateSpeed = 100f; // Speed of camera rotation
+    public Camera mainCamera; 
+    public Transform[] targetPositions; 
+    public float moveSpeed = 5f;
+    public float rotateSpeed = 100f;
 
     public Image soundEffectButton;
     public Sprite soundEffectMute;
@@ -23,8 +23,8 @@ public class MainMenuUI : MonoBehaviour
     public Sprite musicMute;
     public Sprite musicUnmute;
 
-    public AudioSource bgmAudioSource; // Reference to the AudioSource for BGM
-    public AudioClip bgmClip;          // The AudioClip for the BGM
+    public AudioSource bgmAudioSource; 
+    public AudioClip bgmClip;          
 
     public void PlayGameEasy()
     {
@@ -63,7 +63,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void Update()
     {
-        // Moves the camera if the camera is told to move.
+        
         if (isMoving && mainCamera != null && currentTarget != null)
         {
             // Move the camera towards the target position
@@ -114,7 +114,7 @@ public class MainMenuUI : MonoBehaviour
         UpdateSoundEffectSprite();
         UpdateMusicSprite();
 
-        // Play or stop BGM based on the MusicVolume
+        
         UpdateBGM();
     }
 

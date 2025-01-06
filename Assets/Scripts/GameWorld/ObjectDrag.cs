@@ -9,7 +9,6 @@ public class ObjectDrag : MonoBehaviour
 
     private void Update()
     {
-        // Check for left mouse click to toggle dragging
         if (Input.GetMouseButtonDown(0))
         {
             if (isDragging)

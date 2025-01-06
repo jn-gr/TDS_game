@@ -17,7 +17,6 @@ public static class PathGenerator
     // I have also added the ability for paths to split, this adds nice variety and option to implement shortest path algo for enemies. == more marks i hope
     // When 3 or more paths lead to a region. rather than trying to generate a path. I have done it so , the paths all merge into one cell. then that singular path paths off to a random direction
     
-
     public static void Generate(Region region, Dictionary<(int, int), Region> regionMap, Dictionary<(int, int), CellT> globalMap, int width, int height)
     {
         System.Random rand = new System.Random();
@@ -149,7 +148,7 @@ public static class PathGenerator
         }    
     }
      public static void GenerateCenterRegion(Region region, Dictionary<(int, int), Region> regionMap, Dictionary<(int, int), CellT> globalMap, int width, int height)
-    {
+     {
         (int x, int y) = (region.Width/2, region.Height / 2);
         
         CellT centerCell = region.GetCellLocal(x, y);
@@ -157,8 +156,7 @@ public static class PathGenerator
         PathFromMergePointToSide(centerCell, 1, region, width, height);
         PathFromMergePointToSide(centerCell, 2, region, width, height);
         PathFromMergePointToSide(centerCell, 3, region, width, height);
-
-    }
+     }
 
     // Rather than generating paths randomly, we merge all paths into one, then direct one path to an end side
     private static void PathMerge(Region region, Dictionary<(int, int), Region> regionMap, int width, int height, int endSide)
@@ -258,8 +256,6 @@ public static class PathGenerator
         }
     }
 
-
-
     private static List<int> GetValidEndSides(Region region, Dictionary<(int, int), Region> globalRegionMap)
     {
         List<int> validEndSides = new List<int>();
@@ -342,7 +338,6 @@ public static class PathGenerator
             }
         }
     }
-
     private static bool HasUnvisitedNeighbor(Region region, Dictionary<(int, int), CellT> globalMap, int x, int y, int width, int height)
     {
         int[] dx = { 1, -1, 0, 0, 1, 1, -1, -1 };
@@ -366,7 +361,6 @@ public static class PathGenerator
                 if (region.Cells[nx, ny].IsWalkable) numberOfWalkableNeighbour++;
 
                 // Check if the neighbor exists in the global map and is walkable
-
             }
             else
             {
@@ -376,7 +370,6 @@ public static class PathGenerator
                 }
             }
         }
-
         // If the number of neighbors is greater than 2, exclude as a candidate
         return numberOfWalkableNeighbour <= 2;
     }

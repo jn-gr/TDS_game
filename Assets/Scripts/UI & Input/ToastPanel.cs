@@ -25,7 +25,6 @@ public class ToastPanel : MonoBehaviour
         }
 
         Instance = this;
-        //DontDestroyOnLoad(gameObject);
     }
 
 
@@ -48,10 +47,7 @@ public class ToastPanel : MonoBehaviour
 
     IEnumerator AnimateMessage(string message)
     {
-        // Update text
         messageText.text = message;
-
-        // Fade in
         float elapsedTime = 0;
         while (elapsedTime < fadeInDuration)
         {

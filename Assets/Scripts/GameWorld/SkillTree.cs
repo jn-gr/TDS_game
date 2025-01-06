@@ -234,7 +234,7 @@ public class SkillTree : MonoBehaviour
         ActiveSkills = new List<BaseActiveSkill>
         {
             new StopTimeSkill()
-            //new MeteorShowerSkill()
+            
         };
 
         foreach (var skill in PassiveSkills)

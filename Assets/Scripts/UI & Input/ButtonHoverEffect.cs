@@ -13,22 +13,22 @@ public class ButtonHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         buttonImage = GetComponent<Image>();
         button = GetComponent<Button>();
-        buttonImage.sprite = normalSprite; // Set the default sprite on start
+        buttonImage.sprite = normalSprite; 
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (button != null && button.interactable) // Check if the button is interactable
+        if (button != null && button.interactable) 
         {
-            buttonImage.sprite = hoverSprite; // Change sprite on hover
+            buttonImage.sprite = hoverSprite; 
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (button != null && button.interactable) // Check if the button is interactable
+        if (button != null && button.interactable) 
         {
-            buttonImage.sprite = normalSprite; // Revert back on exit
+            buttonImage.sprite = normalSprite; 
         }
     }
 

@@ -27,17 +27,13 @@ public class Region
         Height = height;
         RegionX = regionX;
         RegionY = regionY;
-        Cells = new CellT[width, height];
-        //startCell = new CellT(0, height/2);
+        Cells = new CellT[width, height];      
 
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                //var globalCoords = LocalToGlobal(x, y);
-                //Cells[x,y] = new CellT(globalCoords.globalX, globalCoords.globalY); 
                 Cells[x,y] = new CellT(x,y); 
-                //Debug.Log(x + "," + y);
             }
         }
     }

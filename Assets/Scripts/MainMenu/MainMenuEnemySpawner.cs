@@ -10,7 +10,7 @@ public class MainMenuEnemySpawner : MonoBehaviour
     public Vector3 spawnOffset = Vector3.zero;
 
     [Header("Movement Settings")]
-    public GameObject mainTower; // Reference to MainTower GameObject
+    public GameObject mainTower; 
     public float moveSpeed = 5f;
     public float objectLifetime = 3f;
 

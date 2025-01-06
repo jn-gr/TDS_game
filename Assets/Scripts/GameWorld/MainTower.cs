@@ -11,10 +11,7 @@ public class MainTower : MonoBehaviour
         currentHealth -= incomingDamage;
         GameManager.Instance.UpdateHealth();
 
-        if (currentHealth <= 0)
-        {
-            EndGame();
-        }
+ 
     }
 
     public float GetHealth()
@@ -28,7 +25,7 @@ public class MainTower : MonoBehaviour
         // Debug to check what is entering the trigger
         Debug.Log($"Collision detected with: {other.gameObject.name}, Tag: {other.tag}");
 
-        if (other.CompareTag("Enemy")) // Ensure the tag matches exactly with Unity's tag system
+        if (other.CompareTag("Enemy"))
         {
             NeutralEnemy enemyComponent = other.GetComponent<NeutralEnemy>();
 
@@ -54,10 +51,5 @@ public class MainTower : MonoBehaviour
         }
     }
 
-    // Function when currentHealth is <= 0
-    private void EndGame()
-    {
-        Debug.Log("Main Tower destroyed");
-        // Add logic here to handle the end game state (e.g., show game over UI, restart the level, etc.)
-    }
+    
 }
