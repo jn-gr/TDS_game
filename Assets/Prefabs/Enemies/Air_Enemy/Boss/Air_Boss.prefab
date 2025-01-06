@@ -4940,8 +4940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd54d673e0aea4542aa50d5c3f24c84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  health: 20
+  damage: 5
+  health: 10
   speed: 5
   selfDamageMultiplier: 0.9
   strongDamageMultiplier: 1.2

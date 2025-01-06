@@ -4936,7 +4936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  health: 20
+  health: 10
   speed: 5
   selfDamageMultiplier: 0.9
   strongDamageMultiplier: 1.2

@@ -10,7 +10,7 @@ public class NeutralEnemyTier2 : NeutralEnemy
         Tier = 2;
         // Multiply damage, health and speed for Tier 2
         damage *= 2;
-        health *= 3;
+        health *= 1.5f;
         speed *= 1.2f;
 
     }

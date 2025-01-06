@@ -10,7 +10,7 @@ public class NeutralBoss : NeutralEnemy
         Tier = 3;
         // Multiply damage, health and speed for boss
         damage *= 5;
-        health *= 6;
+        health *= 2.5f;
         speed *= 0.8f;
 
     }
