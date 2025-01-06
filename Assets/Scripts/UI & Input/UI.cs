@@ -95,6 +95,7 @@ public class UI : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1.0f;
         gameManager = GameManager.Instance;
         Transform parent1 = GameObject.Find("SkillHotbar").transform;
         activeSkillCooldownTexts = parent1.GetComponentsInChildren<TextMeshProUGUI>();
@@ -115,6 +116,7 @@ public class UI : MonoBehaviour
         }
         //gameManager.WaveEnded += EndOfWave;
         gameManager.LastWaveCompleted += EndOfLastWave;
+        
     }
 
     void Update()
@@ -204,7 +206,8 @@ public class UI : MonoBehaviour
             SoundManager.PlaySound(SoundType.UiClick, 0.5f);
 
         }
-        Application.Quit();
+        SceneLoader.NextSceneName = "Main Menu";
+        SceneManager.LoadScene("Loading Screen");
     }
 
     enum Fade

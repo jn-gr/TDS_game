@@ -237,6 +237,7 @@ public class MapManager : MonoBehaviour
         }
         if (GameManager.Instance.currency < regionUnlockPrice)
         {
+
             toastPanel.ShowMessage("You do not have enough Gold");
             return;
         }
@@ -246,7 +247,7 @@ public class MapManager : MonoBehaviour
         List<Region> neighbouringRegions = GetNeighbouringRegions(newRegion);
 
         
-        if (!(neighbouringRegions.Count > 0))
+        if (neighbouringRegions.Count == 0)
         {
             toastPanel.ShowMessage("No path leads to this region");
             return;
@@ -266,8 +267,8 @@ public class MapManager : MonoBehaviour
             List<CellT> matchingEndCells = FindEndCellFromNeighbour(neighbour, direction);
 
             if (matchingEndCells.Count == 0)
-            {    
-                // only happens when no paths lead to this region so we cant have this unlockable
+            {
+                
                 continue;
             }
 
@@ -317,7 +318,7 @@ public class MapManager : MonoBehaviour
 
         if (!foundMatchingEndCell)
         {
-            
+            toastPanel.ShowMessage("No path leads to this region");
             return;
         }
         RemoveSpawnersInExpandedRegion(newRegion);

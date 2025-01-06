@@ -98,6 +98,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         // Initialize PlayerPrefs with default values if not already set
         if (!PlayerPrefs.HasKey("SoundEffectVolume"))
         {
