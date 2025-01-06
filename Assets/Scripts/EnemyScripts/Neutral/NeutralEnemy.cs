@@ -10,7 +10,7 @@ public class NeutralEnemy : MonoBehaviour
 
     // Static variables shared by all instances
     public static float GlobalDamage = 5;
-    public static float GlobalHealth = 10;
+    public static float GlobalHealth = 5;
     public static float GlobalSpeed = 1;
 
     // Instance-specific variables initialized from static

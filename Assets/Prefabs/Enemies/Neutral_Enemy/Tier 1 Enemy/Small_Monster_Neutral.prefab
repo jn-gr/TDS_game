@@ -4913,10 +4913,10 @@ PrefabInstance:
       addedObject: {fileID: 2500101730730730621}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a6c3498d48740d244a7659e174b9000b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2085311421715463331}
+      addedObject: {fileID: -6725919740609819741}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a6c3498d48740d244a7659e174b9000b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6725919740609819741}
+      addedObject: {fileID: -8837180642878515505}
   m_SourcePrefab: {fileID: 100100000, guid: a6c3498d48740d244a7659e174b9000b, type: 3}
 --- !u!4 &6091187305369478988 stripped
 Transform:
@@ -4949,28 +4949,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.4000006, y: 2.2, z: 3.5899997}
   m_Center: {x: 0.00000011920929, y: 0, z: -0.7949999}
---- !u!114 &2085311421715463331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6900620980332985846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bdb85753b5144f4d823214a7735469b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  health: 20
-  speed: 0.01
-  selfDamageMultiplier: 0.9
-  strongDamageMultiplier: 1.2
-  weakDamageMultiplier: 0.8
-  element: 0
-  Tier: 1
-  levitationHeight: 0.1
-  levitationSpeed: 0.5
 --- !u!54 &-6725919740609819741
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4998,3 +4976,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8837180642878515505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900620980332985846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b2b6ca24d55b8a4092cab6a88d90fde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  health: 20
+  speed: 5
+  selfDamageMultiplier: 0.9
+  strongDamageMultiplier: 1.2
+  weakDamageMultiplier: 0.8
+  element: 0
+  Tier: 1
+  levitationHeight: 5
+  levitationSpeed: 2
