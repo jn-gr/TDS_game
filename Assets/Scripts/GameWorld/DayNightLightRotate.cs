@@ -20,7 +20,6 @@ public class DayNightLightRotate : MonoBehaviour
 
         gameManager.WaveStarted += OnWaveStarted;
     }
-
     private void OnWaveStarted()
     {
         if (gameManager.waveNum == 1)
@@ -33,7 +32,6 @@ public class DayNightLightRotate : MonoBehaviour
             StartCoroutine(SmoothRotate());
         }
     }
-
     private System.Collections.IEnumerator SmoothRotate()
     {
         isRotating = true;
@@ -47,7 +45,6 @@ public class DayNightLightRotate : MonoBehaviour
             transform.rotation = Quaternion.Lerp(startRotation, targetRotation, rotationProgress);
             yield return null;
         }
-
         transform.rotation = targetRotation; // Ensure final rotation is precise
         isRotating = false;
     }

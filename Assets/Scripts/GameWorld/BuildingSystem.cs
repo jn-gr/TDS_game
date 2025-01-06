@@ -26,21 +26,14 @@ public class BuildingSystem : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
-
     }
     private void Start()
     {
-
-
         grid = MapManager.Instance.tilemap;
-    
     }
-
     private void Update() //Selection of buildings (currently with keyboard buttons
     {
-
         if (!objectToPlace)
         {
             return;
@@ -67,7 +60,7 @@ public class BuildingSystem : MonoBehaviour
                         int regionHeight = MapManager.Instance.regionHeight;
                         int modularX = ((cellPosition.x % regionWidth) + regionWidth) % regionWidth;
                         int modularY = ((cellPosition.y % regionHeight) + regionHeight) % regionHeight;
-                        //Debug.Log((cellPosition.x % MapManager.Instance.regionWidth, cellPosition.y % MapManager.Instance.regionHeight));
+                        
                         PlaceObject(clickedRegion.Cells[modularX, modularY]);
                     }
                     else
@@ -76,11 +69,7 @@ public class BuildingSystem : MonoBehaviour
                         Destroy(objectToPlace.gameObject);
                         objectToPlace = null;
                     }
-
-
                 }
-
-
             }
             else if (Input.GetMouseButtonDown(1))
             {
@@ -89,18 +78,15 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
-    // Hackyish solution. Just copied the InputKeyDownAlpha1 and put it here. Then connected the button to this method.
-    // Currentyl no way to tell UI that theres insufficient gold outside the console.
+    
     public void PlaceObject( GameObject tower) 
-    {
-        
+    { 
         if (GameManager.Instance.currency >= 100)
         {
             if (objectToPlace == null)
             {
                 InitializeWithObject(tower);
-            }
-            
+            }   
         }
         else
         {
@@ -115,17 +101,6 @@ public class BuildingSystem : MonoBehaviour
 
     public static Vector3 GetMouseWorldPosition()  //Cast a ray from the camera to align building to mouse pointer
     {
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        //if (Physics.Raycast(ray, out RaycastHit raycastHit, 1000, BuildingSystem.current.layersToHit))
-        //{
-        //    //Debug.Log("Ray hit: " + raycastHit.collider.name);
-        //    return raycastHit.point;
-        //}
-        //else
-        //{
-        //    return Vector3.zero;
-        //}
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Plane tilemapPlane = new Plane(Vector3.up, Vector3.zero);
         if (tilemapPlane.Raycast(ray, out float enter))
@@ -145,35 +120,13 @@ public class BuildingSystem : MonoBehaviour
         return position;
     }
 
-    //private static TileBase[] GetTilesBlock(BoundsInt area, Tilemap tilemap)
-    //{
-    //    TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
-    //    int counter = 0;
-
-    //    foreach (var v in area.allPositionsWithin)
-    //    {
-    //        Vector3Int pos = new Vector3Int(v.x, v.y, 0);
-    //        array[counter] = tilemap.GetTile(pos);
-    //        counter++;
-    //    }
-    //    return array;
-    //}
-
     #endregion
 
     #region Building Placement
 
     public void InitializeWithObject(GameObject prefab) //Show tower when selected
     {
-        //if (objectToPlace != null) // this will destory the building that hasnt been locked in a place, so that the player doesnt end up having many unplaced towers in the scene
-        //{
-          
-        //    Destroy(objectToPlace.gameObject);
-            
-        //}
-        
         Vector3 positon = SnapCoordinateToGrid(GetMouseWorldPosition());
-
         GameObject obj = Instantiate(prefab, positon, Quaternion.identity);
         objectToPlace = obj.GetComponent<PlaceableObject>();
         obj.AddComponent<ObjectDrag>();
@@ -186,20 +139,17 @@ public class BuildingSystem : MonoBehaviour
             if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
             {
                 SoundManager.PlaySound(SoundType.TowerPlace, 0.5f);
-
             }
             objectToPlace.Place();
             cell.objectPlacedOnCell = objectToPlace.gameObject;
             objectToPlace.GetComponent<Tower>().cellPlacedOn = cell;
-            objectToPlace = null;
-            
+            objectToPlace = null;    
         }
         else
         {
             if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
             {
                 SoundManager.PlaySound(SoundType.UiInsufficient, 0.5f);
-
             }
             Destroy(objectToPlace.gameObject);
             objectToPlace = null;
@@ -207,24 +157,6 @@ public class BuildingSystem : MonoBehaviour
         }
 
         Debug.Log($"{cell.objectPlacedOnCell} has been placed on {cell.X},{cell.Y}");
-       
-        //BoundsInt area = new BoundsInt();
-        //area.position = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
-        //area.size = placeableObject.Size;
-
-        //TileBase[] baseArray = GetTilesBlock(area, MainTilemap);
-
-        //foreach (var b in baseArray){
-        //    if (b == whiteTile)
-        //    {
-        //        return false;
-        //    }
-        //}
-        //return true;
     }
-
-    
-
     #endregion
-
 }
