@@ -183,7 +183,7 @@ public class NeutralEnemy : MonoBehaviour
             return;
         }
 
-        Vector3Int targetCell = new Vector3Int(5, 5, 0);
+        Vector3Int targetCell = new Vector3Int(MapManager.Instance.regionWidth/2, MapManager.Instance.regionHeight/2, 0);
         if (!MapManager.Instance.globalMap.TryGetValue((targetCell.x, targetCell.y), out CellT targetCellData) || !targetCellData.IsWalkable)
         {
             //Debug.LogError($"Target cell {targetCell} is not walkable.");

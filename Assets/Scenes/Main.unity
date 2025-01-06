@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.4
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0004706104, g: 0.00076956063, b: 0.0039070747, a: 0.4}
+  m_IndirectSpecularColor: {r: 0.00047439532, g: 0.0007684457, b: 0.0039261826, a: 0.4}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2071,8 +2071,8 @@ MonoBehaviour:
   spawnerPrefab: {fileID: 4673475698990331751, guid: 910ae57cf546e4f44a657c7696e3513b, type: 3}
   regionUnlockPrice: 200
   mazeOrigin: {x: 0, y: 0, z: 0}
-  regionWidth: 11
-  regionHeight: 11
+  regionWidth: 9
+  regionHeight: 9
 --- !u!156049354 &327115691
 Grid:
   m_ObjectHideFlags: 0
@@ -15290,7 +15290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainTower: {fileID: 757290341}
   currentHealth: 100
-  currency: 0
+  currency: 1000
   experience: 0
   totalKills: 0
   score: 0

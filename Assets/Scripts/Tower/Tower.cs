@@ -85,19 +85,7 @@ public class Tower : MonoBehaviour
 
     public virtual void Shoot()
     {
-        //var damageBoost = SkillTree.Instance.GetSkill<TowerDamageSkill>();
-        //Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation, transform); // spawns a projectile
-        //Rigidbody rb = projectile.GetComponent<Rigidbody>();
-
-        //Vector3 direction = (enemyTarget.transform.position - shootPoint.position).normalized;
-        //rb.AddForce(direction * projectileForce, ForceMode.Impulse); // using the physics, pushes the projectile in a direction
-        //projectile.SetForce(projectileForce);
-        //projectile.SetDamage(damage * damageBoost.getEffect());
-        //Debug.Log(damage);
-        //Debug.Log(damage * damageBoost.getEffect());
-        //projectile.SetTarget(enemyTarget);
-        //projectile.SetElement(element);
-
+        
         var damageBoost = SkillTree.Instance.GetSkill<TowerDamageSkill>();
         Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation, transform);
         projectile.SetForce(projectileForce);
@@ -105,29 +93,9 @@ public class Tower : MonoBehaviour
         projectile.SetTarget(enemyTarget);
         projectile.SetElement(element);
 
-        // Enable homing behavior
-        
-
-
     }
 
-    private Vector3 PredictTargetPosition(GameObject target, float projectileSpeed, float projectileMass)
-    {
-        Rigidbody enemyRb = target.GetComponent<Rigidbody>();
-        if (enemyRb == null) return target.transform.position; // If no rigidbody, return current position
-
-        // Enemy's velocity
-        Vector3 enemyVelocity = enemyRb.velocity;
-
-        // Distance to the target
-        Vector3 toTarget = target.transform.position - shootPoint.position;
-
-        // Time to hit the target
-        float timeToHit = toTarget.magnitude / (projectileSpeed / projectileMass);
-
-        // Predicted position
-        return target.transform.position + enemyVelocity * timeToHit;
-    }
+   
 
     private void OnTriggerEnter(Collider other)
     {
@@ -148,27 +116,43 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public virtual Tower UpgradeTower() {
+    public virtual Tower UpgradeTower()
+    {
         // 0 is tier 1, 1 is tier 2 you can only upgrade 2 times
-        if (currentTier < 2)
+        // Check upgrade conditions based on tier and currency
+        if ((currentTier == 0 && gameManager.currency >= 100) ||
+            (currentTier == 1 && gameManager.currency >= 200))
         {
-            if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+            // Deduct the appropriate currency
+            if (currentTier == 0)
             {
-                SoundManager.PlaySound(SoundType.TowerLevel, 0.5f);
-
+                gameManager.currency -= 100;
             }
-            // the tower type variable is overrided in the child classes, thats how we are able to spawn the correct type of prefab
-            Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier + 1, element), transform.position, transform.rotation).GetComponent<Tower>();
-            upgradedTower.currentTier = currentTier + 1;
-            upgradedTower.element = element;
-            upgradedTower.placed = true;
-            upgradedTower.cellPlacedOn = cellPlacedOn;
-            cellPlacedOn.objectPlacedOnCell = upgradedTower.gameObject;
-            Destroy(gameObject);
-            return upgradedTower;
+            else if (currentTier == 1)
+            {
+                gameManager.currency -= 200;
+            }
+            if (currentTier < 2)
+            {
+                if (PlayerPrefs.GetInt("SoundEffectVolume") == 1)
+                {
+                    SoundManager.PlaySound(SoundType.TowerLevel, 0.5f);
+
+                }
+                // the tower type variable is overrided in the child classes, thats how we are able to spawn the correct type of prefab
+                Tower upgradedTower = Instantiate(gameManager.GetTowerPrefab(towerType, currentTier + 1, element), transform.position, transform.rotation).GetComponent<Tower>();
+                upgradedTower.currentTier = currentTier + 1;
+                upgradedTower.element = element;
+                upgradedTower.placed = true;
+                upgradedTower.cellPlacedOn = cellPlacedOn;
+                cellPlacedOn.objectPlacedOnCell = upgradedTower.gameObject;
+                Destroy(gameObject);
+                return upgradedTower;
+            }
+            
         }
         return this;
-    } 
+    }
     public virtual Tower FireUpgrade()  
     {
         // need ti implement costs of changing element

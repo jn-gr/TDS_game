@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 
 
         currentHealth = mainTower.GetHealth();
-        currency = 1000;
+        
         waveStarted = false;
     }
 

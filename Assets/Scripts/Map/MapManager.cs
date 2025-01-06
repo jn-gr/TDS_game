@@ -51,15 +51,16 @@ public class MapManager : MonoBehaviour
     }
     void Start()
     {
-        
+
         // 0 = Left, 1 = Right, 2 = Bottom, 3 = Top
         // This will be used to create start map
+        GameManager.Instance.currency += regionUnlockPrice * 4; // you dont pay for the first 4 region unlocks
         CreateEmptyRegion(0, 0, regionWidth, regionHeight);
         ExpandRegion(1, 0);
         ExpandRegion(-1, 0);
         ExpandRegion(0, 1);
         ExpandRegion(0, -1);
-        GameManager.Instance.currency += regionUnlockPrice * 4; // you dont pay for the first 4 region unlocks
+        
 
         tilemapPlane = new Plane(Vector3.up, Vector3.zero);
         toastPanel = ToastPanel.Instance;
@@ -94,16 +95,7 @@ public class MapManager : MonoBehaviour
                     );
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (GameManager.Instance.currency >= regionUnlockPrice)
-                    {
-                        ExpandRegion(regionX, regionY);
-                        return;
-                    }
-                    else
-                    {
-                        toastPanel.ShowMessage("You do not have enough Gold");
-                        return;
-                    }
+                    ExpandRegion(regionX, regionY);
                 }
                 HoverRegion(regionX,regionY);
 
@@ -238,12 +230,18 @@ public class MapManager : MonoBehaviour
 
     public void ExpandRegion(int newRegionX, int newRegionY)
     {
+
         if (globalRegionMap.ContainsKey((newRegionX, newRegionY)))
         {            
             return;
         }
+        if (GameManager.Instance.currency < regionUnlockPrice)
+        {
+            toastPanel.ShowMessage("You do not have enough Gold");
+            return;
+        }
 
-        Region newRegion = new Region(newRegionX, newRegionY, regionWidth, regionHeight);
+            Region newRegion = new Region(newRegionX, newRegionY, regionWidth, regionHeight);
         
         List<Region> neighbouringRegions = GetNeighbouringRegions(newRegion);
 
