@@ -6,6 +6,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static Unity.PlasticSCM.Editor.WebApi.CredentialsResponse;
 
+
+[System.Serializable]
+public class DifficultySerializable
+{
+    public DifficultyLevel Difficulty;
+}
+
 [System.Serializable]
 public class GameStats
 {
@@ -63,6 +70,7 @@ public class SerializableSpawner
 [System.Serializable]
 public class SerializableGameData
 {
+    public DifficultySerializable Difficulty;
     public GameStats Stats;
     public KeyValuePairCell[] GlobalMapCells;
     public SerializableRegion[] GlobalRegions;
@@ -73,7 +81,10 @@ public class SaveLoadUtility
     public static SerializableGameData ConvertToSerializable(MapManager mapManager, GameManager gameManager)
     {
         var gameData = new SerializableGameData();
-
+        gameData.Difficulty = new DifficultySerializable
+        {
+            Difficulty = UserDifficulty.CurrentLevel
+        };
         gameData.Stats = new GameStats
         {
             CurrentHealth = gameManager.currentHealth,
@@ -236,6 +247,13 @@ public class SaveLoadUtility
 
     public static void LoadFromSerializable(MapManager mapManager, GameManager gameManager, SerializableGameData gameData)
     {
+        if ((gameData.Difficulty != null))
+        {
+            UserDifficulty.CurrentLevel = gameData.Difficulty.Difficulty;
+        }
+        {
+            
+        }
         if (gameData.Stats != null)
         {
             gameManager.currentHealth = gameData.Stats.CurrentHealth;
