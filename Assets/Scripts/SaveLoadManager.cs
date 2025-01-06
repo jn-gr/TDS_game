@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Unity.PlasticSCM.Editor.WebApi.CredentialsResponse;
 
 
 [System.Serializable]
